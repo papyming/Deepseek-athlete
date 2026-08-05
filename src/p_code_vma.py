@@ -87,4 +87,3 @@ if __name__ == "__main__":
         print(f"{s['distance']}m : {s['pourcentage']}% VMA → {s['vitesse_effort']} km/h")
         print(f"  Effort {s['temps_effort']}, recup {s['temps_recup']}, {s['nb_rep']} rep")
         print(f"  Total : {s['temps_total_seance']}")
-        print()tree /F | Select-String -Pattern "├|└|─"

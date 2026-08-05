@@ -1,0 +1,24 @@
+{
+  "nom": "Jean DUPONT",
+  "bi_quotidien_nb": 0,
+  "jours": {
+    "CAP": [
+      "Lundi",
+      "Mardi",
+      "Jeudi",
+      "Samedi"
+    ],
+    "Velo": [
+      "Mercredi",
+      "Dimanche"
+    ],
+    "Natation": [
+      "Vendredi"
+    ],
+    "bi_quotidien": {
+      "CAP": [],
+      "Velo": [],
+      "Natation": []
+    }
+  }
+}

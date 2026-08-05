@@ -27,7 +27,7 @@ class Physiologie:
         1000: {'M': 0.92, 'F': 0.90}
     }
     
-    # Coefficients VC (à ajuster selon ta feuille "Fractionné VC")
+    # Coefficients VC (extraits de la feuille "Fractionné VC")
     COEFF_VC_DISTANCE = {
         200: {'M': 1.164, 'F': 1.164},
         300: {'M': 1.145, 'F': 1.145},
@@ -78,7 +78,8 @@ class Physiologie:
             self.manques.append({'donnee': 'VMA', 'statut': 'Manquant'})
             return None
         
-        champ = champ.upper().replace(' ', '')
+        # 🔥 Conversion en string
+        champ = str(champ).upper().replace(' ', '')
         match = re.search(r'VMA[=:]*([0-9.]+)', champ)
         if match:
             return float(match.group(1))
@@ -91,8 +92,9 @@ class Physiologie:
     
     def _extraire_vc(self) -> Optional[float]:
         champ = self.data.get('Avez vous fait un test VMA ou de VC ? Sinon avez vous une idée de votre VMA ou de votre VC ? (mettre VC ou VMA)', '')
-        if champ:
-            champ = champ.upper().replace(' ', '')
+        if champ and champ != '':
+            # 🔥 Conversion en string
+            champ = str(champ).upper().replace(' ', '')
             match = re.search(r'VC[=:]*([0-9.]+)', champ)
             if match:
                 return float(match.group(1))
@@ -108,39 +110,64 @@ class Physiologie:
         return None
     
     def _extraire_meilleure_performance(self) -> Optional[float]:
-        if self.data.get('Quel est votre temps sur 10kms ?'):
-            temps = self._temps_vers_secondes(self.data['Quel est votre temps sur 10kms ?'])
-            if temps and temps > 0:
-                return round(10 / (temps / 3600), 1)
+        # 10km
+        temps_val = self.data.get('Quel est votre temps sur 10kms ?')
+        if temps_val is not None and temps_val != '':
+            temps_str = str(temps_val).strip()
+            if temps_str and temps_str != '' and temps_str != 'nan':
+                temps = self._temps_vers_secondes(temps_str)
+                if temps and temps > 0:
+                    return round(10 / (temps / 3600), 1)
         
-        if self.data.get('Quel est votre temps sur semi marathon ?'):
-            temps = self._temps_vers_secondes(self.data['Quel est votre temps sur semi marathon ?'])
-            if temps and temps > 0:
-                return round(21.1 / (temps / 3600), 1)
+        # Semi-marathon
+        temps_val = self.data.get('Quel est votre temps sur semi marathon ?')
+        if temps_val is not None and temps_val != '':
+            temps_str = str(temps_val).strip()
+            if temps_str and temps_str != '' and temps_str != 'nan':
+                temps = self._temps_vers_secondes(temps_str)
+                if temps and temps > 0:
+                    return round(21.1 / (temps / 3600), 1)
         
-        if self.data.get('Quel est votre temps sur marathon ?'):
-            temps = self._temps_vers_secondes(self.data['Quel est votre temps sur marathon ?'])
-            if temps and temps > 0:
-                return round(42.195 / (temps / 3600), 1)
+        # Marathon
+        temps_val = self.data.get('Quel est votre temps sur marathon ?')
+        if temps_val is not None and temps_val != '':
+            temps_str = str(temps_val).strip()
+            if temps_str and temps_str != '' and temps_str != 'nan':
+                temps = self._temps_vers_secondes(temps_str)
+                if temps and temps > 0:
+                    return round(42.195 / (temps / 3600), 1)
         
         return None
     
     def _extraire_ftp(self) -> Optional[int]:
         ftp_str = self.data.get('FTP vélo en watt (laisser vide sinon)', '')
-        if ftp_str and ftp_str != '':
-            try:
-                return int(ftp_str)
-            except:
-                self.manques.append({'donnee': 'FTP', 'statut': 'Erreur', 'valeur': ftp_str})
-                return None
-        return None
+        if ftp_str is None or ftp_str == '':
+            return None
+        
+        # 🔥 Conversion en string
+        ftp_str = str(ftp_str).strip()
+        if not ftp_str or ftp_str == '' or ftp_str == 'nan' or ftp_str == 'None':
+            return None
+        
+        try:
+            return int(float(ftp_str))
+        except:
+            self.manques.append({'donnee': 'FTP', 'statut': 'Erreur', 'valeur': ftp_str})
+            return None
     
     def _extraire_temps_400m(self) -> Optional[int]:
-        temps_str = self.data.get('Temps actuel sur 400m nage libre (laisser vide sinon)', '')
-        if temps_str and temps_str != '':
-            temps_sec = self._temps_vers_secondes(temps_str)
-            if temps_sec and temps_sec > 0:
-                return temps_sec
+        temps_val = self.data.get('Temps actuel sur 400m nage libre (laisser vide sinon)', '')
+        if temps_val is None:
+            return None
+        
+        # 🔥 Conversion en string
+        temps_str = str(temps_val).strip()
+        if not temps_str or temps_str == '' or temps_str == 'nan' or temps_str == 'None':
+            return None
+        
+        temps_sec = self._temps_vers_secondes(temps_str)
+        if temps_sec and temps_sec > 0:
+            return temps_sec
         return None
     
     def _extraire_fc(self, discipline: str) -> Optional[int]:
@@ -153,13 +180,19 @@ class Physiologie:
         if not champ:
             return None
         
-        fc_str = self.data.get(champ, '')
-        if fc_str and fc_str != '':
-            try:
-                return int(fc_str)
-            except:
-                return None
-        return None
+        fc_val = self.data.get(champ, '')
+        if fc_val is None or fc_val == '':
+            return None
+        
+        # 🔥 Conversion en string
+        fc_str = str(fc_val).strip()
+        if not fc_str or fc_str == '' or fc_str == 'nan' or fc_str == 'None':
+            return None
+        
+        try:
+            return int(float(fc_str))
+        except:
+            return None
     
     # ------------------------------------------------------------
     # GÉNÉRATION DES TABLEAUX
@@ -219,9 +252,19 @@ class Physiologie:
     
     @staticmethod
     def _temps_vers_secondes(temps_str: str) -> Optional[int]:
+        """
+        Convertit MM:SS ou HH:MM:SS en secondes.
+        Gère aussi les formats "MM:SS" avec des espaces.
+        """
         if not temps_str or temps_str == '':
             return None
-        parties = temps_str.strip().split(':')
+        
+        # Nettoyer
+        temps_str = str(temps_str).strip()
+        if not temps_str or temps_str == 'nan' or temps_str == 'None':
+            return None
+        
+        parties = temps_str.split(':')
         try:
             if len(parties) == 2:
                 return int(parties[0]) * 60 + int(parties[1])
@@ -233,15 +276,18 @@ class Physiologie:
     
     @staticmethod
     def _secondes_vers_temps(secondes: float) -> str:
+        """Convertit des secondes en MM:SS"""
         minutes = int(secondes // 60)
         sec = int(secondes % 60)
         return f"{minutes:02d}:{sec:02d}"
     
     def _calculer_age(self) -> Optional[int]:
         date_naissance = self.data.get('Date de naissance', '')
-        if date_naissance:
+        if date_naissance and date_naissance != '':
             try:
-                naissance = datetime.strptime(date_naissance, '%Y-%m-%d')
+                # 🔥 Conversion en string
+                date_str = str(date_naissance).strip()
+                naissance = datetime.strptime(date_str, '%Y-%m-%d')
                 age = datetime.now().year - naissance.year
                 if datetime.now().month < naissance.month or (datetime.now().month == naissance.month and datetime.now().day < naissance.day):
                     age -= 1
