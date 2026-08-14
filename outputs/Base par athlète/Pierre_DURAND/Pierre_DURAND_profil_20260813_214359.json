@@ -1,0 +1,237 @@
+{
+  "nom": "Pierre DURAND",
+  "sexe": "M",
+  "age": 48,
+  "taille_poids": "178cm-80kg",
+  "metier_contraintes": "Infirmier horaires décalées",
+  "objectif_principal": "Préparation marathon",
+  "format_competition": "Marathon",
+  "competition_objectif": "Marathon de Lyon 2026",
+  "physiologie": {
+    "vma": 16.7,
+    "vma_origine": "Estimée depuis la VC (14.2 km/h)",
+    "vc": 14.2,
+    "vc_origine": "Déclarée (colonne VC)",
+    "ftp": 210,
+    "temps_400m_natation": 570,
+    "fc_max_cap": 165,
+    "fc_max_natation": 158,
+    "fc_max_velo": 160
+  },
+  "profil": "Non déterminé (1 seule distance)",
+  "vitesses_performances": {
+    "marathon": 8.9
+  },
+  "alertes": [],
+  "zones": {
+    "vma": [
+      {
+        "distance": 100,
+        "vitesse": 17.5,
+        "coeff": 1.05,
+        "temps": "00:20",
+        "temps_sec": 20.53
+      },
+      {
+        "distance": 200,
+        "vitesse": 17.5,
+        "coeff": 1.05,
+        "temps": "00:41",
+        "temps_sec": 41.06
+      },
+      {
+        "distance": 300,
+        "vitesse": 16.5,
+        "coeff": 0.99,
+        "temps": "01:05",
+        "temps_sec": 65.32
+      },
+      {
+        "distance": 400,
+        "vitesse": 16.4,
+        "coeff": 0.98,
+        "temps": "01:27",
+        "temps_sec": 87.99
+      },
+      {
+        "distance": 500,
+        "vitesse": 16.4,
+        "coeff": 0.98,
+        "temps": "01:49",
+        "temps_sec": 109.98
+      },
+      {
+        "distance": 600,
+        "vitesse": 15.9,
+        "coeff": 0.95,
+        "temps": "02:16",
+        "temps_sec": 136.15
+      },
+      {
+        "distance": 700,
+        "vitesse": 15.5,
+        "coeff": 0.93,
+        "temps": "02:42",
+        "temps_sec": 162.26
+      },
+      {
+        "distance": 800,
+        "vitesse": 15.7,
+        "coeff": 0.94,
+        "temps": "03:03",
+        "temps_sec": 183.46
+      },
+      {
+        "distance": 1000,
+        "vitesse": 15.4,
+        "coeff": 0.92,
+        "temps": "03:54",
+        "temps_sec": 234.31
+      }
+    ],
+    "vc": [
+      {
+        "distance_effort": 200,
+        "vitesse_effort": 16.5,
+        "temps_effort": "00:43",
+        "temps_effort_sec": 43.56,
+        "distance_recup": 50,
+        "vitesse_recup": 6.24,
+        "temps_recup": "00:28",
+        "temps_recup_sec": 28.85,
+        "coeff": 1.164
+      },
+      {
+        "distance_effort": 300,
+        "vitesse_effort": 16.3,
+        "temps_effort": "01:06",
+        "temps_effort_sec": 66.42,
+        "distance_recup": 75,
+        "vitesse_recup": 6.24,
+        "temps_recup": "00:43",
+        "temps_recup_sec": 43.27,
+        "coeff": 1.145
+      },
+      {
+        "distance_effort": 400,
+        "vitesse_effort": 15.7,
+        "temps_effort": "01:31",
+        "temps_effort_sec": 91.69,
+        "distance_recup": 100,
+        "vitesse_recup": 6.24,
+        "temps_recup": "00:57",
+        "temps_recup_sec": 57.69,
+        "coeff": 1.106
+      },
+      {
+        "distance_effort": 500,
+        "vitesse_effort": 15.4,
+        "temps_effort": "01:56",
+        "temps_effort_sec": 116.72,
+        "distance_recup": 125,
+        "vitesse_recup": 6.24,
+        "temps_recup": "01:12",
+        "temps_recup_sec": 72.12,
+        "coeff": 1.086
+      },
+      {
+        "distance_effort": 600,
+        "vitesse_effort": 15.2,
+        "temps_effort": "02:22",
+        "temps_effort_sec": 142.56,
+        "distance_recup": 150,
+        "vitesse_recup": 6.24,
+        "temps_recup": "01:26",
+        "temps_recup_sec": 86.54,
+        "coeff": 1.067
+      },
+      {
+        "distance_effort": 700,
+        "vitesse_effort": 14.9,
+        "temps_effort": "02:49",
+        "temps_effort_sec": 169.34,
+        "distance_recup": 175,
+        "vitesse_recup": 6.24,
+        "temps_recup": "01:40",
+        "temps_recup_sec": 100.96,
+        "coeff": 1.048
+      },
+      {
+        "distance_effort": 800,
+        "vitesse_effort": 14.5,
+        "temps_effort": "03:19",
+        "temps_effort_sec": 199.04,
+        "distance_recup": 200,
+        "vitesse_recup": 6.24,
+        "temps_recup": "01:55",
+        "temps_recup_sec": 115.38,
+        "coeff": 1.019
+      },
+      {
+        "distance_effort": 1000,
+        "vitesse_effort": 14.0,
+        "temps_effort": "04:16",
+        "temps_effort_sec": 256.34,
+        "distance_recup": 250,
+        "vitesse_recup": 6.24,
+        "temps_recup": "02:24",
+        "temps_recup_sec": 144.23,
+        "coeff": 0.989
+      },
+      {
+        "distance_effort": 1500,
+        "vitesse_effort": 13.6,
+        "temps_effort": "06:35",
+        "temps_effort_sec": 395.71,
+        "distance_recup": 375,
+        "vitesse_recup": 6.24,
+        "temps_recup": "03:36",
+        "temps_recup_sec": 216.35,
+        "coeff": 0.961
+      },
+      {
+        "distance_effort": 2000,
+        "vitesse_effort": 13.4,
+        "temps_effort": "08:58",
+        "temps_effort_sec": 538.83,
+        "distance_recup": 500,
+        "vitesse_recup": 6.24,
+        "temps_recup": "04:48",
+        "temps_recup_sec": 288.46,
+        "coeff": 0.941
+      },
+      {
+        "distance_effort": 2800,
+        "vitesse_effort": 13.2,
+        "temps_effort": "12:42",
+        "temps_effort_sec": 762.47,
+        "distance_recup": 700,
+        "vitesse_recup": 6.24,
+        "temps_recup": "06:43",
+        "temps_recup_sec": 403.85,
+        "coeff": 0.931
+      }
+    ]
+  },
+  "disponibilites": {
+    "CAP": [
+      "Lundi jeudi samedi"
+    ],
+    "Velo": [
+      "Mercredi"
+    ],
+    "Natation": [
+      "Vendredi"
+    ],
+    "bi_quotidien": {
+      "CAP": [],
+      "Velo": [],
+      "Natation": []
+    }
+  },
+  "bi_quotidien_nb": 4,
+  "seances": {
+    "VMA": "Pierre_DURAND_seances_VMA_20260813_214359.csv",
+    "VC": "Pierre_DURAND_seances_VC_20260813_214359.csv"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "CAP": [
+    "Lundi mercredi vendredi"
+  ],
+  "Velo": [
+    "Dimanche"
+  ],
+  "Natation": [
+    "Mardi"
+  ],
+  "bi_quotidien": {
+    "CAP": [],
+    "Velo": [],
+    "Natation": []
+  }
+}

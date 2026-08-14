@@ -1,0 +1,241 @@
+{
+  "nom": "Lucas BERNARD",
+  "sexe": "M",
+  "age": 25,
+  "taille_poids": "180cm-75kg",
+  "metier_contraintes": "Étudiant stage 2j/semaine",
+  "objectif_principal": "Découvrir le triathlon",
+  "format_competition": "Olympique",
+  "competition_objectif": "Olympique de Paris 2026",
+  "physiologie": {
+    "vma": 16.0,
+    "vma_origine": "Déclarée (colonne VMA)",
+    "vc": 9.4,
+    "vc_origine": "Calculée par régression sur 3 distances (10km, semi-marathon, marathon)",
+    "ftp": 195,
+    "temps_400m_natation": 435,
+    "fc_max_cap": 196,
+    "fc_max_natation": 188,
+    "fc_max_velo": 192
+  },
+  "profil": "Moyen",
+  "vitesses_performances": {
+    "10km": 12.5,
+    "semi": 12.1,
+    "marathon": 10.1
+  },
+  "alertes": [
+    "Incohérence VMA/VC : VMA=16.0 km/h, VC=9.4 km/h (ratio 0.59)"
+  ],
+  "zones": {
+    "vma": [
+      {
+        "distance": 100,
+        "vitesse": 16.8,
+        "coeff": 1.05,
+        "temps": "00:21",
+        "temps_sec": 21.43
+      },
+      {
+        "distance": 200,
+        "vitesse": 16.8,
+        "coeff": 1.05,
+        "temps": "00:42",
+        "temps_sec": 42.86
+      },
+      {
+        "distance": 300,
+        "vitesse": 15.8,
+        "coeff": 0.99,
+        "temps": "01:08",
+        "temps_sec": 68.18
+      },
+      {
+        "distance": 400,
+        "vitesse": 15.7,
+        "coeff": 0.98,
+        "temps": "01:31",
+        "temps_sec": 91.84
+      },
+      {
+        "distance": 500,
+        "vitesse": 15.7,
+        "coeff": 0.98,
+        "temps": "01:54",
+        "temps_sec": 114.8
+      },
+      {
+        "distance": 600,
+        "vitesse": 15.2,
+        "coeff": 0.95,
+        "temps": "02:22",
+        "temps_sec": 142.11
+      },
+      {
+        "distance": 700,
+        "vitesse": 14.9,
+        "coeff": 0.93,
+        "temps": "02:49",
+        "temps_sec": 169.35
+      },
+      {
+        "distance": 800,
+        "vitesse": 15.0,
+        "coeff": 0.94,
+        "temps": "03:11",
+        "temps_sec": 191.49
+      },
+      {
+        "distance": 1000,
+        "vitesse": 14.7,
+        "coeff": 0.92,
+        "temps": "04:04",
+        "temps_sec": 244.57
+      }
+    ],
+    "vc": [
+      {
+        "distance_effort": 200,
+        "vitesse_effort": 10.9,
+        "temps_effort": "01:05",
+        "temps_effort_sec": 65.8,
+        "distance_recup": 50,
+        "vitesse_recup": 6.24,
+        "temps_recup": "00:28",
+        "temps_recup_sec": 28.85,
+        "coeff": 1.164
+      },
+      {
+        "distance_effort": 300,
+        "vitesse_effort": 10.8,
+        "temps_effort": "01:40",
+        "temps_effort_sec": 100.34,
+        "distance_recup": 75,
+        "vitesse_recup": 6.24,
+        "temps_recup": "00:43",
+        "temps_recup_sec": 43.27,
+        "coeff": 1.145
+      },
+      {
+        "distance_effort": 400,
+        "vitesse_effort": 10.4,
+        "temps_effort": "02:18",
+        "temps_effort_sec": 138.51,
+        "distance_recup": 100,
+        "vitesse_recup": 6.24,
+        "temps_recup": "00:57",
+        "temps_recup_sec": 57.69,
+        "coeff": 1.106
+      },
+      {
+        "distance_effort": 500,
+        "vitesse_effort": 10.2,
+        "temps_effort": "02:56",
+        "temps_effort_sec": 176.33,
+        "distance_recup": 125,
+        "vitesse_recup": 6.24,
+        "temps_recup": "01:12",
+        "temps_recup_sec": 72.12,
+        "coeff": 1.086
+      },
+      {
+        "distance_effort": 600,
+        "vitesse_effort": 10.0,
+        "temps_effort": "03:35",
+        "temps_effort_sec": 215.36,
+        "distance_recup": 150,
+        "vitesse_recup": 6.24,
+        "temps_recup": "01:26",
+        "temps_recup_sec": 86.54,
+        "coeff": 1.067
+      },
+      {
+        "distance_effort": 700,
+        "vitesse_effort": 9.9,
+        "temps_effort": "04:15",
+        "temps_effort_sec": 255.81,
+        "distance_recup": 175,
+        "vitesse_recup": 6.24,
+        "temps_recup": "01:40",
+        "temps_recup_sec": 100.96,
+        "coeff": 1.048
+      },
+      {
+        "distance_effort": 800,
+        "vitesse_effort": 9.6,
+        "temps_effort": "05:00",
+        "temps_effort_sec": 300.67,
+        "distance_recup": 200,
+        "vitesse_recup": 6.24,
+        "temps_recup": "01:55",
+        "temps_recup_sec": 115.38,
+        "coeff": 1.019
+      },
+      {
+        "distance_effort": 1000,
+        "vitesse_effort": 9.3,
+        "temps_effort": "06:27",
+        "temps_effort_sec": 387.24,
+        "distance_recup": 250,
+        "vitesse_recup": 6.24,
+        "temps_recup": "02:24",
+        "temps_recup_sec": 144.23,
+        "coeff": 0.989
+      },
+      {
+        "distance_effort": 1500,
+        "vitesse_effort": 9.0,
+        "temps_effort": "09:57",
+        "temps_effort_sec": 597.78,
+        "distance_recup": 375,
+        "vitesse_recup": 6.24,
+        "temps_recup": "03:36",
+        "temps_recup_sec": 216.35,
+        "coeff": 0.961
+      },
+      {
+        "distance_effort": 2000,
+        "vitesse_effort": 8.8,
+        "temps_effort": "13:33",
+        "temps_effort_sec": 813.98,
+        "distance_recup": 500,
+        "vitesse_recup": 6.24,
+        "temps_recup": "04:48",
+        "temps_recup_sec": 288.46,
+        "coeff": 0.941
+      },
+      {
+        "distance_effort": 2800,
+        "vitesse_effort": 8.8,
+        "temps_effort": "19:11",
+        "temps_effort_sec": 1151.82,
+        "distance_recup": 700,
+        "vitesse_recup": 6.24,
+        "temps_recup": "06:43",
+        "temps_recup_sec": 403.85,
+        "coeff": 0.931
+      }
+    ]
+  },
+  "disponibilites": {
+    "CAP": [
+      "Lundi mercredi vendredi"
+    ],
+    "Velo": [
+      "Mercredi"
+    ],
+    "Natation": [
+      "Jeudi"
+    ],
+    "bi_quotidien": {
+      "CAP": [],
+      "Velo": [],
+      "Natation": []
+    }
+  },
+  "bi_quotidien_nb": 2,
+  "seances": {
+    "VMA": "Lucas_BERNARD_seances_VMA_20260813_214359.csv",
+    "VC": "Lucas_BERNARD_seances_VC_20260813_214359.csv"
+  }
+}
