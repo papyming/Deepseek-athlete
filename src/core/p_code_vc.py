@@ -1,5 +1,25 @@
 import math
 
+# ============================================================
+# COEFFICIENTS VC (extraits de ta feuille "Fractionné VC")
+# ============================================================
+COEFF_VC_DISTANCE = {
+    200: {'M': 1.1640, 'F': 1.1640},
+    300: {'M': 1.1446, 'F': 1.1446},
+    400: {'M': 1.1058, 'F': 1.1058},
+    500: {'M': 1.0864, 'F': 1.0864},
+    600: {'M': 1.0670, 'F': 1.0670},
+    700: {'M': 1.0476, 'F': 1.0476},
+    800: {'M': 1.0185, 'F': 1.0185},
+    1000: {'M': 0.9894, 'F': 0.9894},
+    1500: {'M': 0.9605, 'F': 0.9605},
+    2000: {'M': 0.9409, 'F': 0.9409},
+    2800: {'M': 0.9312, 'F': 0.9312}
+}
+
+VITESSE_RECUP_VC = 0.5   # 50% de la VC
+RAPPORT_RECUP_VC = 0.25  # 25% de la distance d'effort
+
 def generer_seances_vc(vc: float, sexe: str, temps_min: int = 15, temps_max: int = 30):
     """
     Génère les séances VC selon le P-code
@@ -7,45 +27,29 @@ def generer_seances_vc(vc: float, sexe: str, temps_min: int = 15, temps_max: int
     sexe : "M" ou "F"
     temps_min, temps_max : minutes
     """
-    
-    # Coefficient Femme
-    coeff_femme = 0.97 if sexe == "F" else 1.0
-    
-    # Table de correspondance VC
-    table_vc = [
-        {"distance": 200,  "%H": 120, "%F": 120 * coeff_femme},
-        {"distance": 300,  "%H": 118, "%F": 118 * coeff_femme},
-        {"distance": 400,  "%H": 114, "%F": 114 * coeff_femme},
-        {"distance": 500,  "%H": 112, "%F": 112 * coeff_femme},
-        {"distance": 600,  "%H": 110, "%F": 110 * coeff_femme},
-        {"distance": 700,  "%H": 108, "%F": 108 * coeff_femme},
-        {"distance": 800,  "%H": 105, "%F": 105 * coeff_femme},
-        {"distance": 1000, "%H": 102, "%F": 102 * coeff_femme},
-        {"distance": 1600, "%H": 100, "%F": 100 * coeff_femme},
-        {"distance": 2000, "%H": 98,  "%F": 98  * coeff_femme},
-        {"distance": 2400, "%H": 97,  "%F": 97  * coeff_femme},
-        {"distance": 2800, "%H": 96,  "%F": 96  * coeff_femme}
-    ]
+    # 🔥 Vérifier que vc est valide
+    if not vc or math.isnan(vc):
+        return []
     
     resultats = []
     
-    for row in table_vc:
-        distance = row["distance"]
-        pourcentage = row["%H"] if sexe == "M" else row["%F"]
+    for distance, coeffs in COEFF_VC_DISTANCE.items():
+        coeff = coeffs.get(sexe, 1.0)
+        pourcentage = coeff * 100
         
-        # Vitesse d'effort
-        vitesse_effort = vc * (pourcentage / 100)
+        # Vitesse d'effort (km/h)
+        vitesse_effort = vc * coeff
         
-        # Récupération
-        distance_recup = distance * 0.25
-        vitesse_recup = vc * 0.5
+        # Récupération : 25% de la distance, à 50% de la VC
+        distance_recup = distance * RAPPORT_RECUP_VC
+        vitesse_recup = vc * VITESSE_RECUP_VC
         
-        # Temps
+        # Temps (secondes)
         temps_effort_s = distance / (vitesse_effort / 3.6)
         temps_recup_s = distance_recup / (vitesse_recup / 3.6)
         temps_total_rep_s = temps_effort_s + temps_recup_s
         
-        # Temps cible selon la distance
+        # Temps cible
         if distance <= 400:
             temps_cible_s = temps_min * 60
         elif distance >= 2000:
@@ -59,15 +63,16 @@ def generer_seances_vc(vc: float, sexe: str, temps_min: int = 15, temps_max: int
         nb_rep = math.ceil(temps_cible_s / temps_total_rep_s)
         temps_total_seance_s = nb_rep * temps_total_rep_s
         
-        # Stockage
         resultats.append({
             "distance": distance,
             "pourcentage": round(pourcentage, 1),
             "vitesse_effort": round(vitesse_effort, 1),
             "temps_effort": formater_temps(temps_effort_s),
-            "distance_recup": distance_recup,
+            "temps_effort_sec": round(temps_effort_s, 2),
+            "distance_recup": round(distance_recup, 1),
             "vitesse_recup": round(vitesse_recup, 1),
             "temps_recup": formater_temps(temps_recup_s),
+            "temps_recup_sec": round(temps_recup_s, 2),
             "temps_total_rep": formater_temps(temps_total_rep_s),
             "nb_rep": nb_rep,
             "temps_cible": formater_temps(temps_cible_s),
@@ -83,10 +88,9 @@ def formater_temps(secondes: float) -> str:
     return f"{minutes:02d}:{sec:02d}"
 
 
-# Test
 if __name__ == "__main__":
-    print("=== TEST VC (Femme, 12.47 km/h) ===")
-    seances = generer_seances_vc(12.47, "F")
+    print("=== TEST VC (Germain Noyer, 17.1 km/h) ===")
+    seances = generer_seances_vc(17.1, "M")
     for s in seances:
         print(f"{s['distance']}m : {s['pourcentage']}% VC → {s['vitesse_effort']} km/h")
         print(f"  Effort {s['temps_effort']}, recup {s['temps_recup']}, {s['nb_rep']} rep")

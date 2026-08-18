@@ -1,6 +1,7 @@
 import os
 import json
 import pandas as pd
+import math
 from reportlab.lib.pagesizes import A4
 from reportlab.platypus import SimpleDocTemplate, Paragraph
 from reportlab.lib.styles import getSampleStyleSheet
@@ -63,17 +64,26 @@ def sauvegarder_csv(df, base_path):
         return test_path
 
 def sauvegarder_pdf(doc, base_path):
+    """
+    Sauvegarde un PDF.
+    Si l'erreur 'getKeepWithNext' se produit, on recrée le document
+    et on reconstruit le story.
+    """
     os.makedirs(os.path.dirname(base_path), exist_ok=True)
     path = str(base_path) + '.pdf'
     
+    # 🔥 Récupérer le story
     story = []
     if hasattr(doc, 'story'):
         story = doc.story
     elif hasattr(doc, '_flowables'):
         story = doc._flowables
     
-    if not story:
+    # 🔥 Si aucun story, créer un story minimal
+    if not story or len(story) == 0:
         print("   ⚠️ Aucun story trouvé. Création d'un PDF minimal.")
+        from reportlab.platypus import Paragraph
+        from reportlab.lib.styles import getSampleStyleSheet
         styles = getSampleStyleSheet()
         story = [Paragraph("PDF de secours (aucun story trouvé)", styles['Normal'])]
     

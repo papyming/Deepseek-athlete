@@ -7,7 +7,10 @@ from typing import Dict, Optional, Tuple, List
 class Physiologie:
     """
     Classe centrale pour tous les calculs physiologiques :
-    - VMA / Vitesse Critique (CAP) avec régression sur 3 chronos
+    - VMA / Vitesse Critique (CAP) avec :
+      * Priorité au test VC 3'/6'/12'
+      * Régression sur 3 chronos (10km, semi, marathon)
+      * Estimation depuis la VMA
     - FTP (Vélo)
     - 400m natation
     - Fréquences cardiaques max
@@ -16,6 +19,7 @@ class Physiologie:
     - Analyse de profil (endurant/moyen/explosif)
     - Origine des calculs VMA/VC
     - Courses préparatoires
+    - Alertes sur la fiabilité des calculs VMA/VC
     """
     
     COEFF_VMA_DISTANCE = {
@@ -47,11 +51,31 @@ class Physiologie:
     VITESSE_RECUP_VC = 6.24
     RAPPORT_RECUP_VC = 0.25
     
+    # ============================================================
+    # FONCTION UTILITAIRE POUR CONVERSION INT SÉCURISÉE
+    # ============================================================
+    @staticmethod
+    def _safe_int(valeur) -> Optional[int]:
+        """Convertit en int en gérant les NaN, None et les chaînes vides."""
+        if valeur is None:
+            return None
+        try:
+            if isinstance(valeur, float) and math.isnan(valeur):
+                return None
+            if isinstance(valeur, str) and valeur.strip() in ['', 'nan', 'None']:
+                return None
+            return int(float(valeur))
+        except:
+            return None
+    
     def __init__(self, athlete_data: Dict):
         self.data = athlete_data
         self.manques = []
+        self.alertes_profil = []
         self.vma_origine = None
         self.vc_origine = None
+        self.date_objectif = None
+        self.test_vc_3_6_12 = None
         
         self.vma = self._extraire_vma()
         self.vc = self._extraire_vc()
@@ -64,13 +88,41 @@ class Physiologie:
         self.fc_max_velo = self._extraire_fc('velo')
         
         self.courses_preparatoires = self._extraire_courses()
+        self.date_objectif = self._extraire_date_objectif()
         
-        self.profil, self.vitesses_performances, self.alertes_profil = self._analyser_profil()
+        self.profil, self.vitesses_performances, _ = self._analyser_profil()
         
         self.tableau_vma = self._generer_tableau_vma()
         self.tableau_vc = self._generer_tableau_vc()
         
         self._generer_bilan()
+    
+    def _extraire_date_objectif(self) -> Optional[str]:
+        """Extrait la date de l'objectif depuis le champ 'Objectif principal'."""
+        texte = self.data.get('Objectif principal', '')
+        if not texte:
+            return None
+        patterns = [
+            r'(\d{2})/(\d{2})(?:/(\d{4}))?',
+            r'(\d{4})-(\d{2})-(\d{2})',
+            r'(\d{2})[\.\-](\d{2})(?:[\.\-](\d{4}))?'
+        ]
+        for pattern in patterns:
+            match = re.search(pattern, texte)
+            if match:
+                groups = match.groups()
+                if len(groups) == 3 and groups[2]:
+                    jour, mois, annee = int(groups[0]), int(groups[1]), int(groups[2])
+                    if annee < 100:
+                        annee += 2000
+                    if 1 <= mois <= 12 and 1 <= jour <= 31:
+                        return f"{annee}-{mois:02d}-{jour:02d}"
+                elif len(groups) == 2 or (len(groups) == 3 and not groups[2]):
+                    jour, mois = int(groups[0]), int(groups[1])
+                    if 1 <= mois <= 12 and 1 <= jour <= 31:
+                        annee = datetime.now().year
+                        return f"{annee}-{mois:02d}-{jour:02d}"
+        return None
     
     def _extraire_courses(self) -> List[str]:
         """Extrait la liste des courses préparatoires depuis le CSV."""
@@ -82,7 +134,7 @@ class Physiologie:
         return courses
     
     def _extraire_vma(self) -> Optional[float]:
-        champ = self.data.get('Avez vous fait un test VMA ou de VC ? Sinon avez vous une idée de votre VMA ou de votre VC ? (mettre VC ou VMA)', '')
+        champ = self.data.get('Avez vous fait un test VMA (Vitesse Maximale Aérobie) ou de VC (Vitesse Critique) ? Sinon avez vous une idée de votre VMA ou de votre VC ?', '')
         if not champ or champ == '':
             self.manques.append({'donnee': 'VMA', 'statut': 'Manquant'})
             return None
@@ -97,7 +149,9 @@ class Physiologie:
         if match_vc:
             vc = float(match_vc.group(1))
             self.vma_origine = f"Estimée depuis la VC ({vc} km/h)"
-            return round(vc / 0.85, 1)
+            vma = round(vc / 0.85, 1)
+            self.alertes_profil.append(f"⚠️ VMA estimée depuis la VC ({vc} km/h) → à valider par un test VMA.")
+            return vma
         
         try:
             self.vma_origine = "Déclarée (valeur numérique)"
@@ -109,13 +163,38 @@ class Physiologie:
     def _extraire_vc(self) -> Optional[float]:
         """
         Extrait la VC avec une priorité :
-        1. Déclaration directe (VC=...)
-        2. Régression linéaire sur 3 chronos (10km, semi, marathon)
-        3. Moyenne sur 2 chronos
-        4. Chrono unique
-        5. Estimation depuis la VMA
+        1. Test VC 3'/6'/12' (prioritaire)
+        2. Déclaration directe (VC=...)
+        3. Régression linéaire sur 3 chronos (10km, semi, marathon)
+        4. Moyenne sur 2 chronos
+        5. Chrono unique
+        6. Estimation depuis la VMA
         """
-        champ = self.data.get('Avez vous fait un test VMA ou de VC ? Sinon avez vous une idée de votre VMA ou de votre VC ? (mettre VC ou VMA)', '')
+        # 1. Test VC 3'/6'/12' (prioritaire)
+        test_vc = self.data.get('Si vous avez fait le test de Vitesse Critique (VC) 3\'/6\'/12\' Veuillez saisir les 3 distances ci dessous avec la syntaxe suivante : 3=X/6=Y/12=Z', '')
+        if test_vc and test_vc != '':
+            test_vc = str(test_vc).strip()
+            test_vc = test_vc.replace(' ', '')
+            match = re.search(r'3=(\d+)/6=(\d+)/12=(\d+)', test_vc)
+            if match:
+                d3 = float(match.group(1))
+                d6 = float(match.group(2))
+                d12 = float(match.group(3))
+                self.test_vc_3_6_12 = f"3={d3}m/6={d6}m/12={d12}m"
+                
+                temps = [3*60, 6*60, 12*60]
+                distances = [d3, d6, d12]
+                try:
+                    coeffs = np.polyfit(temps, distances, 1)
+                    vc = coeffs[0] * 3600 / 1000
+                    self.vc_origine = f"Calculée depuis le test VC 3'/6'/12' (3={d3}m, 6={d6}m, 12={d12}m)"
+                    self.alertes_profil.append(f"✅ VC calculée depuis le test VC 3'/6'/12' → Valeur fiable (3 points)")
+                    return round(vc, 1)
+                except Exception as e:
+                    self.manques.append({'donnee': 'Test VC 3/6/12', 'statut': 'Erreur de calcul', 'valeur': test_vc})
+        
+        # 2. Déclaration directe
+        champ = self.data.get('Avez vous fait un test VMA (Vitesse Maximale Aérobie) ou de VC (Vitesse Critique) ? Sinon avez vous une idée de votre VMA ou de votre VC ?', '')
         if champ and champ != '':
             champ = str(champ).upper().replace(' ', '')
             match = re.search(r'VC[=:]*([0-9.]+)', champ)
@@ -123,6 +202,7 @@ class Physiologie:
                 self.vc_origine = "Déclarée (colonne VC)"
                 return float(match.group(1))
         
+        # 3. Récupérer tous les chronos
         vitesses = []
         distances = []
         origines = []
@@ -148,6 +228,7 @@ class Physiologie:
                 distances.append(42.195)
                 origines.append("marathon")
         
+        # 4. Régression linéaire
         if len(vitesses) >= 2:
             try:
                 temps = [d / v * 3600 for d, v in zip(distances, vitesses)]
@@ -155,20 +236,28 @@ class Physiologie:
                 a, b = coeffs[0], coeffs[1]
                 vc = 3600 / a
                 self.vc_origine = f"Calculée par régression sur {len(vitesses)} distances ({', '.join(origines)})"
+                if len(vitesses) < 3:
+                    self.alertes_profil.append(f"⚠️ VC calculée avec seulement {len(vitesses)} distances ({', '.join(origines)}) → précision limitée.")
                 return round(vc, 1)
             except Exception as e:
                 print(f"   ⚠️ Régression échouée ({e}), utilisation de la moyenne")
                 vc = sum(vitesses) / len(vitesses)
                 self.vc_origine = f"Moyenne sur {len(vitesses)} distances ({', '.join(origines)})"
+                if len(vitesses) < 3:
+                    self.alertes_profil.append(f"⚠️ VC calculée avec seulement {len(vitesses)} distances ({', '.join(origines)}) → précision limitée.")
                 return round(vc, 1)
         
+        # 5. Chrono unique
         elif len(vitesses) == 1:
             vc = vitesses[0]
-            self.vc_origine = f"Calculée depuis le {origines[0]}"
+            self.vc_origine = f"Calculée depuis le {origines[0]} (1 seule distance)"
+            self.alertes_profil.append(f"⚠️ VC calculée avec 1 seule distance → précision très faible. Idéalement, réaliser 3 tests (3'/6'/12').")
             return round(vc, 1)
         
+        # 6. Estimation depuis la VMA
         if self.vma:
             self.vc_origine = f"Estimée depuis la VMA ({self.vma} km/h, 85%)"
+            self.alertes_profil.append(f"⚠️ VC estimée depuis la VMA ({self.vma} km/h, 85%) → à valider par un test VC (3'/6'/12').")
             return round(self.vma * 0.85, 1)
         
         return None
@@ -181,7 +270,8 @@ class Physiologie:
         if not ftp_str or ftp_str == '' or ftp_str == 'nan' or ftp_str == 'None':
             return None
         try:
-            return int(float(ftp_str))
+            valeur = float(ftp_str)
+            return self._safe_int(valeur)
         except:
             self.manques.append({'donnee': 'FTP', 'statut': 'Erreur', 'valeur': ftp_str})
             return None
@@ -214,7 +304,8 @@ class Physiologie:
         if not fc_str or fc_str == '' or fc_str == 'nan' or fc_str == 'None':
             return None
         try:
-            return int(float(fc_str))
+            valeur = float(fc_str)
+            return self._safe_int(valeur)
         except:
             return None
     
@@ -285,33 +376,56 @@ class Physiologie:
         return profil, vitesses, alertes
     
     def _generer_tableau_vma(self) -> List[Dict]:
-        if not self.vma:
+        # 🔥 CORRECTION : vérifier que VMA est valide
+        if not self.vma or math.isnan(self.vma):
             return []
+        
         tableau = []
         for distance, coeffs in self.COEFF_VMA_DISTANCE.items():
             coeff = coeffs.get(self.genre, 0.95)
             vitesse = self.vma * coeff
             temps_sec = distance / (vitesse / 3.6)
+            
+            # 🔥 Vérifier que temps_sec est valide
+            if math.isnan(temps_sec) or math.isinf(temps_sec):
+                continue
+            
+            distance_recup = distance * 0.25
+            vitesse_recup = self.vma * 0.5
+            temps_recup_sec = distance_recup / (vitesse_recup / 3.6)
+            
             tableau.append({
                 'distance': distance,
                 'vitesse': round(vitesse, 1),
                 'coeff': coeff,
                 'temps': self._secondes_vers_temps(temps_sec),
-                'temps_sec': round(temps_sec, 2)
+                'temps_sec': round(temps_sec, 2),
+                'distance_recup': round(distance_recup, 1),
+                'vitesse_recup': round(vitesse_recup, 1),
+                'temps_recup': self._secondes_vers_temps(temps_recup_sec),
+                'temps_recup_sec': round(temps_recup_sec, 2)
             })
         return tableau
     
     def _generer_tableau_vc(self) -> List[Dict]:
-        if not self.vc:
+        # 🔥 CORRECTION : vérifier que VC est valide
+        if not self.vc or math.isnan(self.vc):
             return []
+        
         tableau = []
         for distance, coeffs in self.COEFF_VC_DISTANCE.items():
             coeff = coeffs.get(self.genre, 1.0)
             vitesse_effort = self.vc * coeff
             temps_effort_sec = distance / (vitesse_effort / 3.6)
+            
+            # 🔥 Vérifier que temps_effort_sec est valide
+            if math.isnan(temps_effort_sec) or math.isinf(temps_effort_sec):
+                continue
+            
             distance_recup = int(distance * self.RAPPORT_RECUP_VC)
             vitesse_recup = self.VITESSE_RECUP_VC
             temps_recup_sec = distance_recup / (vitesse_recup / 3.6)
+            
             tableau.append({
                 'distance_effort': distance,
                 'vitesse_effort': round(vitesse_effort, 1),
@@ -344,6 +458,9 @@ class Physiologie:
     
     @staticmethod
     def _secondes_vers_temps(secondes: float) -> str:
+        # 🔥 CORRECTION : vérifier que secondes est valide
+        if math.isnan(secondes) or math.isinf(secondes):
+            return "00:00"
         minutes = int(secondes // 60)
         sec = int(secondes % 60)
         return f"{minutes:02d}:{sec:02d}"
@@ -353,15 +470,20 @@ class Physiologie:
         if date_naissance and date_naissance != '':
             try:
                 date_str = str(date_naissance).strip()
-                naissance = datetime.strptime(date_str, '%Y-%m-%d')
+                if '/' in date_str:
+                    naissance = datetime.strptime(date_str, '%d/%m/%Y')
+                elif '-' in date_str:
+                    naissance = datetime.strptime(date_str, '%Y-%m-%d')
+                else:
+                    naissance = datetime.strptime(date_str, '%d/%m/%Y')
                 age = datetime.now().year - naissance.year
                 if datetime.now().month < naissance.month or (datetime.now().month == naissance.month and datetime.now().day < naissance.day):
                     age -= 1
                 return age
-            except:
+            except Exception as e:
                 pass
         return None
-    
+
     def _generer_bilan(self):
         self.bilan = {
             'athlete': self.data.get('Prénom/Nom', 'Inconnu'),
@@ -371,6 +493,7 @@ class Physiologie:
             'vma_origine': self.vma_origine,
             'vc': self.vc,
             'vc_origine': self.vc_origine,
+            'test_vc_3_6_12': self.test_vc_3_6_12,
             'profil': self.profil,
             'vitesses_performances': self.vitesses_performances,
             'alertes_profil': self.alertes_profil,
@@ -380,12 +503,13 @@ class Physiologie:
             'fc_max_natation': self.fc_max_natation,
             'fc_max_velo': self.fc_max_velo,
             'courses_preparatoires': self.courses_preparatoires,
+            'date_objectif': self.date_objectif,
             'tableau_vma': self.tableau_vma,
             'tableau_vc': self.tableau_vc,
             'manques': self.manques,
             'nb_manques': len(self.manques)
         }
-    
+
     def afficher_bilan(self):
         print("\n" + "="*70)
         print(f"📊 BILAN PHYSIOLOGIQUE - {self.bilan['athlete']}")
@@ -397,6 +521,8 @@ class Physiologie:
             print(f"   VMA : {self.vma} km/h (origine : {self.vma_origine})")
         if self.vc:
             print(f"   VC : {self.vc} km/h (origine : {self.vc_origine})")
+        if self.test_vc_3_6_12:
+            print(f"   Test VC 3/6/12 : {self.test_vc_3_6_12}")
         if self.profil:
             print(f"   Profil : {self.profil}")
         if self.vitesses_performances:
@@ -417,6 +543,8 @@ class Physiologie:
             print("   Courses préparatoires :")
             for c in self.courses_preparatoires:
                 print(f"      - {c}")
+        if self.date_objectif:
+            print(f"   Date objectif : {self.date_objectif}")
         
         if self.tableau_vma:
             print("\n🏃 TABLEAU VMA :")
@@ -436,6 +564,6 @@ class Physiologie:
                 print(f"   - {a}")
         
         print("\n" + "="*70)
-    
+
     def get_bilan_dict(self) -> Dict:
         return self.bilan

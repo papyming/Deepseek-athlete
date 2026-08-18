@@ -5,9 +5,9 @@ import os
 import sys
 import json
 import pandas as pd
+import math
 from datetime import datetime
 
-# Ajouter le chemin src/ pour les imports
 sys.path.insert(0, os.path.dirname(__file__))
 
 from core.physiologie import Physiologie
@@ -55,10 +55,54 @@ def analyser_csv():
 
             print(f"\n--- {nom_brut} ---")
 
+            # ============================================================
+            # 🔍 DEBUG : afficher les colonnes problématiques
+            # ============================================================
+            print(f"   🔍 DEBUG - Colonnes pour {nom_brut} :")
+            
+            # Colonne bi-quotidien
+            bi_val = athlete.get('Possibilité de faire du bi-quotidien ? voire Tri ou quadri ?', '')
+            print(f"      'Possibilité de faire du bi-quotidien ?' : {bi_val} (type: {type(bi_val)})")
+            if isinstance(bi_val, float) and math.isnan(bi_val):
+                print("      ⚠️ NaN détecté dans 'Possibilité de faire du bi-quotidien ?'")
+            
+            # Jours CAP
+            jours_cap = athlete.get('Quels jours ? (CAP)', '')
+            print(f"      'Quels jours ? (CAP)' : {jours_cap} (type: {type(jours_cap)})")
+            
+            # Jours Vélo
+            jours_velo = athlete.get('Quels jours ? (Vélo)', '')
+            print(f"      'Quels jours ? (Vélo)' : {jours_velo} (type: {type(jours_velo)})")
+            
+            # Jours Natation
+            jours_nat = athlete.get('Quels jours ? (Natation)', '')
+            print(f"      'Quels jours ? (Natation)' : {jours_nat} (type: {type(jours_nat)})")
+            
+            # Nombre de jours CAP
+            nb_cap = athlete.get('Nombre de jours de CAP par semaine', '')
+            print(f"      'Nombre de jours de CAP par semaine' : {nb_cap} (type: {type(nb_cap)})")
+            if isinstance(nb_cap, float) and math.isnan(nb_cap):
+                print("      ⚠️ NaN détecté dans 'Nombre de jours de CAP par semaine'")
+            
+            # FTP
+            ftp_val = athlete.get('FTP vélo en watt (laisser vide sinon)', '')
+            print(f"      'FTP vélo en watt' : {ftp_val} (type: {type(ftp_val)})")
+            if isinstance(ftp_val, float) and math.isnan(ftp_val):
+                print("      ⚠️ NaN détecté dans 'FTP vélo en watt'")
+            
+            # FC max CAP
+            fc_cap = athlete.get('Connais tu ta Fréquence Cardiaque Maximum (en CAP si possible)', '')
+            print(f"      'FC max CAP' : {fc_cap} (type: {type(fc_cap)})")
+            if isinstance(fc_cap, float) and math.isnan(fc_cap):
+                print("      ⚠️ NaN détecté dans 'FC max CAP'")
+            # ============================================================
+
             try:
                 physio = Physiologie(athlete)
             except Exception as e:
                 print(f"   ❌ Erreur physiologie : {e}")
+                import traceback
+                traceback.print_exc()
                 continue
 
             vma = physio.vma
@@ -89,7 +133,6 @@ def analyser_csv():
 
             timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
 
-            # ---- PROFIL.JSON ----
             profil = {
                 "nom": nom_brut,
                 "sexe": physio.genre,
@@ -99,12 +142,15 @@ def analyser_csv():
                 "objectif_principal": athlete.get('Objectif principal', ''),
                 "format_competition": athlete.get('Quel format de compétition ?', ''),
                 "competition_objectif": athlete.get('Quelle est la compétition objectif ?', ''),
+                "date_objectif": physio.date_objectif,
                 "courses_preparatoires": physio.courses_preparatoires,
+                "niveau_estime": "Intermédiaire",
                 "physiologie": {
                     "vma": physio.vma,
                     "vma_origine": physio.vma_origine,
                     "vc": physio.vc,
                     "vc_origine": physio.vc_origine,
+                    "test_vc_3_6_12": physio.test_vc_3_6_12,
                     "ftp": physio.ftp,
                     "temps_400m_natation": physio.temps_400m,
                     "fc_max_cap": physio.fc_max_cap,
@@ -149,6 +195,8 @@ def analyser_csv():
 
     except Exception as e:
         print(f"❌ Erreur générale : {e}")
+        import traceback
+        traceback.print_exc()
 
 
 def planifier():
@@ -156,7 +204,6 @@ def planifier():
     print("📅 PLANIFICATEUR D'ENTRAÎNEMENT")
     print("="*60)
     
-    # Utiliser liste.py pour sélectionner l'athlète
     nom = choisir_athlete()
     if not nom:
         print("❌ Planification annulée.")
@@ -168,39 +215,48 @@ def planifier():
         print(f"❌ Athlète {nom} non trouvé")
         return
     
-    # Demander la semaine
-    semaine = input("Numéro de semaine (1 à 4) : ").strip()
-    semaine = int(semaine) if semaine.isdigit() else 1
-    
-    # Demander la date de début
-    date_debut = input("Date de début (YYYY-MM-DD) ou laisser vide pour aujourd'hui : ").strip()
+    date_debut = input("📅 Date de début (YYYY-MM-DD) ou laisser vide pour aujourd'hui : ").strip()
     if not date_debut:
         date_debut = None
     
-    # Générer le plan
-    plan = planifier_athlete(athlete_dir, semaine, date_debut)
+    plan = planifier_athlete(athlete_dir, date_debut)
     
     if "error" in plan:
         print(f"❌ {plan['error']}")
         return
     
-    # Afficher le plan
-    print(f"\n📅 Plan pour {plan['athlete']} - Semaine {plan['semaine']} (début: {plan['date_debut']})")
-    print(f"   Type de semaine : {plan.get('type_semaine_emoji', '🟢')} {plan.get('type_semaine', 'normale')}")
-    print(f"   Volume total : {plan.get('volume_total', 0)} min")
+    # Dictionnaires pour les émojis
+    EMOJI_SEMAINE = {
+        'coupe': '🔵',
+        'normale': '🟢',
+        'chargee': '🟡',
+        'dure': '🔴'
+    }
+    
+    EMOJI_JOURNEE = {
+        'endurance': '🟩',
+        'seuil': '🟨',
+        'intense': '🟥',
+        'recuperation': '🟦',
+        'course': '⭐',
+        'repos': '⬜'
+    }
+    
+    print(f"\n📅 Plan pour {plan['athlete']}")
+    print(f"   Du {plan['date_debut']} au {plan['date_objectif']}")
+    print(f"   {plan['nb_semaines']} semaines")
     print("="*60)
     
-    for jour, data in plan['plan'].items():
-        print(f"\n{jour} ({data['date']}) :")
-        if not data['seances']:
-            print("   ⬜ Repos")
-        else:
-            for seance in data['seances']:
-                emoji = plan['plan'][jour].get('emoji_journee', '')
-                if seance.get('est_course'):
-                    print(f"   ⭐ {seance['details']}")
-                else:
-                    print(f"   {emoji} {seance['discipline']} : {seance['type']} - {seance['details']} ({seance['duree']} min)")
+    for semaine in plan['semaines']:
+        print(f"\n📆 Semaine {semaine['numero']} ({semaine['date_debut']})")
+        type_emoji = EMOJI_SEMAINE.get(semaine['semaine_type'], '🟢')
+        print(f"   Type : {type_emoji} {semaine['semaine_type']}")
+        print(f"   Volume : {semaine['volume_total']} min")
+        for jour in semaine['jours']:
+            print(f"   {jour['jour']} ({jour['date']}) :")
+            for seance in jour['seances']:
+                emoji = EMOJI_JOURNEE.get(seance['difficulte'], '🟩')
+                print(f"      {emoji} {seance['discipline']} - {seance['type']} : {seance['details']} ({seance['duree']} min)")
 
 
 def mise_a_jour_intensites():
@@ -208,7 +264,6 @@ def mise_a_jour_intensites():
     print("🔄 MISE À JOUR DES INTENSITÉS")
     print("="*60)
     
-    # Utiliser liste.py pour sélectionner l'athlète
     nom = choisir_athlete()
     if not nom:
         print("❌ Mise à jour annulée.")
@@ -220,7 +275,6 @@ def mise_a_jour_intensites():
         print(f"❌ Athlète {nom} non trouvé")
         return
     
-    # Demander les nouvelles valeurs
     nouvelle_vma = input("Nouvelle VMA (km/h) ou laisser vide : ").strip()
     nouvelle_vma = float(nouvelle_vma) if nouvelle_vma else None
     
@@ -266,7 +320,8 @@ def main():
             print("\n👋 Au revoir !")
             break
         else:
-            print("❌ Choix invalide.")
+            print("❌ Choix invalide. Au revoir !")
+            break
 
 
 if __name__ == '__main__':

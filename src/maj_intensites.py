@@ -4,12 +4,13 @@
 import os
 import json
 import pandas as pd
+import math
 from datetime import datetime
 from typing import Optional
 
 def charger_profil(athlete_dir: str) -> dict:
     """Charge le fichier profil le plus récent."""
-    fichiers = [f for f in os.listdir(athlete_dir) if f.startswith('profil_') and f.endswith('.json')]
+    fichiers = [f for f in os.listdir(athlete_dir) if 'profil_' in f and f.endswith('.json')]
     if not fichiers:
         return {}
     fichiers.sort(reverse=True)
@@ -19,9 +20,21 @@ def charger_profil(athlete_dir: str) -> dict:
 def sauvegarder_profil(athlete_dir: str, profil: dict):
     """Sauvegarde le profil avec un nouveau timestamp."""
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-    nom_fichier = f"{profil.get('nom', 'athlete').replace(' ', '_')}_profil_{timestamp}.json"
+    nom = profil.get('nom', 'athlete').replace(' ', '_')
+    nom_fichier = f"{nom}_profil_{timestamp}.json"
     with open(os.path.join(athlete_dir, nom_fichier), 'w', encoding='utf-8') as f:
         json.dump(profil, f, ensure_ascii=False, indent=2)
+
+def saisir_float(prompt: str) -> Optional[float]:
+    """Saisie sécurisée d'un float."""
+    valeur = input(prompt).strip()
+    if not valeur or valeur == '':
+        return None
+    try:
+        return float(valeur)
+    except:
+        print("⚠️ Valeur invalide. Veuillez saisir un nombre.")
+        return None
 
 def maj_intensites(athlete_dir: str, nouvelle_vma: Optional[float] = None, nouvelle_vc: Optional[float] = None):
     """
@@ -32,7 +45,7 @@ def maj_intensites(athlete_dir: str, nouvelle_vma: Optional[float] = None, nouve
     print("="*60)
     
     # 1. Charger le plan existant
-    plan_files = [f for f in os.listdir(athlete_dir) if f.startswith('plan_') and f.endswith('.csv')]
+    plan_files = [f for f in os.listdir(athlete_dir) if 'plan_' in f and f.endswith('.csv')]
     if not plan_files:
         print("❌ Aucun plan trouvé. Veuillez d'abord générer un plan.")
         return
@@ -49,16 +62,18 @@ def maj_intensites(athlete_dir: str, nouvelle_vma: Optional[float] = None, nouve
         return
     
     # 3. Mettre à jour les valeurs physiologiques
-    if nouvelle_vma:
-        profil['physiologie']['vma'] = nouvelle_vma
-        profil['physiologie']['vma_origine'] = "Mise à jour post-tests"
-        print(f"✅ VMA mise à jour : {nouvelle_vma} km/h")
-    if nouvelle_vc:
-        profil['physiologie']['vc'] = nouvelle_vc
-        profil['physiologie']['vc_origine'] = "Mise à jour post-tests"
-        print(f"✅ VC mise à jour : {nouvelle_vc} km/h")
+    if nouvelle_vma is not None:
+        if not math.isnan(nouvelle_vma):
+            profil['physiologie']['vma'] = nouvelle_vma
+            profil['physiologie']['vma_origine'] = "Mise à jour post-tests"
+            print(f"✅ VMA mise à jour : {nouvelle_vma} km/h")
+    if nouvelle_vc is not None:
+        if not math.isnan(nouvelle_vc):
+            profil['physiologie']['vc'] = nouvelle_vc
+            profil['physiologie']['vc_origine'] = "Mise à jour post-tests"
+            print(f"✅ VC mise à jour : {nouvelle_vc} km/h")
     
-    # 4. Recalculer les zones (simplifié ici)
+    # 4. Recalculer les zones
     vma = profil['physiologie'].get('vma')
     vc = profil['physiologie'].get('vc')
     
@@ -66,19 +81,19 @@ def maj_intensites(athlete_dir: str, nouvelle_vma: Optional[float] = None, nouve
         print("❌ Aucune VMA ou VC renseignée.")
         return
     
-    # 5. Mettre à jour les séances CAP (exemple simplifié)
+    # 5. Mettre à jour les séances CAP
+    import re
     for idx, row in df_plan.iterrows():
-        cap = row.get('Détails', '')
-        if 'Endurance fondamentale' in cap and vma:
-            # Extraire la durée existante
-            duree_match = re.search(r'(\d+)\s*min', cap)
+        details = row.get('Détails', '')
+        if 'Endurance fondamentale' in details and vma:
+            duree_match = re.search(r'(\d+)\s*min', details)
             duree = int(duree_match.group(1)) if duree_match else 45
             nouvelle_allure = round(vma * 0.7, 1)
             df_plan.at[idx, 'Détails'] = f"Endurance fondamentale Z2 ({duree} min à {nouvelle_allure} km/h)"
-        elif 'VMA' in cap and vma:
-            df_plan.at[idx, 'Détails'] = f"{cap} (mis à jour)"
-        elif 'VC' in cap and vc:
-            df_plan.at[idx, 'Détails'] = f"{cap} (mis à jour)"
+        elif 'VMA' in details and vma:
+            df_plan.at[idx, 'Détails'] = f"{details} (mis à jour)"
+        elif 'VC' in details and vc:
+            df_plan.at[idx, 'Détails'] = f"{details} (mis à jour)"
     
     # 6. Sauvegarder la nouvelle version
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
@@ -93,7 +108,6 @@ def maj_intensites(athlete_dir: str, nouvelle_vma: Optional[float] = None, nouve
 
 if __name__ == "__main__":
     import sys
-    import re
     
     if len(sys.argv) < 2:
         print("Usage: python maj_intensites.py <dossier_athlete> [--vma XX] [--vc YY]")
@@ -106,8 +120,14 @@ if __name__ == "__main__":
     
     for i, arg in enumerate(sys.argv):
         if arg == '--vma' and i+1 < len(sys.argv):
-            nouvelle_vma = float(sys.argv[i+1])
+            try:
+                nouvelle_vma = float(sys.argv[i+1])
+            except:
+                print(f"⚠️ Valeur VMA invalide : {sys.argv[i+1]}")
         elif arg == '--vc' and i+1 < len(sys.argv):
-            nouvelle_vc = float(sys.argv[i+1])
+            try:
+                nouvelle_vc = float(sys.argv[i+1])
+            except:
+                print(f"⚠️ Valeur VC invalide : {sys.argv[i+1]}")
     
     maj_intensites(athlete_dir, nouvelle_vma, nouvelle_vc)

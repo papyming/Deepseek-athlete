@@ -1,0 +1,281 @@
+{
+  "nom": "Germain Noyer",
+  "sexe": "M",
+  "age": 40,
+  "taille_poids": "180cm/65kg",
+  "metier_contraintes": "Dispo 45 min les midis (lundi, jeudi) et mardi midi si bi quotidien avec entraînement le soir",
+  "objectif_principal": "15/11/2027",
+  "format_competition": "10km",
+  "competition_objectif": "Semi Auray Vannes obj 1h15",
+  "date_objectif": "2027-11-15",
+  "courses_preparatoires": [
+    "10km Billiers 15/09",
+    "5km Redon 20/10"
+  ],
+  "niveau_estime": "Intermédiaire",
+  "physiologie": {
+    "vma": 20.3,
+    "vma_origine": "Déclarée (colonne VMA)",
+    "vc": 14.8,
+    "vc_origine": "Calculée par régression sur 3 distances (10km, semi-marathon, marathon)",
+    "test_vc_3_6_12": null,
+    "ftp": 245,
+    "temps_400m_natation": null,
+    "fc_max_cap": 178,
+    "fc_max_natation": 170,
+    "fc_max_velo": 175
+  },
+  "profil": "Moyen",
+  "vitesses_performances": {
+    "10km": 17.2,
+    "semi": 16.4,
+    "marathon": 15.3
+  },
+  "alertes": [],
+  "zones": {
+    "vma": [
+      {
+        "distance": 100,
+        "vitesse": 21.3,
+        "coeff": 1.05,
+        "temps": "00:16",
+        "temps_sec": 16.89,
+        "distance_recup": 25.0,
+        "vitesse_recup": 10.2,
+        "temps_recup": "00:08",
+        "temps_recup_sec": 8.87
+      },
+      {
+        "distance": 200,
+        "vitesse": 21.3,
+        "coeff": 1.05,
+        "temps": "00:33",
+        "temps_sec": 33.78,
+        "distance_recup": 50.0,
+        "vitesse_recup": 10.2,
+        "temps_recup": "00:17",
+        "temps_recup_sec": 17.73
+      },
+      {
+        "distance": 300,
+        "vitesse": 20.1,
+        "coeff": 0.99,
+        "temps": "00:53",
+        "temps_sec": 53.74,
+        "distance_recup": 75.0,
+        "vitesse_recup": 10.2,
+        "temps_recup": "00:26",
+        "temps_recup_sec": 26.6
+      },
+      {
+        "distance": 400,
+        "vitesse": 19.9,
+        "coeff": 0.98,
+        "temps": "01:12",
+        "temps_sec": 72.38,
+        "distance_recup": 100.0,
+        "vitesse_recup": 10.2,
+        "temps_recup": "00:35",
+        "temps_recup_sec": 35.47
+      },
+      {
+        "distance": 500,
+        "vitesse": 19.9,
+        "coeff": 0.98,
+        "temps": "01:30",
+        "temps_sec": 90.48,
+        "distance_recup": 125.0,
+        "vitesse_recup": 10.2,
+        "temps_recup": "00:44",
+        "temps_recup_sec": 44.33
+      },
+      {
+        "distance": 600,
+        "vitesse": 19.3,
+        "coeff": 0.95,
+        "temps": "01:52",
+        "temps_sec": 112.0,
+        "distance_recup": 150.0,
+        "vitesse_recup": 10.2,
+        "temps_recup": "00:53",
+        "temps_recup_sec": 53.2
+      },
+      {
+        "distance": 700,
+        "vitesse": 18.9,
+        "coeff": 0.93,
+        "temps": "02:13",
+        "temps_sec": 133.48,
+        "distance_recup": 175.0,
+        "vitesse_recup": 10.2,
+        "temps_recup": "01:02",
+        "temps_recup_sec": 62.07
+      },
+      {
+        "distance": 800,
+        "vitesse": 19.1,
+        "coeff": 0.94,
+        "temps": "02:30",
+        "temps_sec": 150.93,
+        "distance_recup": 200.0,
+        "vitesse_recup": 10.2,
+        "temps_recup": "01:10",
+        "temps_recup_sec": 70.94
+      },
+      {
+        "distance": 1000,
+        "vitesse": 18.7,
+        "coeff": 0.92,
+        "temps": "03:12",
+        "temps_sec": 192.76,
+        "distance_recup": 250.0,
+        "vitesse_recup": 10.2,
+        "temps_recup": "01:28",
+        "temps_recup_sec": 88.67
+      }
+    ],
+    "vc": [
+      {
+        "distance_effort": 200,
+        "vitesse_effort": 17.2,
+        "temps_effort": "00:41",
+        "temps_effort_sec": 41.79,
+        "distance_recup": 50,
+        "vitesse_recup": 6.24,
+        "temps_recup": "00:28",
+        "temps_recup_sec": 28.85,
+        "coeff": 1.164
+      },
+      {
+        "distance_effort": 300,
+        "vitesse_effort": 16.9,
+        "temps_effort": "01:03",
+        "temps_effort_sec": 63.73,
+        "distance_recup": 75,
+        "vitesse_recup": 6.24,
+        "temps_recup": "00:43",
+        "temps_recup_sec": 43.27,
+        "coeff": 1.145
+      },
+      {
+        "distance_effort": 400,
+        "vitesse_effort": 16.4,
+        "temps_effort": "01:27",
+        "temps_effort_sec": 87.97,
+        "distance_recup": 100,
+        "vitesse_recup": 6.24,
+        "temps_recup": "00:57",
+        "temps_recup_sec": 57.69,
+        "coeff": 1.106
+      },
+      {
+        "distance_effort": 500,
+        "vitesse_effort": 16.1,
+        "temps_effort": "01:51",
+        "temps_effort_sec": 111.99,
+        "distance_recup": 125,
+        "vitesse_recup": 6.24,
+        "temps_recup": "01:12",
+        "temps_recup_sec": 72.12,
+        "coeff": 1.086
+      },
+      {
+        "distance_effort": 600,
+        "vitesse_effort": 15.8,
+        "temps_effort": "02:16",
+        "temps_effort_sec": 136.78,
+        "distance_recup": 150,
+        "vitesse_recup": 6.24,
+        "temps_recup": "01:26",
+        "temps_recup_sec": 86.54,
+        "coeff": 1.067
+      },
+      {
+        "distance_effort": 700,
+        "vitesse_effort": 15.5,
+        "temps_effort": "02:42",
+        "temps_effort_sec": 162.47,
+        "distance_recup": 175,
+        "vitesse_recup": 6.24,
+        "temps_recup": "01:40",
+        "temps_recup_sec": 100.96,
+        "coeff": 1.048
+      },
+      {
+        "distance_effort": 800,
+        "vitesse_effort": 15.1,
+        "temps_effort": "03:10",
+        "temps_effort_sec": 190.97,
+        "distance_recup": 200,
+        "vitesse_recup": 6.24,
+        "temps_recup": "01:55",
+        "temps_recup_sec": 115.38,
+        "coeff": 1.019
+      },
+      {
+        "distance_effort": 1000,
+        "vitesse_effort": 14.6,
+        "temps_effort": "04:05",
+        "temps_effort_sec": 245.95,
+        "distance_recup": 250,
+        "vitesse_recup": 6.24,
+        "temps_recup": "02:24",
+        "temps_recup_sec": 144.23,
+        "coeff": 0.989
+      },
+      {
+        "distance_effort": 1500,
+        "vitesse_effort": 14.2,
+        "temps_effort": "06:19",
+        "temps_effort_sec": 379.67,
+        "distance_recup": 375,
+        "vitesse_recup": 6.24,
+        "temps_recup": "03:36",
+        "temps_recup_sec": 216.35,
+        "coeff": 0.961
+      },
+      {
+        "distance_effort": 2000,
+        "vitesse_effort": 13.9,
+        "temps_effort": "08:36",
+        "temps_effort_sec": 516.99,
+        "distance_recup": 500,
+        "vitesse_recup": 6.24,
+        "temps_recup": "04:48",
+        "temps_recup_sec": 288.46,
+        "coeff": 0.941
+      },
+      {
+        "distance_effort": 2800,
+        "vitesse_effort": 13.8,
+        "temps_effort": "12:11",
+        "temps_effort_sec": 731.56,
+        "distance_recup": 700,
+        "vitesse_recup": 6.24,
+        "temps_recup": "06:43",
+        "temps_recup_sec": 403.85,
+        "coeff": 0.931
+      }
+    ]
+  },
+  "disponibilites": {
+    "CAP": [
+      "Lundi",
+      "Mardi",
+      "Jeudi",
+      "Dimanche"
+    ],
+    "Velo": [],
+    "Natation": [],
+    "bi_quotidien": {
+      "CAP": [],
+      "Velo": [],
+      "Natation": []
+    }
+  },
+  "bi_quotidien_nb": 1,
+  "seances": {
+    "VMA": "Germain_Noyer_seances_VMA_20260818_134206.csv",
+    "VC": "Germain_Noyer_seances_VC_20260818_134206.csv"
+  }
+}
