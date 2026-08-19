@@ -55,48 +55,6 @@ def analyser_csv():
 
             print(f"\n--- {nom_brut} ---")
 
-            # ============================================================
-            # 🔍 DEBUG : afficher les colonnes problématiques
-            # ============================================================
-            print(f"   🔍 DEBUG - Colonnes pour {nom_brut} :")
-            
-            # Colonne bi-quotidien
-            bi_val = athlete.get('Possibilité de faire du bi-quotidien ? voire Tri ou quadri ?', '')
-            print(f"      'Possibilité de faire du bi-quotidien ?' : {bi_val} (type: {type(bi_val)})")
-            if isinstance(bi_val, float) and math.isnan(bi_val):
-                print("      ⚠️ NaN détecté dans 'Possibilité de faire du bi-quotidien ?'")
-            
-            # Jours CAP
-            jours_cap = athlete.get('Quels jours ? (CAP)', '')
-            print(f"      'Quels jours ? (CAP)' : {jours_cap} (type: {type(jours_cap)})")
-            
-            # Jours Vélo
-            jours_velo = athlete.get('Quels jours ? (Vélo)', '')
-            print(f"      'Quels jours ? (Vélo)' : {jours_velo} (type: {type(jours_velo)})")
-            
-            # Jours Natation
-            jours_nat = athlete.get('Quels jours ? (Natation)', '')
-            print(f"      'Quels jours ? (Natation)' : {jours_nat} (type: {type(jours_nat)})")
-            
-            # Nombre de jours CAP
-            nb_cap = athlete.get('Nombre de jours de CAP par semaine', '')
-            print(f"      'Nombre de jours de CAP par semaine' : {nb_cap} (type: {type(nb_cap)})")
-            if isinstance(nb_cap, float) and math.isnan(nb_cap):
-                print("      ⚠️ NaN détecté dans 'Nombre de jours de CAP par semaine'")
-            
-            # FTP
-            ftp_val = athlete.get('FTP vélo en watt (laisser vide sinon)', '')
-            print(f"      'FTP vélo en watt' : {ftp_val} (type: {type(ftp_val)})")
-            if isinstance(ftp_val, float) and math.isnan(ftp_val):
-                print("      ⚠️ NaN détecté dans 'FTP vélo en watt'")
-            
-            # FC max CAP
-            fc_cap = athlete.get('Connais tu ta Fréquence Cardiaque Maximum (en CAP si possible)', '')
-            print(f"      'FC max CAP' : {fc_cap} (type: {type(fc_cap)})")
-            if isinstance(fc_cap, float) and math.isnan(fc_cap):
-                print("      ⚠️ NaN détecté dans 'FC max CAP'")
-            # ============================================================
-
             try:
                 physio = Physiologie(athlete)
             except Exception as e:
@@ -110,13 +68,13 @@ def analyser_csv():
             seances_vma = []
             seances_vc = []
 
-            if vma:
+            if vma and not math.isnan(vma):
                 print(f"   VMA : {vma} km/h (origine : {physio.vma_origine})")
                 seances_vma = generer_seances_vma(vma, sexe)
             else:
                 print("   ⚠️ VMA non renseignée")
 
-            if vc:
+            if vc and not math.isnan(vc):
                 print(f"   VC : {vc} km/h (origine : {physio.vc_origine})")
                 seances_vc = generer_seances_vc(vc, sexe)
             else:
@@ -225,7 +183,6 @@ def planifier():
         print(f"❌ {plan['error']}")
         return
     
-    # Dictionnaires pour les émojis
     EMOJI_SEMAINE = {
         'coupe': '🔵',
         'normale': '🟢',

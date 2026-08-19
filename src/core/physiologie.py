@@ -11,6 +11,8 @@ class Physiologie:
       * Priorité au test VC 3'/6'/12'
       * Régression sur 3 chronos (10km, semi, marathon)
       * Estimation depuis la VMA
+      * Estimation VMA depuis les performances (via % de soutien)
+      * Estimation VC depuis les performances (régression linéaire)
     - FTP (Vélo)
     - 400m natation
     - Fréquences cardiaques max
@@ -22,30 +24,41 @@ class Physiologie:
     - Alertes sur la fiabilité des calculs VMA/VC
     """
     
+    # Pourcentage de VMA typique pour chaque distance
+    POURCENTAGE_VMA = {
+        '10km': 0.88,
+        'semi': 0.83,
+        'marathon': 0.75
+    }
+    
     COEFF_VMA_DISTANCE = {
-        100: {'M': 1.05, 'F': 1.02},
-        200: {'M': 1.05, 'F': 0.98},
-        300: {'M': 0.99, 'F': 0.97},
-        400: {'M': 0.98, 'F': 0.96},
-        500: {'M': 0.98, 'F': 0.96},
-        600: {'M': 0.95, 'F': 0.94},
-        700: {'M': 0.93, 'F': 0.93},
-        800: {'M': 0.94, 'F': 0.92},
-        1000: {'M': 0.92, 'F': 0.90}
+        100: {'M': 105, 'F': 102},
+        200: {'M': 100, 'F': 98},
+        300: {'M': 99, 'F': 97},
+        400: {'M': 98, 'F': 96},
+        500: {'M': 97, 'F': 95},
+        600: {'M': 96, 'F': 94},
+        700: {'M': 95, 'F': 93},
+        800: {'M': 94, 'F': 92},
+        900: {'M': 93, 'F': 91},
+        1000: {'M': 92, 'F': 90},
+        2000: {'M': 89, 'F': 87},
+        3000: {'M': 85, 'F': 82}
     }
     
     COEFF_VC_DISTANCE = {
-        200: {'M': 1.164, 'F': 1.164},
-        300: {'M': 1.145, 'F': 1.145},
-        400: {'M': 1.106, 'F': 1.106},
-        500: {'M': 1.086, 'F': 1.086},
-        600: {'M': 1.067, 'F': 1.067},
-        700: {'M': 1.048, 'F': 1.048},
-        800: {'M': 1.019, 'F': 1.019},
-        1000: {'M': 0.989, 'F': 0.989},
-        1500: {'M': 0.961, 'F': 0.961},
-        2000: {'M': 0.941, 'F': 0.941},
-        2800: {'M': 0.931, 'F': 0.931}
+        200: {'M': 1.2000, 'F': 1.1640},
+        300: {'M': 1.1800, 'F': 1.1446},
+        400: {'M': 1.1400, 'F': 1.1058},
+        500: {'M': 1.1200, 'F': 1.0864},
+        600: {'M': 1.1000, 'F': 1.0670},
+        700: {'M': 1.0800, 'F': 1.0476},
+        800: {'M': 1.0500, 'F': 1.0185},
+        1000: {'M': 1.0200, 'F': 0.9894},
+        1600: {'M': 1.0000, 'F': 0.9700},
+        2000: {'M': 0.9800, 'F': 0.9506},
+        2400: {'M': 0.9700, 'F': 0.9409},
+        2800: {'M': 0.9600, 'F': 0.9312}
     }
     
     VITESSE_RECUP_VC = 6.24
@@ -76,6 +89,8 @@ class Physiologie:
         self.vc_origine = None
         self.date_objectif = None
         self.test_vc_3_6_12 = None
+        self.vma_estimee = None
+        self.vc_estimee = None
         
         self.vma = self._extraire_vma()
         self.vc = self._extraire_vc()
@@ -92,10 +107,92 @@ class Physiologie:
         
         self.profil, self.vitesses_performances, _ = self._analyser_profil()
         
+        # 🔥 Estimations à partir des performances
+        self.vma_estimee = self._estimer_vma()
+        self.vc_estimee = self._estimer_vc()
+        
+        # 🔥 Alerte si écart entre VMA déclarée et estimée
+        if self.vma and self.vma_estimee:
+            ecart = abs(self.vma - self.vma_estimee) / self.vma * 100
+            if ecart > 10:
+                self.alertes_profil.append(
+                    f"⚠️ Écart VMA déclarée ({self.vma} km/h) vs estimée ({self.vma_estimee} km/h) : {ecart:.1f}% > 10%"
+                )
+        
         self.tableau_vma = self._generer_tableau_vma()
         self.tableau_vc = self._generer_tableau_vc()
         
         self._generer_bilan()
+    
+    # ============================================================
+    # ESTIMATIONS
+    # ============================================================
+    
+    def _estimer_vma(self) -> Optional[float]:
+        """
+        Estime la VMA à partir des performances en course (10km, semi, marathon).
+        Utilise les pourcentages de soutien moyens.
+        Retourne la moyenne des estimations si au moins 2 distances sont disponibles.
+        """
+        estimations = []
+        
+        if '10km' in self.vitesses_performances:
+            v = self.vitesses_performances['10km']
+            estimations.append(v / self.POURCENTAGE_VMA['10km'])
+        
+        if 'semi' in self.vitesses_performances:
+            v = self.vitesses_performances['semi']
+            estimations.append(v / self.POURCENTAGE_VMA['semi'])
+        
+        if 'marathon' in self.vitesses_performances:
+            v = self.vitesses_performances['marathon']
+            estimations.append(v / self.POURCENTAGE_VMA['marathon'])
+        
+        if len(estimations) >= 2:
+            return round(sum(estimations) / len(estimations), 1)
+        
+        return None
+    
+    def _estimer_vc(self) -> Optional[float]:
+        """
+        Estime la VC par régression linéaire sur les performances disponibles.
+        Utilise les distances (10km, 21.1km, 42.195km) et les temps en secondes.
+        """
+        temps = []
+        distances = []
+        
+        if self.data.get('Quel est votre temps sur 10kms ?'):
+            t = self._temps_vers_secondes(self.data['Quel est votre temps sur 10kms ?'])
+            if t and t > 0:
+                temps.append(t)
+                distances.append(10)
+        
+        if self.data.get('Quel est votre temps sur semi marathon ?'):
+            t = self._temps_vers_secondes(self.data['Quel est votre temps sur semi marathon ?'])
+            if t and t > 0:
+                temps.append(t)
+                distances.append(21.1)
+        
+        if self.data.get('Quel est votre temps sur marathon ?'):
+            t = self._temps_vers_secondes(self.data['Quel est votre temps sur marathon ?'])
+            if t and t > 0:
+                temps.append(t)
+                distances.append(42.195)
+        
+        if len(distances) >= 2:
+            try:
+                # Régression linéaire : distance = a * temps + b
+                coeffs = np.polyfit(temps, distances, 1)
+                vc = coeffs[0] * 3600  # pente en km/h
+                return round(vc, 1)
+            except:
+                pass
+        
+        return None
+    
+    # ============================================================
+    # EXTRACTION DES DONNÉES
+    # ============================================================
     
     def _extraire_date_objectif(self) -> Optional[str]:
         """Extrait la date de l'objectif depuis le champ 'Objectif principal'."""
@@ -376,17 +473,15 @@ class Physiologie:
         return profil, vitesses, alertes
     
     def _generer_tableau_vma(self) -> List[Dict]:
-        # 🔥 CORRECTION : vérifier que VMA est valide
         if not self.vma or math.isnan(self.vma):
             return []
         
         tableau = []
         for distance, coeffs in self.COEFF_VMA_DISTANCE.items():
-            coeff = coeffs.get(self.genre, 0.95)
-            vitesse = self.vma * coeff
+            coeff = coeffs.get(self.genre, 105 if self.genre == "M" else 102)
+            vitesse = self.vma * (coeff / 100)
             temps_sec = distance / (vitesse / 3.6)
             
-            # 🔥 Vérifier que temps_sec est valide
             if math.isnan(temps_sec) or math.isinf(temps_sec):
                 continue
             
@@ -408,7 +503,6 @@ class Physiologie:
         return tableau
     
     def _generer_tableau_vc(self) -> List[Dict]:
-        # 🔥 CORRECTION : vérifier que VC est valide
         if not self.vc or math.isnan(self.vc):
             return []
         
@@ -418,7 +512,6 @@ class Physiologie:
             vitesse_effort = self.vc * coeff
             temps_effort_sec = distance / (vitesse_effort / 3.6)
             
-            # 🔥 Vérifier que temps_effort_sec est valide
             if math.isnan(temps_effort_sec) or math.isinf(temps_effort_sec):
                 continue
             
@@ -458,7 +551,6 @@ class Physiologie:
     
     @staticmethod
     def _secondes_vers_temps(secondes: float) -> str:
-        # 🔥 CORRECTION : vérifier que secondes est valide
         if math.isnan(secondes) or math.isinf(secondes):
             return "00:00"
         minutes = int(secondes // 60)
@@ -494,6 +586,8 @@ class Physiologie:
             'vc': self.vc,
             'vc_origine': self.vc_origine,
             'test_vc_3_6_12': self.test_vc_3_6_12,
+            'vma_estimee': self.vma_estimee,
+            'vc_estimee': self.vc_estimee,
             'profil': self.profil,
             'vitesses_performances': self.vitesses_performances,
             'alertes_profil': self.alertes_profil,
@@ -523,6 +617,10 @@ class Physiologie:
             print(f"   VC : {self.vc} km/h (origine : {self.vc_origine})")
         if self.test_vc_3_6_12:
             print(f"   Test VC 3/6/12 : {self.test_vc_3_6_12}")
+        if self.vma_estimee:
+            print(f"   VMA estimée (performances) : {self.vma_estimee} km/h")
+        if self.vc_estimee:
+            print(f"   VC estimée (performances) : {self.vc_estimee} km/h")
         if self.profil:
             print(f"   Profil : {self.profil}")
         if self.vitesses_performances:

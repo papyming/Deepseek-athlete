@@ -2,7 +2,8 @@ import math
 
 def parser_bi_quotidien(valeur):
     """
-    Convertit la réponse 'Possibilité de faire du bi-quotidien ?' en nombre de séances supplémentaires.
+    Convertit la réponse 'Possibilité de faire du bi-quotidien ?' en nombre de jours
+    où l'athlète peut faire plusieurs séances dans la même journée.
     """
     if valeur is None:
         return 0
@@ -22,28 +23,43 @@ def parser_bi_quotidien(valeur):
     elif '3 fois' in valeur:
         return 3
     elif 'tri' in valeur or 'quadri' in valeur:
-        print("⚠️ Détection de 'tri/quadri' dans la réponse. Veuillez saisir le nombre de séances supplémentaires autorisées :")
+        print("\n")
+        print("="*60)
+        print("L'ATHLETE A INDIQUE QU'IL PEUT FAIRE DU TRI/QUADRI.")
+        print("CECI SIGNIFIE QU'IL PEUT EFFECTUER PLUSIEURS SEANCES DANS LA MEME JOURNEE.")
+        print("VEUILLEZ SAISIR LE NOMBRE DE JOURS PAR SEMAINE OU IL PEUT FAIRE 2 SEANCES (OU PLUS) :")
+        print("(ex: 1, 2, 3 ou 4)")
+        print("="*60)
         try:
             saisie = input("> ").strip()
             if saisie and saisie.isdigit():
-                return int(saisie)
+                nb = int(saisie)
+                print(f"✅ {nb} jour(s) par semaine avec séance(s) supplémentaire(s) enregistré(s)\n")
+                return nb
             else:
-                print("⚠️ Saisie invalide. Valeur par défaut : 2")
+                print("⚠️ Saisie invalide. Valeur par défaut : 2\n")
                 return 2
         except:
-            print("⚠️ Saisie invalide. Valeur par défaut : 2")
+            print("⚠️ Saisie invalide. Valeur par défaut : 2\n")
             return 2
     elif valeur == 'autre':
-        print("⚠️ Réponse 'Autre' détectée. Veuillez saisir le nombre de séances supplémentaires autorisées :")
+        print("\n")
+        print("="*60)
+        print("L'ATHLETE A INDIQUE 'AUTRE' POUR LE BI-QUOTIDIEN.")
+        print("VEUILLEZ SAISIR LE NOMBRE DE JOURS PAR SEMAINE OU IL PEUT FAIRE 2 SEANCES (OU PLUS) :")
+        print("(ex: 1, 2, 3 ou 4)")
+        print("="*60)
         try:
             saisie = input("> ").strip()
             if saisie and saisie.isdigit():
-                return int(saisie)
+                nb = int(saisie)
+                print(f"✅ {nb} jour(s) par semaine avec séance(s) supplémentaire(s) enregistré(s)\n")
+                return nb
             else:
-                print("⚠️ Saisie invalide. Valeur par défaut : 1")
+                print("⚠️ Saisie invalide. Valeur par défaut : 1\n")
                 return 1
         except:
-            print("⚠️ Saisie invalide. Valeur par défaut : 1")
+            print("⚠️ Saisie invalide. Valeur par défaut : 1\n")
             return 1
     else:
         return 0
