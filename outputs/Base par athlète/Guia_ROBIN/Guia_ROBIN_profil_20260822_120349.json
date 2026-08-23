@@ -1,0 +1,328 @@
+{
+  "nom": "Guia ROBIN",
+  "sexe": "F",
+  "age": 51,
+  "taille_poids": "156cm/57.5kg",
+  "metier_contraintes": "Aucun entraînement possible L M J. Semaine chargée du 5 au 9 juillet.",
+  "objectif_principal": "15/12/2026",
+  "format_competition": "Trail",
+  "competition_objectif": "Trail de la côte d'Émeraude",
+  "date_objectif": "2026-12-15",
+  "courses_preparatoires": [
+    "13/06 SN trail 28km",
+    "20/06 trail des maquisards 23km"
+  ],
+  "niveau_estime": "Intermédiaire",
+  "physiologie": {
+    "vma": 18.2,
+    "vma_origine": "Déclarée (colonne VMA)",
+    "vc": 10.2,
+    "vc_origine": "Calculée par régression sur 2 distances (10km, semi-marathon)",
+    "test_vc_3_6_12": null,
+    "ftp": null,
+    "temps_400m_natation": null,
+    "fc_max_cap": 185,
+    "fc_max_natation": 178,
+    "fc_max_velo": 182
+  },
+  "profil": "Endurant (tendance)",
+  "vitesses_performances": {
+    "10km": 11.5,
+    "semi": 10.8
+  },
+  "alertes": [
+    "VC calculée avec seulement 2 distances → précision limitée.",
+    "Incohérence VMA/VC : VMA=18.2 km/h, VC=10.2 km/h (ratio 0.56)",
+    "Écart VMA déclarée (18.2 km/h) vs estimée (13.0 km/h) : 28.6% > 10%"
+  ],
+  "zones": {
+    "vma": [
+      {
+        "distance": 100,
+        "vitesse": 18.6,
+        "coeff": 102,
+        "temps": "00:19",
+        "temps_sec": 19.39,
+        "distance_recup": 25.0,
+        "vitesse_recup": 9.1,
+        "temps_recup": "00:09",
+        "temps_recup_sec": 9.89
+      },
+      {
+        "distance": 200,
+        "vitesse": 17.8,
+        "coeff": 98,
+        "temps": "00:40",
+        "temps_sec": 40.37,
+        "distance_recup": 50.0,
+        "vitesse_recup": 9.1,
+        "temps_recup": "00:19",
+        "temps_recup_sec": 19.78
+      },
+      {
+        "distance": 300,
+        "vitesse": 17.7,
+        "coeff": 97,
+        "temps": "01:01",
+        "temps_sec": 61.18,
+        "distance_recup": 75.0,
+        "vitesse_recup": 9.1,
+        "temps_recup": "00:29",
+        "temps_recup_sec": 29.67
+      },
+      {
+        "distance": 400,
+        "vitesse": 17.5,
+        "coeff": 96,
+        "temps": "01:22",
+        "temps_sec": 82.42,
+        "distance_recup": 100.0,
+        "vitesse_recup": 9.1,
+        "temps_recup": "00:39",
+        "temps_recup_sec": 39.56
+      },
+      {
+        "distance": 500,
+        "vitesse": 17.3,
+        "coeff": 95,
+        "temps": "01:44",
+        "temps_sec": 104.11,
+        "distance_recup": 125.0,
+        "vitesse_recup": 9.1,
+        "temps_recup": "00:49",
+        "temps_recup_sec": 49.45
+      },
+      {
+        "distance": 600,
+        "vitesse": 17.1,
+        "coeff": 94,
+        "temps": "02:06",
+        "temps_sec": 126.26,
+        "distance_recup": 150.0,
+        "vitesse_recup": 9.1,
+        "temps_recup": "00:59",
+        "temps_recup_sec": 59.34
+      },
+      {
+        "distance": 700,
+        "vitesse": 16.9,
+        "coeff": 93,
+        "temps": "02:28",
+        "temps_sec": 148.88,
+        "distance_recup": 175.0,
+        "vitesse_recup": 9.1,
+        "temps_recup": "01:09",
+        "temps_recup_sec": 69.23
+      },
+      {
+        "distance": 800,
+        "vitesse": 16.7,
+        "coeff": 92,
+        "temps": "02:52",
+        "temps_sec": 172.0,
+        "distance_recup": 200.0,
+        "vitesse_recup": 9.1,
+        "temps_recup": "01:19",
+        "temps_recup_sec": 79.12
+      },
+      {
+        "distance": 900,
+        "vitesse": 16.6,
+        "coeff": 91,
+        "temps": "03:15",
+        "temps_sec": 195.63,
+        "distance_recup": 225.0,
+        "vitesse_recup": 9.1,
+        "temps_recup": "01:29",
+        "temps_recup_sec": 89.01
+      },
+      {
+        "distance": 1000,
+        "vitesse": 16.4,
+        "coeff": 90,
+        "temps": "03:39",
+        "temps_sec": 219.78,
+        "distance_recup": 250.0,
+        "vitesse_recup": 9.1,
+        "temps_recup": "01:38",
+        "temps_recup_sec": 98.9
+      },
+      {
+        "distance": 2000,
+        "vitesse": 15.8,
+        "coeff": 87,
+        "temps": "07:34",
+        "temps_sec": 454.72,
+        "distance_recup": 500.0,
+        "vitesse_recup": 9.1,
+        "temps_recup": "03:17",
+        "temps_recup_sec": 197.8
+      },
+      {
+        "distance": 3000,
+        "vitesse": 14.9,
+        "coeff": 82,
+        "temps": "12:03",
+        "temps_sec": 723.67,
+        "distance_recup": 750.0,
+        "vitesse_recup": 9.1,
+        "temps_recup": "04:56",
+        "temps_recup_sec": 296.7
+      }
+    ],
+    "vc": [
+      {
+        "distance_effort": 200,
+        "vitesse_effort": 11.9,
+        "temps_effort": "01:00",
+        "temps_effort_sec": 60.64,
+        "distance_recup": 50,
+        "vitesse_recup": 6.24,
+        "temps_recup": "00:28",
+        "temps_recup_sec": 28.85,
+        "coeff": 1.164
+      },
+      {
+        "distance_effort": 300,
+        "vitesse_effort": 11.7,
+        "temps_effort": "01:32",
+        "temps_effort_sec": 92.51,
+        "distance_recup": 75,
+        "vitesse_recup": 6.24,
+        "temps_recup": "00:43",
+        "temps_recup_sec": 43.27,
+        "coeff": 1.1446
+      },
+      {
+        "distance_effort": 400,
+        "vitesse_effort": 11.3,
+        "temps_effort": "02:07",
+        "temps_effort_sec": 127.67,
+        "distance_recup": 100,
+        "vitesse_recup": 6.24,
+        "temps_recup": "00:57",
+        "temps_recup_sec": 57.69,
+        "coeff": 1.1058
+      },
+      {
+        "distance_effort": 500,
+        "vitesse_effort": 11.1,
+        "temps_effort": "02:42",
+        "temps_effort_sec": 162.44,
+        "distance_recup": 125,
+        "vitesse_recup": 6.24,
+        "temps_recup": "01:12",
+        "temps_recup_sec": 72.12,
+        "coeff": 1.0864
+      },
+      {
+        "distance_effort": 600,
+        "vitesse_effort": 10.9,
+        "temps_effort": "03:18",
+        "temps_effort_sec": 198.47,
+        "distance_recup": 150,
+        "vitesse_recup": 6.24,
+        "temps_recup": "01:26",
+        "temps_recup_sec": 86.54,
+        "coeff": 1.067
+      },
+      {
+        "distance_effort": 700,
+        "vitesse_effort": 10.7,
+        "temps_effort": "03:55",
+        "temps_effort_sec": 235.83,
+        "distance_recup": 175,
+        "vitesse_recup": 6.24,
+        "temps_recup": "01:40",
+        "temps_recup_sec": 100.96,
+        "coeff": 1.0476
+      },
+      {
+        "distance_effort": 800,
+        "vitesse_effort": 10.4,
+        "temps_effort": "04:37",
+        "temps_effort_sec": 277.22,
+        "distance_recup": 200,
+        "vitesse_recup": 6.24,
+        "temps_recup": "01:55",
+        "temps_recup_sec": 115.38,
+        "coeff": 1.0185
+      },
+      {
+        "distance_effort": 1000,
+        "vitesse_effort": 10.1,
+        "temps_effort": "05:56",
+        "temps_effort_sec": 356.72,
+        "distance_recup": 250,
+        "vitesse_recup": 6.24,
+        "temps_recup": "02:24",
+        "temps_recup_sec": 144.23,
+        "coeff": 0.9894
+      },
+      {
+        "distance_effort": 1600,
+        "vitesse_effort": 9.9,
+        "temps_effort": "09:42",
+        "temps_effort_sec": 582.17,
+        "distance_recup": 400,
+        "vitesse_recup": 6.24,
+        "temps_recup": "03:50",
+        "temps_recup_sec": 230.77,
+        "coeff": 0.97
+      },
+      {
+        "distance_effort": 2000,
+        "vitesse_effort": 9.7,
+        "temps_effort": "12:22",
+        "temps_effort_sec": 742.57,
+        "distance_recup": 500,
+        "vitesse_recup": 6.24,
+        "temps_recup": "04:48",
+        "temps_recup_sec": 288.46,
+        "coeff": 0.9506
+      },
+      {
+        "distance_effort": 2400,
+        "vitesse_effort": 9.6,
+        "temps_effort": "15:00",
+        "temps_effort_sec": 900.26,
+        "distance_recup": 600,
+        "vitesse_recup": 6.24,
+        "temps_recup": "05:46",
+        "temps_recup_sec": 346.15,
+        "coeff": 0.9409
+      },
+      {
+        "distance_effort": 2800,
+        "vitesse_effort": 9.5,
+        "temps_effort": "17:41",
+        "temps_effort_sec": 1061.25,
+        "distance_recup": 700,
+        "vitesse_recup": 6.24,
+        "temps_recup": "06:43",
+        "temps_recup_sec": 403.85,
+        "coeff": 0.9312
+      }
+    ]
+  },
+  "disponibilites": {
+    "CAP": [
+      "Mercredi",
+      "Vendredi",
+      "Samedi",
+      "Dimanche"
+    ],
+    "Velo": [],
+    "Natation": [],
+    "bi_quotidien": {
+      "CAP": [],
+      "Velo": [],
+      "Natation": []
+    }
+  },
+  "bi_quotidien_nb": 0,
+  "seances": {
+    "VMA": "Guia_ROBIN_seances_VMA_20260822_120349.csv",
+    "VC": "Guia_ROBIN_seances_VC_20260822_120349.csv"
+  }
+}

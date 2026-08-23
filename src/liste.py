@@ -1,19 +1,15 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
+# ============================================================
+# FICHIER: src/liste.py
+# RÔLE: Liste et sélection des athlètes
+#       Permet la sélection multiple (1,3,5 ou 1-5 ou *)
+# ============================================================
 
 import os
 from typing import Optional, List, Tuple
 
+
 def lister_athletes(base_dir: str = 'outputs/Base par athlète') -> List[Tuple[int, str]]:
-    """
-    Liste tous les dossiers d'athlètes dans le répertoire Base par athlète.
-    
-    Args:
-        base_dir: Chemin du dossier contenant les athlètes.
-    
-    Returns:
-        Liste de tuples (numéro, nom_athlète)
-    """
+    """Liste tous les dossiers d'athlètes."""
     if not os.path.exists(base_dir):
         print(f"❌ Dossier {base_dir} introuvable.")
         return []
@@ -36,12 +32,9 @@ def lister_athletes(base_dir: str = 'outputs/Base par athlète') -> List[Tuple[i
 
 
 def afficher_athletes(athletes: List[Tuple[int, str]]) -> None:
-    """
-    Affiche la liste des athlètes avec leur numéro.
-    """
+    """Affiche la liste des athlètes avec leur numéro."""
     if not athletes:
         print("❌ Aucun athlète trouvé.")
-        print("   Veuillez d'abord analyser un CSV avec l'option 1.")
         return
     
     print("\n" + "="*60)
@@ -50,61 +43,94 @@ def afficher_athletes(athletes: List[Tuple[int, str]]) -> None:
     for num, nom in athletes:
         print(f"   {num}. {nom}")
     print("="*60)
+    print("   Pour sélectionner plusieurs: 1,3,5 ou 1-5")
+    print("   Pour sélectionner tous: *")
+    print("="*60)
 
 
-def choisir_athlete(base_dir: str = 'outputs/Base par athlète') -> Optional[str]:
+def parser_selection(entree: str, nb_total: int) -> List[int]:
     """
-    Affiche la liste des athlètes et permet à l'utilisateur d'en choisir un.
+    Parse une entrée utilisateur pour la sélection multiple.
+    
+    Exemples:
+    - "1,3,5" → [1, 3, 5]
+    - "1-5" → [1, 2, 3, 4, 5]
+    - "*" → [1, 2, ..., nb_total]
+    """
+    if not entree or entree.strip() == '':
+        return []
+    
+    entree = entree.strip()
+    
+    if entree == '*':
+        return list(range(1, nb_total + 1))
+    
+    resultats = []
+    parties = entree.split(',')
+    
+    for partie in parties:
+        partie = partie.strip()
+        if not partie:
+            continue
+        
+        if '-' in partie:
+            try:
+                debut, fin = partie.split('-')
+                debut = int(debut.strip())
+                fin = int(fin.strip())
+                resultats.extend(range(debut, fin + 1))
+            except ValueError:
+                print(f"⚠️ Plage invalide: {partie}")
+        else:
+            try:
+                resultats.append(int(partie))
+            except ValueError:
+                print(f"⚠️ Numéro invalide: {partie}")
+    
+    resultats = sorted(set(resultats))
+    resultats = [r for r in resultats if 1 <= r <= nb_total]
+    
+    return resultats
+
+
+def choisir_athletes(base_dir: str = 'outputs/Base par athlète') -> List[str]:
+    """
+    Affiche la liste des athlètes et permet d'en choisir plusieurs.
     
     Returns:
-        Nom de l'athlète sélectionné, ou None si annulation.
+        Liste des noms d'athlètes sélectionnés.
     """
     athletes = lister_athletes(base_dir)
     
     if not athletes:
-        return None
+        return []
     
     afficher_athletes(athletes)
     
     while True:
         try:
-            choix = input("\n👉 Entrez le numéro de l'athlète (ou 'q' pour quitter) : ").strip()
+            entree = input("\n👉 Entrez les numéros (ex: 1,3,5 ou 1-5 ou * pour tous) : ").strip()
             
-            if choix.lower() == 'q':
-                return None
+            if not entree:
+                print("❌ Veuillez entrer une sélection.")
+                continue
             
-            num = int(choix)
-            if 1 <= num <= len(athletes):
-                nom = athletes[num-1][1]
-                print(f"✅ Athlète sélectionné : {nom}")
-                return nom
-            else:
-                print(f"❌ Numéro invalide. Choisissez entre 1 et {len(athletes)}.")
-        except ValueError:
-            print("❌ Veuillez entrer un nombre valide.")
+            if entree.lower() == 'q':
+                return []
+            
+            indices = parser_selection(entree, len(athletes))
+            
+            if not indices:
+                print("❌ Aucun athlète sélectionné.")
+                continue
+            
+            noms = [athletes[i-1][1] for i in indices]
+            print(f"✅ Athlètes sélectionnés: {', '.join(noms)}")
+            return noms
+            
         except KeyboardInterrupt:
             print("\n👋 Annulation.")
-            return None
-
-
-def lister_athletes_simple(base_dir: str = 'outputs/Base par athlète') -> List[str]:
-    """
-    Retourne une liste simple des noms d'athlètes (sans numéro).
-    """
-    athletes = lister_athletes(base_dir)
-    return [nom for _, nom in athletes]
-
-
-if __name__ == "__main__":
-    print("🧪 Test du module liste.py")
-    print("-"*40)
-    
-    athletes = lister_athletes()
-    afficher_athletes(athletes)
-    
-    nom = choisir_athlete()
-    if nom:
-        print(f"\n✅ Vous avez sélectionné : {nom}")
-    else:
-        print("\n❌ Aucun athlète sélectionné.")
-        
+            return []
+        except Exception as e:
+            print(f"❌ Erreur: {e}")
+            continue

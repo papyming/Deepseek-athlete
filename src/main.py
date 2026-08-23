@@ -1,9 +1,11 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
+# ============================================================
+# FICHIER: src/main.py
+# RÔLE: Point d'entrée principal de l'application
+#       Menu interactif pour analyser CSV, planifier, mettre à jour
+# ============================================================
 
 import os
 import sys
-import json
 import pandas as pd
 import math
 from datetime import datetime
@@ -15,14 +17,15 @@ from core.p_code_vma import generer_seances_vma
 from core.p_code_vc import generer_seances_vc
 from utils.parsers import parser_bi_quotidien
 from utils.validators import analyser_jours_disponibles
-from es.sov import sauvegarder_json, sauvegarder_csv
-from es.pdf_generator import generer_pdf_athlete
+from export.sov import sauvegarder_json, sauvegarder_csv
+from export import generer_pdf_athlete
 from planificateur import planifier_athlete
-from liste import choisir_athlete
+from liste import choisir_athletes
 from maj_intensites import maj_intensites
 
 
 def analyser_csv():
+    """Analyse un fichier CSV et génère les données pour chaque athlète."""
     print("\n" + "="*60)
     print("📊 AGENT D'ANALYSE - Génération des séances")
     print("="*60)
@@ -158,78 +161,46 @@ def analyser_csv():
 
 
 def planifier():
+    """Planifie l'entraînement pour un ou plusieurs athlètes."""
     print("\n" + "="*60)
     print("📅 PLANIFICATEUR D'ENTRAÎNEMENT")
     print("="*60)
     
-    nom = choisir_athlete()
-    if not nom:
+    noms = choisir_athletes()
+    if not noms:
         print("❌ Planification annulée.")
-        return
-    
-    athlete_dir = os.path.join('outputs/Base par athlète', nom)
-    
-    if not os.path.exists(athlete_dir):
-        print(f"❌ Athlète {nom} non trouvé")
         return
     
     date_debut = input("📅 Date de début (YYYY-MM-DD) ou laisser vide pour aujourd'hui : ").strip()
     if not date_debut:
         date_debut = None
     
-    plan = planifier_athlete(athlete_dir, date_debut)
-    
-    if "error" in plan:
-        print(f"❌ {plan['error']}")
-        return
-    
-    EMOJI_SEMAINE = {
-        'coupe': '🔵',
-        'normale': '🟢',
-        'chargee': '🟡',
-        'dure': '🔴'
-    }
-    
-    EMOJI_JOURNEE = {
-        'endurance': '🟩',
-        'seuil': '🟨',
-        'intense': '🟥',
-        'recuperation': '🟦',
-        'course': '⭐',
-        'repos': '⬜'
-    }
-    
-    print(f"\n📅 Plan pour {plan['athlete']}")
-    print(f"   Du {plan['date_debut']} au {plan['date_objectif']}")
-    print(f"   {plan['nb_semaines']} semaines")
-    print("="*60)
-    
-    for semaine in plan['semaines']:
-        print(f"\n📆 Semaine {semaine['numero']} ({semaine['date_debut']})")
-        type_emoji = EMOJI_SEMAINE.get(semaine['semaine_type'], '🟢')
-        print(f"   Type : {type_emoji} {semaine['semaine_type']}")
-        print(f"   Volume : {semaine['volume_total']} min")
-        for jour in semaine['jours']:
-            print(f"   {jour['jour']} ({jour['date']}) :")
-            for seance in jour['seances']:
-                emoji = EMOJI_JOURNEE.get(seance['difficulte'], '🟩')
-                print(f"      {emoji} {seance['discipline']} - {seance['type']} : {seance['details']} ({seance['duree']} min)")
+    for nom in noms:
+        athlete_dir = os.path.join('outputs/Base par athlète', nom)
+        if not os.path.exists(athlete_dir):
+            print(f"❌ Athlète {nom} non trouvé")
+            continue
+        
+        plan = planifier_athlete(athlete_dir, date_debut)
+        if "error" in plan:
+            print(f"❌ {plan['error']}")
+            continue
+        
+        print(f"\n📅 Plan pour {plan['athlete']}")
+        print(f"   Du {plan['date_debut']} au {plan['date_objectif']}")
+        print(f"   {plan['nb_semaines']} semaines")
+        print("="*60)
 
 
 def mise_a_jour_intensites():
+    """Met à jour les intensités d'un plan existant."""
     print("\n" + "="*60)
     print("🔄 MISE À JOUR DES INTENSITÉS")
     print("="*60)
     
-    nom = choisir_athlete()
-    if not nom:
+    noms = choisir_athletes()
+    if not noms:
         print("❌ Mise à jour annulée.")
-        return
-    
-    athlete_dir = os.path.join('outputs/Base par athlète', nom)
-    
-    if not os.path.exists(athlete_dir):
-        print(f"❌ Athlète {nom} non trouvé")
         return
     
     nouvelle_vma = input("Nouvelle VMA (km/h) ou laisser vide : ").strip()
@@ -242,10 +213,16 @@ def mise_a_jour_intensites():
         print("❌ Aucune nouvelle valeur saisie.")
         return
     
-    maj_intensites(athlete_dir, nouvelle_vma, nouvelle_vc)
+    for nom in noms:
+        athlete_dir = os.path.join('outputs/Base par athlète', nom)
+        if not os.path.exists(athlete_dir):
+            print(f"❌ Athlète {nom} non trouvé")
+            continue
+        maj_intensites(athlete_dir, nouvelle_vma, nouvelle_vc)
 
 
 def menu():
+    """Affiche le menu principal."""
     print("\n" + "="*60)
     print("🏊‍♂️ DEEPSEEK ATHLETE - OUTIL D'ENTRAÎNEMENT")
     print("="*60)
@@ -257,6 +234,7 @@ def menu():
 
 
 def main():
+    """Fonction principale."""
     os.makedirs('inputs', exist_ok=True)
     os.makedirs('outputs/Base par athlète', exist_ok=True)
 
@@ -273,12 +251,10 @@ def main():
         elif choix == '3':
             mise_a_jour_intensites()
             input("\nAppuyez sur Entrée pour continuer...")
-        elif choix == '9':
-            print("\n👋 Au revoir !")
-            break
         else:
-            print("❌ Choix invalide. Au revoir !")
+            print("❌ Choix invalide. Veuillez choisir 1, 2, 3 ou 9.")
             break
+
 
 
 if __name__ == '__main__':

@@ -1,12 +1,17 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
+# ============================================================
+# FICHIER: src/maj_intensites.py
+# RÔLE: Mise à jour des intensités d'un plan existant
+#       après un post-test (nouvelle VMA ou VC)
+# ============================================================
 
 import os
 import json
 import pandas as pd
 import math
+import re
 from datetime import datetime
 from typing import Optional
+
 
 def charger_profil(athlete_dir: str) -> dict:
     """Charge le fichier profil le plus récent."""
@@ -17,6 +22,7 @@ def charger_profil(athlete_dir: str) -> dict:
     with open(os.path.join(athlete_dir, fichiers[0]), 'r', encoding='utf-8') as f:
         return json.load(f)
 
+
 def sauvegarder_profil(athlete_dir: str, profil: dict):
     """Sauvegarde le profil avec un nouveau timestamp."""
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
@@ -25,16 +31,6 @@ def sauvegarder_profil(athlete_dir: str, profil: dict):
     with open(os.path.join(athlete_dir, nom_fichier), 'w', encoding='utf-8') as f:
         json.dump(profil, f, ensure_ascii=False, indent=2)
 
-def saisir_float(prompt: str) -> Optional[float]:
-    """Saisie sécurisée d'un float."""
-    valeur = input(prompt).strip()
-    if not valeur or valeur == '':
-        return None
-    try:
-        return float(valeur)
-    except:
-        print("⚠️ Valeur invalide. Veuillez saisir un nombre.")
-        return None
 
 def maj_intensites(athlete_dir: str, nouvelle_vma: Optional[float] = None, nouvelle_vc: Optional[float] = None):
     """
@@ -62,16 +58,15 @@ def maj_intensites(athlete_dir: str, nouvelle_vma: Optional[float] = None, nouve
         return
     
     # 3. Mettre à jour les valeurs physiologiques
-    if nouvelle_vma is not None:
-        if not math.isnan(nouvelle_vma):
-            profil['physiologie']['vma'] = nouvelle_vma
-            profil['physiologie']['vma_origine'] = "Mise à jour post-tests"
-            print(f"✅ VMA mise à jour : {nouvelle_vma} km/h")
-    if nouvelle_vc is not None:
-        if not math.isnan(nouvelle_vc):
-            profil['physiologie']['vc'] = nouvelle_vc
-            profil['physiologie']['vc_origine'] = "Mise à jour post-tests"
-            print(f"✅ VC mise à jour : {nouvelle_vc} km/h")
+    if nouvelle_vma is not None and not math.isnan(nouvelle_vma):
+        profil['physiologie']['vma'] = nouvelle_vma
+        profil['physiologie']['vma_origine'] = "Mise à jour post-tests"
+        print(f"✅ VMA mise à jour : {nouvelle_vma} km/h")
+    
+    if nouvelle_vc is not None and not math.isnan(nouvelle_vc):
+        profil['physiologie']['vc'] = nouvelle_vc
+        profil['physiologie']['vc_origine'] = "Mise à jour post-tests"
+        print(f"✅ VC mise à jour : {nouvelle_vc} km/h")
     
     # 4. Recalculer les zones
     vma = profil['physiologie'].get('vma')
@@ -82,7 +77,6 @@ def maj_intensites(athlete_dir: str, nouvelle_vma: Optional[float] = None, nouve
         return
     
     # 5. Mettre à jour les séances CAP
-    import re
     for idx, row in df_plan.iterrows():
         details = row.get('Détails', '')
         if 'Endurance fondamentale' in details and vma:
@@ -106,12 +100,12 @@ def maj_intensites(athlete_dir: str, nouvelle_vma: Optional[float] = None, nouve
     sauvegarder_profil(athlete_dir, profil)
     print("✅ Profil mis à jour")
 
+
 if __name__ == "__main__":
     import sys
     
     if len(sys.argv) < 2:
         print("Usage: python maj_intensites.py <dossier_athlete> [--vma XX] [--vc YY]")
-        print("Exemple: python maj_intensites.py 'outputs/Base par athlète/Claire_LEFEVRE' --vma 16.5 --vc 12.3")
         sys.exit(1)
     
     athlete_dir = sys.argv[1]

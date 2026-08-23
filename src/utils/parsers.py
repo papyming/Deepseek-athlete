@@ -1,9 +1,15 @@
+# ============================================================
+# FICHIER: src/utils/parsers.py
+# RÔLE: Fonctions de parsing des données du CSV
+# ============================================================
+
 import math
+
 
 def parser_bi_quotidien(valeur):
     """
-    Convertit la réponse 'Possibilité de faire du bi-quotidien ?' en nombre de jours
-    où l'athlète peut faire plusieurs séances dans la même journée.
+    Convertit la réponse 'Possibilité de faire du bi-quotidien ?'
+    en nombre de jours où l'athlète peut faire plusieurs séances.
     """
     if valeur is None:
         return 0
@@ -23,18 +29,15 @@ def parser_bi_quotidien(valeur):
     elif '3 fois' in valeur:
         return 3
     elif 'tri' in valeur or 'quadri' in valeur:
-        print("\n")
-        print("="*60)
+        print("\n" + "="*60)
         print("L'ATHLETE A INDIQUE QU'IL PEUT FAIRE DU TRI/QUADRI.")
-        print("CECI SIGNIFIE QU'IL PEUT EFFECTUER PLUSIEURS SEANCES DANS LA MEME JOURNEE.")
-        print("VEUILLEZ SAISIR LE NOMBRE DE JOURS PAR SEMAINE OU IL PEUT FAIRE 2 SEANCES (OU PLUS) :")
-        print("(ex: 1, 2, 3 ou 4)")
+        print("VEUILLEZ SAISIR LE NOMBRE DE JOURS PAR SEMAINE :")
         print("="*60)
         try:
             saisie = input("> ").strip()
             if saisie and saisie.isdigit():
                 nb = int(saisie)
-                print(f"✅ {nb} jour(s) par semaine avec séance(s) supplémentaire(s) enregistré(s)\n")
+                print(f"✅ {nb} jour(s) enregistré(s)\n")
                 return nb
             else:
                 print("⚠️ Saisie invalide. Valeur par défaut : 2\n")
@@ -43,17 +46,15 @@ def parser_bi_quotidien(valeur):
             print("⚠️ Saisie invalide. Valeur par défaut : 2\n")
             return 2
     elif valeur == 'autre':
-        print("\n")
-        print("="*60)
+        print("\n" + "="*60)
         print("L'ATHLETE A INDIQUE 'AUTRE' POUR LE BI-QUOTIDIEN.")
-        print("VEUILLEZ SAISIR LE NOMBRE DE JOURS PAR SEMAINE OU IL PEUT FAIRE 2 SEANCES (OU PLUS) :")
-        print("(ex: 1, 2, 3 ou 4)")
+        print("VEUILLEZ SAISIR LE NOMBRE DE JOURS PAR SEMAINE :")
         print("="*60)
         try:
             saisie = input("> ").strip()
             if saisie and saisie.isdigit():
                 nb = int(saisie)
-                print(f"✅ {nb} jour(s) par semaine avec séance(s) supplémentaire(s) enregistré(s)\n")
+                print(f"✅ {nb} jour(s) enregistré(s)\n")
                 return nb
             else:
                 print("⚠️ Saisie invalide. Valeur par défaut : 1\n")

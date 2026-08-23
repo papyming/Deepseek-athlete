@@ -1,4 +1,10 @@
+# ============================================================
+# FICHIER: src/utils/validators.py
+# RÔLE: Validation et analyse des jours disponibles
+# ============================================================
+
 from .parsers import parser_jours_disciplines
+
 
 def analyser_jours_disponibles(row):
     """
