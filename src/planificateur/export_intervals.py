@@ -6,6 +6,7 @@
 
 import os
 import pandas as pd
+import re
 from datetime import datetime
 from typing import Dict
 
@@ -35,11 +36,29 @@ def exporter_intervals(plan: Dict, plan_dir: str) -> str:
                 # Extraire la distance si présente dans les détails
                 details = seance['details']
                 distance = ''
-                if 'm x' in details:
-                    import re
-                    match = re.search(r'(\d+)m x (\d+)', details)
-                    if match:
-                        distance = f"{match.group(1)}m x {match.group(2)}"
+                effort_temps = ''
+                recup_temps = ''
+                
+                # Extraire les détails de la séance
+                match = re.search(r'(\d+)m x (\d+)', details)
+                if match:
+                    distance = f"{match.group(1)}m x {match.group(2)}"
+                
+                # Extraire les temps
+                effort_match = re.search(r'effort (\d+:\d+)', details)
+                if effort_match:
+                    effort_temps = effort_match.group(1)
+                
+                recup_match = re.search(r'recup (\d+\.?\d*)m x (\d+:\d+)', details)
+                if recup_match:
+                    recup_temps = f"{recup_match.group(1)}m x {recup_match.group(2)}"
+                
+                # Créer la description complète
+                description = details
+                if distance and effort_temps:
+                    description = f"{distance} - effort {effort_temps}"
+                    if recup_temps:
+                        description += f" / récup {recup_temps}"
                 
                 # Créer le nom de la séance
                 nom_seance = f"{seance['discipline']} - {seance['type']}"
@@ -49,7 +68,7 @@ def exporter_intervals(plan: Dict, plan_dir: str) -> str:
                 rows.append({
                     'Date': jour['date'],
                     'Name': nom_seance,
-                    'Description': details,
+                    'Description': description,
                     'Planned Duration': f"{seance['duree']} min",
                     'Intensity': intensite_map.get(seance.get('difficulte', 'endurance'), 'Easy'),
                     'Notes': ''

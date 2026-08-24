@@ -18,36 +18,47 @@ def exporter_plan_csv(plan: Dict, plan_dir: str) -> str:
     nb_semaines = plan['nb_semaines']
 
     for s, semaine in enumerate(plan['semaines']):
-        # Utiliser num_affichage pour S-00, S-01, etc.
         num_affichage = semaine.get('num_affichage', nb_semaines - s)
         emoji_semaine = EMOJI_SEMAINE.get(semaine.get('semaine_type', 'normale'), '🟢')
         num_semaine_str = f"{emoji_semaine}S-{num_affichage:02d}"
         
+        # Séances clés: uniquement les séances CAP de qualité (VMA, VC, Seuil)
+        # CORRIGÉ: Endurance n'est PAS une séance clé
         seances_cles = []
         for jour in semaine['jours']:
             for seance in jour['seances']:
-                if seance.get('difficulte') in ['intense', 'seuil']:
-                    seances_cles.append(f"{seance['discipline']}: {seance['type']}")
-        seances_cles_str = ", ".join(seances_cles)
+                discipline = seance.get('discipline', '')
+                difficulte = seance.get('difficulte', '')
+                type_seance = seance.get('type', '')
+                
+                # CAP: VMA, VC, Seuil (pas Endurance)
+                if discipline == 'CAP' and difficulte in ['intense', 'seuil']:
+                    if 'VMA' in type_seance or 'VC' in type_seance or 'Seuil' in type_seance:
+                        seances_cles.append(f"CAP: {type_seance}")
+                # Vélo: Seuil uniquement
+                elif discipline == 'Vélo' and difficulte in ['seuil']:
+                    seances_cles.append(f"Vélo: {type_seance}")
+                # Natation: Seuil uniquement
+                elif discipline == 'Natation' and difficulte in ['seuil']:
+                    seances_cles.append(f"Natation: {type_seance}")
+        
+        # Dédupliquer
+        seances_cles = list(dict.fromkeys(seances_cles))
+        seances_cles_str = ", ".join(seances_cles[:5])
 
         for jour in semaine['jours']:
-            # Ne pas afficher les jours vides (avant le début du plan)
-            if not jour['seances'] or (len(jour['seances']) == 1 and jour['seances'][0].get('discipline') == 'Repos' and jour['seances'][0].get('duree', 0) == 0):
+            if not jour['seances']:
                 continue
                 
             for idx, seance in enumerate(jour['seances']):
                 jour_affichage = jour['jour'] if idx == 0 else '*'
                 emoji_journee = EMOJI_JOURNEE.get(seance.get('difficulte', 'endurance'), '🟩')
                 
-                # Correction: "récupératif" → "de récupération"
                 details = seance['details']
                 if 'récupératif' in details:
                     details = details.replace('récupératif', 'de récupération')
                 if 'Récupératif' in details:
                     details = details.replace('Récupératif', 'de récupération')
-                
-                # Remplir les séances clés pour la première ligne du jour
-                seances_cles_ligne = seances_cles_str if idx == 0 else ''
                 
                 rows.append({
                     'N° semaine': num_semaine_str,
@@ -62,14 +73,13 @@ def exporter_plan_csv(plan: Dict, plan_dir: str) -> str:
                     'Retour Athlète': '',
                     'Commentaires': '',
                     'Niveau semaine': '',
-                    'Séances clés': seances_cles_ligne,
+                    'Séances clés': seances_cles_str if idx == 0 else '',
                     'Message Envoyé ?': ''
                 })
 
-    # Ne garder que les lignes avec des séances (ignorer les jours vides)
     df = pd.DataFrame(rows)
     
-    # Supprimer les jours vides (Repos avec durée 0) mais garder les repos avec durée
+    # Supprimer les jours vides (Repos avec durée 0)
     df = df[~((df['Discipline'] == 'Repos') & (df['Durée (min)'] == 0))]
     
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')

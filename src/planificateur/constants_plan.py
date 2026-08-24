@@ -1,8 +1,14 @@
 # ============================================================
 # FICHIER: src/planificateur/constants_plan.py
 # RÔLE: Définit les constantes utilisées dans la planification
-#       (émojis, types de séances, difficultés)
+#       (émojis, types de séances, difficultés, volumes max)
 # ============================================================
+
+# ============================================================
+# JOURS DE LA SEMAINE
+# ============================================================
+
+JOURS_SEMAINE = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
 
 # ============================================================
 # ÉMOJIS
@@ -103,6 +109,16 @@ DIFFICULTE = {
     'pliometrie': 'intense',
     'gainage': 'endurance',
     'renforcement_excentrique': 'endurance'
+}
+
+# ============================================================
+# VOLUME MAXIMAL PAR SÉANCE
+# ============================================================
+
+VOLUME_MAX_PAR_SEANCE = {
+    'CAP': 120,      # 2h max par séance
+    'Velo': 180,     # 3h max par séance
+    'Natation': 90   # 1h30 max par séance
 }
 
 # ============================================================

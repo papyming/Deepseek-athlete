@@ -1,0 +1,1587 @@
+﻿# ============================================================
+# FUSION DES PLANS (8 COLONNES) - 2026-08-24 18:47:06
+# Colonnes : N° semaine;Jour;Date;Discipline;Type de séance;Détails;Durée (min);Journée type
+# Nombre de fichiers fusionnes : 10
+# ============================================================
+N° semaine;Jour;Date;Discipline;Type de séance;Détails;Durée (min);Journée type
+
+# ============================================================
+# FICHIER N°1 : Claire_LEFEVRE_plan_20260824_184657.csv
+# ============================================================
+🟢S-11;Mardi;2026-08-25;CAP;Footing de récupération Z1;Footing de récupération Z1 (51 min);51;🟦
+🟢S-11;*;2026-08-25;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+🟢S-11;Mercredi;2026-08-26;Vélo;Seuil Z4;Seuil Z4 (80 min);80;🟨
+🟢S-11;Jeudi;2026-08-27;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (72 min);72;🟩
+🟢S-11;*;2026-08-27;Natation;Récupération active;Récupération active (72 min);72;🟦
+🟡S-10;Mardi;2026-09-01;CAP;Footing de récupération Z1;Footing de récupération Z1 (78 min);78;🟦
+🟡S-10;*;2026-09-01;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+🟡S-10;Mercredi;2026-09-02;Vélo;Seuil Z4;Seuil Z4 (123 min);123;🟨
+🟡S-10;Jeudi;2026-09-03;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (112 min);112;🟩
+🟡S-10;*;2026-09-03;Natation;Récupération active;Récupération active (72 min);72;🟦
+🔴S-09;Mardi;2026-09-08;CAP;VC;VC 500m x 6 @ 11.6 km/h (effort 02:34 / recup 125.0m x 01:24) - 15min d'intensité;45;🟨
+🔴S-09;Mercredi;2026-09-09;Vélo;Seuil Z4;Seuil Z4 (172 min);172;🟨
+🔴S-09;Jeudi;2026-09-10;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🔴S-09;*;2026-09-10;Natation;Récupération active;Récupération active (72 min);72;🟦
+🔴S-09;*;2026-09-10;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+⚪S-08;Mardi;2026-09-15;Course;Compétition intermédiaire;Triathlon Mâcon 15/09;0;⭐
+⚪S-08;Mercredi;2026-09-16;Vélo;Seuil Z4;Seuil Z4 (80 min);80;🟨
+⚪S-08;Jeudi;2026-09-17;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (61 min);61;🟩
+⚪S-08;*;2026-09-17;Natation;Récupération active;Récupération active (72 min);72;🟦
+⚪S-08;*;2026-09-17;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+🔴S-07;Mardi;2026-09-22;CAP;Footing de récupération Z1;Footing de récupération Z1 (91 min);91;🟦
+🔴S-07;*;2026-09-22;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+🔴S-07;Mercredi;2026-09-23;Vélo;Seuil Z4;Seuil Z4 (156 min);156;🟨
+🔴S-07;Jeudi;2026-09-24;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🔴S-07;*;2026-09-24;Natation;Récupération active;Récupération active (72 min);72;🟦
+🟡S-06;Mardi;2026-09-29;CAP;VMA;VMA 700m x 6 @ 14.1 km/h (effort 02:58 / recup 175.0m x 01:22) - 17min d'intensité;45;🟥
+🟡S-06;Mercredi;2026-09-30;Vélo;Seuil Z4;Seuil Z4 (180 min);180;🟨
+🟡S-06;Jeudi;2026-10-01;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-06;*;2026-10-01;Natation;Récupération active;Récupération active (72 min);72;🟦
+🟡S-06;*;2026-10-01;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+🔴S-05;Mardi;2026-10-06;CAP;Footing de récupération Z1;Footing de récupération Z1 (85 min);85;🟦
+🔴S-05;*;2026-10-06;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+🔴S-05;Mercredi;2026-10-07;Vélo;Seuil Z4;Seuil Z4 (146 min);146;🟨
+🔴S-05;Jeudi;2026-10-08;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🔴S-05;*;2026-10-08;Natation;Récupération active;Récupération active (72 min);72;🟦
+⚪S-04;Mardi;2026-10-13;CAP;Footing de récupération Z1;Footing de récupération Z1 (35 min);35;🟦
+⚪S-04;*;2026-10-13;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+⚪S-04;Mercredi;2026-10-14;Vélo;Seuil Z4;Seuil Z4 (80 min);80;🟨
+⚪S-04;Jeudi;2026-10-15;Course;Compétition intermédiaire;Sprint de Chambéry 15/10;0;⭐
+🟡S-03;Mardi;2026-10-20;CAP;VC;VC 2000m x 2 @ 10.2 km/h (effort 11:47 / recup 500.0m x 05:36) - 23min d'intensité;53;🟨
+🟡S-03;Mercredi;2026-10-21;Vélo;Seuil Z4;Seuil Z4 (116 min);116;🟨
+🟡S-03;Jeudi;2026-10-22;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (106 min);106;🟩
+🟡S-03;*;2026-10-22;Natation;Récupération active;Récupération active (72 min);72;🟦
+🟡S-03;*;2026-10-22;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+🔵S-02;Mardi;2026-10-27;CAP;Footing de récupération Z1;Footing de récupération Z1 (37 min);37;🟦
+🔵S-02;Mercredi;2026-10-28;Vélo;Récupération active;Récupération active (52 min);52;🟦
+🔵S-02;Jeudi;2026-10-29;CAP;Footing de récupération Z1;Footing de récupération Z1 (37 min);37;🟦
+🔵S-02;*;2026-10-29;Natation;Récupération active;Récupération active (60 min);60;🟦
+🔵S-01;Mardi;2026-11-03;CAP;Footing de récupération Z1;Footing de récupération Z1 (26 min);26;🟦
+🔵S-01;Mercredi;2026-11-04;Vélo;Récupération active;Récupération active (52 min);52;🟦
+🔵S-01;Jeudi;2026-11-05;CAP;Footing de récupération Z1;Footing de récupération Z1 (26 min);26;🟦
+🔵S-01;*;2026-11-05;Natation;Récupération active;Récupération active (60 min);60;🟦
+🔵S-00;Mardi;2026-11-10;CAP;Footing de récupération Z1;Footing de récupération Z1 (26 min);26;🟦
+🔵S-00;Mercredi;2026-11-11;Vélo;Récupération active;Récupération active (52 min);52;🟦
+🔵S-00;Jeudi;2026-11-12;CAP;Footing de récupération Z1;Footing de récupération Z1 (26 min);26;🟦
+🔵S-00;*;2026-11-12;Natation;Récupération active;Récupération active (60 min);60;🟦
+🔵S-00;Dimanche;2026-11-15;Course;Objectif;15/11/2026;0;⭐
+
+# ============================================================
+# FICHIER N°2 : Emma_DUBOIS_plan_20260824_184657.csv
+# ============================================================
+🟢S-16;Lundi;2026-08-24;Vélo;Endurance Z2;Endurance Z2 (80 min);80;🟩
+🟢S-16;*;2026-08-24;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+🟢S-16;Mardi;2026-08-25;CAP;VC;VC 300m x 14 @ 15.8 km/h (effort 01:08 / recup 75.0m x 00:39) - 15min d'intensité;40;🟨
+🟢S-16;Mercredi;2026-08-26;Natation;Endurance Z2;Endurance Z2 (90 min);90;🟩
+🟢S-16;Jeudi;2026-08-27;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟢S-16;Samedi;2026-08-29;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟢S-16;Dimanche;2026-08-30;CAP;Footing de récupération Z1;Footing de récupération Z1 (102 min);102;🟦
+🟡S-15;Lundi;2026-08-31;Vélo;Endurance Z2;Endurance Z2 (112 min);112;🟩
+🟡S-15;*;2026-08-31;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+🟡S-15;Mardi;2026-09-01;CAP;VMA;VMA 300m x 14 @ 15.7 km/h (effort 01:08 / recup 75.0m x 00:33) - 16min d'intensité;41;🟥
+🟡S-15;Mercredi;2026-09-02;Natation;Endurance Z2;Endurance Z2 (90 min);90;🟩
+🟡S-15;Jeudi;2026-09-03;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-15;Samedi;2026-09-05;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟡S-15;Dimanche;2026-09-06;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟢S-14;Lundi;2026-09-07;Vélo;Endurance Z2;Endurance Z2 (80 min);80;🟩
+🟢S-14;*;2026-09-07;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+🟢S-14;Mardi;2026-09-08;CAP;VC;VC 500m x 8 @ 15.0 km/h (effort 02:00 / recup 125.0m x 01:05) - 16min d'intensité;39;🟨
+🟢S-14;Mercredi;2026-09-09;Natation;Endurance Z2;Endurance Z2 (90 min);90;🟩
+🟢S-14;Jeudi;2026-09-10;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟢S-14;Samedi;2026-09-12;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟢S-14;Dimanche;2026-09-13;CAP;Footing de récupération Z1;Footing de récupération Z1 (86 min);86;🟦
+⚪S-13;Lundi;2026-09-14;Vélo;Endurance Z2;Endurance Z2 (80 min);80;🟩
+⚪S-13;*;2026-09-14;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+⚪S-13;Mardi;2026-09-15;Course;Compétition intermédiaire;5km Bruxelles 15/09;0;⭐
+⚪S-13;Mercredi;2026-09-16;Natation;Endurance Z2;Endurance Z2 (85 min);85;🟩
+⚪S-13;Jeudi;2026-09-17;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (82 min);82;🟩
+⚪S-13;Samedi;2026-09-19;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+⚪S-13;Dimanche;2026-09-20;CAP;Footing de récupération Z1;Footing de récupération Z1 (58 min);58;🟦
+🟡S-12;Lundi;2026-09-21;Vélo;Endurance Z2;Endurance Z2 (109 min);109;🟩
+🟡S-12;*;2026-09-21;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+🟡S-12;Mardi;2026-09-22;CAP;VC;VC 700m x 6 @ 14.5 km/h (effort 02:54 / recup 175.0m x 01:31) - 17min d'intensité;45;🟨
+🟡S-12;Mercredi;2026-09-23;Natation;Endurance Z2;Endurance Z2 (90 min);90;🟩
+🟡S-12;Jeudi;2026-09-24;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-12;Samedi;2026-09-26;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟡S-12;Dimanche;2026-09-27;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟢S-11;Lundi;2026-09-28;Vélo;Endurance Z2;Endurance Z2 (142 min);142;🟩
+🟢S-11;*;2026-09-28;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+🟢S-11;Mardi;2026-09-29;CAP;VMA;VMA 700m x 6 @ 15.1 km/h (effort 02:47 / recup 175.0m x 01:17) - 16min d'intensité;39;🟥
+🟢S-11;Mercredi;2026-09-30;Natation;Endurance Z2;Endurance Z2 (90 min);90;🟩
+🟢S-11;Jeudi;2026-10-01;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟢S-11;Samedi;2026-10-03;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟢S-11;Dimanche;2026-10-04;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-10;Lundi;2026-10-05;Vélo;Endurance Z2;Endurance Z2 (104 min);104;🟩
+🟡S-10;*;2026-10-05;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+🟡S-10;Mardi;2026-10-06;CAP;VC;VC 1000m x 4 @ 13.7 km/h (effort 04:23 / recup 250.0m x 02:10) - 17min d'intensité;45;🟨
+🟡S-10;Mercredi;2026-10-07;Natation;Endurance Z2;Endurance Z2 (90 min);90;🟩
+🟡S-10;Jeudi;2026-10-08;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-10;Samedi;2026-10-10;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟡S-10;Dimanche;2026-10-11;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+⚪S-09;Lundi;2026-10-12;Vélo;Endurance Z2;Endurance Z2 (80 min);80;🟩
+⚪S-09;*;2026-10-12;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+⚪S-09;Mardi;2026-10-13;CAP;Footing de récupération Z1;Footing de récupération Z1 (86 min);86;🟦
+⚪S-09;Mercredi;2026-10-14;Natation;Endurance Z2;Endurance Z2 (90 min);90;🟩
+⚪S-09;Jeudi;2026-10-15;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+⚪S-09;Samedi;2026-10-17;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+⚪S-09;Dimanche;2026-10-18;CAP;Footing de récupération Z1;Footing de récupération Z1 (86 min);86;🟦
+🟢S-08;Lundi;2026-10-19;Vélo;Endurance Z2;Endurance Z2 (96 min);96;🟩
+🟢S-08;*;2026-10-19;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+🟢S-08;Mardi;2026-10-20;Course;Compétition intermédiaire;10km Namur 20/10;0;⭐
+🟢S-08;Mercredi;2026-10-21;Natation;Endurance Z2;Endurance Z2 (90 min);90;🟩
+🟢S-08;Jeudi;2026-10-22;CAP;VC;VC 2000m x 3 @ 13.1 km/h (effort 09:08 / recup 500.0m x 04:20) - 27min d'intensité;55;🟨
+🟢S-08;Samedi;2026-10-24;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟢S-08;Dimanche;2026-10-25;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-07;Lundi;2026-10-26;Vélo;Endurance Z2;Endurance Z2 (149 min);149;🟩
+🟡S-07;*;2026-10-26;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+🟡S-07;Mardi;2026-10-27;CAP;VMA;VMA 2000m x 3 @ 14.1 km/h (effort 08:30 / recup 500.0m x 03:42) - 25min d'intensité;56;🟥
+🟡S-07;Mercredi;2026-10-28;Natation;Endurance Z2;Endurance Z2 (90 min);90;🟩
+🟡S-07;Jeudi;2026-10-29;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-07;Samedi;2026-10-31;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟡S-07;Dimanche;2026-11-01;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🔴S-06;Lundi;2026-11-02;Vélo;Endurance Z2;Endurance Z2 (135 min);135;🟩
+🔴S-06;*;2026-11-02;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+🔴S-06;Mardi;2026-11-03;CAP;VC;VC 2800m x 2 @ 12.9 km/h (effort 13:04 / recup 700.0m x 06:05) - 26min d'intensité;63;🟨
+🔴S-06;Mercredi;2026-11-04;Natation;Endurance Z2;Endurance Z2 (90 min);90;🟩
+🔴S-06;Jeudi;2026-11-05;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🔴S-06;Samedi;2026-11-07;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🔴S-06;Dimanche;2026-11-08;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+⚪S-05;Lundi;2026-11-09;Vélo;Endurance Z2;Endurance Z2 (80 min);80;🟩
+⚪S-05;*;2026-11-09;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+⚪S-05;Mardi;2026-11-10;CAP;Footing de récupération Z1;Footing de récupération Z1 (70 min);70;🟦
+⚪S-05;Mercredi;2026-11-11;Natation;Endurance Z2;Endurance Z2 (90 min);90;🟩
+⚪S-05;Jeudi;2026-11-12;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (101 min);101;🟩
+⚪S-05;Samedi;2026-11-14;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+⚪S-05;Dimanche;2026-11-15;CAP;Footing de récupération Z1;Footing de récupération Z1 (70 min);70;🟦
+🟡S-04;Lundi;2026-11-16;Vélo;Endurance Z2;Endurance Z2 (118 min);118;🟩
+🟡S-04;*;2026-11-16;Renforcement;Gainage;Gainage (30 min);30;🟩
+🟡S-04;Mardi;2026-11-17;CAP;VC;VC 300m x 14 @ 15.8 km/h (effort 01:08 / recup 75.0m x 00:39) - 15min d'intensité;44;🟨
+🟡S-04;Mercredi;2026-11-18;Natation;Endurance Z2;Endurance Z2 (90 min);90;🟩
+🟡S-04;Jeudi;2026-11-19;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-04;Samedi;2026-11-21;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟡S-04;Dimanche;2026-11-22;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟢S-03;Lundi;2026-11-23;Vélo;Endurance Z2;Endurance Z2 (104 min);104;🟩
+🟢S-03;*;2026-11-23;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+🟢S-03;Mardi;2026-11-24;CAP;VMA;VMA 300m x 14 @ 15.7 km/h (effort 01:08 / recup 75.0m x 00:33) - 16min d'intensité;38;🟥
+🟢S-03;Mercredi;2026-11-25;Natation;Endurance Z2;Endurance Z2 (90 min);90;🟩
+🟢S-03;Jeudi;2026-11-26;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟢S-03;Samedi;2026-11-28;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟢S-03;Dimanche;2026-11-29;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🔵S-02;Lundi;2026-11-30;Vélo;Récupération active;Récupération active (52 min);52;🟦
+🔵S-02;Mardi;2026-12-01;CAP;Footing de récupération Z1;Footing de récupération Z1 (52 min);52;🟦
+🔵S-02;Mercredi;2026-12-02;Natation;Récupération active;Récupération active (60 min);60;🟦
+🔵S-02;Jeudi;2026-12-03;CAP;Footing de récupération Z1;Footing de récupération Z1 (52 min);52;🟦
+🔵S-02;Samedi;2026-12-05;CAP;Footing de récupération Z1;Footing de récupération Z1 (52 min);52;🟦
+🔵S-02;Dimanche;2026-12-06;CAP;Footing de récupération Z1;Footing de récupération Z1 (52 min);52;🟦
+🔵S-01;Lundi;2026-12-07;Vélo;Récupération active;Récupération active (52 min);52;🟦
+🔵S-01;Mardi;2026-12-08;CAP;Footing de récupération Z1;Footing de récupération Z1 (52 min);52;🟦
+🔵S-01;Mercredi;2026-12-09;Natation;Récupération active;Récupération active (60 min);60;🟦
+🔵S-01;Jeudi;2026-12-10;CAP;Footing de récupération Z1;Footing de récupération Z1 (52 min);52;🟦
+🔵S-01;Samedi;2026-12-12;CAP;Footing de récupération Z1;Footing de récupération Z1 (52 min);52;🟦
+🔵S-01;Dimanche;2026-12-13;CAP;Footing de récupération Z1;Footing de récupération Z1 (52 min);52;🟦
+🔵S-00;Lundi;2026-12-14;Vélo;Récupération active;Récupération active (52 min);52;🟦
+🔵S-00;Mardi;2026-12-15;Course;Objectif;15/12/2026;0;⭐
+
+# ============================================================
+# FICHIER N°3 : Germain_Noyer_plan_20260824_184657.csv
+# ============================================================
+🟢S-64;Lundi;2026-08-24;CAP;VC;VC 300m x 15 @ 17.5 km/h (effort 01:01 / recup 75.0m x 00:36) - 15min d'intensité;39;🟨
+🟢S-64;Mardi;2026-08-25;CAP;Footing de récupération Z1;Footing de récupération Z1 (102 min);102;🟦
+🟢S-64;*;2026-08-25;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+🟢S-64;Jeudi;2026-08-27;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟢S-64;Dimanche;2026-08-30;CAP;Footing de récupération Z1;Footing de récupération Z1 (102 min);102;🟦
+🟡S-63;Lundi;2026-08-31;CAP;VMA;VMA 300m x 17 @ 20.1 km/h (effort 00:53 / recup 75.0m x 00:26) - 15min d'intensité;40;🟥
+🟡S-63;Mardi;2026-09-01;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-63;*;2026-09-01;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+🟡S-63;Jeudi;2026-09-03;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-63;Dimanche;2026-09-06;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟢S-62;Lundi;2026-09-07;CAP;VC;VC 500m x 9 @ 16.7 km/h (effort 01:48 / recup 125.0m x 01:00) - 16min d'intensité;40;🟨
+🟢S-62;Mardi;2026-09-08;CAP;Footing de récupération Z1;Footing de récupération Z1 (86 min);86;🟦
+🟢S-62;*;2026-09-08;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+🟢S-62;Jeudi;2026-09-10;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟢S-62;Dimanche;2026-09-13;CAP;Footing de récupération Z1;Footing de récupération Z1 (86 min);86;🟦
+⚪S-61;Lundi;2026-09-14;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (82 min);82;🟩
+⚪S-61;*;2026-09-14;Renforcement;Gainage;Gainage (30 min);30;🟩
+⚪S-61;Mardi;2026-09-15;CAP;Footing de récupération Z1;Footing de récupération Z1 (58 min);58;🟦
+⚪S-61;Jeudi;2026-09-17;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (82 min);82;🟩
+⚪S-61;Dimanche;2026-09-20;CAP;Footing de récupération Z1;Footing de récupération Z1 (58 min);58;🟦
+🟡S-60;Lundi;2026-09-21;CAP;VC;VC 700m x 6 @ 16.1 km/h (effort 02:37 / recup 175.0m x 01:25) - 15min d'intensité;42;🟨
+🟡S-60;Mardi;2026-09-22;CAP;Footing de récupération Z1;Footing de récupération Z1 (103 min);103;🟦
+🟡S-60;*;2026-09-22;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+🟡S-60;Jeudi;2026-09-24;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-60;Dimanche;2026-09-27;CAP;Footing de récupération Z1;Footing de récupération Z1 (103 min);103;🟦
+🟢S-59;Lundi;2026-09-28;CAP;VMA;VMA 700m x 7 @ 19.4 km/h (effort 02:10 / recup 175.0m x 01:02) - 15min d'intensité;37;🟥
+🟢S-59;Mardi;2026-09-29;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟢S-59;*;2026-09-29;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+🟢S-59;Jeudi;2026-10-01;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟢S-59;Dimanche;2026-10-04;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-58;Lundi;2026-10-05;CAP;VC;VC 1000m x 4 @ 15.2 km/h (effort 03:58 / recup 250.0m x 02:01) - 15min d'intensité;42;🟨
+🟡S-58;Mardi;2026-10-06;CAP;Footing de récupération Z1;Footing de récupération Z1 (97 min);97;🟦
+🟡S-58;*;2026-10-06;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+🟡S-58;Jeudi;2026-10-08;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-58;Dimanche;2026-10-11;CAP;Footing de récupération Z1;Footing de récupération Z1 (97 min);97;🟦
+⚪S-57;Lundi;2026-10-12;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (82 min);82;🟩
+⚪S-57;*;2026-10-12;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+⚪S-57;Mardi;2026-10-13;CAP;Footing de récupération Z1;Footing de récupération Z1 (58 min);58;🟦
+⚪S-57;Jeudi;2026-10-15;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (82 min);82;🟩
+⚪S-57;Dimanche;2026-10-18;CAP;Footing de récupération Z1;Footing de récupération Z1 (58 min);58;🟦
+🟡S-56;Lundi;2026-10-19;CAP;VC;VC 2000m x 3 @ 14.7 km/h (effort 08:16 / recup 500.0m x 04:03) - 24min d'intensité;56;🟨
+🟡S-56;Mardi;2026-10-20;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-56;*;2026-10-20;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+🟡S-56;Jeudi;2026-10-22;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-56;Dimanche;2026-10-25;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟢S-55;Lundi;2026-10-26;CAP;VMA;VMA 2000m x 4 @ 18.3 km/h (effort 06:38 / recup 500.0m x 02:57) - 26min d'intensité;53;🟥
+🟢S-55;Mardi;2026-10-27;CAP;Footing de récupération Z1;Footing de récupération Z1 (106 min);106;🟦
+🟢S-55;*;2026-10-27;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+🟢S-55;Jeudi;2026-10-29;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟢S-55;Dimanche;2026-11-01;CAP;Footing de récupération Z1;Footing de récupération Z1 (106 min);106;🟦
+🟡S-54;Lundi;2026-11-02;CAP;VC;VC 2800m x 2 @ 14.4 km/h (effort 11:49 / recup 700.0m x 05:40) - 23min d'intensité;55;🟨
+🟡S-54;Mardi;2026-11-03;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-54;*;2026-11-03;Renforcement;Gainage;Gainage (30 min);30;🟩
+🟡S-54;Jeudi;2026-11-05;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-54;Dimanche;2026-11-08;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+⚪S-53;Lundi;2026-11-09;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (82 min);82;🟩
+⚪S-53;*;2026-11-09;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+⚪S-53;Mardi;2026-11-10;CAP;Footing de récupération Z1;Footing de récupération Z1 (58 min);58;🟦
+⚪S-53;Jeudi;2026-11-12;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (82 min);82;🟩
+⚪S-53;Dimanche;2026-11-15;CAP;Footing de récupération Z1;Footing de récupération Z1 (58 min);58;🟦
+🟡S-52;Lundi;2026-11-16;CAP;VC;VC 300m x 15 @ 17.8 km/h (effort 01:01 / recup 75.0m x 00:36) - 15min d'intensité;42;🟨
+🟡S-52;Mardi;2026-11-17;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-52;*;2026-11-17;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+🟡S-52;Jeudi;2026-11-19;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-52;Dimanche;2026-11-22;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟢S-51;Lundi;2026-11-23;CAP;VMA;VMA 300m x 17 @ 20.4 km/h (effort 00:53 / recup 75.0m x 00:26) - 15min d'intensité;37;🟥
+🟢S-51;Mardi;2026-11-24;CAP;Footing de récupération Z1;Footing de récupération Z1 (118 min);118;🟦
+🟢S-51;*;2026-11-24;Renforcement;Gainage;Gainage (30 min);30;🟩
+🟢S-51;Jeudi;2026-11-26;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟢S-51;Dimanche;2026-11-29;CAP;Footing de récupération Z1;Footing de récupération Z1 (118 min);118;🟦
+🟡S-50;Lundi;2026-11-30;CAP;VC;VC 500m x 9 @ 16.9 km/h (effort 01:48 / recup 125.0m x 01:00) - 16min d'intensité;44;🟨
+🟡S-50;Mardi;2026-12-01;CAP;Footing de récupération Z1;Footing de récupération Z1 (113 min);113;🟦
+🟡S-50;*;2026-12-01;Renforcement;Gainage;Gainage (30 min);30;🟩
+🟡S-50;Jeudi;2026-12-03;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-50;Dimanche;2026-12-06;CAP;Footing de récupération Z1;Footing de récupération Z1 (113 min);113;🟦
+⚪S-49;Lundi;2026-12-07;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (82 min);82;🟩
+⚪S-49;*;2026-12-07;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+⚪S-49;Mardi;2026-12-08;CAP;Footing de récupération Z1;Footing de récupération Z1 (58 min);58;🟦
+⚪S-49;Jeudi;2026-12-10;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (82 min);82;🟩
+⚪S-49;Dimanche;2026-12-13;CAP;Footing de récupération Z1;Footing de récupération Z1 (58 min);58;🟦
+🟡S-48;Lundi;2026-12-14;CAP;VC;VC 700m x 6 @ 16.3 km/h (effort 02:37 / recup 175.0m x 01:25) - 15min d'intensité;42;🟨
+🟡S-48;Mardi;2026-12-15;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-48;*;2026-12-15;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+🟡S-48;Jeudi;2026-12-17;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-48;Dimanche;2026-12-20;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟢S-47;Lundi;2026-12-21;CAP;VMA;VMA 700m x 7 @ 19.7 km/h (effort 02:10 / recup 175.0m x 01:02) - 15min d'intensité;37;🟥
+🟢S-47;Mardi;2026-12-22;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟢S-47;*;2026-12-22;Renforcement;Gainage;Gainage (30 min);30;🟩
+🟢S-47;Jeudi;2026-12-24;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟢S-47;Dimanche;2026-12-27;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-46;Lundi;2026-12-28;CAP;VC;VC 1000m x 4 @ 15.5 km/h (effort 03:58 / recup 250.0m x 02:01) - 15min d'intensité;42;🟨
+🟡S-46;Mardi;2026-12-29;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-46;*;2026-12-29;Renforcement;Gainage;Gainage (30 min);30;🟩
+🟡S-46;Jeudi;2026-12-31;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-46;Dimanche;2027-01-03;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+⚪S-45;Lundi;2027-01-04;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+⚪S-45;*;2027-01-04;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+⚪S-45;Mardi;2027-01-05;CAP;Footing de récupération Z1;Footing de récupération Z1 (86 min);86;🟦
+⚪S-45;Jeudi;2027-01-07;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+⚪S-45;Dimanche;2027-01-10;CAP;Footing de récupération Z1;Footing de récupération Z1 (86 min);86;🟦
+🟢S-44;Lundi;2027-01-11;CAP;VC;VC 2000m x 3 @ 14.9 km/h (effort 08:16 / recup 500.0m x 04:03) - 24min d'intensité;51;🟨
+🟢S-44;Mardi;2027-01-12;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟢S-44;*;2027-01-12;Renforcement;Gainage;Gainage (30 min);30;🟩
+🟢S-44;Jeudi;2027-01-14;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟢S-44;Dimanche;2027-01-17;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-43;Lundi;2027-01-18;CAP;VMA;VMA 2000m x 4 @ 18.6 km/h (effort 06:38 / recup 500.0m x 02:57) - 26min d'intensité;58;🟥
+🟡S-43;Mardi;2027-01-19;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-43;*;2027-01-19;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+🟡S-43;Jeudi;2027-01-21;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-43;Dimanche;2027-01-24;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🔴S-42;Lundi;2027-01-25;CAP;VC;VC 2800m x 2 @ 14.6 km/h (effort 11:49 / recup 700.0m x 05:40) - 23min d'intensité;60;🟨
+🔴S-42;Mardi;2027-01-26;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🔴S-42;*;2027-01-26;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+🔴S-42;Jeudi;2027-01-28;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🔴S-42;Dimanche;2027-01-31;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+⚪S-41;Lundi;2027-02-01;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+⚪S-41;*;2027-02-01;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+⚪S-41;Mardi;2027-02-02;CAP;Footing de récupération Z1;Footing de récupération Z1 (86 min);86;🟦
+⚪S-41;Jeudi;2027-02-04;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+⚪S-41;Dimanche;2027-02-07;CAP;Footing de récupération Z1;Footing de récupération Z1 (86 min);86;🟦
+🟢S-40;Lundi;2027-02-08;CAP;VC;VC 300m x 15 @ 18.0 km/h (effort 01:01 / recup 75.0m x 00:36) - 15min d'intensité;39;🟨
+🟢S-40;Mardi;2027-02-09;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟢S-40;*;2027-02-09;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+🟢S-40;Jeudi;2027-02-11;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟢S-40;Dimanche;2027-02-14;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-39;Lundi;2027-02-15;CAP;VMA;VMA 300m x 17 @ 20.7 km/h (effort 00:53 / recup 75.0m x 00:26) - 15min d'intensité;40;🟥
+🟡S-39;Mardi;2027-02-16;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-39;*;2027-02-16;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+🟡S-39;Jeudi;2027-02-18;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-39;Dimanche;2027-02-21;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🔴S-38;Lundi;2027-02-22;CAP;VC;VC 500m x 9 @ 17.2 km/h (effort 01:48 / recup 125.0m x 01:00) - 16min d'intensité;48;🟨
+🔴S-38;Mardi;2027-02-23;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🔴S-38;*;2027-02-23;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+🔴S-38;Jeudi;2027-02-25;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🔴S-38;Dimanche;2027-02-28;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+⚪S-37;Lundi;2027-03-01;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+⚪S-37;*;2027-03-01;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+⚪S-37;Mardi;2027-03-02;CAP;Footing de récupération Z1;Footing de récupération Z1 (86 min);86;🟦
+⚪S-37;Jeudi;2027-03-04;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+⚪S-37;Dimanche;2027-03-07;CAP;Footing de récupération Z1;Footing de récupération Z1 (86 min);86;🟦
+🟢S-36;Lundi;2027-03-08;CAP;VC;VC 700m x 6 @ 16.6 km/h (effort 02:37 / recup 175.0m x 01:25) - 15min d'intensité;39;🟨
+🟢S-36;Mardi;2027-03-09;CAP;Footing de récupération Z1;Footing de récupération Z1 (118 min);118;🟦
+🟢S-36;*;2027-03-09;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+🟢S-36;Jeudi;2027-03-11;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟢S-36;Dimanche;2027-03-14;CAP;Footing de récupération Z1;Footing de récupération Z1 (118 min);118;🟦
+🟡S-35;Lundi;2027-03-15;CAP;VMA;VMA 700m x 7 @ 20.0 km/h (effort 02:10 / recup 175.0m x 01:02) - 15min d'intensité;40;🟥
+🟡S-35;Mardi;2027-03-16;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-35;*;2027-03-16;Renforcement;Gainage;Gainage (30 min);30;🟩
+🟡S-35;Jeudi;2027-03-18;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-35;Dimanche;2027-03-21;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🔴S-34;Lundi;2027-03-22;CAP;VC;VC 1000m x 4 @ 15.7 km/h (effort 03:58 / recup 250.0m x 02:01) - 15min d'intensité;46;🟨
+🔴S-34;Mardi;2027-03-23;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🔴S-34;*;2027-03-23;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+🔴S-34;Jeudi;2027-03-25;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🔴S-34;Dimanche;2027-03-28;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+⚪S-33;Lundi;2027-03-29;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+⚪S-33;*;2027-03-29;Renforcement;Gainage;Gainage (30 min);30;🟩
+⚪S-33;Mardi;2027-03-30;CAP;Footing de récupération Z1;Footing de récupération Z1 (86 min);86;🟦
+⚪S-33;Jeudi;2027-04-01;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+⚪S-33;Dimanche;2027-04-04;CAP;Footing de récupération Z1;Footing de récupération Z1 (86 min);86;🟦
+🟢S-32;Lundi;2027-04-05;CAP;VC;VC 2000m x 3 @ 15.1 km/h (effort 08:16 / recup 500.0m x 04:03) - 24min d'intensité;51;🟨
+🟢S-32;Mardi;2027-04-06;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟢S-32;*;2027-04-06;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+🟢S-32;Jeudi;2027-04-08;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟢S-32;Dimanche;2027-04-11;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-31;Lundi;2027-04-12;CAP;VMA;VMA 2000m x 4 @ 18.9 km/h (effort 06:38 / recup 500.0m x 02:57) - 26min d'intensité;58;🟥
+🟡S-31;Mardi;2027-04-13;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-31;*;2027-04-13;Renforcement;Gainage;Gainage (30 min);30;🟩
+🟡S-31;Jeudi;2027-04-15;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-31;Dimanche;2027-04-18;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🔴S-30;Lundi;2027-04-19;CAP;VC;VC 2800m x 2 @ 14.8 km/h (effort 11:49 / recup 700.0m x 05:40) - 23min d'intensité;60;🟨
+🔴S-30;Mardi;2027-04-20;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🔴S-30;*;2027-04-20;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+🔴S-30;Jeudi;2027-04-22;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🔴S-30;Dimanche;2027-04-25;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+⚪S-29;Lundi;2027-04-26;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+⚪S-29;*;2027-04-26;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+⚪S-29;Mardi;2027-04-27;CAP;Footing de récupération Z1;Footing de récupération Z1 (86 min);86;🟦
+⚪S-29;Jeudi;2027-04-29;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+⚪S-29;Dimanche;2027-05-02;CAP;Footing de récupération Z1;Footing de récupération Z1 (86 min);86;🟦
+🟢S-28;Lundi;2027-05-03;CAP;VC;VC 300m x 15 @ 18.3 km/h (effort 01:01 / recup 75.0m x 00:36) - 15min d'intensité;39;🟨
+🟢S-28;Mardi;2027-05-04;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟢S-28;*;2027-05-04;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+🟢S-28;Jeudi;2027-05-06;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟢S-28;Dimanche;2027-05-09;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-27;Lundi;2027-05-10;CAP;VMA;VMA 300m x 17 @ 21.0 km/h (effort 00:53 / recup 75.0m x 00:26) - 15min d'intensité;40;🟥
+🟡S-27;Mardi;2027-05-11;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-27;*;2027-05-11;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+🟡S-27;Jeudi;2027-05-13;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-27;Dimanche;2027-05-16;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🔴S-26;Lundi;2027-05-17;CAP;VC;VC 500m x 9 @ 17.4 km/h (effort 01:48 / recup 125.0m x 01:00) - 16min d'intensité;48;🟨
+🔴S-26;Mardi;2027-05-18;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🔴S-26;*;2027-05-18;Renforcement;Gainage;Gainage (30 min);30;🟩
+🔴S-26;Jeudi;2027-05-20;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🔴S-26;Dimanche;2027-05-23;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+⚪S-25;Lundi;2027-05-24;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (101 min);101;🟩
+⚪S-25;*;2027-05-24;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+⚪S-25;Mardi;2027-05-25;CAP;Footing de récupération Z1;Footing de récupération Z1 (70 min);70;🟦
+⚪S-25;Jeudi;2027-05-27;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (101 min);101;🟩
+⚪S-25;Dimanche;2027-05-30;CAP;Footing de récupération Z1;Footing de récupération Z1 (70 min);70;🟦
+🟡S-24;Lundi;2027-05-31;CAP;VC;VC 700m x 6 @ 16.8 km/h (effort 02:37 / recup 175.0m x 01:25) - 15min d'intensité;42;🟨
+🟡S-24;Mardi;2027-06-01;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-24;*;2027-06-01;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+🟡S-24;Jeudi;2027-06-03;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-24;Dimanche;2027-06-06;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟢S-23;Lundi;2027-06-07;CAP;VMA;VMA 700m x 7 @ 20.3 km/h (effort 02:10 / recup 175.0m x 01:02) - 15min d'intensité;37;🟥
+🟢S-23;Mardi;2027-06-08;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟢S-23;*;2027-06-08;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+🟢S-23;Jeudi;2027-06-10;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟢S-23;Dimanche;2027-06-13;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-22;Lundi;2027-06-14;CAP;VC;VC 1000m x 4 @ 15.9 km/h (effort 03:58 / recup 250.0m x 02:01) - 15min d'intensité;42;🟨
+🟡S-22;Mardi;2027-06-15;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-22;*;2027-06-15;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+🟡S-22;Jeudi;2027-06-17;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-22;Dimanche;2027-06-20;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+⚪S-21;Lundi;2027-06-21;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (101 min);101;🟩
+⚪S-21;*;2027-06-21;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+⚪S-21;Mardi;2027-06-22;CAP;Footing de récupération Z1;Footing de récupération Z1 (70 min);70;🟦
+⚪S-21;Jeudi;2027-06-24;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (101 min);101;🟩
+⚪S-21;Dimanche;2027-06-27;CAP;Footing de récupération Z1;Footing de récupération Z1 (70 min);70;🟦
+🟡S-20;Lundi;2027-06-28;CAP;VC;VC 2000m x 3 @ 15.3 km/h (effort 08:16 / recup 500.0m x 04:03) - 24min d'intensité;56;🟨
+🟡S-20;Mardi;2027-06-29;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-20;*;2027-06-29;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+🟡S-20;Jeudi;2027-07-01;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-20;Dimanche;2027-07-04;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟢S-19;Lundi;2027-07-05;CAP;VMA;VMA 2000m x 4 @ 19.1 km/h (effort 06:38 / recup 500.0m x 02:57) - 26min d'intensité;53;🟥
+🟢S-19;Mardi;2027-07-06;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟢S-19;*;2027-07-06;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+🟢S-19;Jeudi;2027-07-08;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟢S-19;Dimanche;2027-07-11;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-18;Lundi;2027-07-12;CAP;VC;VC 2800m x 2 @ 15.0 km/h (effort 11:49 / recup 700.0m x 05:40) - 23min d'intensité;55;🟨
+🟡S-18;Mardi;2027-07-13;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-18;*;2027-07-13;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+🟡S-18;Jeudi;2027-07-15;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-18;Dimanche;2027-07-18;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+⚪S-17;Lundi;2027-07-19;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (101 min);101;🟩
+⚪S-17;*;2027-07-19;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+⚪S-17;Mardi;2027-07-20;CAP;Footing de récupération Z1;Footing de récupération Z1 (70 min);70;🟦
+⚪S-17;Jeudi;2027-07-22;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (101 min);101;🟩
+⚪S-17;Dimanche;2027-07-25;CAP;Footing de récupération Z1;Footing de récupération Z1 (70 min);70;🟦
+🟡S-16;Lundi;2027-07-26;CAP;VC;VC 300m x 15 @ 18.6 km/h (effort 01:01 / recup 75.0m x 00:36) - 15min d'intensité;42;🟨
+🟡S-16;Mardi;2027-07-27;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-16;*;2027-07-27;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+🟡S-16;Jeudi;2027-07-29;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-16;Dimanche;2027-08-01;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟢S-15;Lundi;2027-08-02;CAP;VMA;VMA 300m x 17 @ 21.3 km/h (effort 00:53 / recup 75.0m x 00:26) - 15min d'intensité;37;🟥
+🟢S-15;Mardi;2027-08-03;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟢S-15;*;2027-08-03;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+🟢S-15;Jeudi;2027-08-05;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟢S-15;Dimanche;2027-08-08;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-14;Lundi;2027-08-09;CAP;VC;VC 500m x 9 @ 17.6 km/h (effort 01:48 / recup 125.0m x 01:00) - 16min d'intensité;44;🟨
+🟡S-14;Mardi;2027-08-10;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-14;*;2027-08-10;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+🟡S-14;Jeudi;2027-08-12;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-14;Dimanche;2027-08-15;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+⚪S-13;Lundi;2027-08-16;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (101 min);101;🟩
+⚪S-13;*;2027-08-16;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+⚪S-13;Mardi;2027-08-17;CAP;Footing de récupération Z1;Footing de récupération Z1 (70 min);70;🟦
+⚪S-13;Jeudi;2027-08-19;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (101 min);101;🟩
+⚪S-13;Dimanche;2027-08-22;CAP;Footing de récupération Z1;Footing de récupération Z1 (70 min);70;🟦
+🟡S-12;Lundi;2027-08-23;CAP;VC;VC 700m x 6 @ 17.0 km/h (effort 02:37 / recup 175.0m x 01:25) - 15min d'intensité;42;🟨
+🟡S-12;Mardi;2027-08-24;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-12;*;2027-08-24;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+🟡S-12;Jeudi;2027-08-26;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-12;Dimanche;2027-08-29;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟢S-11;Lundi;2027-08-30;CAP;VMA;VMA 700m x 7 @ 20.6 km/h (effort 02:10 / recup 175.0m x 01:02) - 15min d'intensité;37;🟥
+🟢S-11;Mardi;2027-08-31;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟢S-11;*;2027-08-31;Renforcement;Gainage;Gainage (30 min);30;🟩
+🟢S-11;Jeudi;2027-09-02;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟢S-11;Dimanche;2027-09-05;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-10;Lundi;2027-09-06;CAP;VC;VC 1000m x 4 @ 16.1 km/h (effort 03:58 / recup 250.0m x 02:01) - 15min d'intensité;42;🟨
+🟡S-10;Mardi;2027-09-07;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-10;*;2027-09-07;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+🟡S-10;Jeudi;2027-09-09;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-10;Dimanche;2027-09-12;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+⚪S-09;Lundi;2027-09-13;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (48 min);48;🟩
+⚪S-09;*;2027-09-13;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+⚪S-09;Mardi;2027-09-14;CAP;Footing de récupération Z1;Footing de récupération Z1 (33 min);33;🟦
+⚪S-09;Mercredi;2027-09-15;Course;Compétition intermédiaire;10km Billiers 15/09;0;⭐
+⚪S-09;Jeudi;2027-09-16;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (48 min);48;🟩
+⚪S-09;Dimanche;2027-09-19;CAP;Footing de récupération Z1;Footing de récupération Z1 (33 min);33;🟦
+🟡S-08;Lundi;2027-09-20;CAP;VC;VC 2000m x 3 @ 15.5 km/h (effort 08:16 / recup 500.0m x 04:03) - 24min d'intensité;56;🟨
+🟡S-08;Mardi;2027-09-21;CAP;Footing de récupération Z1;Footing de récupération Z1 (72 min);72;🟦
+🟡S-08;*;2027-09-21;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+🟡S-08;Jeudi;2027-09-23;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (103 min);103;🟩
+🟡S-08;Dimanche;2027-09-26;CAP;Footing de récupération Z1;Footing de récupération Z1 (72 min);72;🟦
+🟢S-07;Lundi;2027-09-27;CAP;VMA;VMA 2000m x 4 @ 19.4 km/h (effort 06:38 / recup 500.0m x 02:57) - 26min d'intensité;53;🟥
+🟢S-07;Mardi;2027-09-28;CAP;Footing de récupération Z1;Footing de récupération Z1 (63 min);63;🟦
+🟢S-07;*;2027-09-28;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+🟢S-07;Jeudi;2027-09-30;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (90 min);90;🟩
+🟢S-07;Dimanche;2027-10-03;CAP;Footing de récupération Z1;Footing de récupération Z1 (63 min);63;🟦
+🟡S-06;Lundi;2027-10-04;CAP;VC;VC 2800m x 2 @ 15.2 km/h (effort 11:49 / recup 700.0m x 05:40) - 23min d'intensité;55;🟨
+🟡S-06;Mardi;2027-10-05;CAP;Footing de récupération Z1;Footing de récupération Z1 (78 min);78;🟦
+🟡S-06;*;2027-10-05;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+🟡S-06;Jeudi;2027-10-07;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (112 min);112;🟩
+🟡S-06;Dimanche;2027-10-10;CAP;Footing de récupération Z1;Footing de récupération Z1 (78 min);78;🟦
+⚪S-05;Lundi;2027-10-11;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (48 min);48;🟩
+⚪S-05;*;2027-10-11;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+⚪S-05;Mardi;2027-10-12;CAP;Footing de récupération Z1;Footing de récupération Z1 (33 min);33;🟦
+⚪S-05;Jeudi;2027-10-14;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (48 min);48;🟩
+⚪S-05;Dimanche;2027-10-17;CAP;Footing de récupération Z1;Footing de récupération Z1 (33 min);33;🟦
+🟡S-04;Lundi;2027-10-18;CAP;VC;VC 300m x 15 @ 18.8 km/h (effort 01:01 / recup 75.0m x 00:36) - 15min d'intensité;42;🟨
+🟡S-04;Mardi;2027-10-19;CAP;Footing de récupération Z1;Footing de récupération Z1 (80 min);80;🟦
+🟡S-04;*;2027-10-19;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+🟡S-04;Mercredi;2027-10-20;Course;Compétition intermédiaire;5km Redon 20/10;0;⭐
+🟡S-04;Jeudi;2027-10-21;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (115 min);115;🟩
+🟡S-04;Dimanche;2027-10-24;CAP;Footing de récupération Z1;Footing de récupération Z1 (80 min);80;🟦
+🟢S-03;Lundi;2027-10-25;CAP;VMA;VMA 300m x 17 @ 21.6 km/h (effort 00:53 / recup 75.0m x 00:26) - 15min d'intensité;37;🟥
+🟢S-03;Mardi;2027-10-26;CAP;Footing de récupération Z1;Footing de récupération Z1 (72 min);72;🟦
+🟢S-03;*;2027-10-26;Renforcement;Gainage;Gainage (30 min);30;🟩
+🟢S-03;Jeudi;2027-10-28;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (103 min);103;🟩
+🟢S-03;Dimanche;2027-10-31;CAP;Footing de récupération Z1;Footing de récupération Z1 (72 min);72;🟦
+🔵S-02;Lundi;2027-11-01;CAP;Footing de récupération Z1;Footing de récupération Z1 (52 min);52;🟦
+🔵S-02;Mardi;2027-11-02;CAP;Footing de récupération Z1;Footing de récupération Z1 (52 min);52;🟦
+🔵S-02;Jeudi;2027-11-04;CAP;Footing de récupération Z1;Footing de récupération Z1 (52 min);52;🟦
+🔵S-02;Dimanche;2027-11-07;CAP;Footing de récupération Z1;Footing de récupération Z1 (52 min);52;🟦
+🔵S-01;Lundi;2027-11-08;CAP;Footing de récupération Z1;Footing de récupération Z1 (52 min);52;🟦
+🔵S-01;Mardi;2027-11-09;CAP;Footing de récupération Z1;Footing de récupération Z1 (52 min);52;🟦
+🔵S-01;Jeudi;2027-11-11;CAP;Footing de récupération Z1;Footing de récupération Z1 (52 min);52;🟦
+🔵S-01;Dimanche;2027-11-14;CAP;Footing de récupération Z1;Footing de récupération Z1 (52 min);52;🟦
+🔵S-00;Lundi;2027-11-15;Course;Objectif;15/11/2027;0;⭐
+
+# ============================================================
+# FICHIER N°4 : Guia_ROBIN_plan_20260824_184657.csv
+# ============================================================
+🟢S-16;Mercredi;2026-08-26;CAP;VC;VC 300m x 10 @ 11.7 km/h (effort 01:32 / recup 75.0m x 00:52) - 15min d'intensité;39;🟨
+🟢S-16;Vendredi;2026-08-28;CAP;Footing de récupération Z1;Footing de récupération Z1 (102 min);102;🟦
+🟢S-16;*;2026-08-28;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+🟢S-16;Samedi;2026-08-29;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟢S-16;Dimanche;2026-08-30;CAP;Footing de récupération Z1;Footing de récupération Z1 (102 min);102;🟦
+🟡S-15;Mercredi;2026-09-02;CAP;VMA;VMA 300m x 15 @ 17.7 km/h (effort 01:01 / recup 75.0m x 00:29) - 15min d'intensité;40;🟥
+🟡S-15;Vendredi;2026-09-04;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-15;*;2026-09-04;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+🟡S-15;Samedi;2026-09-05;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟡S-15;Dimanche;2026-09-06;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟢S-14;Mercredi;2026-09-09;CAP;VC;VC 500m x 6 @ 11.1 km/h (effort 02:42 / recup 125.0m x 01:28) - 16min d'intensité;40;🟨
+🟢S-14;Vendredi;2026-09-11;CAP;Footing de récupération Z1;Footing de récupération Z1 (86 min);86;🟦
+🟢S-14;*;2026-09-11;Renforcement;Gainage;Gainage (30 min);30;🟩
+🟢S-14;Samedi;2026-09-12;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟢S-14;Dimanche;2026-09-13;CAP;Footing de récupération Z1;Footing de récupération Z1 (86 min);86;🟦
+⚪S-13;Mercredi;2026-09-16;CAP;Footing de récupération Z1;Footing de récupération Z1 (58 min);58;🟦
+⚪S-13;*;2026-09-16;Renforcement;Gainage;Gainage (30 min);30;🟩
+⚪S-13;Vendredi;2026-09-18;CAP;Footing de récupération Z1;Footing de récupération Z1 (58 min);58;🟦
+⚪S-13;Samedi;2026-09-19;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+⚪S-13;Dimanche;2026-09-20;CAP;Footing de récupération Z1;Footing de récupération Z1 (58 min);58;🟦
+🟡S-12;Mercredi;2026-09-23;CAP;VC;VC 700m x 4 @ 10.7 km/h (effort 03:55 / recup 175.0m x 02:03) - 15min d'intensité;41;🟨
+🟡S-12;Vendredi;2026-09-25;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-12;*;2026-09-25;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+🟡S-12;Samedi;2026-09-26;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟡S-12;Dimanche;2026-09-27;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟢S-11;Mercredi;2026-09-30;CAP;VMA;VMA 700m x 7 @ 16.9 km/h (effort 02:28 / recup 175.0m x 01:09) - 17min d'intensité;40;🟥
+🟢S-11;Vendredi;2026-10-02;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟢S-11;*;2026-10-02;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+🟢S-11;Samedi;2026-10-03;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟢S-11;Dimanche;2026-10-04;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-10;Mercredi;2026-10-07;CAP;VC;VC 1000m x 3 @ 10.1 km/h (effort 05:56 / recup 250.0m x 02:56) - 17min d'intensité;45;🟨
+🟡S-10;Vendredi;2026-10-09;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-10;*;2026-10-09;Renforcement;Gainage;Gainage (30 min);30;🟩
+🟡S-10;Samedi;2026-10-10;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟡S-10;Dimanche;2026-10-11;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+⚪S-09;Mercredi;2026-10-14;CAP;Footing de récupération Z1;Footing de récupération Z1 (86 min);86;🟦
+⚪S-09;*;2026-10-14;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+⚪S-09;Vendredi;2026-10-16;CAP;Footing de récupération Z1;Footing de récupération Z1 (86 min);86;🟦
+⚪S-09;Samedi;2026-10-17;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+⚪S-09;Dimanche;2026-10-18;CAP;Footing de récupération Z1;Footing de récupération Z1 (86 min);86;🟦
+🟡S-08;Mercredi;2026-10-21;CAP;VC;VC 2000m x 2 @ 9.7 km/h (effort 12:22 / recup 500.0m x 05:52) - 24min d'intensité;56;🟨
+🟡S-08;Vendredi;2026-10-23;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-08;*;2026-10-23;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+🟡S-08;Samedi;2026-10-24;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟡S-08;Dimanche;2026-10-25;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟢S-07;Mercredi;2026-10-28;CAP;VMA;VMA 2000m x 3 @ 15.8 km/h (effort 07:34 / recup 500.0m x 03:17) - 22min d'intensité;47;🟥
+🟢S-07;Vendredi;2026-10-30;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟢S-07;*;2026-10-30;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+🟢S-07;Samedi;2026-10-31;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟢S-07;Dimanche;2026-11-01;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-06;Mercredi;2026-11-04;CAP;VC;VC 2800m x 1 @ 9.5 km/h (effort 17:41 / recup 700.0m x 08:14) - 17min d'intensité;44;🟨
+🟡S-06;Vendredi;2026-11-06;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-06;*;2026-11-06;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+🟡S-06;Samedi;2026-11-07;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟡S-06;Dimanche;2026-11-08;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+⚪S-05;Mercredi;2026-11-11;CAP;Footing de récupération Z1;Footing de récupération Z1 (70 min);70;🟦
+⚪S-05;*;2026-11-11;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+⚪S-05;Vendredi;2026-11-13;CAP;Footing de récupération Z1;Footing de récupération Z1 (70 min);70;🟦
+⚪S-05;Samedi;2026-11-14;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+⚪S-05;Dimanche;2026-11-15;CAP;Footing de récupération Z1;Footing de récupération Z1 (70 min);70;🟦
+🟡S-04;Mercredi;2026-11-18;CAP;VC;VC 300m x 10 @ 11.7 km/h (effort 01:32 / recup 75.0m x 00:52) - 15min d'intensité;42;🟨
+🟡S-04;Vendredi;2026-11-20;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-04;*;2026-11-20;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+🟡S-04;Samedi;2026-11-21;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟡S-04;Dimanche;2026-11-22;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟢S-03;Mercredi;2026-11-25;CAP;VMA;VMA 300m x 15 @ 17.7 km/h (effort 01:01 / recup 75.0m x 00:29) - 15min d'intensité;37;🟥
+🟢S-03;Vendredi;2026-11-27;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟢S-03;*;2026-11-27;Renforcement;Gainage;Gainage (30 min);30;🟩
+🟢S-03;Samedi;2026-11-28;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟢S-03;Dimanche;2026-11-29;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🔵S-02;Mercredi;2026-12-02;CAP;Footing de récupération Z1;Footing de récupération Z1 (52 min);52;🟦
+🔵S-02;Vendredi;2026-12-04;CAP;Footing de récupération Z1;Footing de récupération Z1 (52 min);52;🟦
+🔵S-02;Samedi;2026-12-05;CAP;Footing de récupération Z1;Footing de récupération Z1 (52 min);52;🟦
+🔵S-02;Dimanche;2026-12-06;CAP;Footing de récupération Z1;Footing de récupération Z1 (52 min);52;🟦
+🔵S-01;Mercredi;2026-12-09;CAP;Footing de récupération Z1;Footing de récupération Z1 (52 min);52;🟦
+🔵S-01;Vendredi;2026-12-11;CAP;Footing de récupération Z1;Footing de récupération Z1 (52 min);52;🟦
+🔵S-01;Samedi;2026-12-12;CAP;Footing de récupération Z1;Footing de récupération Z1 (52 min);52;🟦
+🔵S-01;Dimanche;2026-12-13;CAP;Footing de récupération Z1;Footing de récupération Z1 (52 min);52;🟦
+🔵S-00;Mardi;2026-12-15;Course;Objectif;15/12/2026;0;⭐
+
+# ============================================================
+# FICHIER N°5 : Isabelle_MERCIER_plan_20260824_184657.csv
+# ============================================================
+🟢S-16;Mardi;2026-08-25;CAP;Footing de récupération Z1;Footing de récupération Z1 (51 min);51;🟦
+🟢S-16;*;2026-08-25;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+🟢S-16;Mercredi;2026-08-26;Natation;Endurance Z2;Endurance Z2 (90 min);90;🟩
+🟢S-16;Jeudi;2026-08-27;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (72 min);72;🟩
+🟢S-16;*;2026-08-27;Vélo;Endurance Z2;Endurance Z2 (80 min);80;🟩
+🟡S-15;Mardi;2026-09-01;CAP;Footing de récupération Z1;Footing de récupération Z1 (78 min);78;🟦
+🟡S-15;*;2026-09-01;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+🟡S-15;Mercredi;2026-09-02;Natation;Endurance Z2;Endurance Z2 (90 min);90;🟩
+🟡S-15;Jeudi;2026-09-03;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (112 min);112;🟩
+🟡S-15;*;2026-09-03;Vélo;Endurance Z2;Endurance Z2 (112 min);112;🟩
+🟢S-14;Mardi;2026-09-08;CAP;VC;VC 500m x 5 @ 9.9 km/h (effort 03:02 / recup 125.0m x 01:38) - 15min d'intensité;38;🟨
+🟢S-14;Mercredi;2026-09-09;Natation;Endurance Z2;Endurance Z2 (90 min);90;🟩
+🟢S-14;*;2026-09-09;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+🟢S-14;Jeudi;2026-09-10;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (61 min);61;🟩
+🟢S-14;*;2026-09-10;Vélo;Endurance Z2;Endurance Z2 (80 min);80;🟩
+⚪S-13;Mardi;2026-09-15;Course;Compétition intermédiaire;Triathlon Annecy 15/09;0;⭐
+⚪S-13;Mercredi;2026-09-16;Natation;Endurance Z2;Endurance Z2 (85 min);85;🟩
+⚪S-13;*;2026-09-16;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+⚪S-13;Jeudi;2026-09-17;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (41 min);41;🟩
+⚪S-13;*;2026-09-17;Vélo;Endurance Z2;Endurance Z2 (80 min);80;🟩
+🔴S-12;Mardi;2026-09-22;CAP;Footing de récupération Z1;Footing de récupération Z1 (91 min);91;🟦
+🔴S-12;*;2026-09-22;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+🔴S-12;Mercredi;2026-09-23;Natation;Endurance Z2;Endurance Z2 (90 min);90;🟩
+🔴S-12;Jeudi;2026-09-24;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🔴S-12;*;2026-09-24;Vélo;Endurance Z2;Endurance Z2 (130 min);130;🟩
+🟡S-11;Mardi;2026-09-29;CAP;VMA;VMA 700m x 5 @ 13.0 km/h (effort 03:13 / recup 175.0m x 01:30) - 16min d'intensité;41;🟥
+🟡S-11;Mercredi;2026-09-30;Natation;Endurance Z2;Endurance Z2 (90 min);90;🟩
+🟡S-11;*;2026-09-30;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+🟡S-11;Jeudi;2026-10-01;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-11;*;2026-10-01;Vélo;Endurance Z2;Endurance Z2 (180 min);180;🟩
+🔴S-10;Mardi;2026-10-06;CAP;Footing de récupération Z1;Footing de récupération Z1 (85 min);85;🟦
+🔴S-10;*;2026-10-06;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+🔴S-10;Mercredi;2026-10-07;Natation;Endurance Z2;Endurance Z2 (90 min);90;🟩
+🔴S-10;Jeudi;2026-10-08;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🔴S-10;*;2026-10-08;Vélo;Endurance Z2;Endurance Z2 (122 min);122;🟩
+⚪S-09;Mardi;2026-10-13;CAP;Footing de récupération Z1;Footing de récupération Z1 (42 min);42;🟦
+⚪S-09;*;2026-10-13;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+⚪S-09;Mercredi;2026-10-14;Natation;Endurance Z2;Endurance Z2 (90 min);90;🟩
+⚪S-09;Jeudi;2026-10-15;Course;Compétition intermédiaire;Sprint Lyon 15/10;0;⭐
+🟡S-08;Mardi;2026-10-20;CAP;VC;VC 2000m x 2 @ 8.7 km/h (effort 13:52 / recup 500.0m x 06:35) - 27min d'intensité;60;🟨
+🟡S-08;Mercredi;2026-10-21;Natation;Endurance Z2;Endurance Z2 (90 min);90;🟩
+🟡S-08;*;2026-10-21;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+🟡S-08;Jeudi;2026-10-22;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-08;*;2026-10-22;Vélo;Endurance Z2;Endurance Z2 (129 min);129;🟩
+🟢S-07;Mardi;2026-10-27;CAP;Footing de récupération Z1;Footing de récupération Z1 (78 min);78;🟦
+🟢S-07;*;2026-10-27;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+🟢S-07;Mercredi;2026-10-28;Natation;Endurance Z2;Endurance Z2 (90 min);90;🟩
+🟢S-07;Jeudi;2026-10-29;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (112 min);112;🟩
+🟢S-07;*;2026-10-29;Vélo;Endurance Z2;Endurance Z2 (112 min);112;🟩
+🟡S-06;Mardi;2026-11-03;CAP;Footing de récupération Z1;Footing de récupération Z1 (79 min);79;🟦
+🟡S-06;*;2026-11-03;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+🟡S-06;Mercredi;2026-11-04;Natation;Endurance Z2;Endurance Z2 (90 min);90;🟩
+🟡S-06;Jeudi;2026-11-05;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (114 min);114;🟩
+🟡S-06;*;2026-11-05;Vélo;Endurance Z2;Endurance Z2 (114 min);114;🟩
+⚪S-05;Mardi;2026-11-10;CAP;VMA;VMA 100m x 36 @ 14.3 km/h (effort 00:25 / recup 25.0m x 00:12) - 15min d'intensité;22;🟥
+⚪S-05;Mercredi;2026-11-11;Natation;Endurance Z2;Endurance Z2 (90 min);90;🟩
+⚪S-05;*;2026-11-11;Renforcement;Gainage;Gainage (30 min);30;🟩
+⚪S-05;Jeudi;2026-11-12;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (50 min);50;🟩
+⚪S-05;*;2026-11-12;Vélo;Endurance Z2;Endurance Z2 (80 min);80;🟩
+🔴S-04;Mardi;2026-11-17;CAP;Footing de récupération Z1;Footing de récupération Z1 (97 min);97;🟦
+🔴S-04;*;2026-11-17;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+🔴S-04;Mercredi;2026-11-18;Natation;Endurance Z2;Endurance Z2 (90 min);90;🟩
+🔴S-04;Jeudi;2026-11-19;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🔴S-04;*;2026-11-19;Vélo;Endurance Z2;Endurance Z2 (140 min);140;🟩
+🟡S-03;Mardi;2026-11-24;CAP;Footing de récupération Z1;Footing de récupération Z1 (96 min);96;🟦
+🟡S-03;*;2026-11-24;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+🟡S-03;Mercredi;2026-11-25;Natation;Endurance Z2;Endurance Z2 (90 min);90;🟩
+🟡S-03;Jeudi;2026-11-26;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-03;*;2026-11-26;Vélo;Endurance Z2;Endurance Z2 (137 min);137;🟩
+🔵S-02;Mardi;2026-12-01;CAP;Footing de récupération Z1;Footing de récupération Z1 (26 min);26;🟦
+🔵S-02;Mercredi;2026-12-02;Natation;Récupération active;Récupération active (60 min);60;🟦
+🔵S-02;Jeudi;2026-12-03;CAP;Footing de récupération Z1;Footing de récupération Z1 (26 min);26;🟦
+🔵S-02;*;2026-12-03;Vélo;Récupération active;Récupération active (52 min);52;🟦
+🔵S-01;Mardi;2026-12-08;CAP;Footing de récupération Z1;Footing de récupération Z1 (26 min);26;🟦
+🔵S-01;Mercredi;2026-12-09;Natation;Récupération active;Récupération active (60 min);60;🟦
+🔵S-01;Jeudi;2026-12-10;CAP;Footing de récupération Z1;Footing de récupération Z1 (26 min);26;🟦
+🔵S-01;*;2026-12-10;Vélo;Récupération active;Récupération active (52 min);52;🟦
+🔵S-00;Mardi;2026-12-15;Course;Objectif;15/12/2026;0;⭐
+
+# ============================================================
+# FICHIER N°6 : Lucas_LEFER_plan_20260824_184657.csv
+# ============================================================
+🟢S-29;Lundi;2026-08-24;CAP;VC;VC 300m x 8 @ 9.1 km/h (effort 01:58 / recup 75.0m x 01:10) - 15min d'intensité;40;🟨
+🟢S-29;Mercredi;2026-08-26;CAP;Footing de récupération Z1;Footing de récupération Z1 (76 min);76;🟦
+🟢S-29;*;2026-08-26;Vélo;Seuil Z4;Seuil Z4 (80 min);80;🟨
+🟢S-29;Jeudi;2026-08-27;Natation;Récupération active;Récupération active (72 min);72;🟦
+🟢S-29;*;2026-08-27;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+🟢S-29;Vendredi;2026-08-28;CAP;Footing de récupération Z1;Footing de récupération Z1 (76 min);76;🟦
+🟡S-28;Lundi;2026-08-31;CAP;VC;VC 400m x 6 @ 8.8 km/h (effort 02:44 / recup 100.0m x 01:33) - 16min d'intensité;44;🟨
+🟡S-28;Mercredi;2026-09-02;CAP;Footing de récupération Z1;Footing de récupération Z1 (118 min);118;🟦
+🟡S-28;*;2026-09-02;Vélo;Seuil Z4;Seuil Z4 (123 min);123;🟨
+🟡S-28;Jeudi;2026-09-03;Natation;Récupération active;Récupération active (72 min);72;🟦
+🟡S-28;*;2026-09-03;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+🟡S-28;Vendredi;2026-09-04;CAP;Footing de récupération Z1;Footing de récupération Z1 (118 min);118;🟦
+🟢S-27;Lundi;2026-09-07;CAP;VC;VC 500m x 5 @ 8.7 km/h (effort 03:28 / recup 125.0m x 01:56) - 17min d'intensité;42;🟨
+🟢S-27;Mercredi;2026-09-09;CAP;Footing de récupération Z1;Footing de récupération Z1 (65 min);65;🟦
+🟢S-27;*;2026-09-09;Vélo;Seuil Z4;Seuil Z4 (80 min);80;🟨
+🟢S-27;Jeudi;2026-09-10;Natation;Récupération active;Récupération active (72 min);72;🟦
+🟢S-27;*;2026-09-10;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+🟢S-27;Vendredi;2026-09-11;CAP;Footing de récupération Z1;Footing de récupération Z1 (65 min);65;🟦
+⚪S-26;Lundi;2026-09-14;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (61 min);61;🟩
+⚪S-26;*;2026-09-14;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+⚪S-26;Mercredi;2026-09-16;CAP;Footing de récupération Z1;Footing de récupération Z1 (43 min);43;🟦
+⚪S-26;*;2026-09-16;Vélo;Seuil Z4;Seuil Z4 (80 min);80;🟨
+⚪S-26;Jeudi;2026-09-17;Natation;Récupération active;Récupération active (68 min);68;🟦
+⚪S-26;Vendredi;2026-09-18;CAP;Footing de récupération Z1;Footing de récupération Z1 (43 min);43;🟦
+🟡S-25;Lundi;2026-09-21;CAP;VC;VC 700m x 3 @ 8.4 km/h (effort 05:03 / recup 175.0m x 02:43) - 15min d'intensité;41;🟨
+🟡S-25;Mercredi;2026-09-23;CAP;Footing de récupération Z1;Footing de récupération Z1 (77 min);77;🟦
+🟡S-25;*;2026-09-23;Vélo;Seuil Z4;Seuil Z4 (88 min);88;🟨
+🟡S-25;Jeudi;2026-09-24;Natation;Récupération active;Récupération active (72 min);72;🟦
+🟡S-25;*;2026-09-24;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+🟡S-25;Vendredi;2026-09-25;CAP;Footing de récupération Z1;Footing de récupération Z1 (77 min);77;🟦
+🟢S-24;Lundi;2026-09-28;CAP;VC;VC 800m x 3 @ 8.2 km/h (effort 05:56 / recup 200.0m x 03:07) - 17min d'intensité;42;🟨
+🟢S-24;Mercredi;2026-09-30;CAP;Footing de récupération Z1;Footing de récupération Z1 (100 min);100;🟦
+🟢S-24;*;2026-09-30;Vélo;Seuil Z4;Seuil Z4 (94 min);94;🟨
+🟢S-24;Jeudi;2026-10-01;Natation;Récupération active;Récupération active (72 min);72;🟦
+🟢S-24;*;2026-10-01;Renforcement;Gainage;Gainage (30 min);30;🟩
+🟢S-24;Vendredi;2026-10-02;CAP;Footing de récupération Z1;Footing de récupération Z1 (100 min);100;🟦
+🟡S-23;Lundi;2026-10-05;CAP;VC;VC 1000m x 2 @ 8.0 km/h (effort 07:38 / recup 250.0m x 03:53) - 15min d'intensité;41;🟨
+🟡S-23;Mercredi;2026-10-07;CAP;Footing de récupération Z1;Footing de récupération Z1 (72 min);72;🟦
+🟡S-23;*;2026-10-07;Vélo;Seuil Z4;Seuil Z4 (88 min);88;🟨
+🟡S-23;Jeudi;2026-10-08;Natation;Récupération active;Récupération active (72 min);72;🟦
+🟡S-23;*;2026-10-08;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+🟡S-23;Vendredi;2026-10-09;CAP;Footing de récupération Z1;Footing de récupération Z1 (72 min);72;🟦
+⚪S-22;Lundi;2026-10-12;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (92 min);92;🟩
+⚪S-22;*;2026-10-12;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+⚪S-22;Mercredi;2026-10-14;CAP;Footing de récupération Z1;Footing de récupération Z1 (65 min);65;🟦
+⚪S-22;*;2026-10-14;Vélo;Seuil Z4;Seuil Z4 (80 min);80;🟨
+⚪S-22;Jeudi;2026-10-15;Natation;Récupération active;Récupération active (72 min);72;🟦
+⚪S-22;Vendredi;2026-10-16;CAP;Footing de récupération Z1;Footing de récupération Z1 (65 min);65;🟦
+🟡S-21;Lundi;2026-10-19;CAP;VC;VC 2000m x 1 @ 7.7 km/h (effort 15:54 / recup 500.0m x 07:47) - 15min d'intensité;41;🟨
+🟡S-21;Mercredi;2026-10-21;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-21;*;2026-10-21;Vélo;Seuil Z4;Seuil Z4 (141 min);141;🟨
+🟡S-21;Jeudi;2026-10-22;Natation;Récupération active;Récupération active (72 min);72;🟦
+🟡S-21;*;2026-10-22;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+🟡S-21;Vendredi;2026-10-23;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟢S-20;Lundi;2026-10-26;CAP;VC;VC 2400m x 1 @ 7.7 km/h (effort 19:16 / recup 600.0m x 09:21) - 19min d'intensité;43;🟨
+🟢S-20;Mercredi;2026-10-28;CAP;Footing de récupération Z1;Footing de récupération Z1 (118 min);118;🟦
+🟢S-20;*;2026-10-28;Vélo;Seuil Z4;Seuil Z4 (112 min);112;🟨
+🟢S-20;Jeudi;2026-10-29;Natation;Récupération active;Récupération active (72 min);72;🟦
+🟢S-20;*;2026-10-29;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+🟢S-20;Vendredi;2026-10-30;CAP;Footing de récupération Z1;Footing de récupération Z1 (118 min);118;🟦
+🟡S-19;Lundi;2026-11-02;CAP;VC;VC 2800m x 1 @ 7.6 km/h (effort 22:43 / recup 700.0m x 10:54) - 22min d'intensité;52;🟨
+🟡S-19;Mercredi;2026-11-04;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-19;*;2026-11-04;Vélo;Seuil Z4;Seuil Z4 (150 min);150;🟨
+🟡S-19;Jeudi;2026-11-05;Natation;Récupération active;Récupération active (72 min);72;🟦
+🟡S-19;*;2026-11-05;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+🟡S-19;Vendredi;2026-11-06;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+⚪S-18;Lundi;2026-11-09;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (92 min);92;🟩
+⚪S-18;*;2026-11-09;Renforcement;Gainage;Gainage (30 min);30;🟩
+⚪S-18;Mercredi;2026-11-11;CAP;Footing de récupération Z1;Footing de récupération Z1 (65 min);65;🟦
+⚪S-18;*;2026-11-11;Vélo;Seuil Z4;Seuil Z4 (80 min);80;🟨
+⚪S-18;Jeudi;2026-11-12;Natation;Récupération active;Récupération active (72 min);72;🟦
+⚪S-18;Vendredi;2026-11-13;CAP;Footing de récupération Z1;Footing de récupération Z1 (65 min);65;🟦
+🟡S-17;Lundi;2026-11-16;CAP;VC;VC 300m x 8 @ 9.4 km/h (effort 01:58 / recup 75.0m x 01:10) - 15min d'intensité;44;🟨
+🟡S-17;Mercredi;2026-11-18;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-17;*;2026-11-18;Vélo;Seuil Z4;Seuil Z4 (156 min);156;🟨
+🟡S-17;Jeudi;2026-11-19;Natation;Récupération active;Récupération active (72 min);72;🟦
+🟡S-17;*;2026-11-19;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+🟡S-17;Vendredi;2026-11-20;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟢S-16;Lundi;2026-11-23;CAP;VC;VC 400m x 6 @ 9.1 km/h (effort 02:44 / recup 100.0m x 01:33) - 16min d'intensité;40;🟨
+🟢S-16;Mercredi;2026-11-25;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟢S-16;*;2026-11-25;Vélo;Seuil Z4;Seuil Z4 (127 min);127;🟨
+🟢S-16;Jeudi;2026-11-26;Natation;Récupération active;Récupération active (72 min);72;🟦
+🟢S-16;*;2026-11-26;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+🟢S-16;Vendredi;2026-11-27;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-15;Lundi;2026-11-30;CAP;VC;VC 500m x 5 @ 8.9 km/h (effort 03:28 / recup 125.0m x 01:56) - 17min d'intensité;46;🟨
+🟡S-15;Mercredi;2026-12-02;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-15;*;2026-12-02;Vélo;Seuil Z4;Seuil Z4 (132 min);132;🟨
+🟡S-15;Jeudi;2026-12-03;Natation;Récupération active;Récupération active (72 min);72;🟦
+🟡S-15;*;2026-12-03;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+🟡S-15;Vendredi;2026-12-04;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+⚪S-14;Lundi;2026-12-07;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (92 min);92;🟩
+⚪S-14;*;2026-12-07;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+⚪S-14;Mercredi;2026-12-09;CAP;Footing de récupération Z1;Footing de récupération Z1 (65 min);65;🟦
+⚪S-14;*;2026-12-09;Vélo;Seuil Z4;Seuil Z4 (80 min);80;🟨
+⚪S-14;Jeudi;2026-12-10;Natation;Récupération active;Récupération active (72 min);72;🟦
+⚪S-14;Vendredi;2026-12-11;CAP;Footing de récupération Z1;Footing de récupération Z1 (65 min);65;🟦
+🟡S-13;Lundi;2026-12-14;CAP;VC;VC 700m x 3 @ 8.7 km/h (effort 05:03 / recup 175.0m x 02:43) - 15min d'intensité;41;🟨
+🟡S-13;Mercredi;2026-12-16;CAP;Footing de récupération Z1;Footing de récupération Z1 (115 min);115;🟦
+🟡S-13;*;2026-12-16;Vélo;Seuil Z4;Seuil Z4 (119 min);119;🟨
+🟡S-13;Jeudi;2026-12-17;Natation;Récupération active;Récupération active (72 min);72;🟦
+🟡S-13;*;2026-12-17;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+🟡S-13;Vendredi;2026-12-18;CAP;Footing de récupération Z1;Footing de récupération Z1 (115 min);115;🟦
+🟢S-12;Lundi;2026-12-21;CAP;VC;VC 800m x 3 @ 8.5 km/h (effort 05:56 / recup 200.0m x 03:07) - 17min d'intensité;42;🟨
+🟢S-12;Mercredi;2026-12-23;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟢S-12;*;2026-12-23;Vélo;Seuil Z4;Seuil Z4 (118 min);118;🟨
+🟢S-12;Jeudi;2026-12-24;Natation;Récupération active;Récupération active (72 min);72;🟦
+🟢S-12;*;2026-12-24;Renforcement;Gainage;Gainage (30 min);30;🟩
+🟢S-12;Vendredi;2026-12-25;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-11;Lundi;2026-12-28;CAP;VC;VC 1000m x 2 @ 8.3 km/h (effort 07:38 / recup 250.0m x 03:53) - 15min d'intensité;41;🟨
+🟡S-11;Mercredi;2026-12-30;CAP;Footing de récupération Z1;Footing de récupération Z1 (90 min);90;🟦
+🟡S-11;*;2026-12-30;Vélo;Seuil Z4;Seuil Z4 (94 min);94;🟨
+🟡S-11;Jeudi;2026-12-31;Natation;Récupération active;Récupération active (72 min);72;🟦
+🟡S-11;*;2026-12-31;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+🟡S-11;Vendredi;2027-01-01;CAP;Footing de récupération Z1;Footing de récupération Z1 (90 min);90;🟦
+⚪S-10;Lundi;2027-01-04;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (75 min);75;🟩
+⚪S-10;*;2027-01-04;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+⚪S-10;Mercredi;2027-01-06;CAP;Footing de récupération Z1;Footing de récupération Z1 (53 min);53;🟦
+⚪S-10;*;2027-01-06;Vélo;Seuil Z4;Seuil Z4 (80 min);80;🟨
+⚪S-10;Jeudi;2027-01-07;Natation;Récupération active;Récupération active (72 min);72;🟦
+⚪S-10;Vendredi;2027-01-08;CAP;Footing de récupération Z1;Footing de récupération Z1 (53 min);53;🟦
+🟡S-09;Lundi;2027-01-11;CAP;VC;VC 2000m x 1 @ 7.9 km/h (effort 15:54 / recup 500.0m x 07:47) - 15min d'intensité;41;🟨
+🟡S-09;Mercredi;2027-01-13;CAP;Footing de récupération Z1;Footing de récupération Z1 (112 min);112;🟦
+🟡S-09;*;2027-01-13;Vélo;Seuil Z4;Seuil Z4 (116 min);116;🟨
+🟡S-09;Jeudi;2027-01-14;Natation;Récupération active;Récupération active (72 min);72;🟦
+🟡S-09;*;2027-01-14;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+🟡S-09;Vendredi;2027-01-15;CAP;Footing de récupération Z1;Footing de récupération Z1 (112 min);112;🟦
+🟢S-08;Lundi;2027-01-18;CAP;VC;VC 2400m x 1 @ 7.9 km/h (effort 19:16 / recup 600.0m x 09:21) - 19min d'intensité;43;🟨
+🟢S-08;Mercredi;2027-01-20;CAP;Footing de récupération Z1;Footing de récupération Z1 (97 min);97;🟦
+🟢S-08;*;2027-01-20;Vélo;Seuil Z4;Seuil Z4 (92 min);92;🟨
+🟢S-08;Jeudi;2027-01-21;Natation;Récupération active;Récupération active (72 min);72;🟦
+🟢S-08;*;2027-01-21;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+🟢S-08;Vendredi;2027-01-22;CAP;Footing de récupération Z1;Footing de récupération Z1 (97 min);97;🟦
+🟡S-07;Lundi;2027-01-25;CAP;VC;VC 2800m x 1 @ 7.9 km/h (effort 22:43 / recup 700.0m x 10:54) - 22min d'intensité;52;🟨
+🟡S-07;Mercredi;2027-01-27;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-07;*;2027-01-27;Vélo;Seuil Z4;Seuil Z4 (125 min);125;🟨
+🟡S-07;Jeudi;2027-01-28;Natation;Récupération active;Récupération active (72 min);72;🟦
+🟡S-07;*;2027-01-28;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+🟡S-07;Vendredi;2027-01-29;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+⚪S-06;Lundi;2027-02-01;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (75 min);75;🟩
+⚪S-06;*;2027-02-01;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+⚪S-06;Mercredi;2027-02-03;CAP;Footing de récupération Z1;Footing de récupération Z1 (53 min);53;🟦
+⚪S-06;*;2027-02-03;Vélo;Seuil Z4;Seuil Z4 (80 min);80;🟨
+⚪S-06;Jeudi;2027-02-04;Natation;Récupération active;Récupération active (72 min);72;🟦
+⚪S-06;Vendredi;2027-02-05;CAP;Footing de récupération Z1;Footing de récupération Z1 (53 min);53;🟦
+🟡S-05;Lundi;2027-02-08;CAP;VC;VC 300m x 8 @ 9.7 km/h (effort 01:58 / recup 75.0m x 01:10) - 15min d'intensité;44;🟨
+🟡S-05;Mercredi;2027-02-10;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-05;*;2027-02-10;Vélo;Seuil Z4;Seuil Z4 (129 min);129;🟨
+🟡S-05;Jeudi;2027-02-11;Natation;Récupération active;Récupération active (72 min);72;🟦
+🟡S-05;*;2027-02-11;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+🟡S-05;Vendredi;2027-02-12;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟢S-04;Lundi;2027-02-15;CAP;VC;VC 400m x 6 @ 9.4 km/h (effort 02:44 / recup 100.0m x 01:33) - 16min d'intensité;40;🟨
+🟢S-04;Mercredi;2027-02-17;CAP;Footing de récupération Z1;Footing de récupération Z1 (54 min);54;🟦
+🟢S-04;*;2027-02-17;Vélo;Seuil Z4;Seuil Z4 (80 min);80;🟨
+🟢S-04;Jeudi;2027-02-18;Natation;Récupération active;Récupération active (72 min);72;🟦
+🟢S-04;*;2027-02-18;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+🟢S-04;Vendredi;2027-02-19;CAP;Footing de récupération Z1;Footing de récupération Z1 (54 min);54;🟦
+🟡S-03;Lundi;2027-02-22;CAP;VC;VC 500m x 5 @ 9.2 km/h (effort 03:28 / recup 125.0m x 01:56) - 17min d'intensité;46;🟨
+🟡S-03;Mercredi;2027-02-24;CAP;Footing de récupération Z1;Footing de récupération Z1 (51 min);51;🟦
+🟡S-03;*;2027-02-24;Vélo;Seuil Z4;Seuil Z4 (88 min);88;🟨
+🟡S-03;Jeudi;2027-02-25;Natation;Récupération active;Récupération active (72 min);72;🟦
+🟡S-03;*;2027-02-25;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+🟡S-03;Vendredi;2027-02-26;CAP;Footing de récupération Z1;Footing de récupération Z1 (51 min);51;🟦
+🔵S-02;Lundi;2027-03-01;CAP;Footing de récupération Z1;Footing de récupération Z1 (39 min);39;🟦
+🔵S-02;Mercredi;2027-03-03;CAP;Footing de récupération Z1;Footing de récupération Z1 (39 min);39;🟦
+🔵S-02;*;2027-03-03;Vélo;Récupération active;Récupération active (52 min);52;🟦
+🔵S-02;Jeudi;2027-03-04;Natation;Récupération active;Récupération active (60 min);60;🟦
+🔵S-02;Vendredi;2027-03-05;CAP;Footing de récupération Z1;Footing de récupération Z1 (39 min);39;🟦
+🔵S-01;Lundi;2027-03-08;CAP;Footing de récupération Z1;Footing de récupération Z1 (39 min);39;🟦
+🔵S-01;Mercredi;2027-03-10;CAP;Footing de récupération Z1;Footing de récupération Z1 (39 min);39;🟦
+🔵S-01;*;2027-03-10;Vélo;Récupération active;Récupération active (52 min);52;🟦
+🔵S-01;Jeudi;2027-03-11;Natation;Récupération active;Récupération active (60 min);60;🟦
+🔵S-01;Vendredi;2027-03-12;CAP;Footing de récupération Z1;Footing de récupération Z1 (39 min);39;🟦
+🔵S-00;Lundi;2027-03-15;Course;Objectif;15/03/2027;0;⭐
+
+# ============================================================
+# FICHIER N°7 : Maxime_GIRARD_plan_20260824_184657.csv
+# ============================================================
+🟢S-11;Lundi;2026-08-24;CAP;VC;VC 300m x 10 @ 11.6 km/h (effort 01:33 / recup 75.0m x 00:55) - 15min d'intensité;39;🟨
+🟢S-11;Mardi;2026-08-25;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟢S-11;*;2026-08-25;Renforcement;Gainage;Gainage (30 min);30;🟩
+🟢S-11;Mercredi;2026-08-26;CAP;VC;VC 400m x 7 @ 11.2 km/h (effort 02:08 / recup 100.0m x 01:13) - 15min d'intensité;38;🟨
+🟢S-11;Jeudi;2026-08-27;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟢S-11;Vendredi;2026-08-28;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟢S-11;Samedi;2026-08-29;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟢S-11;Dimanche;2026-08-30;Vélo;Endurance Z2;Endurance Z2 (80 min);80;🟩
+🟡S-10;Lundi;2026-08-31;CAP;VC;VC 400m x 7 @ 11.2 km/h (effort 02:08 / recup 100.0m x 01:13) - 15min d'intensité;41;🟨
+🟡S-10;Mardi;2026-09-01;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-10;*;2026-09-01;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+🟡S-10;Mercredi;2026-09-02;CAP;VC;VC 500m x 6 @ 11.0 km/h (effort 02:43 / recup 125.0m x 01:31) - 16min d'intensité;44;🟨
+🟡S-10;Jeudi;2026-09-03;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-10;Vendredi;2026-09-04;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-10;Samedi;2026-09-05;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟡S-10;Dimanche;2026-09-06;Vélo;Endurance Z2;Endurance Z2 (112 min);112;🟩
+🔴S-09;Lundi;2026-09-07;CAP;VC;VC 500m x 6 @ 11.0 km/h (effort 02:43 / recup 125.0m x 01:31) - 16min d'intensité;48;🟨
+🔴S-09;Mardi;2026-09-08;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🔴S-09;*;2026-09-08;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+🔴S-09;Mercredi;2026-09-09;CAP;VC;VC 600m x 5 @ 10.8 km/h (effort 03:20 / recup 150.0m x 01:50) - 16min d'intensité;48;🟨
+🔴S-09;Jeudi;2026-09-10;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🔴S-09;Vendredi;2026-09-11;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🔴S-09;Samedi;2026-09-12;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🔴S-09;Dimanche;2026-09-13;Vélo;Endurance Z2;Endurance Z2 (144 min);144;🟩
+⚪S-08;Lundi;2026-09-14;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+⚪S-08;*;2026-09-14;Renforcement;Gainage;Gainage (30 min);30;🟩
+⚪S-08;Mardi;2026-09-15;CAP;Footing de récupération Z1;Footing de récupération Z1 (108 min);108;🟦
+⚪S-08;Mercredi;2026-09-16;CAP;Footing de récupération Z1;Footing de récupération Z1 (108 min);108;🟦
+⚪S-08;Jeudi;2026-09-17;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+⚪S-08;Vendredi;2026-09-18;Natation;Technique + Seuil;Technique + seuil Z4 (54 min, 3km);54;🟨
+⚪S-08;Samedi;2026-09-19;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+⚪S-08;Dimanche;2026-09-20;Course;Compétition intermédiaire;Semi de Paris 20/09;0;⭐
+🟡S-07;Lundi;2026-09-21;CAP;VC;VC 700m x 4 @ 10.6 km/h (effort 03:58 / recup 175.0m x 02:08) - 15min d'intensité;42;🟨
+🟡S-07;Mardi;2026-09-22;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-07;*;2026-09-22;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+🟡S-07;Mercredi;2026-09-23;CAP;VC;VC 800m x 4 @ 10.3 km/h (effort 04:39 / recup 200.0m x 02:26) - 18min d'intensité;47;🟨
+🟡S-07;Jeudi;2026-09-24;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-07;Vendredi;2026-09-25;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-07;Samedi;2026-09-26;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟡S-07;Dimanche;2026-09-27;Vélo;Endurance Z2;Endurance Z2 (109 min);109;🟩
+🔴S-06;Lundi;2026-09-28;CAP;VC;VC 800m x 4 @ 10.3 km/h (effort 04:39 / recup 200.0m x 02:26) - 18min d'intensité;51;🟨
+🔴S-06;Mardi;2026-09-29;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🔴S-06;*;2026-09-29;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+🔴S-06;Mercredi;2026-09-30;CAP;VC;VC 1000m x 3 @ 10.0 km/h (effort 06:00 / recup 250.0m x 03:03) - 18min d'intensité;50;🟨
+🔴S-06;Jeudi;2026-10-01;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🔴S-06;Vendredi;2026-10-02;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🔴S-06;Samedi;2026-10-03;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🔴S-06;Dimanche;2026-10-04;Vélo;Endurance Z2;Endurance Z2 (180 min);180;🟩
+🟡S-05;Lundi;2026-10-05;CAP;VC;VC 1000m x 3 @ 10.0 km/h (effort 06:00 / recup 250.0m x 03:03) - 18min d'intensité;46;🟨
+🟡S-05;Mardi;2026-10-06;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-05;*;2026-10-06;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+🟡S-05;Mercredi;2026-10-07;CAP;VC;VC 1600m x 2 @ 9.8 km/h (effort 09:47 / recup 400.0m x 04:53) - 19min d'intensité;48;🟨
+🟡S-05;Jeudi;2026-10-08;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-05;Vendredi;2026-10-09;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-05;Samedi;2026-10-10;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟡S-05;Dimanche;2026-10-11;Vélo;Endurance Z2;Endurance Z2 (104 min);104;🟩
+⚪S-04;Lundi;2026-10-12;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+⚪S-04;*;2026-10-12;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+⚪S-04;Mardi;2026-10-13;CAP;Footing de récupération Z1;Footing de récupération Z1 (88 min);88;🟦
+⚪S-04;Mercredi;2026-10-14;CAP;Footing de récupération Z1;Footing de récupération Z1 (88 min);88;🟦
+⚪S-04;Jeudi;2026-10-15;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+⚪S-04;Vendredi;2026-10-16;Natation;Technique + Seuil;Technique + seuil Z4 (54 min, 3km);54;🟨
+⚪S-04;Samedi;2026-10-17;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+⚪S-04;Dimanche;2026-10-18;Vélo;Endurance Z2;Endurance Z2 (80 min);80;🟩
+🟢S-03;Lundi;2026-10-19;CAP;VC;VC 2000m x 2 @ 9.6 km/h (effort 12:29 / recup 500.0m x 06:07) - 24min d'intensité;52;🟨
+🟢S-03;Mardi;2026-10-20;Course;Compétition intermédiaire;10km Lyon 20/10;0;⭐
+🟢S-03;Mercredi;2026-10-21;CAP;VC;VC 2400m x 2 @ 9.5 km/h (effort 15:08 / recup 600.0m x 07:20) - 30min d'intensité;59;🟨
+🟢S-03;Jeudi;2026-10-22;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟢S-03;*;2026-10-22;Renforcement;Gainage;Gainage (30 min);30;🟩
+🟢S-03;Vendredi;2026-10-23;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟢S-03;Samedi;2026-10-24;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟢S-03;Dimanche;2026-10-25;Vélo;Endurance Z2;Endurance Z2 (80 min);80;🟩
+🔵S-02;Lundi;2026-10-26;CAP;Footing de récupération Z1;Footing de récupération Z1 (94 min);94;🟦
+🔵S-02;Mardi;2026-10-27;CAP;Footing de récupération Z1;Footing de récupération Z1 (94 min);94;🟦
+🔵S-02;Mercredi;2026-10-28;CAP;Footing de récupération Z1;Footing de récupération Z1 (94 min);94;🟦
+🔵S-02;Jeudi;2026-10-29;CAP;Footing de récupération Z1;Footing de récupération Z1 (94 min);94;🟦
+🔵S-02;Vendredi;2026-10-30;Natation;Récupération active;Récupération active (60 min);60;🟦
+🔵S-02;Samedi;2026-10-31;CAP;Footing de récupération Z1;Footing de récupération Z1 (94 min);94;🟦
+🔵S-02;Dimanche;2026-11-01;Vélo;Récupération active;Récupération active (52 min);52;🟦
+🔵S-01;Lundi;2026-11-02;CAP;Footing de récupération Z1;Footing de récupération Z1 (65 min);65;🟦
+🔵S-01;Mardi;2026-11-03;CAP;Footing de récupération Z1;Footing de récupération Z1 (65 min);65;🟦
+🔵S-01;Mercredi;2026-11-04;CAP;Footing de récupération Z1;Footing de récupération Z1 (65 min);65;🟦
+🔵S-01;Jeudi;2026-11-05;CAP;Footing de récupération Z1;Footing de récupération Z1 (65 min);65;🟦
+🔵S-01;Vendredi;2026-11-06;Natation;Récupération active;Récupération active (60 min);60;🟦
+🔵S-01;Samedi;2026-11-07;CAP;Footing de récupération Z1;Footing de récupération Z1 (65 min);65;🟦
+🔵S-01;Dimanche;2026-11-08;Vélo;Récupération active;Récupération active (52 min);52;🟦
+🔵S-00;Lundi;2026-11-09;CAP;Footing de récupération Z1;Footing de récupération Z1 (65 min);65;🟦
+🔵S-00;Mardi;2026-11-10;CAP;Footing de récupération Z1;Footing de récupération Z1 (65 min);65;🟦
+🔵S-00;Mercredi;2026-11-11;CAP;Footing de récupération Z1;Footing de récupération Z1 (65 min);65;🟦
+🔵S-00;Jeudi;2026-11-12;CAP;Footing de récupération Z1;Footing de récupération Z1 (65 min);65;🟦
+🔵S-00;Vendredi;2026-11-13;Natation;Récupération active;Récupération active (60 min);60;🟦
+🔵S-00;Samedi;2026-11-14;CAP;Footing de récupération Z1;Footing de récupération Z1 (65 min);65;🟦
+🔵S-00;Dimanche;2026-11-15;Course;Objectif;15/11/2026;0;⭐
+
+# ============================================================
+# FICHIER N°8 : Nina_KOWALSKI_plan_20260824_184657.csv
+# ============================================================
+🟢S-11;Lundi;2026-08-24;CAP;VC;VC 300m x 15 @ 17.3 km/h (effort 01:02 / recup 75.0m x 00:35) - 15min d'intensité;39;🟨
+🟢S-11;*;2026-08-24;Vélo;Endurance Z2;Endurance Z2 (145 min);145;🟩
+🟢S-11;Mardi;2026-08-25;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟢S-11;Mercredi;2026-08-26;CAP;Footing de récupération Z1;Footing de récupération Z1 (102 min);102;🟦
+🟢S-11;*;2026-08-26;Renforcement;Gainage;Gainage (30 min);30;🟩
+🟢S-11;Jeudi;2026-08-27;Vélo;Endurance Z2;Endurance Z2 (145 min);145;🟩
+🟢S-11;*;2026-08-27;Natation;Récupération active;Récupération active (72 min);72;🟦
+🟢S-11;Vendredi;2026-08-28;CAP;Footing de récupération Z1;Footing de récupération Z1 (102 min);102;🟦
+🟢S-11;Samedi;2026-08-29;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟢S-11;*;2026-08-29;Natation;Récupération active;Récupération active (72 min);72;🟦
+🟡S-10;Lundi;2026-08-31;CAP;VMA;VMA 300m x 15 @ 17.3 km/h (effort 01:02 / recup 75.0m x 00:30) - 15min d'intensité;41;🟥
+🟡S-10;*;2026-08-31;Vélo;Endurance Z2;Endurance Z2 (180 min);180;🟩
+🟡S-10;Mardi;2026-09-01;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-10;Mercredi;2026-09-02;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-10;*;2026-09-02;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+🟡S-10;Jeudi;2026-09-03;Vélo;Endurance Z2;Endurance Z2 (180 min);180;🟩
+🟡S-10;*;2026-09-03;Natation;Récupération active;Récupération active (72 min);72;🟦
+🟡S-10;Vendredi;2026-09-04;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-10;Samedi;2026-09-05;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟡S-10;*;2026-09-05;Natation;Récupération active;Récupération active (72 min);72;🟦
+🔴S-09;Lundi;2026-09-07;CAP;VC;VC 500m x 9 @ 16.4 km/h (effort 01:49 / recup 125.0m x 00:59) - 16min d'intensité;48;🟨
+🔴S-09;*;2026-09-07;Vélo;Endurance Z2;Endurance Z2 (180 min);180;🟩
+🔴S-09;Mardi;2026-09-08;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🔴S-09;Mercredi;2026-09-09;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🔴S-09;*;2026-09-09;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+🔴S-09;Jeudi;2026-09-10;Vélo;Endurance Z2;Endurance Z2 (180 min);180;🟩
+🔴S-09;*;2026-09-10;Natation;Récupération active;Récupération active (72 min);72;🟦
+🔴S-09;Vendredi;2026-09-11;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🔴S-09;Samedi;2026-09-12;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🔴S-09;*;2026-09-12;Natation;Récupération active;Récupération active (72 min);72;🟦
+⚪S-08;Lundi;2026-09-14;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+⚪S-08;*;2026-09-14;Vélo;Endurance Z2;Endurance Z2 (132 min);132;🟩
+⚪S-08;*;2026-09-14;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+⚪S-08;Mardi;2026-09-15;Course;Compétition intermédiaire;70.3 Vichy 15/09;0;⭐
+⚪S-08;Mercredi;2026-09-16;CAP;Footing de récupération Z1;Footing de récupération Z1 (86 min);86;🟦
+⚪S-08;Jeudi;2026-09-17;Vélo;Endurance Z2;Endurance Z2 (132 min);132;🟩
+⚪S-08;*;2026-09-17;Natation;Récupération active;Récupération active (72 min);72;🟦
+⚪S-08;Vendredi;2026-09-18;CAP;Footing de récupération Z1;Footing de récupération Z1 (86 min);86;🟦
+⚪S-08;Samedi;2026-09-19;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+⚪S-08;*;2026-09-19;Natation;Récupération active;Récupération active (72 min);72;🟦
+🟡S-07;Lundi;2026-09-21;CAP;VC;VC 700m x 6 @ 15.8 km/h (effort 02:39 / recup 175.0m x 01:23) - 15min d'intensité;42;🟨
+🟡S-07;*;2026-09-21;Vélo;Endurance Z2;Endurance Z2 (180 min);180;🟩
+🟡S-07;Mardi;2026-09-22;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-07;Mercredi;2026-09-23;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-07;*;2026-09-23;Renforcement;Gainage;Gainage (30 min);30;🟩
+🟡S-07;Jeudi;2026-09-24;Vélo;Endurance Z2;Endurance Z2 (180 min);180;🟩
+🟡S-07;*;2026-09-24;Natation;Récupération active;Récupération active (72 min);72;🟦
+🟡S-07;Vendredi;2026-09-25;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-07;Samedi;2026-09-26;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟡S-07;*;2026-09-26;Natation;Récupération active;Récupération active (72 min);72;🟦
+🟢S-06;Lundi;2026-09-28;CAP;VMA;VMA 700m x 6 @ 16.6 km/h (effort 02:32 / recup 175.0m x 01:10) - 15min d'intensité;37;🟥
+🟢S-06;*;2026-09-28;Vélo;Endurance Z2;Endurance Z2 (180 min);180;🟩
+🟢S-06;Mardi;2026-09-29;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟢S-06;Mercredi;2026-09-30;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟢S-06;*;2026-09-30;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+🟢S-06;Jeudi;2026-10-01;Vélo;Endurance Z2;Endurance Z2 (180 min);180;🟩
+🟢S-06;*;2026-10-01;Natation;Récupération active;Récupération active (72 min);72;🟦
+🟢S-06;Vendredi;2026-10-02;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟢S-06;Samedi;2026-10-03;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟢S-06;*;2026-10-03;Natation;Récupération active;Récupération active (72 min);72;🟦
+🟡S-05;Lundi;2026-10-05;CAP;VC;VC 1000m x 4 @ 14.9 km/h (effort 04:00 / recup 250.0m x 01:59) - 16min d'intensité;42;🟨
+🟡S-05;*;2026-10-05;Vélo;Endurance Z2;Endurance Z2 (180 min);180;🟩
+🟡S-05;Mardi;2026-10-06;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-05;Mercredi;2026-10-07;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-05;*;2026-10-07;Renforcement;Gainage;Gainage (30 min);30;🟩
+🟡S-05;Jeudi;2026-10-08;Vélo;Endurance Z2;Endurance Z2 (180 min);180;🟩
+🟡S-05;*;2026-10-08;Natation;Récupération active;Récupération active (72 min);72;🟦
+🟡S-05;Vendredi;2026-10-09;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-05;Samedi;2026-10-10;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟡S-05;*;2026-10-10;Natation;Récupération active;Récupération active (72 min);72;🟦
+⚪S-04;Lundi;2026-10-12;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (101 min);101;🟩
+⚪S-04;*;2026-10-12;Vélo;Endurance Z2;Endurance Z2 (120 min);120;🟩
+⚪S-04;*;2026-10-12;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+⚪S-04;Mardi;2026-10-13;Natation;Technique + Seuil;Technique + seuil Z4 (54 min, 3km);54;🟨
+⚪S-04;Mercredi;2026-10-14;CAP;Footing de récupération Z1;Footing de récupération Z1 (70 min);70;🟦
+⚪S-04;Jeudi;2026-10-15;Course;Compétition intermédiaire;70.3 Nice 15/10;0;⭐
+⚪S-04;Vendredi;2026-10-16;CAP;Footing de récupération Z1;Footing de récupération Z1 (70 min);70;🟦
+⚪S-04;Samedi;2026-10-17;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+⚪S-04;*;2026-10-17;Natation;Récupération active;Récupération active (72 min);72;🟦
+🟡S-03;Lundi;2026-10-19;CAP;VC;VC 2000m x 3 @ 14.4 km/h (effort 08:21 / recup 500.0m x 03:58) - 25min d'intensité;57;🟨
+🟡S-03;*;2026-10-19;Vélo;Endurance Z2;Endurance Z2 (180 min);180;🟩
+🟡S-03;Mardi;2026-10-20;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-03;Mercredi;2026-10-21;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-03;*;2026-10-21;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+🟡S-03;Jeudi;2026-10-22;Vélo;Endurance Z2;Endurance Z2 (180 min);180;🟩
+🟡S-03;*;2026-10-22;Natation;Récupération active;Récupération active (72 min);72;🟦
+🟡S-03;Vendredi;2026-10-23;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-03;Samedi;2026-10-24;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟡S-03;*;2026-10-24;Natation;Récupération active;Récupération active (72 min);72;🟦
+🔵S-02;Lundi;2026-10-26;CAP;Footing de récupération Z1;Footing de récupération Z1 (76 min);76;🟦
+🔵S-02;*;2026-10-26;Vélo;Récupération active;Récupération active (104 min);104;🟦
+🔵S-02;Mardi;2026-10-27;Natation;Récupération active;Récupération active (60 min);60;🟦
+🔵S-02;Mercredi;2026-10-28;CAP;Footing de récupération Z1;Footing de récupération Z1 (76 min);76;🟦
+🔵S-02;Jeudi;2026-10-29;Vélo;Récupération active;Récupération active (104 min);104;🟦
+🔵S-02;*;2026-10-29;Natation;Récupération active;Récupération active (60 min);60;🟦
+🔵S-02;Vendredi;2026-10-30;CAP;Footing de récupération Z1;Footing de récupération Z1 (76 min);76;🟦
+🔵S-02;Samedi;2026-10-31;CAP;Footing de récupération Z1;Footing de récupération Z1 (76 min);76;🟦
+🔵S-02;*;2026-10-31;Natation;Récupération active;Récupération active (60 min);60;🟦
+🔵S-01;Lundi;2026-11-02;CAP;Footing de récupération Z1;Footing de récupération Z1 (52 min);52;🟦
+🔵S-01;*;2026-11-02;Vélo;Récupération active;Récupération active (104 min);104;🟦
+🔵S-01;Mardi;2026-11-03;Natation;Récupération active;Récupération active (60 min);60;🟦
+🔵S-01;Mercredi;2026-11-04;CAP;Footing de récupération Z1;Footing de récupération Z1 (52 min);52;🟦
+🔵S-01;Jeudi;2026-11-05;Vélo;Récupération active;Récupération active (104 min);104;🟦
+🔵S-01;*;2026-11-05;Natation;Récupération active;Récupération active (60 min);60;🟦
+🔵S-01;Vendredi;2026-11-06;CAP;Footing de récupération Z1;Footing de récupération Z1 (52 min);52;🟦
+🔵S-01;Samedi;2026-11-07;CAP;Footing de récupération Z1;Footing de récupération Z1 (52 min);52;🟦
+🔵S-01;*;2026-11-07;Natation;Récupération active;Récupération active (60 min);60;🟦
+🔵S-00;Lundi;2026-11-09;CAP;Footing de récupération Z1;Footing de récupération Z1 (52 min);52;🟦
+🔵S-00;*;2026-11-09;Vélo;Récupération active;Récupération active (104 min);104;🟦
+🔵S-00;Mardi;2026-11-10;Natation;Récupération active;Récupération active (60 min);60;🟦
+🔵S-00;Mercredi;2026-11-11;CAP;Footing de récupération Z1;Footing de récupération Z1 (52 min);52;🟦
+🔵S-00;Jeudi;2026-11-12;Vélo;Récupération active;Récupération active (104 min);104;🟦
+🔵S-00;*;2026-11-12;Natation;Récupération active;Récupération active (60 min);60;🟦
+🔵S-00;Vendredi;2026-11-13;CAP;Footing de récupération Z1;Footing de récupération Z1 (52 min);52;🟦
+🔵S-00;Samedi;2026-11-14;CAP;Footing de récupération Z1;Footing de récupération Z1 (52 min);52;🟦
+🔵S-00;*;2026-11-14;Natation;Récupération active;Récupération active (60 min);60;🟦
+🔵S-00;Dimanche;2026-11-15;Course;Objectif;15/11/2026;0;⭐
+
+# ============================================================
+# FICHIER N°9 : Pierre_DURAND_plan_20260824_184657.csv
+# ============================================================
+🟢S-68;Lundi;2026-08-24;CAP;VC;VC 300m x 14 @ 16.8 km/h (effort 01:04 / recup 75.0m x 00:38) - 15min d'intensité;38;🟨
+🟢S-68;Mercredi;2026-08-26;Vélo;Seuil Z4;Seuil Z4 (80 min);80;🟨
+🟢S-68;Jeudi;2026-08-27;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (108 min);108;🟩
+🟢S-68;*;2026-08-27;Renforcement;Gainage;Gainage (30 min);30;🟩
+🟢S-68;Vendredi;2026-08-28;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟢S-68;Samedi;2026-08-29;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟡S-67;Lundi;2026-08-31;CAP;VMA;VMA 300m x 14 @ 16.5 km/h (effort 01:05 / recup 75.0m x 00:32) - 15min d'intensité;40;🟥
+🟡S-67;Mercredi;2026-09-02;Vélo;Seuil Z4;Seuil Z4 (123 min);123;🟨
+🟡S-67;Jeudi;2026-09-03;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-67;*;2026-09-03;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+🟡S-67;Vendredi;2026-09-04;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-67;Samedi;2026-09-05;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟢S-66;Lundi;2026-09-07;CAP;VC;VC 500m x 8 @ 16.0 km/h (effort 01:53 / recup 125.0m x 01:03) - 15min d'intensité;38;🟨
+🟢S-66;Mercredi;2026-09-09;Vélo;Seuil Z4;Seuil Z4 (80 min);80;🟨
+🟢S-66;Jeudi;2026-09-10;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (92 min);92;🟩
+🟢S-66;*;2026-09-10;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+🟢S-66;Vendredi;2026-09-11;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟢S-66;Samedi;2026-09-12;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+⚪S-65;Lundi;2026-09-14;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (61 min);61;🟩
+⚪S-65;*;2026-09-14;Renforcement;Gainage;Gainage (30 min);30;🟩
+⚪S-65;Mercredi;2026-09-16;Vélo;Seuil Z4;Seuil Z4 (80 min);80;🟨
+⚪S-65;Jeudi;2026-09-17;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (61 min);61;🟩
+⚪S-65;Vendredi;2026-09-18;Natation;Technique + Seuil;Technique + seuil Z4 (51 min, 3km);51;🟨
+⚪S-65;Samedi;2026-09-19;CAP;Sortie longue Z2;Sortie longue Z2 (92 min);92;🟩
+🟡S-64;Lundi;2026-09-21;CAP;VC;VC 700m x 6 @ 15.4 km/h (effort 02:44 / recup 175.0m x 01:28) - 16min d'intensité;44;🟨
+🟡S-64;Mercredi;2026-09-23;Vélo;Seuil Z4;Seuil Z4 (88 min);88;🟨
+🟡S-64;Jeudi;2026-09-24;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (111 min);111;🟩
+🟡S-64;*;2026-09-24;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+🟡S-64;Vendredi;2026-09-25;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-64;Samedi;2026-09-26;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟢S-63;Lundi;2026-09-28;CAP;VMA;VMA 700m x 6 @ 16.0 km/h (effort 02:38 / recup 175.0m x 01:15) - 15min d'intensité;38;🟥
+🟢S-63;Mercredi;2026-09-30;Vélo;Seuil Z4;Seuil Z4 (94 min);94;🟨
+🟢S-63;Jeudi;2026-10-01;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟢S-63;*;2026-10-01;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+🟢S-63;Vendredi;2026-10-02;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟢S-63;Samedi;2026-10-03;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟡S-62;Lundi;2026-10-05;CAP;VC;VC 1000m x 4 @ 14.6 km/h (effort 04:08 / recup 250.0m x 02:06) - 16min d'intensité;44;🟨
+🟡S-62;Mercredi;2026-10-07;Vélo;Seuil Z4;Seuil Z4 (88 min);88;🟨
+🟡S-62;Jeudi;2026-10-08;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (103 min);103;🟩
+🟡S-62;*;2026-10-08;Renforcement;Gainage;Gainage (30 min);30;🟩
+🟡S-62;Vendredi;2026-10-09;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-62;Samedi;2026-10-10;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+⚪S-61;Lundi;2026-10-12;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (61 min);61;🟩
+⚪S-61;*;2026-10-12;Renforcement;Gainage;Gainage (30 min);30;🟩
+⚪S-61;Mercredi;2026-10-14;Vélo;Seuil Z4;Seuil Z4 (80 min);80;🟨
+⚪S-61;Jeudi;2026-10-15;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (61 min);61;🟩
+⚪S-61;Vendredi;2026-10-16;Natation;Technique + Seuil;Technique + seuil Z4 (51 min, 3km);51;🟨
+⚪S-61;Samedi;2026-10-17;CAP;Sortie longue Z2;Sortie longue Z2 (92 min);92;🟩
+🟡S-60;Lundi;2026-10-19;CAP;VC;VC 2000m x 3 @ 14.0 km/h (effort 08:37 / recup 500.0m x 04:13) - 25min d'intensité;58;🟨
+🟡S-60;Mercredi;2026-10-21;Vélo;Seuil Z4;Seuil Z4 (94 min);94;🟨
+🟡S-60;Jeudi;2026-10-22;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-60;*;2026-10-22;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+🟡S-60;Vendredi;2026-10-23;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-60;Samedi;2026-10-24;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟢S-59;Lundi;2026-10-26;CAP;VMA;VMA 2000m x 3 @ 15.1 km/h (effort 08:04 / recup 500.0m x 03:35) - 24min d'intensité;49;🟥
+🟢S-59;Mercredi;2026-10-28;Vélo;Seuil Z4;Seuil Z4 (80 min);80;🟨
+🟢S-59;Jeudi;2026-10-29;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (114 min);114;🟩
+🟢S-59;*;2026-10-29;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+🟢S-59;Vendredi;2026-10-30;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟢S-59;Samedi;2026-10-31;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟡S-58;Lundi;2026-11-02;CAP;VC;VC 2800m x 2 @ 13.8 km/h (effort 12:19 / recup 700.0m x 05:54) - 24min d'intensité;56;🟨
+🟡S-58;Mercredi;2026-11-04;Vélo;Seuil Z4;Seuil Z4 (99 min);99;🟨
+🟡S-58;Jeudi;2026-11-05;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-58;*;2026-11-05;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+🟡S-58;Vendredi;2026-11-06;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-58;Samedi;2026-11-07;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+⚪S-57;Lundi;2026-11-09;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (61 min);61;🟩
+⚪S-57;*;2026-11-09;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+⚪S-57;Mercredi;2026-11-11;Vélo;Seuil Z4;Seuil Z4 (80 min);80;🟨
+⚪S-57;Jeudi;2026-11-12;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (61 min);61;🟩
+⚪S-57;Vendredi;2026-11-13;Natation;Technique + Seuil;Technique + seuil Z4 (51 min, 3km);51;🟨
+⚪S-57;Samedi;2026-11-14;CAP;Sortie longue Z2;Sortie longue Z2 (92 min);92;🟩
+🟡S-56;Lundi;2026-11-16;CAP;VC;VC 300m x 14 @ 17.1 km/h (effort 01:04 / recup 75.0m x 00:38) - 15min d'intensité;41;🟨
+🟡S-56;Mercredi;2026-11-18;Vélo;Seuil Z4;Seuil Z4 (103 min);103;🟨
+🟡S-56;Jeudi;2026-11-19;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-56;*;2026-11-19;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+🟡S-56;Vendredi;2026-11-20;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-56;Samedi;2026-11-21;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟢S-55;Lundi;2026-11-23;CAP;VMA;VMA 300m x 14 @ 16.8 km/h (effort 01:05 / recup 75.0m x 00:32) - 15min d'intensité;37;🟥
+🟢S-55;Mercredi;2026-11-25;Vélo;Seuil Z4;Seuil Z4 (84 min);84;🟨
+🟢S-55;Jeudi;2026-11-26;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟢S-55;*;2026-11-26;Renforcement;Gainage;Gainage (30 min);30;🟩
+🟢S-55;Vendredi;2026-11-27;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟢S-55;Samedi;2026-11-28;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟡S-54;Lundi;2026-11-30;CAP;VC;VC 500m x 8 @ 16.2 km/h (effort 01:53 / recup 125.0m x 01:03) - 15min d'intensité;41;🟨
+🟡S-54;Mercredi;2026-12-02;Vélo;Seuil Z4;Seuil Z4 (88 min);88;🟨
+🟡S-54;Jeudi;2026-12-03;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-54;*;2026-12-03;Renforcement;Gainage;Gainage (30 min);30;🟩
+🟡S-54;Vendredi;2026-12-04;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-54;Samedi;2026-12-05;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+⚪S-53;Lundi;2026-12-07;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (61 min);61;🟩
+⚪S-53;*;2026-12-07;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+⚪S-53;Mercredi;2026-12-09;Vélo;Seuil Z4;Seuil Z4 (80 min);80;🟨
+⚪S-53;Jeudi;2026-12-10;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (61 min);61;🟩
+⚪S-53;Vendredi;2026-12-11;Natation;Technique + Seuil;Technique + seuil Z4 (51 min, 3km);51;🟨
+⚪S-53;Samedi;2026-12-12;CAP;Sortie longue Z2;Sortie longue Z2 (92 min);92;🟩
+🟡S-52;Lundi;2026-12-14;CAP;VC;VC 700m x 6 @ 15.6 km/h (effort 02:44 / recup 175.0m x 01:28) - 16min d'intensité;44;🟨
+🟡S-52;Mercredi;2026-12-16;Vélo;Seuil Z4;Seuil Z4 (88 min);88;🟨
+🟡S-52;Jeudi;2026-12-17;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (111 min);111;🟩
+🟡S-52;*;2026-12-17;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+🟡S-52;Vendredi;2026-12-18;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-52;Samedi;2026-12-19;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟢S-51;Lundi;2026-12-21;CAP;VMA;VMA 700m x 6 @ 16.2 km/h (effort 02:38 / recup 175.0m x 01:15) - 15min d'intensité;38;🟥
+🟢S-51;Mercredi;2026-12-23;Vélo;Seuil Z4;Seuil Z4 (142 min);142;🟨
+🟢S-51;Jeudi;2026-12-24;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟢S-51;*;2026-12-24;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+🟢S-51;Vendredi;2026-12-25;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟢S-51;Samedi;2026-12-26;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟡S-50;Lundi;2026-12-28;CAP;VC;VC 1000m x 4 @ 14.8 km/h (effort 04:08 / recup 250.0m x 02:06) - 16min d'intensité;44;🟨
+🟡S-50;Mercredi;2026-12-30;Vélo;Seuil Z4;Seuil Z4 (114 min);114;🟨
+🟡S-50;Jeudi;2026-12-31;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-50;*;2026-12-31;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+🟡S-50;Vendredi;2027-01-01;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-50;Samedi;2027-01-02;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+⚪S-49;Lundi;2027-01-04;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (92 min);92;🟩
+⚪S-49;*;2027-01-04;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+⚪S-49;Mercredi;2027-01-06;Vélo;Seuil Z4;Seuil Z4 (80 min);80;🟨
+⚪S-49;Jeudi;2027-01-07;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (92 min);92;🟩
+⚪S-49;Vendredi;2027-01-08;Natation;Technique + Seuil;Technique + seuil Z4 (54 min, 3km);54;🟨
+⚪S-49;Samedi;2027-01-09;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟡S-48;Lundi;2027-01-11;CAP;VC;VC 2000m x 3 @ 14.2 km/h (effort 08:37 / recup 500.0m x 04:13) - 25min d'intensité;58;🟨
+🟡S-48;Mercredi;2027-01-13;Vélo;Seuil Z4;Seuil Z4 (141 min);141;🟨
+🟡S-48;Jeudi;2027-01-14;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-48;*;2027-01-14;Renforcement;Gainage;Gainage (30 min);30;🟩
+🟡S-48;Vendredi;2027-01-15;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-48;Samedi;2027-01-16;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟢S-47;Lundi;2027-01-18;CAP;VMA;VMA 2000m x 3 @ 15.3 km/h (effort 08:04 / recup 500.0m x 03:35) - 24min d'intensité;49;🟥
+🟢S-47;Mercredi;2027-01-20;Vélo;Seuil Z4;Seuil Z4 (112 min);112;🟨
+🟢S-47;Jeudi;2027-01-21;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟢S-47;*;2027-01-21;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+🟢S-47;Vendredi;2027-01-22;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟢S-47;Samedi;2027-01-23;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟡S-46;Lundi;2027-01-25;CAP;VC;VC 2800m x 2 @ 14.0 km/h (effort 12:19 / recup 700.0m x 05:54) - 24min d'intensité;56;🟨
+🟡S-46;Mercredi;2027-01-27;Vélo;Seuil Z4;Seuil Z4 (150 min);150;🟨
+🟡S-46;Jeudi;2027-01-28;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-46;*;2027-01-28;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+🟡S-46;Vendredi;2027-01-29;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-46;Samedi;2027-01-30;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+⚪S-45;Lundi;2027-02-01;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (92 min);92;🟩
+⚪S-45;*;2027-02-01;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+⚪S-45;Mercredi;2027-02-03;Vélo;Seuil Z4;Seuil Z4 (80 min);80;🟨
+⚪S-45;Jeudi;2027-02-04;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (92 min);92;🟩
+⚪S-45;Vendredi;2027-02-05;Natation;Technique + Seuil;Technique + seuil Z4 (54 min, 3km);54;🟨
+⚪S-45;Samedi;2027-02-06;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟡S-44;Lundi;2027-02-08;CAP;VC;VC 300m x 14 @ 17.3 km/h (effort 01:04 / recup 75.0m x 00:38) - 15min d'intensité;41;🟨
+🟡S-44;Mercredi;2027-02-10;Vélo;Seuil Z4;Seuil Z4 (156 min);156;🟨
+🟡S-44;Jeudi;2027-02-11;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-44;*;2027-02-11;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+🟡S-44;Vendredi;2027-02-12;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-44;Samedi;2027-02-13;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟢S-43;Lundi;2027-02-15;CAP;VMA;VMA 300m x 14 @ 17.0 km/h (effort 01:05 / recup 75.0m x 00:32) - 15min d'intensité;37;🟥
+🟢S-43;Mercredi;2027-02-17;Vélo;Seuil Z4;Seuil Z4 (127 min);127;🟨
+🟢S-43;Jeudi;2027-02-18;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟢S-43;*;2027-02-18;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+🟢S-43;Vendredi;2027-02-19;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟢S-43;Samedi;2027-02-20;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟡S-42;Lundi;2027-02-22;CAP;VC;VC 500m x 8 @ 16.4 km/h (effort 01:53 / recup 125.0m x 01:03) - 15min d'intensité;41;🟨
+🟡S-42;Mercredi;2027-02-24;Vélo;Seuil Z4;Seuil Z4 (132 min);132;🟨
+🟡S-42;Jeudi;2027-02-25;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-42;*;2027-02-25;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+🟡S-42;Vendredi;2027-02-26;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-42;Samedi;2027-02-27;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+⚪S-41;Lundi;2027-03-01;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (92 min);92;🟩
+⚪S-41;*;2027-03-01;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+⚪S-41;Mercredi;2027-03-03;Vélo;Seuil Z4;Seuil Z4 (80 min);80;🟨
+⚪S-41;Jeudi;2027-03-04;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (92 min);92;🟩
+⚪S-41;Vendredi;2027-03-05;Natation;Technique + Seuil;Technique + seuil Z4 (54 min, 3km);54;🟨
+⚪S-41;Samedi;2027-03-06;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟡S-40;Lundi;2027-03-08;CAP;VC;VC 700m x 6 @ 15.8 km/h (effort 02:44 / recup 175.0m x 01:28) - 16min d'intensité;44;🟨
+🟡S-40;Mercredi;2027-03-10;Vélo;Seuil Z4;Seuil Z4 (119 min);119;🟨
+🟡S-40;Jeudi;2027-03-11;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-40;*;2027-03-11;Renforcement;Gainage;Gainage (30 min);30;🟩
+🟡S-40;Vendredi;2027-03-12;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-40;Samedi;2027-03-13;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟢S-39;Lundi;2027-03-15;CAP;VMA;VMA 700m x 6 @ 16.5 km/h (effort 02:38 / recup 175.0m x 01:15) - 15min d'intensité;38;🟥
+🟢S-39;Mercredi;2027-03-17;Vélo;Seuil Z4;Seuil Z4 (142 min);142;🟨
+🟢S-39;Jeudi;2027-03-18;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟢S-39;*;2027-03-18;Renforcement;Gainage;Gainage (30 min);30;🟩
+🟢S-39;Vendredi;2027-03-19;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟢S-39;Samedi;2027-03-20;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟡S-38;Lundi;2027-03-22;CAP;VC;VC 1000m x 4 @ 15.0 km/h (effort 04:08 / recup 250.0m x 02:06) - 16min d'intensité;44;🟨
+🟡S-38;Mercredi;2027-03-24;Vélo;Seuil Z4;Seuil Z4 (114 min);114;🟨
+🟡S-38;Jeudi;2027-03-25;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-38;*;2027-03-25;Renforcement;Gainage;Gainage (30 min);30;🟩
+🟡S-38;Vendredi;2027-03-26;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-38;Samedi;2027-03-27;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+⚪S-37;Lundi;2027-03-29;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (92 min);92;🟩
+⚪S-37;*;2027-03-29;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+⚪S-37;Mercredi;2027-03-31;Vélo;Seuil Z4;Seuil Z4 (80 min);80;🟨
+⚪S-37;Jeudi;2027-04-01;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (92 min);92;🟩
+⚪S-37;Vendredi;2027-04-02;Natation;Technique + Seuil;Technique + seuil Z4 (54 min, 3km);54;🟨
+⚪S-37;Samedi;2027-04-03;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟡S-36;Lundi;2027-04-05;CAP;VC;VC 2000m x 3 @ 14.4 km/h (effort 08:37 / recup 500.0m x 04:13) - 25min d'intensité;58;🟨
+🟡S-36;Mercredi;2027-04-07;Vélo;Seuil Z4;Seuil Z4 (141 min);141;🟨
+🟡S-36;Jeudi;2027-04-08;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-36;*;2027-04-08;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+🟡S-36;Vendredi;2027-04-09;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-36;Samedi;2027-04-10;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟢S-35;Lundi;2027-04-12;CAP;VMA;VMA 2000m x 3 @ 15.5 km/h (effort 08:04 / recup 500.0m x 03:35) - 24min d'intensité;49;🟥
+🟢S-35;Mercredi;2027-04-14;Vélo;Seuil Z4;Seuil Z4 (112 min);112;🟨
+🟢S-35;Jeudi;2027-04-15;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟢S-35;*;2027-04-15;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+🟢S-35;Vendredi;2027-04-16;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟢S-35;Samedi;2027-04-17;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟡S-34;Lundi;2027-04-19;CAP;VC;VC 2800m x 2 @ 14.2 km/h (effort 12:19 / recup 700.0m x 05:54) - 24min d'intensité;56;🟨
+🟡S-34;Mercredi;2027-04-21;Vélo;Seuil Z4;Seuil Z4 (150 min);150;🟨
+🟡S-34;Jeudi;2027-04-22;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-34;*;2027-04-22;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+🟡S-34;Vendredi;2027-04-23;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-34;Samedi;2027-04-24;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+⚪S-33;Lundi;2027-04-26;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (92 min);92;🟩
+⚪S-33;*;2027-04-26;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+⚪S-33;Mercredi;2027-04-28;Vélo;Seuil Z4;Seuil Z4 (80 min);80;🟨
+⚪S-33;Jeudi;2027-04-29;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (92 min);92;🟩
+⚪S-33;Vendredi;2027-04-30;Natation;Technique + Seuil;Technique + seuil Z4 (54 min, 3km);54;🟨
+⚪S-33;Samedi;2027-05-01;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟡S-32;Lundi;2027-05-03;CAP;VC;VC 300m x 14 @ 17.5 km/h (effort 01:04 / recup 75.0m x 00:38) - 15min d'intensité;41;🟨
+🟡S-32;Mercredi;2027-05-05;Vélo;Seuil Z4;Seuil Z4 (156 min);156;🟨
+🟡S-32;Jeudi;2027-05-06;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-32;*;2027-05-06;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+🟡S-32;Vendredi;2027-05-07;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-32;Samedi;2027-05-08;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟢S-31;Lundi;2027-05-10;CAP;VMA;VMA 300m x 14 @ 17.2 km/h (effort 01:05 / recup 75.0m x 00:32) - 15min d'intensité;37;🟥
+🟢S-31;Mercredi;2027-05-12;Vélo;Seuil Z4;Seuil Z4 (127 min);127;🟨
+🟢S-31;Jeudi;2027-05-13;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟢S-31;*;2027-05-13;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+🟢S-31;Vendredi;2027-05-14;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟢S-31;Samedi;2027-05-15;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟡S-30;Lundi;2027-05-17;CAP;VC;VC 500m x 8 @ 16.6 km/h (effort 01:53 / recup 125.0m x 01:03) - 15min d'intensité;41;🟨
+🟡S-30;Mercredi;2027-05-19;Vélo;Seuil Z4;Seuil Z4 (132 min);132;🟨
+🟡S-30;Jeudi;2027-05-20;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-30;*;2027-05-20;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+🟡S-30;Vendredi;2027-05-21;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-30;Samedi;2027-05-22;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+⚪S-29;Lundi;2027-05-24;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (92 min);92;🟩
+⚪S-29;*;2027-05-24;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+⚪S-29;Mercredi;2027-05-26;Vélo;Seuil Z4;Seuil Z4 (80 min);80;🟨
+⚪S-29;Jeudi;2027-05-27;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (92 min);92;🟩
+⚪S-29;Vendredi;2027-05-28;Natation;Technique + Seuil;Technique + seuil Z4 (54 min, 3km);54;🟨
+⚪S-29;Samedi;2027-05-29;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟡S-28;Lundi;2027-05-31;CAP;VC;VC 700m x 6 @ 16.0 km/h (effort 02:44 / recup 175.0m x 01:28) - 16min d'intensité;44;🟨
+🟡S-28;Mercredi;2027-06-02;Vélo;Seuil Z4;Seuil Z4 (119 min);119;🟨
+🟡S-28;Jeudi;2027-06-03;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-28;*;2027-06-03;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+🟡S-28;Vendredi;2027-06-04;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-28;Samedi;2027-06-05;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟢S-27;Lundi;2027-06-07;CAP;VMA;VMA 700m x 6 @ 16.7 km/h (effort 02:38 / recup 175.0m x 01:15) - 15min d'intensité;38;🟥
+🟢S-27;Mercredi;2027-06-09;Vélo;Seuil Z4;Seuil Z4 (118 min);118;🟨
+🟢S-27;Jeudi;2027-06-10;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟢S-27;*;2027-06-10;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+🟢S-27;Vendredi;2027-06-11;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟢S-27;Samedi;2027-06-12;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟡S-26;Lundi;2027-06-14;CAP;VC;VC 1000m x 4 @ 15.2 km/h (effort 04:08 / recup 250.0m x 02:06) - 16min d'intensité;44;🟨
+🟡S-26;Mercredi;2027-06-16;Vélo;Seuil Z4;Seuil Z4 (94 min);94;🟨
+🟡S-26;Jeudi;2027-06-17;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-26;*;2027-06-17;Renforcement;Gainage;Gainage (30 min);30;🟩
+🟡S-26;Vendredi;2027-06-18;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-26;Samedi;2027-06-19;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+⚪S-25;Lundi;2027-06-21;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (75 min);75;🟩
+⚪S-25;*;2027-06-21;Renforcement;Gainage;Gainage (30 min);30;🟩
+⚪S-25;Mercredi;2027-06-23;Vélo;Seuil Z4;Seuil Z4 (80 min);80;🟨
+⚪S-25;Jeudi;2027-06-24;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (75 min);75;🟩
+⚪S-25;Vendredi;2027-06-25;Natation;Technique + Seuil;Technique + seuil Z4 (54 min, 3km);54;🟨
+⚪S-25;Samedi;2027-06-26;CAP;Sortie longue Z2;Sortie longue Z2 (113 min);113;🟩
+🟡S-24;Lundi;2027-06-28;CAP;VC;VC 2000m x 3 @ 14.6 km/h (effort 08:37 / recup 500.0m x 04:13) - 25min d'intensité;58;🟨
+🟡S-24;Mercredi;2027-06-30;Vélo;Seuil Z4;Seuil Z4 (116 min);116;🟨
+🟡S-24;Jeudi;2027-07-01;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-24;*;2027-07-01;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+🟡S-24;Vendredi;2027-07-02;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-24;Samedi;2027-07-03;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟢S-23;Lundi;2027-07-05;CAP;VMA;VMA 2000m x 3 @ 15.7 km/h (effort 08:04 / recup 500.0m x 03:35) - 24min d'intensité;49;🟥
+🟢S-23;Mercredi;2027-07-07;Vélo;Seuil Z4;Seuil Z4 (92 min);92;🟨
+🟢S-23;Jeudi;2027-07-08;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟢S-23;*;2027-07-08;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+🟢S-23;Vendredi;2027-07-09;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟢S-23;Samedi;2027-07-10;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟡S-22;Lundi;2027-07-12;CAP;VC;VC 2800m x 2 @ 14.3 km/h (effort 12:19 / recup 700.0m x 05:54) - 24min d'intensité;56;🟨
+🟡S-22;Mercredi;2027-07-14;Vélo;Seuil Z4;Seuil Z4 (125 min);125;🟨
+🟡S-22;Jeudi;2027-07-15;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-22;*;2027-07-15;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+🟡S-22;Vendredi;2027-07-16;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-22;Samedi;2027-07-17;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+⚪S-21;Lundi;2027-07-19;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (75 min);75;🟩
+⚪S-21;*;2027-07-19;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+⚪S-21;Mercredi;2027-07-21;Vélo;Seuil Z4;Seuil Z4 (80 min);80;🟨
+⚪S-21;Jeudi;2027-07-22;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (75 min);75;🟩
+⚪S-21;Vendredi;2027-07-23;Natation;Technique + Seuil;Technique + seuil Z4 (54 min, 3km);54;🟨
+⚪S-21;Samedi;2027-07-24;CAP;Sortie longue Z2;Sortie longue Z2 (113 min);113;🟩
+🟡S-20;Lundi;2027-07-26;CAP;VC;VC 300m x 14 @ 17.8 km/h (effort 01:04 / recup 75.0m x 00:38) - 15min d'intensité;41;🟨
+🟡S-20;Mercredi;2027-07-28;Vélo;Seuil Z4;Seuil Z4 (129 min);129;🟨
+🟡S-20;Jeudi;2027-07-29;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-20;*;2027-07-29;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+🟡S-20;Vendredi;2027-07-30;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-20;Samedi;2027-07-31;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟢S-19;Lundi;2027-08-02;CAP;VMA;VMA 300m x 14 @ 17.5 km/h (effort 01:05 / recup 75.0m x 00:32) - 15min d'intensité;37;🟥
+🟢S-19;Mercredi;2027-08-04;Vélo;Seuil Z4;Seuil Z4 (104 min);104;🟨
+🟢S-19;Jeudi;2027-08-05;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟢S-19;*;2027-08-05;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+🟢S-19;Vendredi;2027-08-06;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟢S-19;Samedi;2027-08-07;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟡S-18;Lundi;2027-08-09;CAP;VC;VC 500m x 8 @ 16.8 km/h (effort 01:53 / recup 125.0m x 01:03) - 15min d'intensité;41;🟨
+🟡S-18;Mercredi;2027-08-11;Vélo;Seuil Z4;Seuil Z4 (110 min);110;🟨
+🟡S-18;Jeudi;2027-08-12;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-18;*;2027-08-12;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+🟡S-18;Vendredi;2027-08-13;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-18;Samedi;2027-08-14;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+⚪S-17;Lundi;2027-08-16;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (75 min);75;🟩
+⚪S-17;*;2027-08-16;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+⚪S-17;Mercredi;2027-08-18;Vélo;Seuil Z4;Seuil Z4 (80 min);80;🟨
+⚪S-17;Jeudi;2027-08-19;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (75 min);75;🟩
+⚪S-17;Vendredi;2027-08-20;Natation;Technique + Seuil;Technique + seuil Z4 (54 min, 3km);54;🟨
+⚪S-17;Samedi;2027-08-21;CAP;Sortie longue Z2;Sortie longue Z2 (113 min);113;🟩
+🟡S-16;Lundi;2027-08-23;CAP;VC;VC 700m x 6 @ 16.2 km/h (effort 02:44 / recup 175.0m x 01:28) - 16min d'intensité;44;🟨
+🟡S-16;Mercredi;2027-08-25;Vélo;Seuil Z4;Seuil Z4 (99 min);99;🟨
+🟡S-16;Jeudi;2027-08-26;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-16;*;2027-08-26;Renforcement;Gainage;Gainage (30 min);30;🟩
+🟡S-16;Vendredi;2027-08-27;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-16;Samedi;2027-08-28;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟢S-15;Lundi;2027-08-30;CAP;VMA;VMA 700m x 6 @ 16.9 km/h (effort 02:38 / recup 175.0m x 01:15) - 15min d'intensité;38;🟥
+🟢S-15;Mercredi;2027-09-01;Vélo;Seuil Z4;Seuil Z4 (118 min);118;🟨
+🟢S-15;Jeudi;2027-09-02;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟢S-15;*;2027-09-02;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+🟢S-15;Vendredi;2027-09-03;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟢S-15;Samedi;2027-09-04;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟡S-14;Lundi;2027-09-06;CAP;VC;VC 1000m x 4 @ 15.4 km/h (effort 04:08 / recup 250.0m x 02:06) - 16min d'intensité;44;🟨
+🟡S-14;Mercredi;2027-09-08;Vélo;Seuil Z4;Seuil Z4 (94 min);94;🟨
+🟡S-14;Jeudi;2027-09-09;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-14;*;2027-09-09;Renforcement;Gainage;Gainage (30 min);30;🟩
+🟡S-14;Vendredi;2027-09-10;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-14;Samedi;2027-09-11;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+⚪S-13;Lundi;2027-09-13;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (75 min);75;🟩
+⚪S-13;*;2027-09-13;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+⚪S-13;Mercredi;2027-09-15;Vélo;Seuil Z4;Seuil Z4 (80 min);80;🟨
+⚪S-13;Jeudi;2027-09-16;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (75 min);75;🟩
+⚪S-13;Vendredi;2027-09-17;Natation;Technique + Seuil;Technique + seuil Z4 (54 min, 3km);54;🟨
+⚪S-13;Samedi;2027-09-18;CAP;Sortie longue Z2;Sortie longue Z2 (113 min);113;🟩
+🟡S-12;Lundi;2027-09-20;CAP;VC;VC 2000m x 3 @ 14.8 km/h (effort 08:37 / recup 500.0m x 04:13) - 25min d'intensité;58;🟨
+🟡S-12;Mercredi;2027-09-22;Vélo;Seuil Z4;Seuil Z4 (116 min);116;🟨
+🟡S-12;Jeudi;2027-09-23;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟡S-12;*;2027-09-23;Renforcement;Gainage;Gainage (30 min);30;🟩
+🟡S-12;Vendredi;2027-09-24;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-12;Samedi;2027-09-25;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟢S-11;Lundi;2027-09-27;CAP;VMA;VMA 2000m x 3 @ 15.9 km/h (effort 08:04 / recup 500.0m x 03:35) - 24min d'intensité;49;🟥
+🟢S-11;Mercredi;2027-09-29;Vélo;Seuil Z4;Seuil Z4 (92 min);92;🟨
+🟢S-11;Jeudi;2027-09-30;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (120 min);120;🟩
+🟢S-11;*;2027-09-30;Renforcement;Gainage;Gainage (30 min);30;🟩
+🟢S-11;Vendredi;2027-10-01;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟢S-11;Samedi;2027-10-02;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟡S-10;Lundi;2027-10-04;CAP;VC;VC 2800m x 2 @ 14.5 km/h (effort 12:19 / recup 700.0m x 05:54) - 24min d'intensité;56;🟨
+🟡S-10;Mercredi;2027-10-06;Vélo;Seuil Z4;Seuil Z4 (88 min);88;🟨
+🟡S-10;Jeudi;2027-10-07;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (83 min);83;🟩
+🟡S-10;*;2027-10-07;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+🟡S-10;Vendredi;2027-10-08;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-10;Samedi;2027-10-09;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+⚪S-09;Lundi;2027-10-11;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (36 min);36;🟩
+⚪S-09;*;2027-10-11;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+⚪S-09;Mercredi;2027-10-13;Vélo;Seuil Z4;Seuil Z4 (80 min);80;🟨
+⚪S-09;Jeudi;2027-10-14;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (36 min);36;🟩
+⚪S-09;Vendredi;2027-10-15;Natation;Technique + Seuil;Technique + seuil Z4 (39 min, 3km);39;🟨
+⚪S-09;Samedi;2027-10-16;CAP;Sortie longue Z2;Sortie longue Z2 (54 min);54;🟩
+🟡S-08;Lundi;2027-10-18;CAP;VC;VC 300m x 14 @ 18.0 km/h (effort 01:04 / recup 75.0m x 00:38) - 15min d'intensité;41;🟨
+🟡S-08;Mercredi;2027-10-20;Course;Compétition intermédiaire;Marathon Paris 20/10;0;⭐
+🟡S-08;Jeudi;2027-10-21;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (86 min);86;🟩
+🟡S-08;*;2027-10-21;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+🟡S-08;Vendredi;2027-10-22;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-08;Samedi;2027-10-23;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🟢S-07;Lundi;2027-10-25;CAP;VMA;VMA 300m x 14 @ 17.7 km/h (effort 01:05 / recup 75.0m x 00:32) - 15min d'intensité;37;🟥
+🟢S-07;Mercredi;2027-10-27;Vélo;Seuil Z4;Seuil Z4 (80 min);80;🟨
+🟢S-07;Jeudi;2027-10-28;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (77 min);77;🟩
+🟢S-07;*;2027-10-28;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+🟢S-07;Vendredi;2027-10-29;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟢S-07;Samedi;2027-10-30;CAP;Sortie longue Z2;Sortie longue Z2 (116 min);116;🟩
+🟡S-06;Lundi;2027-11-01;CAP;VC;VC 500m x 8 @ 17.1 km/h (effort 01:53 / recup 125.0m x 01:03) - 15min d'intensité;41;🟨
+🟡S-06;Mercredi;2027-11-03;Vélo;Seuil Z4;Seuil Z4 (88 min);88;🟨
+🟡S-06;Jeudi;2027-11-04;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (73 min);73;🟩
+🟡S-06;*;2027-11-04;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+🟡S-06;Vendredi;2027-11-05;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-06;Samedi;2027-11-06;CAP;Sortie longue Z2;Sortie longue Z2 (109 min);109;🟩
+⚪S-05;Lundi;2027-11-08;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (36 min);36;🟩
+⚪S-05;*;2027-11-08;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+⚪S-05;Mercredi;2027-11-10;Vélo;Seuil Z4;Seuil Z4 (80 min);80;🟨
+⚪S-05;Jeudi;2027-11-11;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (36 min);36;🟩
+⚪S-05;Vendredi;2027-11-12;Natation;Technique + Seuil;Technique + seuil Z4 (39 min, 3km);39;🟨
+⚪S-05;Samedi;2027-11-13;CAP;Sortie longue Z2;Sortie longue Z2 (54 min);54;🟩
+🟡S-04;Lundi;2027-11-15;Course;Compétition intermédiaire;Semi Lyon 15/11;0;⭐
+🟡S-04;Mercredi;2027-11-17;Vélo;Seuil Z4;Seuil Z4 (88 min);88;🟨
+🟡S-04;Jeudi;2027-11-18;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (67 min);67;🟩
+🟡S-04;*;2027-11-18;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+🟡S-04;Vendredi;2027-11-19;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-04;Samedi;2027-11-20;CAP;Sortie longue Z2;Sortie longue Z2 (101 min);101;🟩
+🟢S-03;Lundi;2027-11-22;CAP;VMA;VMA 700m x 6 @ 17.1 km/h (effort 02:38 / recup 175.0m x 01:15) - 15min d'intensité;38;🟥
+🟢S-03;Mercredi;2027-11-24;Vélo;Seuil Z4;Seuil Z4 (80 min);80;🟨
+🟢S-03;Jeudi;2027-11-25;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (86 min);86;🟩
+🟢S-03;*;2027-11-25;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+🟢S-03;Vendredi;2027-11-26;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟢S-03;Samedi;2027-11-27;CAP;Sortie longue Z2;Sortie longue Z2 (120 min);120;🟩
+🔵S-02;Lundi;2027-11-29;CAP;Footing de récupération Z1;Footing de récupération Z1 (39 min);39;🟦
+🔵S-02;Mercredi;2027-12-01;Vélo;Récupération active;Récupération active (52 min);52;🟦
+🔵S-02;Jeudi;2027-12-02;CAP;Footing de récupération Z1;Footing de récupération Z1 (39 min);39;🟦
+🔵S-02;Vendredi;2027-12-03;Natation;Récupération active;Récupération active (60 min);60;🟦
+🔵S-02;Samedi;2027-12-04;CAP;Footing de récupération Z1;Footing de récupération Z1 (39 min);39;🟦
+🔵S-01;Lundi;2027-12-06;CAP;Footing de récupération Z1;Footing de récupération Z1 (39 min);39;🟦
+🔵S-01;Mercredi;2027-12-08;Vélo;Récupération active;Récupération active (52 min);52;🟦
+🔵S-01;Jeudi;2027-12-09;CAP;Footing de récupération Z1;Footing de récupération Z1 (39 min);39;🟦
+🔵S-01;Vendredi;2027-12-10;Natation;Récupération active;Récupération active (60 min);60;🟦
+🔵S-01;Samedi;2027-12-11;CAP;Footing de récupération Z1;Footing de récupération Z1 (39 min);39;🟦
+🔵S-00;Lundi;2027-12-13;CAP;Footing de récupération Z1;Footing de récupération Z1 (39 min);39;🟦
+🔵S-00;Mercredi;2027-12-15;Course;Objectif;15/12/2027;0;⭐
+
+# ============================================================
+# FICHIER N°10 : Thomas_ROBERT_plan_20260824_184657.csv
+# ============================================================
+🟢S-16;Lundi;2026-08-24;CAP;VC;VC 300m x 12 @ 13.2 km/h (effort 01:21 / recup 75.0m x 00:48) - 16min d'intensité;40;🟨
+🟢S-16;Mardi;2026-08-25;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟢S-16;Mercredi;2026-08-26;CAP;Footing de récupération Z1;Footing de récupération Z1 (76 min);76;🟦
+🟢S-16;*;2026-08-26;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+🟢S-16;Vendredi;2026-08-28;CAP;Footing de récupération Z1;Footing de récupération Z1 (76 min);76;🟦
+🟢S-16;Dimanche;2026-08-30;Vélo;Endurance Z2;Endurance Z2 (80 min);80;🟩
+🟡S-15;Lundi;2026-08-31;CAP;VMA;VMA 300m x 16 @ 18.3 km/h (effort 00:58 / recup 75.0m x 00:29) - 15min d'intensité;41;🟥
+🟡S-15;Mardi;2026-09-01;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-15;Mercredi;2026-09-02;CAP;Footing de récupération Z1;Footing de récupération Z1 (118 min);118;🟦
+🟡S-15;*;2026-09-02;Renforcement;Gainage;Gainage (30 min);30;🟩
+🟡S-15;Vendredi;2026-09-04;CAP;Footing de récupération Z1;Footing de récupération Z1 (118 min);118;🟦
+🟡S-15;Dimanche;2026-09-06;Vélo;Endurance Z2;Endurance Z2 (112 min);112;🟩
+🟢S-14;Lundi;2026-09-07;CAP;VC;VC 500m x 7 @ 12.5 km/h (effort 02:23 / recup 125.0m x 01:20) - 16min d'intensité;41;🟨
+🟢S-14;Mardi;2026-09-08;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟢S-14;Mercredi;2026-09-09;CAP;Footing de récupération Z1;Footing de récupération Z1 (65 min);65;🟦
+🟢S-14;*;2026-09-09;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+🟢S-14;Vendredi;2026-09-11;CAP;Footing de récupération Z1;Footing de récupération Z1 (65 min);65;🟦
+🟢S-14;Dimanche;2026-09-13;Vélo;Endurance Z2;Endurance Z2 (80 min);80;🟩
+⚪S-13;Lundi;2026-09-14;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (61 min);61;🟩
+⚪S-13;*;2026-09-14;Renforcement;Renforcement général;Renforcement général (30 min);30;🟩
+⚪S-13;Mardi;2026-09-15;Natation;Technique + Seuil;Technique + seuil Z4 (51 min, 3km);51;🟨
+⚪S-13;Mercredi;2026-09-16;CAP;Footing de récupération Z1;Footing de récupération Z1 (43 min);43;🟦
+⚪S-13;Vendredi;2026-09-18;CAP;Footing de récupération Z1;Footing de récupération Z1 (43 min);43;🟦
+⚪S-13;Dimanche;2026-09-20;Course;Compétition intermédiaire;10km Lyon 20/09;0;⭐
+🟡S-12;Lundi;2026-09-21;CAP;VC;VC 700m x 5 @ 12.1 km/h (effort 03:28 / recup 175.0m x 01:52) - 17min d'intensité;45;🟨
+🟡S-12;Mardi;2026-09-22;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-12;Mercredi;2026-09-23;CAP;Footing de récupération Z1;Footing de récupération Z1 (115 min);115;🟦
+🟡S-12;*;2026-09-23;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+🟡S-12;Vendredi;2026-09-25;CAP;Footing de récupération Z1;Footing de récupération Z1 (115 min);115;🟦
+🟡S-12;Dimanche;2026-09-27;Vélo;Endurance Z2;Endurance Z2 (109 min);109;🟩
+🟢S-11;Lundi;2026-09-28;CAP;VMA;VMA 700m x 7 @ 17.6 km/h (effort 02:23 / recup 175.0m x 01:08) - 16min d'intensité;39;🟥
+🟢S-11;Mardi;2026-09-29;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟢S-11;Mercredi;2026-09-30;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟢S-11;*;2026-09-30;Renforcement;Gainage;Gainage (30 min);30;🟩
+🟢S-11;Vendredi;2026-10-02;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟢S-11;Dimanche;2026-10-04;Vélo;Endurance Z2;Endurance Z2 (142 min);142;🟩
+🟡S-10;Lundi;2026-10-05;CAP;VC;VC 1000m x 3 @ 11.4 km/h (effort 05:15 / recup 250.0m x 02:40) - 15min d'intensité;41;🟨
+🟡S-10;Mardi;2026-10-06;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-10;Mercredi;2026-10-07;CAP;Footing de récupération Z1;Footing de récupération Z1 (109 min);109;🟦
+🟡S-10;*;2026-10-07;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+🟡S-10;Vendredi;2026-10-09;CAP;Footing de récupération Z1;Footing de récupération Z1 (109 min);109;🟦
+🟡S-10;Dimanche;2026-10-11;Vélo;Endurance Z2;Endurance Z2 (104 min);104;🟩
+⚪S-09;Lundi;2026-10-12;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (92 min);92;🟩
+⚪S-09;*;2026-10-12;Renforcement;Gainage;Gainage (30 min);30;🟩
+⚪S-09;Mardi;2026-10-13;Natation;Technique + Seuil;Technique + seuil Z4 (54 min, 3km);54;🟨
+⚪S-09;Mercredi;2026-10-14;CAP;Footing de récupération Z1;Footing de récupération Z1 (65 min);65;🟦
+⚪S-09;Vendredi;2026-10-16;CAP;Footing de récupération Z1;Footing de récupération Z1 (65 min);65;🟦
+⚪S-09;Dimanche;2026-10-18;Vélo;Endurance Z2;Endurance Z2 (80 min);80;🟩
+🟡S-08;Lundi;2026-10-19;CAP;VC;VC 2000m x 2 @ 11.0 km/h (effort 10:55 / recup 500.0m x 05:21) - 21min d'intensité;51;🟨
+🟡S-08;Mardi;2026-10-20;Course;Compétition intermédiaire;5km Villeurbanne 20/10;0;⭐
+🟡S-08;Mercredi;2026-10-21;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-08;*;2026-10-21;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+🟡S-08;Vendredi;2026-10-23;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-08;Dimanche;2026-10-25;Vélo;Endurance Z2;Endurance Z2 (129 min);129;🟩
+🟢S-07;Lundi;2026-10-26;CAP;VMA;VMA 2000m x 3 @ 16.5 km/h (effort 07:17 / recup 500.0m x 03:14) - 21min d'intensité;46;🟥
+🟢S-07;Mardi;2026-10-27;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟢S-07;Mercredi;2026-10-28;CAP;Footing de récupération Z1;Footing de récupération Z1 (118 min);118;🟦
+🟢S-07;*;2026-10-28;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+🟢S-07;Vendredi;2026-10-30;CAP;Footing de récupération Z1;Footing de récupération Z1 (118 min);118;🟦
+🟢S-07;Dimanche;2026-11-01;Vélo;Endurance Z2;Endurance Z2 (112 min);112;🟩
+🟡S-06;Lundi;2026-11-02;CAP;VC;VC 2800m x 1 @ 10.8 km/h (effort 15:37 / recup 700.0m x 07:30) - 15min d'intensité;41;🟨
+🟡S-06;Mardi;2026-11-03;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-06;Mercredi;2026-11-04;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-06;*;2026-11-04;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+🟡S-06;Vendredi;2026-11-06;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-06;Dimanche;2026-11-08;Vélo;Endurance Z2;Endurance Z2 (114 min);114;🟩
+⚪S-05;Lundi;2026-11-09;CAP;Endurance fondamentale Z2;Endurance fondamentale Z2 (75 min);75;🟩
+⚪S-05;*;2026-11-09;Renforcement;Renforcement excentrique;Renforcement excentrique (30 min);30;🟩
+⚪S-05;Mardi;2026-11-10;Natation;Technique + Seuil;Technique + seuil Z4 (54 min, 3km);54;🟨
+⚪S-05;Mercredi;2026-11-11;CAP;Footing de récupération Z1;Footing de récupération Z1 (53 min);53;🟦
+⚪S-05;Vendredi;2026-11-13;CAP;Footing de récupération Z1;Footing de récupération Z1 (53 min);53;🟦
+⚪S-05;Dimanche;2026-11-15;Vélo;Endurance Z2;Endurance Z2 (80 min);80;🟩
+🟡S-04;Lundi;2026-11-16;CAP;VC;VC 300m x 12 @ 13.2 km/h (effort 01:21 / recup 75.0m x 00:48) - 16min d'intensité;44;🟨
+🟡S-04;Mardi;2026-11-17;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟡S-04;Mercredi;2026-11-18;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-04;*;2026-11-18;Renforcement;Renforcement spécifique;Renforcement spécifique (30 min);30;🟩
+🟡S-04;Vendredi;2026-11-20;CAP;Footing de récupération Z1;Footing de récupération Z1 (120 min);120;🟦
+🟡S-04;Dimanche;2026-11-22;Vélo;Endurance Z2;Endurance Z2 (118 min);118;🟩
+🟢S-03;Lundi;2026-11-23;CAP;VMA;VMA 300m x 16 @ 18.3 km/h (effort 00:58 / recup 75.0m x 00:29) - 15min d'intensité;38;🟥
+🟢S-03;Mardi;2026-11-24;Natation;Technique + Seuil;Technique + seuil Z4 (90 min, 3km);90;🟨
+🟢S-03;Mercredi;2026-11-25;CAP;Footing de récupération Z1;Footing de récupération Z1 (109 min);109;🟦
+🟢S-03;*;2026-11-25;Renforcement;Pliométrie;Pliométrie (30 min);30;🟩
+🟢S-03;Vendredi;2026-11-27;CAP;Footing de récupération Z1;Footing de récupération Z1 (109 min);109;🟦
+🟢S-03;Dimanche;2026-11-29;Vélo;Endurance Z2;Endurance Z2 (104 min);104;🟩
+🔵S-02;Lundi;2026-11-30;CAP;Footing de récupération Z1;Footing de récupération Z1 (39 min);39;🟦
+🔵S-02;Mardi;2026-12-01;Natation;Récupération active;Récupération active (60 min);60;🟦
+🔵S-02;Mercredi;2026-12-02;CAP;Footing de récupération Z1;Footing de récupération Z1 (39 min);39;🟦
+🔵S-02;Vendredi;2026-12-04;CAP;Footing de récupération Z1;Footing de récupération Z1 (39 min);39;🟦
+🔵S-02;Dimanche;2026-12-06;Vélo;Récupération active;Récupération active (52 min);52;🟦
+🔵S-01;Lundi;2026-12-07;CAP;Footing de récupération Z1;Footing de récupération Z1 (39 min);39;🟦
+🔵S-01;Mardi;2026-12-08;Natation;Récupération active;Récupération active (60 min);60;🟦
+🔵S-01;Mercredi;2026-12-09;CAP;Footing de récupération Z1;Footing de récupération Z1 (39 min);39;🟦
+🔵S-01;Vendredi;2026-12-11;CAP;Footing de récupération Z1;Footing de récupération Z1 (39 min);39;🟦
+🔵S-01;Dimanche;2026-12-13;Vélo;Récupération active;Récupération active (52 min);52;🟦
+🔵S-00;Lundi;2026-12-14;CAP;Footing de récupération Z1;Footing de récupération Z1 (39 min);39;🟦
+🔵S-00;Mardi;2026-12-15;Course;Objectif;15/12/2026;0;⭐
+
+# ============================================================
+# FIN DE LA FUSION - 2026-08-24 18:47:23
+# Total fichiers : 10
+# Total lignes extraites : 1534
+# Fichier de sortie : D:\DevPython\Deepseek-athlete\outputs\plans\fusion_plans_8_colonnes.csv
+# ============================================================
