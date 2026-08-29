@@ -2,6 +2,7 @@
 # FICHIER: src/main.py
 # RÔLE: Point d'entrée principal de l'application
 #       Menu interactif pour analyser CSV, planifier, mettre à jour
+#       CORRIGÉ: Utilisation des fonctions génériques de liste.py
 # ============================================================
 
 import os
@@ -20,7 +21,7 @@ from utils.validators import analyser_jours_disponibles
 from export.sov import sauvegarder_json, sauvegarder_csv
 from export import generer_pdf_athlete
 from planificateur import planifier_athlete
-from liste import choisir_athletes
+from liste import choisir_athletes, choisir_element  # ← IMPORT MODIFIÉ
 from maj_intensites import maj_intensites
 
 
@@ -29,23 +30,28 @@ def analyser_csv():
     print("\n" + "="*60)
     print("📊 AGENT D'ANALYSE - Génération des séances")
     print("="*60)
-
-    csv_file = input("📁 Nom du fichier CSV (dans inputs/) : ").strip()
-    if not csv_file.endswith('.csv'):
-        csv_file += '.csv'
-    csv_path = os.path.join('inputs', csv_file)
-
-    if not os.path.exists(csv_path):
-        print(f"❌ Fichier {csv_path} introuvable")
+    
+    # CORRIGÉ: Utilisation de choisir_element() de liste.py
+    fichier_csv = choisir_element(
+        dossier='inputs',
+        extension='.csv',
+        titre="📁 FICHIERS CSV DISPONIBLES DANS inputs/"
+    )
+    
+    if not fichier_csv:
+        print("❌ Analyse annulée.")
         return
-
+    
+    csv_path = os.path.join('inputs', fichier_csv)
+    
     try:
         df = pd.read_csv(csv_path, encoding='utf-8-sig', delimiter=';')
         if df.empty:
             print(f"⚠️ Le fichier {csv_path} est vide.")
             return
-
-        print(f"✅ {len(df)} athlètes chargés")
+        
+        print(f"\n✅ {len(df)} athlètes chargés depuis {fichier_csv}")
+        print("="*60)
 
         base_dir = 'outputs/Base par athlète'
         os.makedirs(base_dir, exist_ok=True)
@@ -251,10 +257,11 @@ def main():
         elif choix == '3':
             mise_a_jour_intensites()
             input("\nAppuyez sur Entrée pour continuer...")
+        elif choix == '9':
+            print("\n👋 Au revoir !")
+            break
         else:
             print("❌ Choix invalide. Veuillez choisir 1, 2, 3 ou 9.")
-            break
-
 
 
 if __name__ == '__main__':
