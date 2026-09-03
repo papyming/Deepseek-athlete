@@ -1,26 +1,16 @@
+# ============================================================
+# FICHIER: src/core/p_code_vc.py
+# RÔLE: Génération des séances VC selon le P-code
+#       CORRIGÉ: Import depuis physiology/
+# ============================================================
+
 import math
+from .physiology import COEFF_VC_DISTANCE
 
-# ============================================================
-# COEFFICIENTS VC (différenciés selon le genre)
-# ============================================================
-COEFF_VC_DISTANCE = {
-    # Hommes (M) / Femmes (F)
-    200: {'M': 1.2000, 'F': 1.1640},
-    300: {'M': 1.1800, 'F': 1.1446},
-    400: {'M': 1.1400, 'F': 1.1058},
-    500: {'M': 1.1200, 'F': 1.0864},
-    600: {'M': 1.1000, 'F': 1.0670},
-    700: {'M': 1.0800, 'F': 1.0476},
-    800: {'M': 1.0500, 'F': 1.0185},
-    1000: {'M': 1.0200, 'F': 0.9894},
-    1600: {'M': 1.0000, 'F': 0.9700},
-    2000: {'M': 0.9800, 'F': 0.9506},
-    2400: {'M': 0.9700, 'F': 0.9409},
-    2800: {'M': 0.9600, 'F': 0.9312}
-}
 
-VITESSE_RECUP_VC = 0.5   # 50% de la VC
-RAPPORT_RECUP_VC = 0.25  # 25% de la distance d'effort
+VITESSE_RECUP_VC = 0.5
+RAPPORT_RECUP_VC = 0.25
+
 
 def generer_seances_vc(vc: float, sexe: str, temps_min: int = 15, temps_max: int = 30):
     """
@@ -81,21 +71,3 @@ def formater_temps(secondes: float) -> str:
     minutes = int(secondes // 60)
     sec = int(secondes % 60)
     return f"{minutes:02d}:{sec:02d}"
-
-
-if __name__ == "__main__":
-    print("=== TEST VC (Homme, 14.0 km/h) ===")
-    seances = generer_seances_vc(14.0, "M")
-    for s in seances:
-        print(f"{s['distance']}m : {s['pourcentage']}% VC → {s['vitesse_effort']} km/h")
-        print(f"  Effort {s['temps_effort']}, recup {s['temps_recup']}, {s['nb_rep']} rep")
-        print(f"  Total : {s['temps_total_seance']}")
-        print()
-    
-    print("=== TEST VC (Femme, 14.0 km/h) ===")
-    seances = generer_seances_vc(14.0, "F")
-    for s in seances:
-        print(f"{s['distance']}m : {s['pourcentage']}% VC → {s['vitesse_effort']} km/h")
-        print(f"  Effort {s['temps_effort']}, recup {s['temps_recup']}, {s['nb_rep']} rep")
-        print(f"  Total : {s['temps_total_seance']}")
-        print()

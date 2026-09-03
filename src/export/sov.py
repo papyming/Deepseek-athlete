@@ -139,3 +139,16 @@ def sauvegarder_pdf(doc, base_path):
         with open(txt_path, 'w', encoding='utf-8') as f:
             f.write(f"Erreur: {e}\n")
         return txt_path
+
+def sauvegarder_intensites_csv(tableau_intensites: list, base_path: str) -> str:
+    """
+    Sauvegarde le tableau des intensités en CSV.
+    """
+    if not tableau_intensites:
+        return None
+    
+    import pandas as pd
+    df = pd.DataFrame(tableau_intensites)
+    path = base_path + '_intensites.csv'
+    df.to_csv(path, index=False, encoding='utf-8-sig', sep=';')
+    return path

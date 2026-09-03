@@ -1,25 +1,16 @@
+# ============================================================
+# FICHIER: src/core/p_code_vma.py
+# RÔLE: Génération des séances VMA selon le P-code
+#       CORRIGÉ: Import depuis physiology/
+# ============================================================
+
 import math
+from .physiology import COEFF_VMA_DISTANCE
 
-# ============================================================
-# COEFFICIENTS VMA (différenciés selon le genre)
-# ============================================================
-COEFF_VMA_DISTANCE = {
-    100: {'M': 105, 'F': 102},
-    200: {'M': 100, 'F': 98},
-    300: {'M': 99, 'F': 97},
-    400: {'M': 98, 'F': 96},
-    500: {'M': 97, 'F': 95},
-    600: {'M': 96, 'F': 94},
-    700: {'M': 95, 'F': 93},
-    800: {'M': 94, 'F': 92},
-    900: {'M': 93, 'F': 91},
-    1000: {'M': 92, 'F': 90},
-    2000: {'M': 89, 'F': 87},
-    3000: {'M': 85, 'F': 82}
-}
 
-VITESSE_RECUP_VMA = 0.5   # 50% de la VMA
-RAPPORT_RECUP_VMA = 0.25  # 25% de la distance d'effort
+VITESSE_RECUP_VMA = 0.5
+RAPPORT_RECUP_VMA = 0.25
+
 
 def generer_seances_vma(vma: float, sexe: str, temps_min: int = 15, temps_max: int = 30):
     """
@@ -59,7 +50,7 @@ def generer_seances_vma(vma: float, sexe: str, temps_min: int = 15, temps_max: i
         
         resultats.append({
             "distance": distance,
-            "pourcentage": pourcentage,
+            "pourcentage": round(pourcentage, 1),
             "vitesse_effort": round(vitesse_effort, 1),
             "temps_effort": formater_temps(temps_effort_s),
             "temps_effort_sec": round(temps_effort_s, 2),
@@ -80,21 +71,3 @@ def formater_temps(secondes: float) -> str:
     minutes = int(secondes // 60)
     sec = int(secondes % 60)
     return f"{minutes:02d}:{sec:02d}"
-
-
-if __name__ == "__main__":
-    print("=== TEST VMA (Homme, 16.5 km/h) ===")
-    seances = generer_seances_vma(16.5, "M")
-    for s in seances:
-        print(f"{s['distance']}m : {s['pourcentage']}% VMA → {s['vitesse_effort']} km/h")
-        print(f"  Effort {s['temps_effort']}, recup {s['temps_recup']}, {s['nb_rep']} rep")
-        print(f"  Total : {s['temps_total_seance']}")
-        print()
-    
-    print("=== TEST VMA (Femme, 16.5 km/h) ===")
-    seances = generer_seances_vma(16.5, "F")
-    for s in seances:
-        print(f"{s['distance']}m : {s['pourcentage']}% VMA → {s['vitesse_effort']} km/h")
-        print(f"  Effort {s['temps_effort']}, recup {s['temps_recup']}, {s['nb_rep']} rep")
-        print(f"  Total : {s['temps_total_seance']}")
-        print()

@@ -1,0 +1,197 @@
+{
+  "nom": "Lucas LEFER",
+  "sexe": "M",
+  "age": 25,
+  "taille_poids": "180cm/75kg",
+  "metier_contraintes": "Étudiant stage 2 jours/semaine",
+  "objectif_principal": "15/03/2027",
+  "format_competition": "Olympique",
+  "competition_objectif": "Olympique de Paris 2027",
+  "date_objectif": "2027-03-15",
+  "courses_preparatoires": [
+    "Sprint Bordeaux 10/09",
+    "Sprint La Rochelle 15/11"
+  ],
+  "niveau_estime": "Intermédiaire",
+  "physiologie": {
+    "vma": null,
+    "vma_origine": null,
+    "vc": 7.7,
+    "vc_origine": "Calculée depuis le test VC 3'/6'/12' (3=450.0m, 6=820.0m, 12=1600.0m)",
+    "test_vc_3_6_12": "3=450.0m/6=820.0m/12=1600.0m",
+    "ftp": 195,
+    "temps_400m_natation": 435,
+    "fc_max_cap": 196,
+    "fc_max_natation": 188,
+    "fc_max_velo": 192
+  },
+  "profil": "Équilibré",
+  "vitesses_performances": {
+    "10km": 13.3,
+    "semi": 12.1,
+    "marathon": 24.1
+  },
+  "alertes": [
+    "VC calculée depuis le test VC 3'/6'/12' → Valeur fiable (3 points)"
+  ],
+  "zones": {
+    "vma": [],
+    "vc": [
+      {
+        "distance_effort": 200,
+        "vitesse_effort": 9.2,
+        "temps_effort": "01:17",
+        "temps_effort_sec": 77.92,
+        "distance_recup": 50,
+        "vitesse_recup": 6.24,
+        "temps_recup": "00:28",
+        "temps_recup_sec": 28.85,
+        "coeff": 1.2
+      },
+      {
+        "distance_effort": 300,
+        "vitesse_effort": 9.1,
+        "temps_effort": "01:58",
+        "temps_effort_sec": 118.86,
+        "distance_recup": 75,
+        "vitesse_recup": 6.24,
+        "temps_recup": "00:43",
+        "temps_recup_sec": 43.27,
+        "coeff": 1.18
+      },
+      {
+        "distance_effort": 400,
+        "vitesse_effort": 8.8,
+        "temps_effort": "02:44",
+        "temps_effort_sec": 164.05,
+        "distance_recup": 100,
+        "vitesse_recup": 6.24,
+        "temps_recup": "00:57",
+        "temps_recup_sec": 57.69,
+        "coeff": 1.14
+      },
+      {
+        "distance_effort": 500,
+        "vitesse_effort": 8.6,
+        "temps_effort": "03:28",
+        "temps_effort_sec": 208.72,
+        "distance_recup": 125,
+        "vitesse_recup": 6.24,
+        "temps_recup": "01:12",
+        "temps_recup_sec": 72.12,
+        "coeff": 1.12
+      },
+      {
+        "distance_effort": 600,
+        "vitesse_effort": 8.5,
+        "temps_effort": "04:15",
+        "temps_effort_sec": 255.02,
+        "distance_recup": 150,
+        "vitesse_recup": 6.24,
+        "temps_recup": "01:26",
+        "temps_recup_sec": 86.54,
+        "coeff": 1.1
+      },
+      {
+        "distance_effort": 700,
+        "vitesse_effort": 8.3,
+        "temps_effort": "05:03",
+        "temps_effort_sec": 303.03,
+        "distance_recup": 175,
+        "vitesse_recup": 6.24,
+        "temps_recup": "01:40",
+        "temps_recup_sec": 100.96,
+        "coeff": 1.08
+      },
+      {
+        "distance_effort": 800,
+        "vitesse_effort": 8.1,
+        "temps_effort": "05:56",
+        "temps_effort_sec": 356.22,
+        "distance_recup": 200,
+        "vitesse_recup": 6.24,
+        "temps_recup": "01:55",
+        "temps_recup_sec": 115.38,
+        "coeff": 1.05
+      },
+      {
+        "distance_effort": 1000,
+        "vitesse_effort": 7.9,
+        "temps_effort": "07:38",
+        "temps_effort_sec": 458.37,
+        "distance_recup": 250,
+        "vitesse_recup": 6.24,
+        "temps_recup": "02:24",
+        "temps_recup_sec": 144.23,
+        "coeff": 1.02
+      },
+      {
+        "distance_effort": 1600,
+        "vitesse_effort": 7.7,
+        "temps_effort": "12:28",
+        "temps_effort_sec": 748.05,
+        "distance_recup": 400,
+        "vitesse_recup": 6.24,
+        "temps_recup": "03:50",
+        "temps_recup_sec": 230.77,
+        "coeff": 1.0
+      },
+      {
+        "distance_effort": 2000,
+        "vitesse_effort": 7.5,
+        "temps_effort": "15:54",
+        "temps_effort_sec": 954.15,
+        "distance_recup": 500,
+        "vitesse_recup": 6.24,
+        "temps_recup": "04:48",
+        "temps_recup_sec": 288.46,
+        "coeff": 0.98
+      },
+      {
+        "distance_effort": 2400,
+        "vitesse_effort": 7.5,
+        "temps_effort": "19:16",
+        "temps_effort_sec": 1156.78,
+        "distance_recup": 600,
+        "vitesse_recup": 6.24,
+        "temps_recup": "05:46",
+        "temps_recup_sec": 346.15,
+        "coeff": 0.97
+      },
+      {
+        "distance_effort": 2800,
+        "vitesse_effort": 7.4,
+        "temps_effort": "22:43",
+        "temps_effort_sec": 1363.64,
+        "distance_recup": 700,
+        "vitesse_recup": 6.24,
+        "temps_recup": "06:43",
+        "temps_recup_sec": 403.85,
+        "coeff": 0.96
+      }
+    ]
+  },
+  "disponibilites": {
+    "CAP": [
+      "Lundi",
+      "Mercredi",
+      "Vendredi"
+    ],
+    "Velo": [
+      "Mercredi"
+    ],
+    "Natation": [
+      "Jeudi"
+    ],
+    "bi_quotidien": {
+      "CAP": [],
+      "Velo": [],
+      "Natation": []
+    }
+  },
+  "bi_quotidien_nb": 0,
+  "seances": {
+    "VMA": null,
+    "VC": "Lucas_LEFER_seances_VC_20260903_180815.csv"
+  }
+}

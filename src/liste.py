@@ -1,7 +1,7 @@
 # ============================================================
 # FICHIER: src/liste.py
 # RÔLE: Fonctions génériques de listage et sélection d'éléments
-#       CORRIGÉ: Support de plusieurs extensions
+#       CORRIGÉ: Suppression de l'import circulaire
 # ============================================================
 
 import os
@@ -28,7 +28,8 @@ def lister_elements(dossier: str, extensions: List[str] = None) -> List[Tuple[in
     
     elements = []
     for f in os.listdir(dossier):
-        if os.path.isdir(os.path.join(dossier, f)):
+        chemin_complet = os.path.join(dossier, f)
+        if os.path.isdir(chemin_complet):
             continue
         # Vérifier si le fichier a une des extensions
         for ext in extensions:
@@ -201,6 +202,7 @@ def choisir_athletes(base_dir: str = 'outputs/Base par athlète') -> List[str]:
     athletes = lister_athletes(base_dir)
     
     if not athletes:
+        print("❌ Aucun athlète trouvé dans 'outputs/Base par athlète/'")
         return []
     
     afficher_athletes(athletes)

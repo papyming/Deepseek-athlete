@@ -1,0 +1,330 @@
+{
+  "nom": "Isabelle MERCIER",
+  "sexe": "F",
+  "age": 30,
+  "taille_poids": "168cm/61kg",
+  "metier_contraintes": "Chirurgienne gardes",
+  "objectif_principal": "15/12/2026",
+  "format_competition": "Olympique",
+  "competition_objectif": "Olympique de Lyon 2026",
+  "date_objectif": "2026-12-15",
+  "courses_preparatoires": [
+    "Triathlon Annecy 15/09",
+    "Sprint Lyon 15/10"
+  ],
+  "niveau_estime": "Intermédiaire",
+  "physiologie": {
+    "vma": 14.0,
+    "vma_origine": "Déclarée (colonne VMA)",
+    "vc": 9.1,
+    "vc_origine": "Calculée par régression sur 3 distances (10km, semi-marathon, marathon)",
+    "test_vc_3_6_12": null,
+    "ftp": 205,
+    "temps_400m_natation": 465,
+    "fc_max_cap": 175,
+    "fc_max_natation": 168,
+    "fc_max_velo": 172
+  },
+  "profil": "Endurant",
+  "vitesses_performances": {
+    "10km": 12.0,
+    "semi": 11.5,
+    "marathon": 23.0
+  },
+  "alertes": [
+    "Incohérence VMA/VC : VMA=14.0 km/h, VC=9.1 km/h (ratio 0.65)",
+    "Écart VMA déclarée (14.0 km/h) vs estimée (19.4 km/h) : 38.6% > 10%"
+  ],
+  "zones": {
+    "vma": [
+      {
+        "distance": 100,
+        "vitesse": 14.3,
+        "coeff": 102,
+        "temps": "00:25",
+        "temps_sec": 25.21,
+        "distance_recup": 25.0,
+        "vitesse_recup": 7.0,
+        "temps_recup": "00:12",
+        "temps_recup_sec": 12.86
+      },
+      {
+        "distance": 200,
+        "vitesse": 13.7,
+        "coeff": 98,
+        "temps": "00:52",
+        "temps_sec": 52.48,
+        "distance_recup": 50.0,
+        "vitesse_recup": 7.0,
+        "temps_recup": "00:25",
+        "temps_recup_sec": 25.71
+      },
+      {
+        "distance": 300,
+        "vitesse": 13.6,
+        "coeff": 97,
+        "temps": "01:19",
+        "temps_sec": 79.53,
+        "distance_recup": 75.0,
+        "vitesse_recup": 7.0,
+        "temps_recup": "00:38",
+        "temps_recup_sec": 38.57
+      },
+      {
+        "distance": 400,
+        "vitesse": 13.4,
+        "coeff": 96,
+        "temps": "01:47",
+        "temps_sec": 107.14,
+        "distance_recup": 100.0,
+        "vitesse_recup": 7.0,
+        "temps_recup": "00:51",
+        "temps_recup_sec": 51.43
+      },
+      {
+        "distance": 500,
+        "vitesse": 13.3,
+        "coeff": 95,
+        "temps": "02:15",
+        "temps_sec": 135.34,
+        "distance_recup": 125.0,
+        "vitesse_recup": 7.0,
+        "temps_recup": "01:04",
+        "temps_recup_sec": 64.29
+      },
+      {
+        "distance": 600,
+        "vitesse": 13.2,
+        "coeff": 94,
+        "temps": "02:44",
+        "temps_sec": 164.13,
+        "distance_recup": 150.0,
+        "vitesse_recup": 7.0,
+        "temps_recup": "01:17",
+        "temps_recup_sec": 77.14
+      },
+      {
+        "distance": 700,
+        "vitesse": 13.0,
+        "coeff": 93,
+        "temps": "03:13",
+        "temps_sec": 193.55,
+        "distance_recup": 175.0,
+        "vitesse_recup": 7.0,
+        "temps_recup": "01:30",
+        "temps_recup_sec": 90.0
+      },
+      {
+        "distance": 800,
+        "vitesse": 12.9,
+        "coeff": 92,
+        "temps": "03:43",
+        "temps_sec": 223.6,
+        "distance_recup": 200.0,
+        "vitesse_recup": 7.0,
+        "temps_recup": "01:42",
+        "temps_recup_sec": 102.86
+      },
+      {
+        "distance": 900,
+        "vitesse": 12.7,
+        "coeff": 91,
+        "temps": "04:14",
+        "temps_sec": 254.32,
+        "distance_recup": 225.0,
+        "vitesse_recup": 7.0,
+        "temps_recup": "01:55",
+        "temps_recup_sec": 115.71
+      },
+      {
+        "distance": 1000,
+        "vitesse": 12.6,
+        "coeff": 90,
+        "temps": "04:45",
+        "temps_sec": 285.71,
+        "distance_recup": 250.0,
+        "vitesse_recup": 7.0,
+        "temps_recup": "02:08",
+        "temps_recup_sec": 128.57
+      },
+      {
+        "distance": 2000,
+        "vitesse": 12.2,
+        "coeff": 87,
+        "temps": "09:51",
+        "temps_sec": 591.13,
+        "distance_recup": 500.0,
+        "vitesse_recup": 7.0,
+        "temps_recup": "04:17",
+        "temps_recup_sec": 257.14
+      },
+      {
+        "distance": 3000,
+        "vitesse": 11.5,
+        "coeff": 82,
+        "temps": "15:40",
+        "temps_sec": 940.77,
+        "distance_recup": 750.0,
+        "vitesse_recup": 7.0,
+        "temps_recup": "06:25",
+        "temps_recup_sec": 385.71
+      }
+    ],
+    "vc": [
+      {
+        "distance_effort": 200,
+        "vitesse_effort": 10.6,
+        "temps_effort": "01:07",
+        "temps_effort_sec": 67.97,
+        "distance_recup": 50,
+        "vitesse_recup": 6.24,
+        "temps_recup": "00:28",
+        "temps_recup_sec": 28.85,
+        "coeff": 1.164
+      },
+      {
+        "distance_effort": 300,
+        "vitesse_effort": 10.4,
+        "temps_effort": "01:43",
+        "temps_effort_sec": 103.69,
+        "distance_recup": 75,
+        "vitesse_recup": 6.24,
+        "temps_recup": "00:43",
+        "temps_recup_sec": 43.27,
+        "coeff": 1.1446
+      },
+      {
+        "distance_effort": 400,
+        "vitesse_effort": 10.1,
+        "temps_effort": "02:23",
+        "temps_effort_sec": 143.1,
+        "distance_recup": 100,
+        "vitesse_recup": 6.24,
+        "temps_recup": "00:57",
+        "temps_recup_sec": 57.69,
+        "coeff": 1.1058
+      },
+      {
+        "distance_effort": 500,
+        "vitesse_effort": 9.9,
+        "temps_effort": "03:02",
+        "temps_effort_sec": 182.07,
+        "distance_recup": 125,
+        "vitesse_recup": 6.24,
+        "temps_recup": "01:12",
+        "temps_recup_sec": 72.12,
+        "coeff": 1.0864
+      },
+      {
+        "distance_effort": 600,
+        "vitesse_effort": 9.7,
+        "temps_effort": "03:42",
+        "temps_effort_sec": 222.46,
+        "distance_recup": 150,
+        "vitesse_recup": 6.24,
+        "temps_recup": "01:26",
+        "temps_recup_sec": 86.54,
+        "coeff": 1.067
+      },
+      {
+        "distance_effort": 700,
+        "vitesse_effort": 9.5,
+        "temps_effort": "04:24",
+        "temps_effort_sec": 264.34,
+        "distance_recup": 175,
+        "vitesse_recup": 6.24,
+        "temps_recup": "01:40",
+        "temps_recup_sec": 100.96,
+        "coeff": 1.0476
+      },
+      {
+        "distance_effort": 800,
+        "vitesse_effort": 9.3,
+        "temps_effort": "05:10",
+        "temps_effort_sec": 310.73,
+        "distance_recup": 200,
+        "vitesse_recup": 6.24,
+        "temps_recup": "01:55",
+        "temps_recup_sec": 115.38,
+        "coeff": 1.0185
+      },
+      {
+        "distance_effort": 1000,
+        "vitesse_effort": 9.0,
+        "temps_effort": "06:39",
+        "temps_effort_sec": 399.84,
+        "distance_recup": 250,
+        "vitesse_recup": 6.24,
+        "temps_recup": "02:24",
+        "temps_recup_sec": 144.23,
+        "coeff": 0.9894
+      },
+      {
+        "distance_effort": 1600,
+        "vitesse_effort": 8.8,
+        "temps_effort": "10:52",
+        "temps_effort_sec": 652.54,
+        "distance_recup": 400,
+        "vitesse_recup": 6.24,
+        "temps_recup": "03:50",
+        "temps_recup_sec": 230.77,
+        "coeff": 0.97
+      },
+      {
+        "distance_effort": 2000,
+        "vitesse_effort": 8.7,
+        "temps_effort": "13:52",
+        "temps_effort_sec": 832.33,
+        "distance_recup": 500,
+        "vitesse_recup": 6.24,
+        "temps_recup": "04:48",
+        "temps_recup_sec": 288.46,
+        "coeff": 0.9506
+      },
+      {
+        "distance_effort": 2400,
+        "vitesse_effort": 8.6,
+        "temps_effort": "16:49",
+        "temps_effort_sec": 1009.09,
+        "distance_recup": 600,
+        "vitesse_recup": 6.24,
+        "temps_recup": "05:46",
+        "temps_recup_sec": 346.15,
+        "coeff": 0.9409
+      },
+      {
+        "distance_effort": 2800,
+        "vitesse_effort": 8.5,
+        "temps_effort": "19:49",
+        "temps_effort_sec": 1189.53,
+        "distance_recup": 700,
+        "vitesse_recup": 6.24,
+        "temps_recup": "06:43",
+        "temps_recup_sec": 403.85,
+        "coeff": 0.9312
+      }
+    ]
+  },
+  "disponibilites": {
+    "CAP": [
+      "Mardi",
+      "Jeudi"
+    ],
+    "Velo": [
+      "Jeudi"
+    ],
+    "Natation": [
+      "Mercredi"
+    ],
+    "bi_quotidien": {
+      "CAP": [],
+      "Velo": [],
+      "Natation": []
+    }
+  },
+  "bi_quotidien_nb": 3,
+  "seances": {
+    "VMA": "Isabelle_MERCIER_seances_VMA_20260903_180817.csv",
+    "VC": "Isabelle_MERCIER_seances_VC_20260903_180817.csv"
+  }
+}

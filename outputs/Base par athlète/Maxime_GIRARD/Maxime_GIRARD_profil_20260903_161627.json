@@ -1,0 +1,201 @@
+{
+  "nom": "Maxime GIRARD",
+  "sexe": "M",
+  "age": 28,
+  "taille_poids": "182cm/68kg",
+  "metier_contraintes": "Étudiant disponible 10h",
+  "objectif_principal": "15/11/2026",
+  "format_competition": "Semi-marathon",
+  "competition_objectif": "Semi-marathon de Lyon 2026",
+  "date_objectif": "2026-11-15",
+  "courses_preparatoires": [
+    "Semi de Paris 20/09",
+    "10km Lyon 20/10"
+  ],
+  "niveau_estime": "Intermédiaire",
+  "physiologie": {
+    "vma": null,
+    "vma_origine": null,
+    "vc": 9.8,
+    "vc_origine": "Calculée depuis le test VC 3'/6'/12' (3=580.0m, 6=1050.0m, 12=2050.0m)",
+    "test_vc_3_6_12": "3=580.0m/6=1050.0m/12=2050.0m",
+    "ftp": 310,
+    "temps_400m_natation": 360,
+    "fc_max_cap": 200,
+    "fc_max_natation": 192,
+    "fc_max_velo": 195
+  },
+  "profil": "Endurant",
+  "vitesses_performances": {
+    "10km": 16.3,
+    "semi": 15.4,
+    "marathon": 30.9
+  },
+  "alertes": [
+    "VC calculée depuis le test VC 3'/6'/12' → Valeur fiable (3 points)"
+  ],
+  "zones": {
+    "vma": [],
+    "vc": [
+      {
+        "distance_effort": 200,
+        "vitesse_effort": 11.8,
+        "temps_effort": "01:01",
+        "temps_effort_sec": 61.22,
+        "distance_recup": 50,
+        "vitesse_recup": 6.24,
+        "temps_recup": "00:28",
+        "temps_recup_sec": 28.85,
+        "coeff": 1.2
+      },
+      {
+        "distance_effort": 300,
+        "vitesse_effort": 11.6,
+        "temps_effort": "01:33",
+        "temps_effort_sec": 93.39,
+        "distance_recup": 75,
+        "vitesse_recup": 6.24,
+        "temps_recup": "00:43",
+        "temps_recup_sec": 43.27,
+        "coeff": 1.18
+      },
+      {
+        "distance_effort": 400,
+        "vitesse_effort": 11.2,
+        "temps_effort": "02:08",
+        "temps_effort_sec": 128.89,
+        "distance_recup": 100,
+        "vitesse_recup": 6.24,
+        "temps_recup": "00:57",
+        "temps_recup_sec": 57.69,
+        "coeff": 1.14
+      },
+      {
+        "distance_effort": 500,
+        "vitesse_effort": 11.0,
+        "temps_effort": "02:43",
+        "temps_effort_sec": 163.99,
+        "distance_recup": 125,
+        "vitesse_recup": 6.24,
+        "temps_recup": "01:12",
+        "temps_recup_sec": 72.12,
+        "coeff": 1.12
+      },
+      {
+        "distance_effort": 600,
+        "vitesse_effort": 10.8,
+        "temps_effort": "03:20",
+        "temps_effort_sec": 200.37,
+        "distance_recup": 150,
+        "vitesse_recup": 6.24,
+        "temps_recup": "01:26",
+        "temps_recup_sec": 86.54,
+        "coeff": 1.1
+      },
+      {
+        "distance_effort": 700,
+        "vitesse_effort": 10.6,
+        "temps_effort": "03:58",
+        "temps_effort_sec": 238.1,
+        "distance_recup": 175,
+        "vitesse_recup": 6.24,
+        "temps_recup": "01:40",
+        "temps_recup_sec": 100.96,
+        "coeff": 1.08
+      },
+      {
+        "distance_effort": 800,
+        "vitesse_effort": 10.3,
+        "temps_effort": "04:39",
+        "temps_effort_sec": 279.88,
+        "distance_recup": 200,
+        "vitesse_recup": 6.24,
+        "temps_recup": "01:55",
+        "temps_recup_sec": 115.38,
+        "coeff": 1.05
+      },
+      {
+        "distance_effort": 1000,
+        "vitesse_effort": 10.0,
+        "temps_effort": "06:00",
+        "temps_effort_sec": 360.14,
+        "distance_recup": 250,
+        "vitesse_recup": 6.24,
+        "temps_recup": "02:24",
+        "temps_recup_sec": 144.23,
+        "coeff": 1.02
+      },
+      {
+        "distance_effort": 1600,
+        "vitesse_effort": 9.8,
+        "temps_effort": "09:47",
+        "temps_effort_sec": 587.76,
+        "distance_recup": 400,
+        "vitesse_recup": 6.24,
+        "temps_recup": "03:50",
+        "temps_recup_sec": 230.77,
+        "coeff": 1.0
+      },
+      {
+        "distance_effort": 2000,
+        "vitesse_effort": 9.6,
+        "temps_effort": "12:29",
+        "temps_effort_sec": 749.69,
+        "distance_recup": 500,
+        "vitesse_recup": 6.24,
+        "temps_recup": "04:48",
+        "temps_recup_sec": 288.46,
+        "coeff": 0.98
+      },
+      {
+        "distance_effort": 2400,
+        "vitesse_effort": 9.5,
+        "temps_effort": "15:08",
+        "temps_effort_sec": 908.9,
+        "distance_recup": 600,
+        "vitesse_recup": 6.24,
+        "temps_recup": "05:46",
+        "temps_recup_sec": 346.15,
+        "coeff": 0.97
+      },
+      {
+        "distance_effort": 2800,
+        "vitesse_effort": 9.4,
+        "temps_effort": "17:51",
+        "temps_effort_sec": 1071.43,
+        "distance_recup": 700,
+        "vitesse_recup": 6.24,
+        "temps_recup": "06:43",
+        "temps_recup_sec": 403.85,
+        "coeff": 0.96
+      }
+    ]
+  },
+  "disponibilites": {
+    "CAP": [
+      "Lundi",
+      "Mardi",
+      "Mercredi",
+      "Jeudi",
+      "Samedi"
+    ],
+    "Velo": [
+      "Dimanche"
+    ],
+    "Natation": [
+      "Vendredi"
+    ],
+    "bi_quotidien": {
+      "CAP": [
+        "Jeudi"
+      ],
+      "Velo": [],
+      "Natation": []
+    }
+  },
+  "bi_quotidien_nb": 2,
+  "seances": {
+    "VMA": null,
+    "VC": "Maxime_GIRARD_seances_VC_20260903_161627.csv"
+  }
+}

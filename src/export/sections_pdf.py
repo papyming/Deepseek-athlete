@@ -1,7 +1,7 @@
 # ============================================================
 # FICHIER: src/export/sections_pdf.py
-# RÔLE: Définit les sections du PDF (données personnelles,
-#       objectif, performances, profil, alertes, etc.)
+# RÔLE: Définit les sections du PDF
+#       CORRIGÉ: Tableau des intensités avec colonnes simplifiées
 # ============================================================
 
 import math
@@ -113,7 +113,7 @@ def ajouter_section_ratio(story, physio, normal_style, sous_titre_style):
             elif ratio > 90:
                 story.append(Paragraph("Coureur endurant, bien entraîné", normal_style))
             else:
-                story.append(Paragraph("Coureur moyen", normal_style))
+                story.append(Paragraph("Coureur équilibré", normal_style))
             story.append(Spacer(1, 6))
 
 
@@ -152,6 +152,55 @@ def ajouter_section_profil(story, physio, normal_style, sous_titre_style):
     story.append(Spacer(1, 6))
 
 
+def ajouter_section_intensites(story, physio, normal_style, sous_titre_style):
+    """
+    Ajoute le tableau des intensités.
+    Colonnes: Durée, VMA (km/h), Dist (m), VC (km/h), Dist (m), Zone, Objectif
+    """
+    story.append(Paragraph("6. Tableau des intensités (effort/récupération)", sous_titre_style))
+    
+    tableau_intensites = getattr(physio, 'tableau_intensites', None)
+    if not tableau_intensites:
+        story.append(Paragraph("VMA ou VC non renseignée - impossible de calculer les intensités", normal_style))
+        story.append(Spacer(1, 6))
+        return
+    
+    base_utilisee = "VMA" if physio.vma else ("VC" if physio.vc else "inconnue")
+    vitesse_base = physio.vma if physio.vma else (physio.vc if physio.vc else 0)
+    story.append(Paragraph(f"   Basé sur {base_utilisee} = {vitesse_base} km/h", normal_style))
+    
+    if physio.genre == 'F':
+        story.append(Paragraph("   ⚠️ Correction de -2% appliquée (athlète féminine)", normal_style))
+    story.append(Spacer(1, 3))
+    
+    data = [["Durée", "VMA (km/h)", "Dist (m)", "VC (km/h)", "Dist (m)", "Zone", "Objectif"]]
+    
+    for z in tableau_intensites:
+        data.append([
+            z["label"],
+            f"{z['vitesse_vma']}",
+            f"{z['distance_vma']}",
+            f"{z['vitesse_vc']}",
+            f"{z['distance_vc']}",
+            z["zone"],
+            z["objectif"]
+        ])
+    
+    col_widths = [22*mm, 30*mm, 22*mm, 30*mm, 22*mm, 40*mm, 50*mm]
+    
+    table = Table(data, colWidths=col_widths)
+    table.setStyle(TableStyle([
+        ('GRID', (0,0), (-1,-1), 0.5, colors.grey),
+        ('BACKGROUND', (0,0), (-1,0), colors.lightgrey),
+        ('ALIGN', (0,0), (-1,-1), 'CENTER'),
+        ('FONTNAME', (0,0), (-1,-1), 'Helvetica'),
+        ('FONTSIZE', (0,0), (-1,-1), 7),
+        ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
+    ]))
+    story.append(table)
+    story.append(Spacer(1, 6))
+
+
 def ajouter_section_alertes(story, physio, normal_style, sous_titre_style):
     """Ajoute la section Alertes / Données manquantes."""
     alertes = []
@@ -168,8 +217,8 @@ def ajouter_section_alertes(story, physio, normal_style, sous_titre_style):
         alertes.append("VC : Non renseignée")
     
     if alertes:
-        story.append(Paragraph("9. Alertes / Données manquantes", sous_titre_style))
+        story.append(Paragraph("7. Alertes / Données manquantes", sous_titre_style))
         for a in alertes:
             story.append(Paragraph(f"• {a}", normal_style))
     else:
-        story.append(Paragraph("9. Aucune donnée manquante", sous_titre_style))
+        story.append(Paragraph("7. Aucune donnée manquante", sous_titre_style))

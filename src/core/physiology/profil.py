@@ -1,6 +1,12 @@
+# ============================================================
+# FICHIER: src/core/physiology/profil.py
+# RÔLE: Analyse du profil de l'athlète
+#       CORRIGÉ: "Moyen" → "Équilibré"
+# ============================================================
+
 def analyser_profil(vitesses_performances: dict, vma: float = None, vc: float = None) -> dict:
     """
-    Analyse le profil de l'athlète (Endurant/Explosif/Moyen).
+    Analyse le profil de l'athlète (Endurant/Explosif/Équilibré).
     Retourne : {'profil': str, 'nb_distances': int, 'alertes': list}
     """
     alertes = []
@@ -14,10 +20,10 @@ def analyser_profil(vitesses_performances: dict, vma: float = None, vc: float = 
         if v10 and vsemi and vmar:
             if vsemi > (v10 - 1) and vmar > (vsemi - 1):
                 profil = "Endurant"
-            elif vsemi < (v10 - 1) and vmar < (vsemi - 1):
+            elif vsemi < (v10 - 1.5) and vmar < (vsemi - 1.5):
                 profil = "Explosif"
             else:
-                profil = "Moyen"
+                profil = "Équilibré"
         else:
             profil = "Non déterminé (données incomplètes)"
     elif nb_distances == 2:
@@ -28,17 +34,17 @@ def analyser_profil(vitesses_performances: dict, vma: float = None, vc: float = 
         if v10 and vsemi:
             if vsemi > (v10 - 1):
                 profil = "Endurant (tendance)"
-            elif vsemi < (v10 - 1):
+            elif vsemi < (v10 - 1.5):
                 profil = "Explosif (tendance)"
             else:
-                profil = "Moyen"
+                profil = "Équilibré"
         elif vsemi and vmar:
             if vmar > (vsemi - 1):
                 profil = "Endurant"
-            elif vmar < (vsemi - 1):
+            elif vmar < (vsemi - 1.5):
                 profil = "Explosif (tendance)"
             else:
-                profil = "Moyen"
+                profil = "Équilibré"
         else:
             profil = "Non déterminé (2 distances)"
     elif nb_distances == 1:
@@ -46,7 +52,6 @@ def analyser_profil(vitesses_performances: dict, vma: float = None, vc: float = 
     else:
         profil = "Non déterminé (aucune distance)"
     
-    # Vérification cohérence VMA/VC
     if vma and vc:
         ratio = vc / vma
         if ratio < 0.75 or ratio > 0.95:

@@ -1,7 +1,7 @@
 # ============================================================
 # FICHIER: src/main.py
 # RÔLE: Point d'entrée principal de l'application
-#       CORRIGÉ: Lecture directe des fichiers TSV (tabulations)
+#       CORRIGÉ: UNIQUEMENT les fichiers .tsv
 # ============================================================
 
 import os
@@ -32,6 +32,10 @@ from liste import choisir_athletes, choisir_element
 from maj_intensites import maj_intensites
 
 
+# ============================================================
+# FONCTIONS DE LECTURE
+# ============================================================
+
 def detecter_encodage(fichier_path: str) -> str:
     """Détecte l'encodage d'un fichier."""
     if HAS_CHARDET:
@@ -47,96 +51,68 @@ def detecter_encodage(fichier_path: str) -> str:
 
 def lire_fichier_donnees(fichier_path: str) -> pd.DataFrame:
     """
-    CORRIGÉ: Lit un fichier TSV (tabulations) ou CSV.
-    Gère automatiquement les deux formats.
+    Lit un fichier TSV en forçant TOUTES les colonnes en chaîne.
     """
-    # Détecter l'encodage
     enc = detecter_encodage(fichier_path)
     
-    # Lire le fichier brut
-    with open(fichier_path, 'r', encoding=enc, errors='ignore') as f:
-        contenu = f.read()
+    df = pd.read_csv(
+        fichier_path,
+        delimiter='\t',
+        encoding=enc,
+        engine='python',
+        quotechar='"',
+        dtype=str,
+        keep_default_na=False
+    )
     
-    # Nettoyer les caractères invisibles
-    contenu = contenu.replace('\r', '')
+    # Convertir chaque colonne en string
+    for col in df.columns:
+        df[col] = df[col].astype(str)
     
-    # Déterminer le séparateur
-    premiere_ligne = contenu.split('\n')[0] if contenu else ''
+    # Nettoyer les noms de colonnes
+    df.columns = df.columns.str.replace('\n', ' ', regex=False)
+    df.columns = df.columns.str.replace('\r', '', regex=False)
+    df.columns = df.columns.str.strip()
+    df.columns = df.columns.str.replace(r'  +', ' ', regex=True)
     
-    if '\t' in premiere_ligne:
-        sep = '\t'
-        sep_nom = 'tabulation (TSV)'
-    elif ';' in premiere_ligne:
-        sep = ';'
-        sep_nom = 'point-virgule (CSV)'
-    elif ',' in premiere_ligne:
-        sep = ','
-        sep_nom = 'virgule (CSV)'
-    else:
-        sep = '\t'
-        sep_nom = 'tabulation (par défaut)'
+    # Supprimer les colonnes vides
+    cols_a_garder = []
+    for col in df.columns:
+        if col == '' or col.startswith('Unnamed'):
+            continue
+        if df[col].astype(str).str.strip().ne('').any():
+            cols_a_garder.append(col)
     
-    print(f"   🔍 Séparateur détecté : '{sep_nom}'")
+    df = df[cols_a_garder]
     
-    # Écrire dans un fichier temporaire pour pandas
-    import tempfile
-    with tempfile.NamedTemporaryFile(mode='w', suffix='.csv', delete=False, encoding='utf-8') as tmp:
-        tmp.write(contenu)
-        tmp_path = tmp.name
+    print(f"   ✅ {len(df)} lignes, {len(df.columns)} colonnes")
     
-    try:
-        # Lire avec pandas
-        df = pd.read_csv(
-            tmp_path,
-            delimiter=sep,
-            encoding='utf-8',
-            engine='python',
-            quotechar='"',
-            quoting=1,
-            keep_default_na=False,
-            dtype=str
-        )
-        
-        # Nettoyer les noms de colonnes
-        df.columns = df.columns.str.replace('\n', ' ', regex=False)
-        df.columns = df.columns.str.replace('\r', '', regex=False)
-        df.columns = df.columns.str.strip()
-        df.columns = df.columns.str.replace(r'  +', ' ', regex=True)
-        
-        # Supprimer les colonnes vides (nom vide ET toutes les valeurs vides)
-        cols_a_garder = []
-        for col in df.columns:
-            if col == '' or col.startswith('Unnamed'):
-                continue
-            # Vérifier si la colonne a au moins une valeur non vide
-            if df[col].astype(str).str.strip().ne('').any():
-                cols_a_garder.append(col)
-        
-        df = df[cols_a_garder]
-        
-        os.unlink(tmp_path)
-        
-        print(f"   ✅ {len(df)} lignes, {len(df.columns)} colonnes")
-        return df
-        
-    except Exception as e:
-        os.unlink(tmp_path)
-        raise e
+    # DEBUG: Afficher les temps bruts
+    for col in df.columns:
+        if '10kms' in col or 'semi' in col or 'marathon' in col:
+            if not df.empty:
+                print(f"   🔍 {col} = '{df.iloc[0][col]}'")
+    
+    return df
 
+
+# ============================================================
+# OPTION 1 : ANALYSER UN FICHIER
+# ============================================================
 
 def analyser_csv():
     """Analyse un fichier et génère les données pour chaque athlète."""
     print("\n" + "="*60)
     print("📊 AGENT D'ANALYSE - Génération des séances")
     print("="*60)
-    print("\n📋 Fichiers supportés : .tsv (tabulations) et .csv")
+    print("\n📋 Fichiers supportés : .tsv (tabulations)")
     print("="*60)
     
-    # Lister les fichiers TSV et CSV
+    # CORRIGÉ: UNIQUEMENT les fichiers .tsv
     fichier = choisir_element(
         dossier='inputs',
-        extension='',
-        titre="📁 FICHIERS DISPONIBLES DANS inputs/"
+        extensions=['.tsv'],
+        titre="📁 FICHIERS TSV DISPONIBLES DANS inputs/"
     )
     
     if not fichier:
@@ -146,7 +122,6 @@ def analyser_csv():
     fichier_path = os.path.join('inputs', fichier)
     
     try:
-        # Lire le fichier (TSV ou CSV)
         print(f"\n   📖 Lecture du fichier : {fichier}")
         df = lire_fichier_donnees(fichier_path)
         
@@ -161,10 +136,8 @@ def analyser_csv():
         os.makedirs(base_dir, exist_ok=True)
 
         for index, row in df.iterrows():
-            # Convertir en dictionnaire
             athlete = row.to_dict()
             
-            # Nettoyer les clés et les valeurs
             athlete_clean = {}
             for k, v in athlete.items():
                 key_clean = str(k).strip() if k is not None else ''
@@ -173,7 +146,6 @@ def analyser_csv():
             
             athlete = athlete_clean
             
-            # Extraire le nom
             nom_brut = athlete.get('Prénom/Nom', '')
             if not nom_brut or nom_brut == '' or nom_brut == 'nan':
                 nom_brut = f'Athlète {index+1}'
@@ -359,17 +331,6 @@ def mise_a_jour_intensites():
 
 
 # ============================================================
-# OPTION 8 : TRANSFORMER (supprimée / redirigée)
-# ============================================================
-
-def transformer_copier_coller_interactif():
-    """Redirige vers l'option 1."""
-    print("\n💡 Utilisez l'option 1 pour analyser directement votre fichier TSV/CSV.")
-    print("   Placez votre fichier .tsv ou .csv dans le dossier 'inputs/'")
-    return
-
-
-# ============================================================
 # MENU PRINCIPAL
 # ============================================================
 
@@ -378,7 +339,7 @@ def menu():
     print("\n" + "="*60)
     print("🏊‍♂️ DEEPSEEK ATHLETE - OUTIL D'ENTRAÎNEMENT")
     print("="*60)
-    print("1. 📊 Analyser un fichier (TSV/CSV)")
+    print("1. 📊 Analyser un fichier (TSV)")
     print("2. 📅 Planifier un entraînement (planificateur)")
     print("3. 🔄 Mettre à jour les intensités (post-tests)")
     print("9. 🚪 Quitter")
