@@ -1,5 +1,13 @@
+# ============================================================
+# FICHIER: src/core/physiologie.py
+# RÔLE: Orchestrateur principal des calculs physiologiques
+#       CORRIGÉ: Recherche exacte des colonnes partout
+# ============================================================
+
 import math
+import re
 from datetime import datetime
+
 from .physiology import (
     extraire_vma, estimer_vma, generer_tableau_vma,
     extraire_vc, generer_tableau_vc,
@@ -7,6 +15,7 @@ from .physiology import (
     extraire_temps_400m, generer_zones_natation, generer_tableau_natation,
     analyser_profil
 )
+
 
 class Physiologie:
     """
@@ -60,7 +69,7 @@ class Physiologie:
         self.vitesses_performances = self._extraire_vitesses_performances()
         
         # ---- Estimations ----
-        self.vma_estimee = estimer_vma(self.vitesses_performances)
+        self.vma_estimee = self._estimer_vma()
         self.vc_estimee = self._estimer_vc()
         
         # ---- Profil ----
@@ -84,17 +93,18 @@ class Physiologie:
         self.tableau_natation = generer_tableau_natation(self.vitesse_400m)
         self.zones_velo = generer_zones_velo(self.ftp)
         self.zones_natation = generer_zones_natation(self.vitesse_400m)
+        
+        # ---- Tableau des intensités ----
+        self.tableau_intensites = self._generer_tableau_intensites()
     
     # ============================================================
     # MÉTHODES D'EXTRACTION
     # ============================================================
     
     def _extraire_date_objectif(self) -> str:
-        """Extrait la date de l'objectif depuis le champ 'Objectif principal'."""
         texte = self.data.get('Objectif principal', '')
         if not texte:
             return None
-        import re
         patterns = [
             r'(\d{2})/(\d{2})(?:/(\d{4}))?',
             r'(\d{4})-(\d{2})-(\d{2})',
@@ -118,7 +128,6 @@ class Physiologie:
         return None
     
     def _extraire_courses(self) -> list:
-        """Extrait la liste des courses préparatoires depuis le CSV."""
         courses_raw = self.data.get('Liste courses préparatoires avec les dates', '')
         if not courses_raw or courses_raw == '':
             return []
@@ -126,22 +135,71 @@ class Physiologie:
         courses = [c.strip() for c in courses_raw.split(',') if c.strip()]
         return courses
     
+    def _trouver_colonne(self, patterns: list) -> str:
+        """Trouve une colonne en fonction de patterns."""
+        for key in self.data.keys():
+            key_normalise = key.replace(' ', '').replace('?', '').replace(':', '').replace('.', '').replace('\n', '').replace('\r', '').lower()
+            for pattern in patterns:
+                pattern_normalise = pattern.replace(' ', '').replace('?', '').replace(':', '').replace('.', '').replace('\n', '').replace('\r', '').lower()
+                if pattern_normalise in key_normalise:
+                    return key
+        return None
+    
     def _extraire_vitesses_performances(self) -> dict:
+        """Extrait les performances (10km, semi, marathon)."""
         vitesses = {}
-        if self.data.get('Quel est votre temps sur 10kms ?'):
-            t = self._temps_vers_secondes(self.data['Quel est votre temps sur 10kms ?'])
+        
+        print(f"   🔍 Colonnes disponibles: {list(self.data.keys())}")
+        
+        # Recherche par nom EXACT d'abord
+        col_10k = None
+        col_semi = None
+        col_marathon = None
+        
+        for key in self.data.keys():
+            if key == 'Quel est votre temps sur 10kms ?':
+                col_10k = key
+            elif key == 'Quel est votre temps sur semi marathon ?':
+                col_semi = key
+            elif key == 'Quel est votre temps sur marathon ?':
+                col_marathon = key
+        
+        # Si non trouvé, utiliser la recherche flexible
+        if col_10k is None:
+            col_10k = self._trouver_colonne(["10kms"])
+        if col_semi is None:
+            col_semi = self._trouver_colonne(["semi marathon"])
+        if col_marathon is None:
+            col_marathon = self._trouver_colonne(["marathon"])
+            if col_marathon and 'semi' in col_marathon.lower():
+                col_marathon = None
+        
+        print(f"   🔍 col_10k = '{col_10k}'")
+        print(f"   🔍 col_semi = '{col_semi}'")
+        print(f"   🔍 col_marathon = '{col_marathon}'")
+        
+        if col_10k:
+            temps_raw = self.data.get(col_10k, '')
+            t = self._temps_vers_secondes(temps_raw)
             if t and t > 0:
                 vitesses['10km'] = round(10 / (t / 3600), 1)
+                print(f"   🔍 10km: {temps_raw} → {t}s → {vitesses['10km']} km/h")
         
-        if self.data.get('Quel est votre temps sur semi marathon ?'):
-            t = self._temps_vers_secondes(self.data['Quel est votre temps sur semi marathon ?'])
+        if col_semi:
+            temps_raw = self.data.get(col_semi, '')
+            t = self._temps_vers_secondes(temps_raw)
             if t and t > 0:
                 vitesses['semi'] = round(21.1 / (t / 3600), 1)
+                print(f"   🔍 Semi: {temps_raw} → {t}s → {vitesses['semi']} km/h")
         
-        if self.data.get('Quel est votre temps sur marathon ?'):
-            t = self._temps_vers_secondes(self.data['Quel est votre temps sur marathon ?'])
+        if col_marathon:
+            temps_raw = self.data.get(col_marathon, '')
+            t = self._temps_vers_secondes(temps_raw)
             if t and t > 0:
                 vitesses['marathon'] = round(42.195 / (t / 3600), 1)
+                print(f"   🔍 Marathon: {temps_raw} → {t}s → {vitesses['marathon']} km/h")
+        
+        print(f"   🔍 Performances finales: {vitesses}")
         
         return vitesses
     
@@ -154,7 +212,12 @@ class Physiologie:
         champ = mapping.get(discipline.lower(), '')
         if not champ:
             return None
-        fc_val = self.data.get(champ, '')
+        
+        col = self._trouver_colonne([champ, champ.replace(' ?', '?')])
+        if not col:
+            return None
+        
+        fc_val = self.data.get(col, '')
         if fc_val is None or fc_val == '':
             return None
         fc_str = str(fc_val).strip()
@@ -168,65 +231,133 @@ class Physiologie:
         except:
             return None
     
+    def _estimer_vma(self) -> float:
+        estimations = []
+        
+        if '10km' in self.vitesses_performances:
+            estimations.append(self.vitesses_performances['10km'] / 0.88)
+        if 'semi' in self.vitesses_performances:
+            estimations.append(self.vitesses_performances['semi'] / 0.83)
+        if 'marathon' in self.vitesses_performances:
+            estimations.append(self.vitesses_performances['marathon'] / 0.75)
+        
+        if len(estimations) >= 2:
+            return round(sum(estimations) / len(estimations), 1)
+        return None
+    
     def _estimer_vc(self) -> float:
-        """Estime la VC par régression linéaire sur les performances disponibles."""
+        """Estime la VC par régression linéaire."""
         temps = []
         distances = []
         
-        if self.data.get('Quel est votre temps sur 10kms ?'):
-            t = self._temps_vers_secondes(self.data['Quel est votre temps sur 10kms ?'])
+        # CORRIGÉ: Recherche exacte des colonnes (identique à _extraire_vitesses_performances)
+        col_10k = None
+        col_semi = None
+        col_marathon = None
+        
+        for key in self.data.keys():
+            if key == 'Quel est votre temps sur 10kms ?':
+                col_10k = key
+            elif key == 'Quel est votre temps sur semi marathon ?':
+                col_semi = key
+            elif key == 'Quel est votre temps sur marathon ?':
+                col_marathon = key
+        
+        if col_10k is None:
+            col_10k = self._trouver_colonne(["10kms"])
+        if col_semi is None:
+            col_semi = self._trouver_colonne(["semi marathon"])
+        if col_marathon is None:
+            col_marathon = self._trouver_colonne(["marathon"])
+            if col_marathon and 'semi' in col_marathon.lower():
+                col_marathon = None
+        
+        if col_10k:
+            t = self._temps_vers_secondes(self.data.get(col_10k, ''))
             if t and t > 0:
                 temps.append(t)
                 distances.append(10)
         
-        if self.data.get('Quel est votre temps sur semi marathon ?'):
-            t = self._temps_vers_secondes(self.data['Quel est votre temps sur semi marathon ?'])
+        if col_semi:
+            t = self._temps_vers_secondes(self.data.get(col_semi, ''))
             if t and t > 0:
                 temps.append(t)
                 distances.append(21.1)
         
-        if self.data.get('Quel est votre temps sur marathon ?'):
-            t = self._temps_vers_secondes(self.data['Quel est votre temps sur marathon ?'])
+        if col_marathon:
+            t = self._temps_vers_secondes(self.data.get(col_marathon, ''))
             if t and t > 0:
                 temps.append(t)
                 distances.append(42.195)
+        
+        print(f"   🔍 Régression VC: temps={temps}, distances={distances}")
         
         if len(distances) >= 2:
             try:
                 import numpy as np
                 coeffs = np.polyfit(temps, distances, 1)
-                return round(coeffs[0] * 3600, 1)
+                a = coeffs[0]
+                vc = a * 3600
+                if 8 <= vc <= 30:
+                    return round(vc, 1)
             except:
                 pass
+        
+        if self.vma:
+            return round(self.vma * 0.85, 1)
+        
         return None
     
     # ============================================================
-    # MÉTHODES UTILITAIRES
+    # CONVERSION DES TEMPS
     # ============================================================
     
     @staticmethod
-    def _temps_vers_secondes(temps_str: str) -> int:
-        if not temps_str or temps_str == '':
+    def _temps_vers_secondes(temps_str) -> int:
+        if temps_str is None or temps_str == '':
             return None
+        
+        if isinstance(temps_str, (int, float)):
+            val = float(temps_str)
+            if val < 60:
+                heures = int(val)
+                minutes = int((val - heures) * 60)
+                return heures * 3600 + minutes * 60
+            if val < 100:
+                return int(val * 60)
+            return int(val)
+        
         temps_str = str(temps_str).strip()
-        if not temps_str or temps_str == 'nan' or temps_str == 'None':
+        temps_str = re.sub(r'[\s\xa0]', '', temps_str)
+        temps_str = temps_str.replace('"', '').replace("'", '')
+        
+        if not temps_str or temps_str in ['nan', 'None', '']:
             return None
-        parties = temps_str.split(':')
-        try:
-            if len(parties) == 2:
-                return int(parties[0]) * 60 + int(parties[1])
-            elif len(parties) == 3:
-                return int(parties[0]) * 3600 + int(parties[1]) * 60 + int(parties[2])
-        except:
-            return None
+        
+        if ':' in temps_str:
+            parts = temps_str.split(':')
+            try:
+                if len(parts) == 3:
+                    return int(parts[0]) * 3600 + int(parts[1]) * 60 + int(parts[2])
+                elif len(parts) == 2:
+                    if int(parts[0]) >= 60:
+                        return int(parts[0]) * 60 + int(parts[1])
+                    else:
+                        return int(parts[0]) * 3600 + int(parts[1]) * 60
+            except:
+                pass
+        
         return None
     
     @staticmethod
     def _secondes_vers_temps(secondes: float) -> str:
         if math.isnan(secondes) or math.isinf(secondes):
             return "00:00"
-        minutes = int(secondes // 60)
+        heures = int(secondes // 3600)
+        minutes = int((secondes % 3600) // 60)
         sec = int(secondes % 60)
+        if heures > 0:
+            return f"{heures:02d}:{minutes:02d}:{sec:02d}"
         return f"{minutes:02d}:{sec:02d}"
     
     def _calculer_age(self) -> int:
@@ -247,6 +378,65 @@ class Physiologie:
             except:
                 pass
         return None
+    
+    # ============================================================
+    # TABLEAU DES INTENSITÉS
+    # ============================================================
+    
+    def _generer_tableau_intensites(self) -> list:
+        vitesse_base = self.vma if self.vma else (self.vc if self.vc else None)
+        if not vitesse_base:
+            return []
+        
+        correction_genre = 0.98 if self.genre == 'F' else 1.0
+        
+        zones_intensites = [
+            {"duree": 30, "label": "30\"", "pct_vma": 118, "pct_vc": 128, "zone": "Anaérobie alactique", "objectif": "Puissance / Explosivité"},
+            {"duree": 45, "label": "45\"", "pct_vma": 113, "pct_vc": 123, "zone": "Anaérobie lactique", "objectif": "Tolérance à l'acide lactique"},
+            {"duree": 60, "label": "1'", "pct_vma": 108, "pct_vc": 118, "zone": "Anaérobie lactique", "objectif": "Capacité anaérobie / VO₂max"},
+            {"duree": 75, "label": "1'15\"", "pct_vma": 105, "pct_vc": 115, "zone": "Anaérobie lactique", "objectif": "Transition vers endurance de vitesse"},
+            {"duree": 90, "label": "1'30\"", "pct_vma": 103, "pct_vc": 113, "zone": "VO₂max sup.", "objectif": "Optimisation de la consommation d'O₂"},
+            {"duree": 120, "label": "2'", "pct_vma": 100, "pct_vc": 110, "zone": "VO₂max cent.", "objectif": "Maintien de la VO₂max"},
+            {"duree": 150, "label": "2'30\"", "pct_vma": 99, "pct_vc": 108, "zone": "VO₂max / Endurance", "objectif": "Renforcement capacité aérobie"},
+            {"duree": 180, "label": "3'", "pct_vma": 97, "pct_vc": 105, "zone": "VO₂max inf. / Seuil", "objectif": "Transition vers endurance fondamentale"},
+            {"duree": 240, "label": "4'", "pct_vma": 95, "pct_vc": 103, "zone": "Seuil lactique sup.", "objectif": "Amélioration de la vitesse au seuil"},
+            {"duree": 300, "label": "5'", "pct_vma": 94, "pct_vc": 100, "zone": "Seuil lactique cent.", "objectif": "Développement endurance spécifique"},
+            {"duree": 360, "label": "6'", "pct_vma": 91, "pct_vc": 99, "zone": "Seuil lactique inf.", "objectif": "Renforcement soutien effort"},
+            {"duree": 420, "label": "7'", "pct_vma": 90, "pct_vc": 97, "zone": "Endurance fonda sup.", "objectif": "Adaptation métabolique aérobie"},
+            {"duree": 480, "label": "8'", "pct_vma": 89, "pct_vc": 95, "zone": "Endurance fondamentale", "objectif": "Optimisation efficacité énergétique"},
+            {"duree": 540, "label": "9'", "pct_vma": 88, "pct_vc": 94, "zone": "Endurance fondamentale", "objectif": "Maintien vitesse en endurance"},
+            {"duree": 600, "label": "10'", "pct_vma": 87, "pct_vc": 92, "zone": "Endurance fonda inf.", "objectif": "Développement base aérobie"},
+        ]
+        
+        resultat = []
+        for z in zones_intensites:
+            pct_vma = int(round(z["pct_vma"] * correction_genre))
+            pct_vc = int(round(z["pct_vc"] * correction_genre))
+            
+            vitesse_vma = round(vitesse_base * (pct_vma / 100), 1)
+            vitesse_vc = round(vitesse_base * (pct_vc / 100), 1)
+            
+            distance_vma = round(vitesse_vma * (z["duree"] / 3600) * 1000, 0)
+            distance_vc = round(vitesse_vc * (z["duree"] / 3600) * 1000, 0)
+            
+            resultat.append({
+                "duree": z["duree"],
+                "label": z["label"],
+                "pct_vma": pct_vma,
+                "vitesse_vma": vitesse_vma,
+                "distance_vma": int(distance_vma),
+                "pct_vc": pct_vc,
+                "vitesse_vc": vitesse_vc,
+                "distance_vc": int(distance_vc),
+                "zone": z["zone"],
+                "objectif": z["objectif"]
+            })
+        
+        return resultat
+    
+    # ============================================================
+    # BILAN COMPLET
+    # ============================================================
     
     def get_bilan_dict(self) -> dict:
         return {
@@ -277,5 +467,6 @@ class Physiologie:
             'zones_velo': self.zones_velo,
             'zones_natation': self.zones_natation,
             'manques': self.manques,
-            'nb_manques': len(self.manques)
+            'nb_manques': len(self.manques),
+            'tableau_intensites': self.tableau_intensites
         }
