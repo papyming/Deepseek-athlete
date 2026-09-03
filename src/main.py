@@ -1,17 +1,17 @@
 # ============================================================
 # FICHIER: src/main.py
 # RÔLE: Point d'entrée principal de l'application
-#       Menu interactif pour analyser CSV, planifier, mettre à jour
-#       NOUVEAU: Option 8 utilisant transforme_sheet_csv.py
+#       CORRIGÉ: Lecture directe des fichiers TSV (tabulations)
 # ============================================================
 
 import os
 import sys
 import pandas as pd
 import math
+import re
 from datetime import datetime
 
-# Essayé d'importer chardet, sinon utiliser des encodages par défaut
+# Essayé d'importer chardet
 try:
     import chardet
     HAS_CHARDET = True
@@ -20,7 +20,6 @@ except ImportError:
 
 sys.path.insert(0, os.path.dirname(__file__))
 
-# Imports des modules internes
 from core.physiologie import Physiologie
 from core.p_code_vma import generer_seances_vma
 from core.p_code_vc import generer_seances_vc
@@ -31,138 +30,160 @@ from export import generer_pdf_athlete
 from planificateur import planifier_athlete
 from liste import choisir_athletes, choisir_element
 from maj_intensites import maj_intensites
-from transforme_sheet_csv import (
-    transformer_copier_coller,
-    afficher_resume_transformation,
-    analyser_fichier_apres_transformation
-)
 
-
-# ============================================================
-# FONCTIONS DE LECTURE CSV
-# ============================================================
 
 def detecter_encodage(fichier_path: str) -> str:
-    """
-    Détecte l'encodage d'un fichier texte.
-    """
+    """Détecte l'encodage d'un fichier."""
     if HAS_CHARDET:
         try:
             with open(fichier_path, 'rb') as f:
                 raw_data = f.read()
                 result = chardet.detect(raw_data)
-                enc = result.get('encoding', 'utf-8-sig')
-                if enc and 'mac' in enc.lower():
-                    return 'mac_roman'
-                return enc
+                return result.get('encoding', 'utf-8-sig')
         except Exception:
             pass
     return 'utf-8-sig'
 
 
-def lire_csv_avec_encodage(fichier_path: str) -> pd.DataFrame:
+def lire_fichier_donnees(fichier_path: str) -> pd.DataFrame:
     """
-    Lit un fichier CSV en détectant automatiquement son encodage.
-    Gère les retours à la ligne dans les noms de colonnes.
+    CORRIGÉ: Lit un fichier TSV (tabulations) ou CSV.
+    Gère automatiquement les deux formats.
     """
-    import re
+    # Détecter l'encodage
+    enc = detecter_encodage(fichier_path)
+    
+    # Lire le fichier brut
+    with open(fichier_path, 'r', encoding=enc, errors='ignore') as f:
+        contenu = f.read()
+    
+    # Nettoyer les caractères invisibles
+    contenu = contenu.replace('\r', '')
+    
+    # Déterminer le séparateur
+    premiere_ligne = contenu.split('\n')[0] if contenu else ''
+    
+    if '\t' in premiere_ligne:
+        sep = '\t'
+        sep_nom = 'tabulation (TSV)'
+    elif ';' in premiere_ligne:
+        sep = ';'
+        sep_nom = 'point-virgule (CSV)'
+    elif ',' in premiere_ligne:
+        sep = ','
+        sep_nom = 'virgule (CSV)'
+    else:
+        sep = '\t'
+        sep_nom = 'tabulation (par défaut)'
+    
+    print(f"   🔍 Séparateur détecté : '{sep_nom}'")
+    
+    # Écrire dans un fichier temporaire pour pandas
     import tempfile
-    
-    encodages_a_tester = [
-        detecter_encodage(fichier_path),
-        'utf-8-sig',
-        'utf-8',
-        'windows-1252',
-        'cp1252',
-        'latin-1',
-        'iso-8859-1',
-        'mac_roman',
-        'cp863',
-        'cp850',
-        'cp437'
-    ]
-    encodages_a_tester = list(dict.fromkeys([e for e in encodages_a_tester if e]))
-    
-    for enc in encodages_a_tester:
-        try:
-            with open(fichier_path, 'r', encoding=enc, errors='ignore') as f:
-                contenu = f.read()
-            
-            # Nettoyer les sauts de ligne dans les guillemets
-            def nettoyer_guillemets(match):
-                return '"' + match.group(1).replace('\n', ' ').replace('\r', ' ') + '"'
-            
-            contenu = re.sub(r'"([^"]*)"', nettoyer_guillemets, contenu)
-            contenu = contenu.replace('NḞ', 'N°')
-            contenu = contenu.replace('????????????', 'Compléments')
-            contenu = contenu.replace('?', '')
-            
-            # Écrire temporairement
-            with tempfile.NamedTemporaryFile(mode='w', suffix='.csv', delete=False, encoding='utf-8') as tmp:
-                tmp.write(contenu)
-                tmp_path = tmp.name
-            
-            # Essayer plusieurs séparateurs
-            for sep in [';', ',', '\t', '|']:
-                try:
-                    df = pd.read_csv(tmp_path, delimiter=sep, encoding='utf-8', engine='python')
-                    if not df.empty and len(df.columns) > 1:
-                        os.unlink(tmp_path)
-                        print(f"   ✅ Fichier lu (encodage: {enc}, séparateur: '{sep}')")
-                        return df
-                except Exception:
-                    continue
-            
-            os.unlink(tmp_path)
-            
-        except Exception:
-            continue
-    
-    raise ValueError(f"Impossible de lire le fichier {fichier_path}")
-
-
-# ============================================================
-# OPTION 1 : ANALYSER UN CSV
-# ============================================================
-
-def analyser_csv_fichier(fichier_csv: str = None):
-    """
-    Analyse un fichier CSV spécifique.
-    Utilisé par l'option 1 et l'option 8.
-    """
-    if fichier_csv is None:
-        analyser_csv()
-        return
-    
-    csv_path = os.path.join('inputs', fichier_csv)
+    with tempfile.NamedTemporaryFile(mode='w', suffix='.csv', delete=False, encoding='utf-8') as tmp:
+        tmp.write(contenu)
+        tmp_path = tmp.name
     
     try:
-        df = lire_csv_avec_encodage(csv_path)
+        # Lire avec pandas
+        df = pd.read_csv(
+            tmp_path,
+            delimiter=sep,
+            encoding='utf-8',
+            engine='python',
+            quotechar='"',
+            quoting=1,
+            keep_default_na=False,
+            dtype=str
+        )
+        
+        # Nettoyer les noms de colonnes
+        df.columns = df.columns.str.replace('\n', ' ', regex=False)
+        df.columns = df.columns.str.replace('\r', '', regex=False)
+        df.columns = df.columns.str.strip()
+        df.columns = df.columns.str.replace(r'  +', ' ', regex=True)
+        
+        # Supprimer les colonnes vides (nom vide ET toutes les valeurs vides)
+        cols_a_garder = []
+        for col in df.columns:
+            if col == '' or col.startswith('Unnamed'):
+                continue
+            # Vérifier si la colonne a au moins une valeur non vide
+            if df[col].astype(str).str.strip().ne('').any():
+                cols_a_garder.append(col)
+        
+        df = df[cols_a_garder]
+        
+        os.unlink(tmp_path)
+        
+        print(f"   ✅ {len(df)} lignes, {len(df.columns)} colonnes")
+        return df
+        
+    except Exception as e:
+        os.unlink(tmp_path)
+        raise e
+
+
+def analyser_csv():
+    """Analyse un fichier et génère les données pour chaque athlète."""
+    print("\n" + "="*60)
+    print("📊 AGENT D'ANALYSE - Génération des séances")
+    print("="*60)
+    print("\n📋 Fichiers supportés : .tsv (tabulations) et .csv")
+    print("="*60)
+    
+    # Lister les fichiers TSV et CSV
+    fichier = choisir_element(
+        dossier='inputs',
+        extension='',
+        titre="📁 FICHIERS DISPONIBLES DANS inputs/"
+    )
+    
+    if not fichier:
+        print("❌ Analyse annulée.")
+        return
+    
+    fichier_path = os.path.join('inputs', fichier)
+    
+    try:
+        # Lire le fichier (TSV ou CSV)
+        print(f"\n   📖 Lecture du fichier : {fichier}")
+        df = lire_fichier_donnees(fichier_path)
         
         if df.empty:
-            print(f"⚠️ Le fichier {csv_path} est vide.")
+            print(f"⚠️ Le fichier {fichier_path} est vide.")
             return
         
-        print(f"\n✅ {len(df)} athlètes chargés depuis {fichier_csv}")
+        print(f"\n✅ {len(df)} athlètes chargés depuis {fichier}")
         print("="*60)
 
         base_dir = 'outputs/Base par athlète'
         os.makedirs(base_dir, exist_ok=True)
 
         for index, row in df.iterrows():
+            # Convertir en dictionnaire
             athlete = row.to_dict()
-            athlete = {str(k).strip(): v for k, v in athlete.items()}
             
-            nom_brut = athlete.get('Prénom/Nom', f'Athlète {index+1}')
-            if pd.isna(nom_brut) or not str(nom_brut).strip():
+            # Nettoyer les clés et les valeurs
+            athlete_clean = {}
+            for k, v in athlete.items():
+                key_clean = str(k).strip() if k is not None else ''
+                val_clean = str(v).strip() if v is not None else ''
+                athlete_clean[key_clean] = val_clean
+            
+            athlete = athlete_clean
+            
+            # Extraire le nom
+            nom_brut = athlete.get('Prénom/Nom', '')
+            if not nom_brut or nom_brut == '' or nom_brut == 'nan':
                 nom_brut = f'Athlète {index+1}'
-            nom_brut = str(nom_brut).strip()
+            nom_brut = nom_brut.strip()
             
             nom_fichier = nom_brut.replace(' ', '_').replace('/', '_')
             sexe = athlete.get('Sexe', 'M')
-            if pd.isna(sexe):
+            if not sexe or sexe == '' or sexe == 'nan':
                 sexe = 'M'
-            sexe = str(sexe).upper().strip()
+            sexe = sexe.upper().strip()
 
             print(f"\n--- {nom_brut} ---")
 
@@ -268,25 +289,6 @@ def analyser_csv_fichier(fichier_csv: str = None):
         traceback.print_exc()
 
 
-def analyser_csv():
-    """Analyse un fichier CSV et génère les données pour chaque athlète."""
-    print("\n" + "="*60)
-    print("📊 AGENT D'ANALYSE - Génération des séances")
-    print("="*60)
-    
-    fichier_csv = choisir_element(
-        dossier='inputs',
-        extension='.csv',
-        titre="📁 FICHIERS CSV DISPONIBLES DANS inputs/"
-    )
-    
-    if not fichier_csv:
-        print("❌ Analyse annulée.")
-        return
-    
-    analyser_csv_fichier(fichier_csv)
-
-
 # ============================================================
 # OPTION 2 : PLANIFIER
 # ============================================================
@@ -324,7 +326,7 @@ def planifier():
 
 
 # ============================================================
-# OPTION 3 : MISE À JOUR DES INTENSITÉS
+# OPTION 3 : MISE À JOUR
 # ============================================================
 
 def mise_a_jour_intensites():
@@ -357,39 +359,14 @@ def mise_a_jour_intensites():
 
 
 # ============================================================
-# OPTION 8 : TRANSFORMER COPIER/COLLER
+# OPTION 8 : TRANSFORMER (supprimée / redirigée)
 # ============================================================
 
 def transformer_copier_coller_interactif():
-    """
-    Version interactive de la transformation copier/coller.
-    Utilise le module transforme_sheet_csv.py.
-    """
-    print("\n" + "="*60)
-    print("🔄 TRANSFORMATION COPIER/COLLER TSV → CSV")
-    print("="*60)
-    
-    # Utiliser la fonction du module
-    chemin = transformer_copier_coller()
-    
-    if not chemin:
-        print("❌ Transformation annulée ou échouée.")
-        return
-    
-    # Afficher le résumé
-    afficher_resume_transformation(chemin)
-    
-    # Proposer l'analyse directe
-    print("\n" + "="*60)
-    print("🔍 Voulez-vous analyser ce fichier maintenant ?")
-    print("   (o) Oui, lancer l'analyse")
-    print("   (n) Non, terminer")
-    print("="*60)
-    
-    reponse = input("\nVotre choix : ").strip().lower()
-    if reponse in ['o', 'oui', 'y', 'yes']:
-        nom_fichier = os.path.basename(chemin)
-        analyser_csv_fichier(nom_fichier)
+    """Redirige vers l'option 1."""
+    print("\n💡 Utilisez l'option 1 pour analyser directement votre fichier TSV/CSV.")
+    print("   Placez votre fichier .tsv ou .csv dans le dossier 'inputs/'")
+    return
 
 
 # ============================================================
@@ -401,10 +378,9 @@ def menu():
     print("\n" + "="*60)
     print("🏊‍♂️ DEEPSEEK ATHLETE - OUTIL D'ENTRAÎNEMENT")
     print("="*60)
-    print("1. 📊 Analyser un CSV (agent)")
+    print("1. 📊 Analyser un fichier (TSV/CSV)")
     print("2. 📅 Planifier un entraînement (planificateur)")
     print("3. 🔄 Mettre à jour les intensités (post-tests)")
-    print("8. 🔄 Transformer un copier/coller TSV → CSV")
     print("9. 🚪 Quitter")
     print("="*60)
 
@@ -426,9 +402,6 @@ def main():
             input("\nAppuyez sur Entrée pour continuer...")
         elif choix == '3':
             mise_a_jour_intensites()
-            input("\nAppuyez sur Entrée pour continuer...")
-        elif choix == '8':
-            transformer_copier_coller_interactif()
             input("\nAppuyez sur Entrée pour continuer...")
         elif choix == '9':
             print("\n👋 Au revoir !")
