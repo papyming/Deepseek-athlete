@@ -1,7 +1,7 @@
 # ============================================================
 # FICHIER: src/core/physiologie.py
 # RÔLE: Orchestrateur principal des calculs physiologiques
-#       CORRIGÉ: Recherche exacte des colonnes partout
+#       CORRIGÉ: Ajout de l'allure (Temps/km)
 # ============================================================
 
 import math
@@ -149,9 +149,6 @@ class Physiologie:
         """Extrait les performances (10km, semi, marathon)."""
         vitesses = {}
         
-        print(f"   🔍 Colonnes disponibles: {list(self.data.keys())}")
-        
-        # Recherche par nom EXACT d'abord
         col_10k = None
         col_semi = None
         col_marathon = None
@@ -164,7 +161,6 @@ class Physiologie:
             elif key == 'Quel est votre temps sur marathon ?':
                 col_marathon = key
         
-        # Si non trouvé, utiliser la recherche flexible
         if col_10k is None:
             col_10k = self._trouver_colonne(["10kms"])
         if col_semi is None:
@@ -174,32 +170,23 @@ class Physiologie:
             if col_marathon and 'semi' in col_marathon.lower():
                 col_marathon = None
         
-        print(f"   🔍 col_10k = '{col_10k}'")
-        print(f"   🔍 col_semi = '{col_semi}'")
-        print(f"   🔍 col_marathon = '{col_marathon}'")
-        
         if col_10k:
             temps_raw = self.data.get(col_10k, '')
             t = self._temps_vers_secondes(temps_raw)
             if t and t > 0:
                 vitesses['10km'] = round(10 / (t / 3600), 1)
-                print(f"   🔍 10km: {temps_raw} → {t}s → {vitesses['10km']} km/h")
         
         if col_semi:
             temps_raw = self.data.get(col_semi, '')
             t = self._temps_vers_secondes(temps_raw)
             if t and t > 0:
                 vitesses['semi'] = round(21.1 / (t / 3600), 1)
-                print(f"   🔍 Semi: {temps_raw} → {t}s → {vitesses['semi']} km/h")
         
         if col_marathon:
             temps_raw = self.data.get(col_marathon, '')
             t = self._temps_vers_secondes(temps_raw)
             if t and t > 0:
                 vitesses['marathon'] = round(42.195 / (t / 3600), 1)
-                print(f"   🔍 Marathon: {temps_raw} → {t}s → {vitesses['marathon']} km/h")
-        
-        print(f"   🔍 Performances finales: {vitesses}")
         
         return vitesses
     
@@ -250,7 +237,6 @@ class Physiologie:
         temps = []
         distances = []
         
-        # CORRIGÉ: Recherche exacte des colonnes (identique à _extraire_vitesses_performances)
         col_10k = None
         col_semi = None
         col_marathon = None
@@ -289,8 +275,6 @@ class Physiologie:
             if t and t > 0:
                 temps.append(t)
                 distances.append(42.195)
-        
-        print(f"   🔍 Régression VC: temps={temps}, distances={distances}")
         
         if len(distances) >= 2:
             try:
@@ -383,51 +367,84 @@ class Physiologie:
     # TABLEAU DES INTENSITÉS
     # ============================================================
     
+    @staticmethod
+    def _vitesse_vers_allure(vitesse_kmh: float) -> str:
+        """
+        Convertit une vitesse (km/h) en allure (min/km).
+        Exemple: 18 km/h → 3'20"/km
+        """
+        if vitesse_kmh <= 0:
+            return ""
+        minutes_par_km = 60 / vitesse_kmh
+        minutes = int(minutes_par_km)
+        secondes = int((minutes_par_km - minutes) * 60)
+        return f"{minutes}'{secondes:02d}\"/km"
+    
     def _generer_tableau_intensites(self) -> list:
-        vitesse_base = self.vma if self.vma else (self.vc if self.vc else None)
-        if not vitesse_base:
+        if not self.vma and not self.vc:
             return []
         
         correction_genre = 0.98 if self.genre == 'F' else 1.0
         
         zones_intensites = [
-            {"duree": 30, "label": "30\"", "pct_vma": 118, "pct_vc": 128, "zone": "Anaérobie alactique", "objectif": "Puissance / Explosivité"},
-            {"duree": 45, "label": "45\"", "pct_vma": 113, "pct_vc": 123, "zone": "Anaérobie lactique", "objectif": "Tolérance à l'acide lactique"},
-            {"duree": 60, "label": "1'", "pct_vma": 108, "pct_vc": 118, "zone": "Anaérobie lactique", "objectif": "Capacité anaérobie / VO₂max"},
-            {"duree": 75, "label": "1'15\"", "pct_vma": 105, "pct_vc": 115, "zone": "Anaérobie lactique", "objectif": "Transition vers endurance de vitesse"},
-            {"duree": 90, "label": "1'30\"", "pct_vma": 103, "pct_vc": 113, "zone": "VO₂max sup.", "objectif": "Optimisation de la consommation d'O₂"},
-            {"duree": 120, "label": "2'", "pct_vma": 100, "pct_vc": 110, "zone": "VO₂max cent.", "objectif": "Maintien de la VO₂max"},
-            {"duree": 150, "label": "2'30\"", "pct_vma": 99, "pct_vc": 108, "zone": "VO₂max / Endurance", "objectif": "Renforcement capacité aérobie"},
-            {"duree": 180, "label": "3'", "pct_vma": 97, "pct_vc": 105, "zone": "VO₂max inf. / Seuil", "objectif": "Transition vers endurance fondamentale"},
-            {"duree": 240, "label": "4'", "pct_vma": 95, "pct_vc": 103, "zone": "Seuil lactique sup.", "objectif": "Amélioration de la vitesse au seuil"},
-            {"duree": 300, "label": "5'", "pct_vma": 94, "pct_vc": 100, "zone": "Seuil lactique cent.", "objectif": "Développement endurance spécifique"},
-            {"duree": 360, "label": "6'", "pct_vma": 91, "pct_vc": 99, "zone": "Seuil lactique inf.", "objectif": "Renforcement soutien effort"},
-            {"duree": 420, "label": "7'", "pct_vma": 90, "pct_vc": 97, "zone": "Endurance fonda sup.", "objectif": "Adaptation métabolique aérobie"},
-            {"duree": 480, "label": "8'", "pct_vma": 89, "pct_vc": 95, "zone": "Endurance fondamentale", "objectif": "Optimisation efficacité énergétique"},
-            {"duree": 540, "label": "9'", "pct_vma": 88, "pct_vc": 94, "zone": "Endurance fondamentale", "objectif": "Maintien vitesse en endurance"},
-            {"duree": 600, "label": "10'", "pct_vma": 87, "pct_vc": 92, "zone": "Endurance fonda inf.", "objectif": "Développement base aérobie"},
+            {"duree": 30, "label": "30\"", "pct_vma": 118, "pct_vc": 128, 
+             "zone": "Anaérobie alactique", "objectif": "Puissance / Explosivité"},
+            {"duree": 45, "label": "45\"", "pct_vma": 113, "pct_vc": 123, 
+             "zone": "Anaérobie lactique", "objectif": "Tolérance à l'acide lactique"},
+            {"duree": 60, "label": "1'", "pct_vma": 108, "pct_vc": 118, 
+             "zone": "Anaérobie lactique", "objectif": "Capacité anaérobie / VO2max"},
+            {"duree": 75, "label": "1'15\"", "pct_vma": 105, "pct_vc": 115, 
+             "zone": "Anaérobie lactique", "objectif": "Transition vers endurance de vitesse"},
+            {"duree": 90, "label": "1'30\"", "pct_vma": 103, "pct_vc": 113, 
+             "zone": "VO2max sup.", "objectif": "Optimisation de la consommation d'O2"},
+            {"duree": 120, "label": "2'", "pct_vma": 100, "pct_vc": 110, 
+             "zone": "VO2max cent.", "objectif": "Maintien de la VO2max"},
+            {"duree": 150, "label": "2'30\"", "pct_vma": 99, "pct_vc": 108, 
+             "zone": "VO2max / Endurance", "objectif": "Renforcement capacité aérobie"},
+            {"duree": 180, "label": "3'", "pct_vma": 97, "pct_vc": 105, 
+             "zone": "VO2max inf. / Seuil", "objectif": "Transition vers endurance fondamentale"},
+            {"duree": 240, "label": "4'", "pct_vma": 95, "pct_vc": 103, 
+             "zone": "Seuil lactique sup.", "objectif": "Amélioration de la vitesse au seuil"},
+            {"duree": 300, "label": "5'", "pct_vma": 94, "pct_vc": 100, 
+             "zone": "Seuil lactique cent.", "objectif": "Développement endurance spécifique"},
+            {"duree": 360, "label": "6'", "pct_vma": 91, "pct_vc": 99, 
+             "zone": "Seuil lactique inf.", "objectif": "Renforcement soutien effort"},
+            {"duree": 420, "label": "7'", "pct_vma": 90, "pct_vc": 97, 
+             "zone": "Endurance fonda sup.", "objectif": "Adaptation métabolique aérobie"},
+            {"duree": 480, "label": "8'", "pct_vma": 89, "pct_vc": 95, 
+             "zone": "Endurance fondamentale", "objectif": "Optimisation efficacité énergétique"},
+            {"duree": 540, "label": "9'", "pct_vma": 88, "pct_vc": 94, 
+             "zone": "Endurance fondamentale", "objectif": "Maintien vitesse en endurance"},
+            {"duree": 600, "label": "10'", "pct_vma": 87, "pct_vc": 92, 
+             "zone": "Endurance fonda inf.", "objectif": "Développement base aérobie"},
         ]
         
         resultat = []
         for z in zones_intensites:
-            pct_vma = int(round(z["pct_vma"] * correction_genre))
-            pct_vc = int(round(z["pct_vc"] * correction_genre))
+            pct_vma = z["pct_vma"] * correction_genre
+            pct_vc = z["pct_vc"] * correction_genre
             
-            vitesse_vma = round(vitesse_base * (pct_vma / 100), 1)
-            vitesse_vc = round(vitesse_base * (pct_vc / 100), 1)
+            vitesse_vma = round(self.vma * (pct_vma / 100), 1) if self.vma else 0
+            vitesse_vc = round(self.vc * (pct_vc / 100), 1) if self.vc else 0
             
             distance_vma = round(vitesse_vma * (z["duree"] / 3600) * 1000, 0)
             distance_vc = round(vitesse_vc * (z["duree"] / 3600) * 1000, 0)
             
+            # NOUVEAU: Calcul des allures (Temps/km)
+            allure_vma = self._vitesse_vers_allure(vitesse_vma) if vitesse_vma > 0 else ""
+            allure_vc = self._vitesse_vers_allure(vitesse_vc) if vitesse_vc > 0 else ""
+            
             resultat.append({
                 "duree": z["duree"],
                 "label": z["label"],
-                "pct_vma": pct_vma,
+                "pct_vma": int(pct_vma),
                 "vitesse_vma": vitesse_vma,
                 "distance_vma": int(distance_vma),
-                "pct_vc": pct_vc,
+                "allure_vma": allure_vma,
+                "pct_vc": int(pct_vc),
                 "vitesse_vc": vitesse_vc,
                 "distance_vc": int(distance_vc),
+                "allure_vc": allure_vc,
                 "zone": z["zone"],
                 "objectif": z["objectif"]
             })

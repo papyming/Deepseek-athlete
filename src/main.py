@@ -1,7 +1,7 @@
 # ============================================================
 # FICHIER: src/main.py
 # RÔLE: Point d'entrée principal de l'application
-#       CORRIGÉ: UNIQUEMENT les fichiers .tsv
+#       CORRIGÉ: Passage des valeurs saisies à PhysiologieSimple
 # ============================================================
 
 import os
@@ -11,7 +11,6 @@ import math
 import re
 from datetime import datetime
 
-# Essayé d'importer chardet
 try:
     import chardet
     HAS_CHARDET = True
@@ -21,12 +20,15 @@ except ImportError:
 sys.path.insert(0, os.path.dirname(__file__))
 
 from core.physiologie import Physiologie
+from core.physiologie_simple import PhysiologieSimple
 from core.p_code_vma import generer_seances_vma
 from core.p_code_vc import generer_seances_vc
 from utils.parsers import parser_bi_quotidien
 from utils.validators import analyser_jours_disponibles
-from export.sov import sauvegarder_json, sauvegarder_csv
+from export.sov import sauvegarder_json, sauvegarder_csv, sauvegarder_pdf
 from export import generer_pdf_athlete
+from export.sections_pdf import ajouter_section_intensites
+from export.tables_pdf import generer_tableau_vma, generer_tableau_vc
 from planificateur import planifier_athlete
 from liste import choisir_athletes, choisir_element
 from maj_intensites import maj_intensites
@@ -37,7 +39,6 @@ from maj_intensites import maj_intensites
 # ============================================================
 
 def detecter_encodage(fichier_path: str) -> str:
-    """Détecte l'encodage d'un fichier."""
     if HAS_CHARDET:
         try:
             with open(fichier_path, 'rb') as f:
@@ -50,9 +51,6 @@ def detecter_encodage(fichier_path: str) -> str:
 
 
 def lire_fichier_donnees(fichier_path: str) -> pd.DataFrame:
-    """
-    Lit un fichier TSV en forçant TOUTES les colonnes en chaîne.
-    """
     enc = detecter_encodage(fichier_path)
     
     df = pd.read_csv(
@@ -65,17 +63,14 @@ def lire_fichier_donnees(fichier_path: str) -> pd.DataFrame:
         keep_default_na=False
     )
     
-    # Convertir chaque colonne en string
     for col in df.columns:
         df[col] = df[col].astype(str)
     
-    # Nettoyer les noms de colonnes
     df.columns = df.columns.str.replace('\n', ' ', regex=False)
     df.columns = df.columns.str.replace('\r', '', regex=False)
     df.columns = df.columns.str.strip()
     df.columns = df.columns.str.replace(r'  +', ' ', regex=True)
     
-    # Supprimer les colonnes vides
     cols_a_garder = []
     for col in df.columns:
         if col == '' or col.startswith('Unnamed'):
@@ -87,13 +82,121 @@ def lire_fichier_donnees(fichier_path: str) -> pd.DataFrame:
     
     print(f"   ✅ {len(df)} lignes, {len(df.columns)} colonnes")
     
-    # DEBUG: Afficher les temps bruts
-    for col in df.columns:
-        if '10kms' in col or 'semi' in col or 'marathon' in col:
-            if not df.empty:
-                print(f"   🔍 {col} = '{df.iloc[0][col]}'")
-    
     return df
+
+
+# ============================================================
+# NOUVELLE FONCTION : GÉNÉRER PDF ALLURES
+# ============================================================
+
+def generer_pdf_allures():
+    """
+    Fonction pour l'option 4 du menu.
+    Saisie utilisateur et génération d'un PDF avec les allures.
+    """
+    print("\n" + "="*60)
+    print("🏃 CALCUL DES ALLURES VMA OU VC")
+    print("="*60)
+    print("\n📋 Cette option permet de générer un PDF personnalisé")
+    print("   avec le tableau des intensités (effort/récupération)")
+    print("   et les zones d'entraînement correspondantes.")
+    print("="*60)
+
+    nom = input("\n👉 Prénom/Nom de l'athlète : ").strip()
+    if not nom:
+        nom = "Athlète"
+    
+    nom_fichier = nom.replace(' ', '_')
+    nom_fichier = nom_fichier.replace('\t', '_')
+    nom_fichier = nom_fichier.replace('\n', '_')
+    nom_fichier = nom_fichier.replace('\r', '_')
+    nom_fichier = re.sub(r'[<>:"/\\|?*]', '_', nom_fichier)
+    nom_fichier = re.sub(r'_+', '_', nom_fichier)
+
+    genre = input("👉 Genre (M/F) : ").strip().upper()
+    if genre not in ['M', 'F']:
+        print("   ⚠️ Genre non reconnu. Utilisation de 'M' par défaut.")
+        genre = 'M'
+
+    print("\n   Vous devez saisir soit une VMA, soit une VC (ou les deux).")
+    vma_input = input("👉 VMA (km/h) ou laisser vide : ").strip()
+    vc_input = input("👉 VC (km/h) ou laisser vide : ").strip()
+
+    vma = None
+    vc = None
+    vma_saisie = None  # Pour savoir ce qui a été saisi
+    vc_saisie = None
+
+    if vma_input:
+        try:
+            vma = float(vma_input.replace(',', '.'))
+            vma_saisie = vma
+            print(f"   ✅ VMA saisie : {vma} km/h")
+        except ValueError:
+            print("   ❌ Format de VMA invalide.")
+            return
+
+    if vc_input:
+        try:
+            vc = float(vc_input.replace(',', '.'))
+            vc_saisie = vc
+            print(f"   ✅ VC saisie : {vc} km/h")
+        except ValueError:
+            print("   ❌ Format de VC invalide.")
+            return
+
+    if vma is None and vc is None:
+        print("   ❌ Aucune VMA ni VC saisie. Opération annulée.")
+        return
+
+    print("\n" + "="*60)
+    print("   📊 Génération du PDF en cours...")
+    print("="*60)
+
+    # CORRIGÉ: Passer les valeurs SAISIES à PhysiologieSimple
+    physio_simule = PhysiologieSimple(vma_saisie, vc_saisie, genre, nom)
+
+    from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+    from reportlab.lib.enums import TA_CENTER
+    from reportlab.platypus import Paragraph, Spacer
+
+    class DocTemp:
+        pass
+    doc = DocTemp()
+    story = []
+    
+    styles = getSampleStyleSheet()
+    titre_style = ParagraphStyle('Titre', parent=styles['Heading1'], fontSize=16, alignment=TA_CENTER, spaceAfter=12)
+    sous_titre_style = ParagraphStyle('SousTitre', parent=styles['Heading2'], fontSize=12, spaceAfter=6)
+    normal_style = styles['Normal']
+    
+    story.append(Paragraph(f"Tableau des allures pour : {nom}", titre_style))
+    story.append(Spacer(1, 6))
+    
+    story.append(Paragraph(f"Genre : {genre}", normal_style))
+    if vma_saisie:
+        story.append(Paragraph(f"VMA : {vma_saisie:.1f} km/h", normal_style))
+    if vc_saisie:
+        story.append(Paragraph(f"VC : {vc_saisie:.1f} km/h", normal_style))
+    story.append(Spacer(1, 10))
+    
+    ajouter_section_intensites(story, physio_simule, normal_style, sous_titre_style)
+    
+    if vma_saisie:
+        generer_tableau_vma(story, physio_simule, normal_style, sous_titre_style)
+    if vc_saisie:
+        generer_tableau_vc(story, physio_simule, normal_style, sous_titre_style)
+    
+    doc.story = story
+    
+    timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+    base_path = os.path.join('outputs', f'allures_{nom_fichier}_{timestamp}')
+    
+    os.makedirs('outputs', exist_ok=True)
+    
+    pdf_path = sauvegarder_pdf(doc, base_path)
+    print(f"\n✅ PDF généré avec succès : {pdf_path}")
+    print("="*60)
 
 
 # ============================================================
@@ -108,7 +211,6 @@ def analyser_csv():
     print("\n📋 Fichiers supportés : .tsv (tabulations)")
     print("="*60)
     
-    # CORRIGÉ: UNIQUEMENT les fichiers .tsv
     fichier = choisir_element(
         dossier='inputs',
         extensions=['.tsv'],
@@ -266,7 +368,6 @@ def analyser_csv():
 # ============================================================
 
 def planifier():
-    """Planifie l'entraînement pour un ou plusieurs athlètes."""
     print("\n" + "="*60)
     print("📅 PLANIFICATEUR D'ENTRAÎNEMENT")
     print("="*60)
@@ -302,7 +403,6 @@ def planifier():
 # ============================================================
 
 def mise_a_jour_intensites():
-    """Met à jour les intensités d'un plan existant."""
     print("\n" + "="*60)
     print("🔄 MISE À JOUR DES INTENSITÉS")
     print("="*60)
@@ -335,19 +435,18 @@ def mise_a_jour_intensites():
 # ============================================================
 
 def menu():
-    """Affiche le menu principal."""
     print("\n" + "="*60)
     print("🏊‍♂️ DEEPSEEK ATHLETE - OUTIL D'ENTRAÎNEMENT")
     print("="*60)
     print("1. 📊 Analyser un fichier (TSV)")
     print("2. 📅 Planifier un entraînement (planificateur)")
     print("3. 🔄 Mettre à jour les intensités (post-tests)")
+    print("4. 🏃 Calculer et afficher les allures VMA ou VC")
     print("9. 🚪 Quitter")
     print("="*60)
 
 
 def main():
-    """Fonction principale."""
     os.makedirs('inputs', exist_ok=True)
     os.makedirs('outputs/Base par athlète', exist_ok=True)
 
@@ -363,6 +462,9 @@ def main():
             input("\nAppuyez sur Entrée pour continuer...")
         elif choix == '3':
             mise_a_jour_intensites()
+            input("\nAppuyez sur Entrée pour continuer...")
+        elif choix == '4':
+            generer_pdf_allures()
             input("\nAppuyez sur Entrée pour continuer...")
         elif choix == '9':
             print("\n👋 Au revoir !")
