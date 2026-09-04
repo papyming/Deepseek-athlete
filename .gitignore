@@ -1,0 +1,30 @@
+# Fichiers Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Environnement virtuel
+.venv/
+venv/
+env/
+
+# Fichiers de configuration locaux
+.env
+*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Données sensibles
+*.csv
+*.xlsx
+*.ods
+!exemples/*.csv  # Autorise les fichiers dans un dossier "exemples"
+
+# Logs
+*.log
