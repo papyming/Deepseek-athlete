@@ -12,20 +12,29 @@ from reportlab.lib.units import mm
 from reportlab.lib.styles import ParagraphStyle
 
 
+# Dans la fonction ajouter_section_intensites() ou ailleurs,
+# remplacer les émojis avant affichage
+
 def clean_unicode(text):
-    """Remplace les caractères Unicode problématiques."""
-    if not isinstance(text, str):
-        text = str(text)
     replacements = {
         '₂': '2', '₃': '3', '₄': '4', '₁': '1', '₀': '0',
         '²': '2', '³': '3', '·': '.', '–': '-', '—': '-',
-        '’': "'", '‘': "'", '"': '"', '"': '"', '…': '...',
-        '≤': '<=', '≥': '>=', '≠': '!=', '≈': '~', '±': '+/-',
-        '×': 'x', '÷': '/', '✓': '[OK]', '✗': '[KO]',
+        '’': "'", '‘': "'",
+        '🟩': '●',
+        '🟨': '◐',
+        '🟥': '■',
+        '🟦': '○',
+        '⭐': '★',
+        '⬜': '□',
+        '🟢': '●',
+        '🟡': '◐',
+        '🔴': '■',
+        '⚪': '○',
+        '🔵': '◑',
+        '🟤': '◒',
     }
     for old, new in replacements.items():
         text = text.replace(old, new)
-    text = re.sub(r'[\u200b\u200c\u200d\u2060\uFEFF]', '', text)
     return text
 
 

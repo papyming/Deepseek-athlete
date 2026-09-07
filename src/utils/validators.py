@@ -1,6 +1,7 @@
 # ============================================================
 # FICHIER: src/utils/validators.py
 # RÔLE: Validation et analyse des jours disponibles
+#       CORRIGÉ: Suppression des imports inutiles
 # ============================================================
 
 from .parsers import parser_jours_disciplines
@@ -19,34 +20,109 @@ def analyser_jours_disponibles(row):
     
     jours_semaine = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
     
-    # ---- CAP ----
-    jours_cap = row.get('Quels jours ? (CAP)', '')
-    if jours_cap and jours_cap != '':
-        jours_cap = str(jours_cap).replace(';', ',').replace(' et ', ',')
-        jours_list = [j.strip().capitalize() for j in jours_cap.replace(',', ' ').split() if j.strip()]
-        resultat['CAP'] = [j for j in jours_list if j in jours_semaine]
+    # ---- 1. CAP ----
+    col_cap = None
+    for nom_colonne in [
+        'Quels jours ? (CAP) [Course à pieds]',
+        'Quels jours ? (CAP)',
+        'Quels jours ? (Course à pieds)',
+        'CAP',
+        'Course à pieds'
+    ]:
+        if nom_colonne in row:
+            col_cap = nom_colonne
+            break
     
-    # ---- Vélo ----
-    jours_velo = row.get('Quels jours ? (Vélo)', '')
-    if jours_velo and jours_velo != '':
-        jours_velo = str(jours_velo).replace(';', ',').replace(' et ', ',')
-        jours_list = [j.strip().capitalize() for j in jours_velo.replace(',', ' ').split() if j.strip()]
-        resultat['Velo'] = [j for j in jours_list if j in jours_semaine]
+    if col_cap:
+        valeur = str(row.get(col_cap, '')).strip()
+        if valeur and valeur != '' and valeur != 'nan' and valeur != 'None':
+            valeur = valeur.replace(';', ',').replace(' et ', ',').replace(' et', ',')
+            valeur = valeur.replace(' ', ',')
+            while ',,' in valeur:
+                valeur = valeur.replace(',,', ',')
+            jours = []
+            for j in valeur.split(','):
+                j = j.strip().capitalize()
+                if j in jours_semaine:
+                    jours.append(j)
+            resultat['CAP'] = jours
     
-    # ---- Natation ----
-    jours_natation = row.get('Quels jours ? (Natation)', '')
-    if jours_natation and jours_natation != '':
-        jours_natation = str(jours_natation).replace(';', ',').replace(' et ', ',')
-        jours_list = [j.strip().capitalize() for j in jours_natation.replace(',', ' ').split() if j.strip()]
-        resultat['Natation'] = [j for j in jours_list if j in jours_semaine]
+    # ---- 2. Vélo ----
+    col_velo = None
+    for nom_colonne in [
+        'Quels jours ? (Nat/vélo) [Vélo]',
+        'Quels jours ? (Vélo)',
+        'Quels jours ? (Nat/vélo) [Velo]',
+        'Quels jours ? (Velo)',
+        'Vélo',
+        'Velo'
+    ]:
+        if nom_colonne in row:
+            col_velo = nom_colonne
+            break
     
-    # ---- Bi-quotidien ----
-    bi_str = row.get('Si oui quel(s) jour(s) ? (Bi-quotidien) et Quel(s) discipline(s)', '')
-    if bi_str and bi_str != '':
-        bi_parsed = parser_jours_disciplines(bi_str)
-        for discipline, jours in bi_parsed.items():
-            if discipline in resultat['bi_quotidien']:
-                jours_normaux = resultat.get(discipline, [])
-                resultat['bi_quotidien'][discipline] = [j for j in jours if j in jours_normaux]
+    if col_velo:
+        valeur = str(row.get(col_velo, '')).strip()
+        if valeur and valeur != '' and valeur != 'nan' and valeur != 'None':
+            if valeur.lower() not in ['non pratiquant', '0', 'aucun', '']:
+                valeur = valeur.replace(';', ',').replace(' et ', ',').replace(' et', ',')
+                valeur = valeur.replace(' ', ',')
+                while ',,' in valeur:
+                    valeur = valeur.replace(',,', ',')
+                jours = []
+                for j in valeur.split(','):
+                    j = j.strip().capitalize()
+                    if j in jours_semaine:
+                        jours.append(j)
+                resultat['Velo'] = jours
+    
+    # ---- 3. Natation ----
+    col_natation = None
+    for nom_colonne in [
+        'Quels jours ? (Nat/vélo) [Natation,]',
+        'Quels jours ? (Natation)',
+        'Quels jours ? (Nat/vélo) [Natation]',
+        'Natation',
+        'Nat'
+    ]:
+        if nom_colonne in row:
+            col_natation = nom_colonne
+            break
+    
+    if col_natation:
+        valeur = str(row.get(col_natation, '')).strip()
+        if valeur and valeur != '' and valeur != 'nan' and valeur != 'None':
+            if valeur.lower() not in ['non pratiquant', '0', 'aucun', '']:
+                valeur = valeur.replace(';', ',').replace(' et ', ',').replace(' et', ',')
+                valeur = valeur.replace(' ', ',')
+                while ',,' in valeur:
+                    valeur = valeur.replace(',,', ',')
+                jours = []
+                for j in valeur.split(','):
+                    j = j.strip().capitalize()
+                    if j in jours_semaine:
+                        jours.append(j)
+                resultat['Natation'] = jours
+    
+    # ---- 4. Bi-quotidien ----
+    col_bi = None
+    for nom_colonne in [
+        'Si oui quel(s) jour(s) ? (Bi-quotidien) et Quel(s) discipline(s)',
+        'Bi-quotidien',
+        'bi_quotidien'
+    ]:
+        if nom_colonne in row:
+            col_bi = nom_colonne
+            break
+    
+    if col_bi:
+        valeur = str(row.get(col_bi, '')).strip()
+        if valeur and valeur != '' and valeur != 'nan' and valeur != 'None':
+            if valeur.lower() not in ['non', '0', 'aucun', '']:
+                bi_parsed = parser_jours_disciplines(valeur)
+                for discipline, jours in bi_parsed.items():
+                    if discipline in resultat['bi_quotidien']:
+                        jours_normaux = resultat.get(discipline, [])
+                        resultat['bi_quotidien'][discipline] = [j for j in jours if j in jours_normaux]
     
     return resultat

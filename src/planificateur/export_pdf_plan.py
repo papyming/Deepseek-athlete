@@ -1,7 +1,7 @@
 # ============================================================
 # FICHIER: src/planificateur/export_pdf_plan.py
 # RÔLE: Export du plan en PDF (1 page, une semaine au hasard)
-#       Permet de visualiser l'agencement du plan
+#       CORRIGÉ: Utilisation de caractères Unicode simples pour les émojis
 # ============================================================
 
 import os
@@ -10,7 +10,6 @@ import random
 from datetime import datetime
 from typing import Dict
 
-# Ajouter le chemin parent pour les imports
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from reportlab.lib.pagesizes import A4, landscape
@@ -20,14 +19,39 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, Tabl
 from reportlab.lib import colors
 from reportlab.lib.units import mm, cm
 
-# Import modifié - utilisation d'un import absolu
 from export.sov import ajouter_filigrane_pdf
+
+
+# CORRIGÉ: Utiliser des caractères Unicode simples au lieu des émojis
+EMOJI_MAP = {
+    '🟩': '●',   # Endurance
+    '🟨': '◐',   # Seuil
+    '🟥': '■',   # Intense
+    '🟦': '○',   # Récupération
+    '⭐': '★',   # Course
+    '⬜': '□',   # Repos
+    '🟢': '●',   # Semaine normale
+    '🟡': '◐',   # Semaine chargée
+    '🔴': '■',   # Semaine dure
+    '⚪': '○',   # Semaine récupération
+    '🔵': '◑',   # Affûtage
+    '🟤': '◒',   # Exceptionnelle
+}
+
+
+def replace_emoji(text):
+    """Remplace les émojis par des caractères Unicode simples."""
+    if not text:
+        return text
+    for emoji, replacement in EMOJI_MAP.items():
+        text = text.replace(emoji, replacement)
+    return text
 
 
 def exporter_pdf_plan(plan: Dict, plan_dir: str) -> str:
     """
     Exporte une page PDF du plan avec une semaine aléatoire.
-    Permet de visualiser l'agencement du plan.
+    CORRIGÉ: Émojis remplacés par des caractères simples.
     """
     if not plan['semaines']:
         print("   ⚠️ Aucune semaine à exporter")
@@ -57,7 +81,7 @@ def exporter_pdf_plan(plan: Dict, plan_dir: str) -> str:
         titre_style
     ))
     story.append(Paragraph(
-        f"Semaine {semaine_choisie['emoji']} S-{semaine_choisie['num_affichage']:02d} "
+        f"Semaine {replace_emoji(semaine_choisie['emoji'])} S-{semaine_choisie['num_affichage']:02d} "
         f"du {semaine_choisie['date_debut']} au {semaine_choisie['date_fin']}",
         sous_titre_style
     ))
@@ -88,12 +112,14 @@ def exporter_pdf_plan(plan: Dict, plan_dir: str) -> str:
         for seance in jour['seances']:
             if seance['discipline'] == 'Repos':
                 continue
+            # CORRIGÉ: Remplacer les émojis dans les détails
+            details = replace_emoji(seance['details'])
             data.append([
                 Paragraph(jour['jour'], normal_style),
                 Paragraph(jour['date'], normal_style),
                 Paragraph(seance['discipline'], normal_style),
                 Paragraph(seance['type'], normal_style),
-                Paragraph(seance['details'][:50] + "..." if len(seance['details']) > 50 else seance['details'], normal_style),
+                Paragraph(details[:50] + "..." if len(details) > 50 else details, normal_style),
                 Paragraph(f"{seance['duree']} min", normal_style)
             ])
     
@@ -105,14 +131,16 @@ def exporter_pdf_plan(plan: Dict, plan_dir: str) -> str:
         ('FONTNAME', (0,0), (-1,-1), 'Helvetica'),
         ('FONTSIZE', (0,0), (-1,-1), 8),
         ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
+        ('WORDWRAP', (0,0), (-1,-1), True),
     ]))
     story.append(table)
     story.append(Spacer(1, 6))
     
     # ---- LÉGENDE ----
+    # CORRIGÉ: Utilisation de caractères simples
     story.append(Paragraph(
         "Légende : "
-        "🟩 Endurance | 🟨 Seuil | 🟥 Intense | 🟦 Récupération | ⭐ Course | ⬜ Repos",
+        "● Endurance | ◐ Seuil | ■ Intense | ○ Récupération | ★ Course | □ Repos",
         normal_style
     ))
     

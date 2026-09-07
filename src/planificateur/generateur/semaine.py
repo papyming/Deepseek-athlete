@@ -1,10 +1,11 @@
 # ============================================================
 # FICHIER: src/planificateur/generateur/semaine.py
 # RÔLE: Construction d'une semaine complète
-#       CORRIGÉ: Variation forcée des semaines + alternance structure
+#       CORRIGÉ: Sélection des jours prioritaires
 # ============================================================
 
 import math
+import re
 from datetime import datetime, timedelta
 from typing import Dict, List
 
@@ -51,6 +52,27 @@ def construire_semaine(
     nb_velo = len(jours_velo)
     nb_natation = len(jours_natation)
     
+    # CORRIGÉ: Sélection des jours prioritaires
+    ordre_priorite = ['Mardi', 'Jeudi', 'Samedi', 'Lundi', 'Mercredi', 'Vendredi', 'Dimanche']
+    
+    # CAP: max 4 jours par semaine
+    if nb_cap > 4:
+        jours_cap_tries = sorted(jours_cap, key=lambda x: ordre_priorite.index(x) if x in ordre_priorite else 99)
+        jours_cap = jours_cap_tries[:4]
+        nb_cap = len(jours_cap)
+    
+    # Vélo: max 3 jours par semaine
+    if nb_velo > 3:
+        jours_velo_tries = sorted(jours_velo, key=lambda x: ordre_priorite.index(x) if x in ordre_priorite else 99)
+        jours_velo = jours_velo_tries[:3]
+        nb_velo = len(jours_velo)
+    
+    # Natation: max 3 jours par semaine
+    if nb_natation > 3:
+        jours_natation_tries = sorted(jours_natation, key=lambda x: ordre_priorite.index(x) if x in ordre_priorite else 99)
+        jours_natation = jours_natation_tries[:3]
+        nb_natation = len(jours_natation)
+    
     volume_approx = nb_cap * 45 + nb_velo * 90 + nb_natation * 45
     
     type_semaine = determiner_type_semaine(
@@ -59,13 +81,10 @@ def construire_semaine(
         phase, semaines_anterieures
     )
     
-    # CORRIGÉ: Forcer la variation des semaines
     if semaines_anterieures:
         dernier_type = semaines_anterieures[-1].get('semaine_type', 'normale')
         dernier_volume = semaines_anterieures[-1].get('volume_total', 0)
-        dernier_phase = semaines_anterieures[-1].get('phase', '')
         
-        # 1. Éviter 2 semaines consécutives identiques
         if dernier_type == type_semaine and type_semaine not in ['affutage', 'recuperation']:
             alternance = {
                 'normale': 'chargee',
@@ -73,36 +92,6 @@ def construire_semaine(
                 'dure': 'chargee'
             }
             type_semaine = alternance.get(type_semaine, 'normale')
-        
-        # 2. Éviter les volumes trop proches (>10% de variation)
-        if dernier_volume > 0 and type_semaine not in ['affutage', 'recuperation']:
-            volume_courant = volume_approx * get_volume_coeff(type_semaine, phase, semaine_num)
-            diff = abs(volume_courant - dernier_volume) / max(dernier_volume, 1)
-            if diff < 0.10:
-                if type_semaine == 'normale':
-                    type_semaine = 'chargee'
-                elif type_semaine == 'chargee':
-                    type_semaine = 'dure'
-                else:
-                    type_semaine = 'chargee'
-        
-        # 3. CORRIGÉ: Forcer changement si 3 semaines même type
-        if len(semaines_anterieures) >= 2:
-            types_recents = [s.get('semaine_type', 'normale') for s in semaines_anterieures[-3:]]
-            if len(types_recents) >= 3 and all(t == types_recents[0] for t in types_recents):
-                if types_recents[0] == 'normale':
-                    type_semaine = 'chargee'
-                elif types_recents[0] == 'chargee':
-                    type_semaine = 'dure'
-                elif types_recents[0] == 'dure':
-                    type_semaine = 'recuperation'
-        
-        # 4. CORRIGÉ: Alterner les jours d'intensité (décalage cyclique)
-        if type_semaine not in ['affutage', 'recuperation']:
-            # Décaler le jour d'intensité de 1 jour sur 2 semaines
-            if semaine_num % 2 == 0:
-                # Ceci sera géré par le paramètre semaine_num dans construire_journee
-                pass
     
     emoji_semaine = get_emoji_semaine(type_semaine)
     nb_intenses_requis = get_nb_intenses_requis(nb_cap, semaine_num, type_semaine)
@@ -131,14 +120,32 @@ def construire_semaine(
     if nb_cap <= 2 and semaine_num % 3 == 0:
         nb_intenses_requis = max(nb_intenses_requis, 1)
     
+    # Courses préparatoires
     course_semaine = None
+    fin_semaine = date_semaine + timedelta(days=6)
+    
     for course in courses_preparatoires:
-        date_course = course['date']
-        debut_semaine = date_semaine
-        fin_semaine = date_semaine + timedelta(days=6)
-        if debut_semaine <= date_course <= fin_semaine:
-            course_semaine = course
-            break
+        if isinstance(course, dict) and 'date' in course:
+            date_course = course['date']
+            if isinstance(date_course, datetime):
+                if date_semaine <= date_course <= fin_semaine:
+                    course_semaine = course
+                    break
+        elif isinstance(course, str):
+            match = re.search(r'(\d{2})/(\d{2})', course)
+            if match:
+                jour = int(match.group(1))
+                mois = int(match.group(2))
+                annee = date_objectif.year
+                if mois > date_objectif.month:
+                    annee = date_objectif.year - 1
+                try:
+                    date_course = datetime(annee, mois, jour)
+                    if date_semaine <= date_course <= fin_semaine:
+                        course_semaine = {'date': date_course, 'nom': course}
+                        break
+                except ValueError:
+                    pass
     
     for i, nom_jour in enumerate(JOURS_SEMAINE):
         date_str = generer_jour_date(date_semaine, i)
@@ -161,7 +168,6 @@ def construire_semaine(
                 'emoji': '⭐'
             }
             jours.append(jour_course)
-            course_semaine = None
             continue
         
         jour = construire_journee(
@@ -191,8 +197,6 @@ def construire_semaine(
                 jour['seances'].append(generer_seance_renforcement('Renforcement', 30))
                 renforcement_place = True
                 break
-        if not renforcement_place and jours:
-            jours[0]['seances'].append(generer_seance_renforcement('Renforcement', 30))
     
     volume_total = sum(s.get('duree', 0) for jour in jours for s in jour['seances'] if s.get('discipline') not in ['Repos', 'Course'])
     seances_intenses = sum(1 for jour in jours for s in jour['seances'] if s.get('difficulte') in ['intense', 'seuil'])

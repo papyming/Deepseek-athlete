@@ -1,7 +1,7 @@
 # ============================================================
 # FICHIER: src/export/tables_pdf.py
 # RÔLE: Définit les tableaux du PDF (VMA, VC, Vélo, Natation)
-#       CORRIGÉ: Largeurs adaptées avec wrap
+#       CORRIGÉ: Retour à la ligne pour la colonne Jours
 # ============================================================
 
 from reportlab.platypus import Table, TableStyle, Paragraph, Spacer
@@ -15,6 +15,9 @@ def clean_unicode(text):
         '₂': '2', '₃': '3', '₄': '4', '₁': '1', '₀': '0',
         '²': '2', '³': '3', '·': '.', '–': '-', '—': '-',
         '’': "'", '‘': "'",
+        '🟩': '●', '🟨': '◐', '🟥': '■', '🟦': '○',
+        '⭐': '★', '⬜': '□', '🟢': '●', '🟡': '◐',
+        '🔴': '■', '⚪': '○', '🔵': '◑', '🟤': '◒',
     }
     for old, new in replacements.items():
         text = text.replace(old, new)
@@ -36,8 +39,6 @@ def generer_tableau_vma(story, physio, normal_style, sous_titre_style):
     
     story.append(Paragraph(clean_unicode("Zones VMA"), sous_titre_style))
     story.append(Spacer(1, 3))
-    
-    wrapped_style = get_style_wrapped(8)
     
     data = [
         [clean_unicode("Effort (m)"), clean_unicode("Vitesse (km/h)"), clean_unicode("Temps effort"), clean_unicode("Récup (m)"), clean_unicode("Temps recup")]
@@ -147,8 +148,6 @@ def generer_tableau_natation(story, physio, normal_style, sous_titre_style):
     story.append(Paragraph(clean_unicode("Zones Natation (400m)"), sous_titre_style))
     story.append(Spacer(1, 3))
     
-    wrapped_style = get_style_wrapped(7)
-    
     data = [
         [clean_unicode("Zone"), clean_unicode("Allure (min/100m)"), clean_unicode("25m Effort/Repos"), clean_unicode("50m Effort/Repos"), clean_unicode("75m Effort/Repos"), clean_unicode("100m Effort/Repos")]
     ]
@@ -190,24 +189,45 @@ def generer_tableau_natation(story, physio, normal_style, sous_titre_style):
 
 
 def generer_tableau_jours(story, physio, jours_dispos, normal_style, sous_titre_style):
+    """
+    Génère le tableau des jours d'entraînement.
+    CORRIGÉ: Retour à la ligne pour les jours.
+    """
     story.append(Paragraph(clean_unicode("Jours d'entraînement"), sous_titre_style))
     story.append(Spacer(1, 3))
     
+    wrapped_style = get_style_wrapped(8)
+    
+    cap_jours = clean_unicode(", ".join(jours_dispos['CAP']) or "Aucun")
+    cap_bi = clean_unicode(", ".join(jours_dispos['bi_quotidien']['CAP']) or "Non")
+    velo_jours = clean_unicode(", ".join(jours_dispos['Velo']) or "Aucun")
+    velo_bi = clean_unicode(", ".join(jours_dispos['bi_quotidien']['Velo']) or "Non")
+    nat_jours = clean_unicode(", ".join(jours_dispos['Natation']) or "Aucun")
+    nat_bi = clean_unicode(", ".join(jours_dispos['bi_quotidien']['Natation']) or "Non")
+    
     data = [
-        [clean_unicode("Discipline"), clean_unicode("Jours"), clean_unicode("Bi-quotidien")],
-        [clean_unicode("CAP"), clean_unicode(", ".join(jours_dispos['CAP']) or "Aucun"), clean_unicode(", ".join(jours_dispos['bi_quotidien']['CAP']) or "Non")],
-        [clean_unicode("Vélo"), clean_unicode(", ".join(jours_dispos['Velo']) or "Aucun"), clean_unicode(", ".join(jours_dispos['bi_quotidien']['Velo']) or "Non")],
-        [clean_unicode("Natation"), clean_unicode(", ".join(jours_dispos['Natation']) or "Aucun"), clean_unicode(", ".join(jours_dispos['bi_quotidien']['Natation']) or "Non")]
+        [Paragraph(clean_unicode("Discipline"), wrapped_style),
+         Paragraph(cap_jours, wrapped_style),
+         Paragraph(clean_unicode("Bi-quotidien"), wrapped_style)],
+        [Paragraph(clean_unicode("CAP"), wrapped_style),
+         Paragraph(cap_jours, wrapped_style),
+         Paragraph(cap_bi, wrapped_style)],
+        [Paragraph(clean_unicode("Vélo"), wrapped_style),
+         Paragraph(velo_jours, wrapped_style),
+         Paragraph(velo_bi, wrapped_style)],
+        [Paragraph(clean_unicode("Natation"), wrapped_style),
+         Paragraph(nat_jours, wrapped_style),
+         Paragraph(nat_bi, wrapped_style)]
     ]
     
-    table = Table(data, colWidths=[40*mm, 55*mm, 55*mm])
+    table = Table(data, colWidths=[35*mm, 70*mm, 45*mm])
     table.setStyle(TableStyle([
         ('GRID', (0,0), (-1,-1), 0.5, colors.grey),
         ('BACKGROUND', (0,0), (-1,0), colors.lightgrey),
         ('ALIGN', (0,0), (-1,-1), 'CENTER'),
         ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
         ('FONTNAME', (0,0), (-1,-1), 'Helvetica'),
-        ('FONTSIZE', (0,0), (-1,-1), 9),
+        ('FONTSIZE', (0,0), (-1,-1), 8),
         ('WORDWRAP', (0,0), (-1,-1), True),
     ]))
     story.append(table)
