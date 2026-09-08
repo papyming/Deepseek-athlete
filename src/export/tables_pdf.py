@@ -195,16 +195,17 @@ def generer_tableau_jours(story, physio, jours_dispos, normal_style, sous_titre_
     """
     story.append(Paragraph(clean_unicode("Jours d'entraînement"), sous_titre_style))
     story.append(Spacer(1, 3))
-    
+
     wrapped_style = get_style_wrapped(8)
-    
-    cap_jours = clean_unicode(", ".join(jours_dispos['CAP']) or "Aucun")
-    cap_bi = clean_unicode(", ".join(jours_dispos['bi_quotidien']['CAP']) or "Non")
-    velo_jours = clean_unicode(", ".join(jours_dispos['Velo']) or "Aucun")
-    velo_bi = clean_unicode(", ".join(jours_dispos['bi_quotidien']['Velo']) or "Non")
-    nat_jours = clean_unicode(", ".join(jours_dispos['Natation']) or "Aucun")
-    nat_bi = clean_unicode(", ".join(jours_dispos['bi_quotidien']['Natation']) or "Non")
-    
+
+    # CORRIGÉ: Utiliser les vraies valeurs
+    cap_jours = clean_unicode(", ".join(jours_dispos.get('CAP', [])) or "Aucun")
+    cap_bi = clean_unicode(", ".join(jours_dispos.get('bi_quotidien', {}).get('CAP', [])) or "Non")
+    velo_jours = clean_unicode(", ".join(jours_dispos.get('Velo', [])) or "Aucun")
+    velo_bi = clean_unicode(", ".join(jours_dispos.get('bi_quotidien', {}).get('Velo', [])) or "Non")
+    nat_jours = clean_unicode(", ".join(jours_dispos.get('Natation', [])) or "Aucun")
+    nat_bi = clean_unicode(", ".join(jours_dispos.get('bi_quotidien', {}).get('Natation', [])) or "Non")
+
     data = [
         [Paragraph(clean_unicode("Discipline"), wrapped_style),
          Paragraph(cap_jours, wrapped_style),
@@ -219,7 +220,7 @@ def generer_tableau_jours(story, physio, jours_dispos, normal_style, sous_titre_
          Paragraph(nat_jours, wrapped_style),
          Paragraph(nat_bi, wrapped_style)]
     ]
-    
+
     table = Table(data, colWidths=[35*mm, 70*mm, 45*mm])
     table.setStyle(TableStyle([
         ('GRID', (0,0), (-1,-1), 0.5, colors.grey),

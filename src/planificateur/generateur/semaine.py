@@ -1,7 +1,7 @@
 # ============================================================
 # FICHIER: src/planificateur/generateur/semaine.py
 # RÔLE: Construction d'une semaine complète
-#       CORRIGÉ: Sélection des jours prioritaires
+#       CORRIGÉ: Parsing dates libellées, sélection jours prioritaires
 # ============================================================
 
 import math
@@ -15,6 +15,97 @@ from ..volume import calculer_volume_hebdo, get_nb_intenses_requis, get_natation
 from .dates import generer_jour_date, jours_disponibles_renforcement, get_volume_semaine_affichage
 from .journee import construire_journee
 from .seances import generer_seance_renforcement
+
+
+def _extraire_date_course(texte: str, annee_defaut: int) -> datetime:
+    """
+    Extrait une date d'une chaîne de type "4 Octobre 26" ou "15/09" ou "15 septembre"
+    """
+    texte = texte.strip()
+    
+    mois_fr = {
+        'janvier': 1, 'fevrier': 2, 'mars': 3, 'avril': 4, 'mai': 5, 'juin': 6,
+        'juillet': 7, 'aout': 8, 'août': 8, 'septembre': 9, 'octobre': 10,
+        'novembre': 11, 'decembre': 12, 'décembre': 12
+    }
+    
+    # Format: "4 Octobre 26"
+    match = re.search(r'(\d{1,2})\s+([A-Za-zàâéèêëïîôöùûç]+)\s+(\d{2,4})', texte, re.IGNORECASE)
+    if match:
+        jour = int(match.group(1))
+        mois_str = match.group(2).lower()
+        mois = mois_fr.get(mois_str)
+        annee = int(match.group(3))
+        if annee < 100:
+            annee += 2000 if annee >= 24 else 2000
+        if mois and 1 <= mois <= 12 and 1 <= jour <= 31:
+            try:
+                return datetime(annee, mois, jour)
+            except ValueError:
+                pass
+    
+    # Format: "4 octobre 2026"
+    match = re.search(r'(\d{1,2})\s+([A-Za-zàâéèêëïîôöùûç]+)\s+(\d{4})', texte, re.IGNORECASE)
+    if match:
+        jour = int(match.group(1))
+        mois_str = match.group(2).lower()
+        mois = mois_fr.get(mois_str)
+        annee = int(match.group(3))
+        if mois and 1 <= mois <= 12 and 1 <= jour <= 31:
+            try:
+                return datetime(annee, mois, jour)
+            except ValueError:
+                pass
+    
+    # Format: "15/09"
+    match = re.search(r'(\d{1,2})/(\d{1,2})', texte)
+    if match:
+        jour = int(match.group(1))
+        mois = int(match.group(2))
+        if 1 <= mois <= 12 and 1 <= jour <= 31:
+            try:
+                return datetime(annee_defaut, mois, jour)
+            except ValueError:
+                pass
+    
+    # Format: "15 septembre"
+    match = re.search(r'(\d{1,2})\s+([A-Za-zàâéèêëïîôöùûç]+)', texte, re.IGNORECASE)
+    if match:
+        jour = int(match.group(1))
+        mois_str = match.group(2).lower()
+        mois = mois_fr.get(mois_str)
+        if mois and 1 <= mois <= 12 and 1 <= jour <= 31:
+            try:
+                return datetime(annee_defaut, mois, jour)
+            except ValueError:
+                pass
+    
+    return None
+
+
+def _determiner_nb_jours_utilises(nb_jours_disponibles: int, niveau: str, phase: str) -> int:
+    """
+    Détermine le nombre de jours à utiliser par discipline.
+    """
+    base_niveau = {
+        'Débutant': 3,
+        'Intermédiaire': 4,
+        'Avancé': 5
+    }.get(niveau, 4)
+    
+    if phase == 'preparation_generale':
+        coeff = 0.9
+    elif phase == 'preparation_specifique':
+        coeff = 1.0
+    elif phase == 'competition':
+        coeff = 0.85
+    else:
+        coeff = 0.6
+    
+    nb_base = int(base_niveau * coeff)
+    nb_utilises = min(nb_jours_disponibles, nb_base)
+    
+    return max(2, nb_utilises)
 
 
 def construire_semaine(
@@ -52,25 +143,25 @@ def construire_semaine(
     nb_velo = len(jours_velo)
     nb_natation = len(jours_natation)
     
-    # CORRIGÉ: Sélection des jours prioritaires
+    nb_cap_utilises = _determiner_nb_jours_utilises(nb_cap, niveau, phase)
+    nb_velo_utilises = _determiner_nb_jours_utilises(nb_velo, niveau, phase)
+    nb_natation_utilises = _determiner_nb_jours_utilises(nb_natation, niveau, phase)
+    
     ordre_priorite = ['Mardi', 'Jeudi', 'Samedi', 'Lundi', 'Mercredi', 'Vendredi', 'Dimanche']
     
-    # CAP: max 4 jours par semaine
-    if nb_cap > 4:
+    if nb_cap > nb_cap_utilises:
         jours_cap_tries = sorted(jours_cap, key=lambda x: ordre_priorite.index(x) if x in ordre_priorite else 99)
-        jours_cap = jours_cap_tries[:4]
+        jours_cap = jours_cap_tries[:nb_cap_utilises]
         nb_cap = len(jours_cap)
     
-    # Vélo: max 3 jours par semaine
-    if nb_velo > 3:
+    if nb_velo > nb_velo_utilises:
         jours_velo_tries = sorted(jours_velo, key=lambda x: ordre_priorite.index(x) if x in ordre_priorite else 99)
-        jours_velo = jours_velo_tries[:3]
+        jours_velo = jours_velo_tries[:nb_velo_utilises]
         nb_velo = len(jours_velo)
     
-    # Natation: max 3 jours par semaine
-    if nb_natation > 3:
+    if nb_natation > nb_natation_utilises:
         jours_natation_tries = sorted(jours_natation, key=lambda x: ordre_priorite.index(x) if x in ordre_priorite else 99)
-        jours_natation = jours_natation_tries[:3]
+        jours_natation = jours_natation_tries[:nb_natation_utilises]
         nb_natation = len(jours_natation)
     
     volume_approx = nb_cap * 45 + nb_velo * 90 + nb_natation * 45
@@ -83,8 +174,6 @@ def construire_semaine(
     
     if semaines_anterieures:
         dernier_type = semaines_anterieures[-1].get('semaine_type', 'normale')
-        dernier_volume = semaines_anterieures[-1].get('volume_total', 0)
-        
         if dernier_type == type_semaine and type_semaine not in ['affutage', 'recuperation']:
             alternance = {
                 'normale': 'chargee',
@@ -132,20 +221,10 @@ def construire_semaine(
                     course_semaine = course
                     break
         elif isinstance(course, str):
-            match = re.search(r'(\d{2})/(\d{2})', course)
-            if match:
-                jour = int(match.group(1))
-                mois = int(match.group(2))
-                annee = date_objectif.year
-                if mois > date_objectif.month:
-                    annee = date_objectif.year - 1
-                try:
-                    date_course = datetime(annee, mois, jour)
-                    if date_semaine <= date_course <= fin_semaine:
-                        course_semaine = {'date': date_course, 'nom': course}
-                        break
-                except ValueError:
-                    pass
+            date_course = _extraire_date_course(course, date_objectif.year)
+            if date_course and date_semaine <= date_course <= fin_semaine:
+                course_semaine = {'date': date_course, 'nom': course}
+                break
     
     for i, nom_jour in enumerate(JOURS_SEMAINE):
         date_str = generer_jour_date(date_semaine, i)

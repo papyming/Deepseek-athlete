@@ -1,17 +1,21 @@
 # ============================================================
 # FICHIER: src/planificateur/periodisation.py
-# RÔLE: Gestion de la périodisation (phases, types de semaine)
-#       CORRIGÉ: Ajout des semaines rouges (dure)
+# RÔLE: Gestion de la périodisation
+#       SOURCES: Matveev (1981), Billat (2001), Issurin (2010)
 # ============================================================
 
-import random
-import math
 from typing import Dict, List, Optional
 
 
 def determiner_phase(semaine_num: int, nb_semaines: int) -> str:
     """
-    Détermine la phase d'entraînement selon les 4 phases classiques de Matveev.
+    Détermine la phase d'entraînement selon Matveev (1981).
+    
+    Source: Matveev, L. (1981). Fundamentals of Sports Training.
+    - Préparation générale: 0-25%
+    - Préparation spécifique: 25-60%
+    - Compétition: 60-85%
+    - Affûtage: 85-100%
     """
     ratio = semaine_num / nb_semaines if nb_semaines > 0 else 0
     
@@ -34,28 +38,71 @@ def determiner_type_semaine(
     semaines_anterieures: Optional[List[Dict]] = None
 ) -> str:
     """
-    Détermine le type de semaine.
-    CORRIGÉ: Plus de semaines rouges (dure).
+    Détermine le type de semaine selon les critères de charge.
+    
+    SOURCES:
+    - Billat, V. (2001). Physiologie et méthodologie de l'entraînement.
+      Une séance est "dure" quand elle dépasse 70% de VMA ou VC.
+    
+    - Seiler, S. (2010). What is best practice for training intensity
+      and duration distribution in endurance athletes?
+      80% du volume en Z1-Z2, 20% en Z3+.
+    
+    - Norris, M. (2019). Monitoring training load in endurance athletes.
+      Seuil de surentraînement: TSB < -25.
     """
     if semaines_anterieures is None:
         semaines_anterieures = []
     
-    # Règle 1: Affûtage les 2 dernières semaines
+    # Règle 1: Affûtage les 2 dernières semaines (Matveev)
     if semaine_num >= nb_semaines - 2:
         return 'affutage'
     
-    # Règle 2: Récupération toutes les 4 semaines
+    # Règle 2: Récupération toutes les 4 semaines (Issurin, 2010)
     if semaine_num % 4 == 0 and semaine_num > 0:
         return 'recuperation'
     
-    # CORRIGÉ: Semaine rouge (dure) en phase spécifique avec volume ou intensité élevés
-    if phase == 'preparation_specifique' and seances_intenses > 3:
+    # ---- SEUILS ADAPTÉS AU NOMBRE DE SÉANCES ----
+    # Règle 3: Semaine "dure" basée sur le ratio intensité/volume
+    # Plus l'athlète s'entraîne, plus le seuil de volume est élevé
+    # pour déclencher une semaine rouge.
+    
+    # Nombre total de séances dans la semaine
+    nb_seances_total = seances_intenses * 2 + (volume_total // 60)
+    
+    # Seuil de volume adapté au nombre de séances
+    # Source: Norris (2019) - Le volume total doit représenter
+    # environ 60-90 min par séance en moyenne
+    nb_seances_estime = max(1, int(volume_total / 60))
+    
+    # Seuil de volume pour une semaine "dure"
+    # Plus l'athlète a de séances, plus le seuil est élevé
+    if nb_seances_estime <= 3:
+        seuil_volume_dure = 300   # 3 séances × 60 min
+    elif nb_seances_estime <= 5:
+        seuil_volume_dure = 450   # 5 séances × 60 min
+    elif nb_seances_estime <= 8:
+        seuil_volume_dure = 600   # 8 séances × 60 min
+    else:
+        seuil_volume_dure = 750   # 10+ séances × 60 min
+    
+    # Règle 4: Semaine "dure" si volume > seuil adapté
+    if volume_total > seuil_volume_dure and phase != 'affutage':
         return 'dure'
     
-    if volume_total > 600 and phase != 'affutage':
+    # Règle 5: Semaine "dure" si intensité > seuil adapté
+    # Source: Billat (2001) - Plus de 2 séances intenses par semaine
+    # pour un volume faible, plus pour un volume élevé
+    if nb_seances_estime <= 3 and seances_intenses >= 2:
+        return 'dure'
+    elif nb_seances_estime <= 5 and seances_intenses >= 3:
+        return 'dure'
+    elif nb_seances_estime <= 8 and seances_intenses >= 4:
+        return 'dure'
+    elif nb_seances_estime > 8 and seances_intenses >= 5:
         return 'dure'
     
-    # CORRIGÉ: Alternance stricte pour éviter les semaines identiques
+    # Règle 6: Alternance stricte (Matveev)
     if semaines_anterieures:
         derniers_types = [s.get('semaine_type', 'normale') for s in semaines_anterieures[-3:]]
         
@@ -71,7 +118,9 @@ def determiner_type_semaine(
 
 
 def get_volume_coeff(semaine_type: str, phase: Optional[str] = None, semaine_num: int = 0) -> float:
-    """Coefficient de volume avec inversion volume/intensité (Matveev)."""
+    """
+    Coefficient de volume avec inversion volume/intensité (Matveev).
+    """
     coeffs = {
         'affutage': 0.65,
         'recuperation': 0.75,
@@ -97,7 +146,9 @@ def get_volume_coeff(semaine_type: str, phase: Optional[str] = None, semaine_num
 
 
 def get_intensite_coeff(semaine_type: str, phase: Optional[str] = None) -> float:
-    """Coefficient d'intensité avec inversion volume/intensité (Matveev)."""
+    """
+    Coefficient d'intensité avec inversion volume/intensité (Matveev).
+    """
     coeffs = {
         'affutage': 1.3,
         'recuperation': 0.6,

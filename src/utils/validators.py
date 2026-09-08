@@ -1,7 +1,7 @@
 # ============================================================
 # FICHIER: src/utils/validators.py
 # RÔLE: Validation et analyse des jours disponibles
-#       CORRIGÉ: Suppression des imports inutiles
+#       CORRIGÉ: Extraction des contraintes + robustesse
 # ============================================================
 
 from .parsers import parser_jours_disciplines
@@ -15,7 +15,13 @@ def analyser_jours_disponibles(row):
         'CAP': [],
         'Velo': [],
         'Natation': [],
-        'bi_quotidien': {'CAP': [], 'Velo': [], 'Natation': []}
+        'bi_quotidien': {'CAP': [], 'Velo': [], 'Natation': []},
+        'contraintes': {
+            'velo_weekend': False,
+            'pas_velo_dimanche': False,
+            'pas_cap_samedi': False,
+            'double_seance': False
+        }
     }
     
     jours_semaine = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
@@ -124,5 +130,22 @@ def analyser_jours_disponibles(row):
                     if discipline in resultat['bi_quotidien']:
                         jours_normaux = resultat.get(discipline, [])
                         resultat['bi_quotidien'][discipline] = [j for j in jours if j in jours_normaux]
+    
+    # ---- 5. Contraintes ----
+    contraintes = row.get('Compléments à rajouter pour améliorer le suivi, contraintes pro/perso, santé, emploi du temps, etc...', '')
+    if contraintes and contraintes != '' and contraintes != 'nan':
+        contraintes = str(contraintes).lower()
+        
+        if 'vélo le week-end' in contraintes or 'velo le week-end' in contraintes:
+            resultat['contraintes']['velo_weekend'] = True
+        
+        if 'pas de vélo le dimanche' in contraintes or 'pas de velo le dimanche' in contraintes:
+            resultat['contraintes']['pas_velo_dimanche'] = True
+        
+        if 'pas de cap le samedi' in contraintes or 'pas de course le samedi' in contraintes:
+            resultat['contraintes']['pas_cap_samedi'] = True
+        
+        if 'double séance' in contraintes or 'double seance' in contraintes:
+            resultat['contraintes']['double_seance'] = True
     
     return resultat

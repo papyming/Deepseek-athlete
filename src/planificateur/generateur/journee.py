@@ -125,49 +125,46 @@ def construire_journee(
                 seances.append(seance)
             else:
                 duree = int(volumes.get('CAP', 45) * coeff_volume)
-                duree = min(duree, VOLUME_MAX_PAR_SEANCE['CAP'])
-                if nb_cap <= 3 and semaine_num > 0:
-                    duree = min(duree, 60)
+                duree = min(duree, 60)
                 seances.append(generer_seance_endurance('CAP', duree, 'Z2', 'endurance_fondamentale'))
         else:
-            # CORRIGÉ: Limiter le volume le dimanche
-            if i == 6:  # Dimanche
+            # CORRIGÉ: Types de séances selon le jour
+            if i == 5:  # Samedi
+                duree = int(volumes.get('CAP', 45) * 1.3 * coeff_volume)
+                duree = min(duree, 90)
+                if duree > 60:
+                    seances.append(generer_seance_endurance('CAP', duree, 'Z2', 'sortie_longue'))
+                else:
+                    seances.append(generer_seance_endurance('CAP', duree, 'Z2', 'endurance_fondamentale'))
+            elif i == 6:  # Dimanche
                 duree = int(volumes.get('CAP', 45) * 0.5 * coeff_volume)
                 duree = min(duree, 45)
-                seances.append(generer_seance_endurance('CAP', duree, 'Z1', 'endurance_recuperative'))
-            elif i == 5:  # Samedi
-                duree = int(volumes.get('CAP', 45) * 1.5 * coeff_volume)
-                duree = min(duree, VOLUME_MAX_PAR_SEANCE['CAP'])
-                if nb_cap <= 3:
-                    duree = min(duree, 75)
-                seances.append(generer_seance_endurance('CAP', duree, 'Z2', 'sortie_longue'))
+                if duree > 30:
+                    seances.append(generer_seance_endurance('CAP', duree, 'Z1', 'endurance_recuperative'))
+                else:
+                    seances.append({'discipline': 'Repos', 'type': 'Repos', 'details': 'Repos actif', 'duree': 0, 'difficulte': 'repos'})
             elif i in [0, 3]:  # Lundi ou Jeudi
                 duree = int(volumes.get('CAP', 45) * coeff_volume)
-                duree = min(duree, VOLUME_MAX_PAR_SEANCE['CAP'])
-                if nb_cap <= 3:
-                    duree = min(duree, 60)
+                duree = min(duree, 60)
                 seances.append(generer_seance_endurance('CAP', duree, 'Z2', 'endurance_fondamentale'))
             else:
-                duree = int(volumes.get('CAP', 45) * 0.7 * coeff_volume)
-                duree = min(duree, VOLUME_MAX_PAR_SEANCE['CAP'])
-                if nb_cap <= 3:
-                    duree = min(duree, 45)
+                duree = int(volumes.get('CAP', 45) * 0.6 * coeff_volume)
+                duree = min(duree, 45)
                 seances.append(generer_seance_endurance('CAP', duree, 'Z1', 'endurance_recuperative'))
     
     # ---- Vélo ----
     if velo_dispo:
-        # CORRIGÉ: Pas de Vélo le dimanche si déjà CAP
+        # Pas de Vélo le dimanche si déjà CAP
         if i == 6 and cap_dispo:
-            # Dimanche avec CAP → pas de Vélo
             pass
         else:
             if i == 5:  # Samedi
-                duree = max(90, int(volumes.get('Velo', 90) * coeff_volume))
-                duree = min(duree, 150)
+                duree = max(80, int(volumes.get('Velo', 90) * 0.8 * coeff_volume))
+                duree = min(duree, 120)
                 seances.append(generer_seance_endurance('Vélo', duree, 'Z2', 'sortie_longue'))
             elif i == 6:  # Dimanche (sans CAP)
                 duree = max(60, int(volumes.get('Velo', 90) * 0.6))
-                duree = min(duree, 120)
+                duree = min(duree, 90)
                 seances.append(generer_seance_endurance('Vélo', duree, 'Z2', 'endurance'))
             else:
                 duree = max(80, int(volumes.get('Velo', 90) * coeff_volume))
@@ -180,7 +177,7 @@ def construire_journee(
     
     # ---- Natation ----
     if natation_dispo:
-        # CORRIGÉ: Pas de Natation le dimanche si déjà CAP ou Vélo
+        # Pas de Natation le dimanche si déjà CAP ou Vélo
         if i == 6 and (cap_dispo or velo_dispo):
             pass
         else:

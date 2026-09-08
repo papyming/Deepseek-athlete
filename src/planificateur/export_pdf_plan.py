@@ -1,12 +1,11 @@
 # ============================================================
 # FICHIER: src/planificateur/export_pdf_plan.py
-# RÔLE: Export du plan en PDF (1 page, une semaine au hasard)
-#       CORRIGÉ: Utilisation de caractères Unicode simples pour les émojis
+# RÔLE: Export du plan en PDF (TOUTES les semaines)
+#       CORRIGÉ: Légende émojis différenciés + tableau complet
 # ============================================================
 
 import os
 import sys
-import random
 from datetime import datetime
 from typing import Dict
 
@@ -15,7 +14,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from reportlab.lib.pagesizes import A4, landscape
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.enums import TA_CENTER, TA_LEFT
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, PageBreak
 from reportlab.lib import colors
 from reportlab.lib.units import mm, cm
 
@@ -23,46 +22,52 @@ from export.sov import ajouter_filigrane_pdf
 
 
 # CORRIGÉ: Utiliser des caractères Unicode simples au lieu des émojis
-EMOJI_MAP = {
-    '🟩': '●',   # Endurance
-    '🟨': '◐',   # Seuil
-    '🟥': '■',   # Intense
-    '🟦': '○',   # Récupération
-    '⭐': '★',   # Course
-    '⬜': '□',   # Repos
-    '🟢': '●',   # Semaine normale
-    '🟡': '◐',   # Semaine chargée
-    '🔴': '■',   # Semaine dure
-    '⚪': '○',   # Semaine récupération
-    '🔵': '◑',   # Affûtage
-    '🟤': '◒',   # Exceptionnelle
+LEGENDE = {
+    '●': 'Endurance',
+    '◐': 'Seuil',
+    '■': 'Intense',
+    '○': 'Récupération',
+    '★': 'Course',
+    '□': 'Repos',
+}
+
+# CORRIGÉ: Remplacer les émojis par des caractères simples dans les données
+EMOJI_TO_SYMBOL = {
+    '🟩': '●',
+    '🟨': '◐',
+    '🟥': '■',
+    '🟦': '○',
+    '⭐': '★',
+    '⬜': '□',
+    '🟢': '●',
+    '🟡': '◐',
+    '🔴': '■',
+    '⚪': '○',
+    '🔵': '◑',
+    '🟤': '◒',
 }
 
 
-def replace_emoji(text):
-    """Remplace les émojis par des caractères Unicode simples."""
+def replace_emojis(text):
+    """Remplace les émojis par des caractères simples."""
     if not text:
         return text
-    for emoji, replacement in EMOJI_MAP.items():
-        text = text.replace(emoji, replacement)
+    for emoji, symbol in EMOJI_TO_SYMBOL.items():
+        text = text.replace(emoji, symbol)
     return text
 
 
 def exporter_pdf_plan(plan: Dict, plan_dir: str) -> str:
     """
-    Exporte une page PDF du plan avec une semaine aléatoire.
-    CORRIGÉ: Émojis remplacés par des caractères simples.
+    Exporte le plan complet en PDF avec toutes les semaines.
+    CORRIGÉ: Toutes les semaines + légende claire.
     """
     if not plan['semaines']:
         print("   ⚠️ Aucune semaine à exporter")
         return ""
-    
-    # Choisir une semaine au hasard
-    semaine_choisie = random.choice(plan['semaines'])
-    
+
     styles = getSampleStyleSheet()
-    
-    # Styles personnalisés
+
     titre_style = ParagraphStyle(
         'Titre', parent=styles['Heading1'],
         fontSize=16, alignment=TA_CENTER, spaceAfter=12
@@ -72,84 +77,100 @@ def exporter_pdf_plan(plan: Dict, plan_dir: str) -> str:
         fontSize=12, spaceAfter=6
     )
     normal_style = styles['Normal']
-    
+    small_style = ParagraphStyle(
+        'Small', parent=styles['Normal'],
+        fontSize=7, alignment=TA_CENTER
+    )
+
     story = []
-    
-    # ---- TITRE ----
+
+    # ---- TITRE GÉNÉRAL ----
     story.append(Paragraph(
         f"Plan d'entraînement : {plan['athlete']}",
         titre_style
     ))
     story.append(Paragraph(
-        f"Semaine {replace_emoji(semaine_choisie['emoji'])} S-{semaine_choisie['num_affichage']:02d} "
-        f"du {semaine_choisie['date_debut']} au {semaine_choisie['date_fin']}",
+        f"Du {plan['date_debut']} au {plan['date_objectif']}",
         sous_titre_style
     ))
     story.append(Spacer(1, 6))
-    
-    # ---- INFORMATIONS ----
-    story.append(Paragraph(
-        f"Phase : {semaine_choisie['phase'].replace('_', ' ').capitalize()} | "
-        f"Volume total : {semaine_choisie['volume_total']} min | "
-        f"Séances intenses : {semaine_choisie['seances_intenses']}",
-        normal_style
-    ))
+
+    # ---- LÉGENDE ----
+    legend_text = "Légende : "
+    for symbol, label in LEGENDE.items():
+        legend_text += f"{symbol} = {label}  "
+    story.append(Paragraph(legend_text, normal_style))
     story.append(Spacer(1, 6))
-    
-    # ---- TABLEAU DES SÉANCES ----
-    data = [
-        [
-            Paragraph("Jour", normal_style),
-            Paragraph("Date", normal_style),
-            Paragraph("Discipline", normal_style),
-            Paragraph("Type", normal_style),
-            Paragraph("Détails", normal_style),
-            Paragraph("Durée", normal_style)
-        ]
-    ]
-    
-    for jour in semaine_choisie['jours']:
-        for seance in jour['seances']:
-            if seance['discipline'] == 'Repos':
-                continue
-            # CORRIGÉ: Remplacer les émojis dans les détails
-            details = replace_emoji(seance['details'])
-            data.append([
-                Paragraph(jour['jour'], normal_style),
-                Paragraph(jour['date'], normal_style),
-                Paragraph(seance['discipline'], normal_style),
-                Paragraph(seance['type'], normal_style),
-                Paragraph(details[:50] + "..." if len(details) > 50 else details, normal_style),
-                Paragraph(f"{seance['duree']} min", normal_style)
-            ])
-    
-    table = Table(data, colWidths=[30*mm, 30*mm, 30*mm, 35*mm, 45*mm, 25*mm])
+
+    # ---- TABLEAU DE TOUTES LES SEMAINES ----
+    story.append(Paragraph("Planning complet", sous_titre_style))
+    story.append(Spacer(1, 3))
+
+    # Construction du tableau avec toutes les séances
+    all_rows = []
+
+    # En-tête
+    header = ["Semaine", "Jour", "Date", "Discipline", "Type", "Détails", "Durée", "Intensité"]
+    all_rows.append([Paragraph(h, small_style) for h in header])
+
+    for semaine in plan['semaines']:
+        num_affichage = semaine.get('num_affichage', '')
+        emoji = replace_emojis(semaine.get('emoji', '●'))
+        semaine_label = f"{emoji}S-{num_affichage:02d}"
+
+        for jour in semaine.get('jours', []):
+            for seance in jour.get('seances', []):
+                if seance.get('discipline') == 'Repos':
+                    continue
+
+                details = replace_emojis(seance.get('details', ''))
+                if len(details) > 40:
+                    details = details[:37] + "..."
+
+                # Niveau d'intensité
+                difficulte = seance.get('difficulte', 'endurance')
+                intensite_map = {
+                    'recuperation': '○',
+                    'endurance': '●',
+                    'seuil': '◐',
+                    'intense': '■',
+                    'course': '★'
+                }
+                intensite = intensite_map.get(difficulte, '●')
+
+                all_rows.append([
+                    Paragraph(semaine_label, small_style),
+                    Paragraph(jour.get('jour', ''), small_style),
+                    Paragraph(jour.get('date', ''), small_style),
+                    Paragraph(seance.get('discipline', ''), small_style),
+                    Paragraph(seance.get('type', ''), small_style),
+                    Paragraph(details, small_style),
+                    Paragraph(f"{seance.get('duree', 0)} min", small_style),
+                    Paragraph(intensite, small_style)
+                ])
+
+    # Largeurs des colonnes
+    col_widths = [25*mm, 20*mm, 25*mm, 25*mm, 30*mm, 50*mm, 20*mm, 15*mm]
+
+    # Création du tableau
+    table = Table(all_rows, colWidths=col_widths, repeatRows=1)
     table.setStyle(TableStyle([
-        ('GRID', (0,0), (-1,-1), 0.5, colors.grey),
-        ('BACKGROUND', (0,0), (-1,0), colors.lightgrey),
-        ('ALIGN', (0,0), (-1,-1), 'CENTER'),
-        ('FONTNAME', (0,0), (-1,-1), 'Helvetica'),
-        ('FONTSIZE', (0,0), (-1,-1), 8),
-        ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
-        ('WORDWRAP', (0,0), (-1,-1), True),
+        ('GRID', (0, 0), (-1, -1), 0.5, colors.grey),
+        ('BACKGROUND', (0, 0), (-1, 0), colors.lightgrey),
+        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+        ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+        ('FONTNAME', (0, 0), (-1, -1), 'Helvetica'),
+        ('FONTSIZE', (0, 0), (-1, -1), 7),
+        ('WORDWRAP', (0, 0), (-1, -1), True),
     ]))
     story.append(table)
-    story.append(Spacer(1, 6))
-    
-    # ---- LÉGENDE ----
-    # CORRIGÉ: Utilisation de caractères simples
-    story.append(Paragraph(
-        "Légende : "
-        "● Endurance | ◐ Seuil | ■ Intense | ○ Récupération | ★ Course | □ Repos",
-        normal_style
-    ))
-    
+
     # ---- GÉNÉRATION DU PDF ----
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
     nom = plan['athlete'].replace(' ', '_')
     nom_fichier = f"{nom}_plan_apercu_{timestamp}.pdf"
     chemin = os.path.join(plan_dir, nom_fichier)
-    
+
     try:
         doc = SimpleDocTemplate(chemin, pagesize=landscape(A4))
         doc.onFirstPage = ajouter_filigrane_pdf
