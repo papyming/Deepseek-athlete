@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block titre %}Plans — Deepseek Athlete{% endblock %}
+{% block contenu %}
+  <h1>Plans disponibles</h1>
+  {% if plans %}
+    <div class="tableau">
+      <table>
+        <thead>
+          <tr>
+            <th>Plan</th>
+            <th>Fichier</th>
+            <th>Identifiant</th>
+            <th>Modifié (nommage)</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for plan in plans %}
+          <tr>
+            <td>{{ plan.athlete }}</td>
+            <td>{{ plan.fichier }}</td>
+            <td class="mono">{{ plan.identifiant }}</td>
+            <td>{{ plan.modifie }}</td>
+            <td><a class="bouton" href="/plans/{{ plan.identifiant }}">Ouvrir</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="vide">Aucun plan CSV disponible.</p>
+  {% endif %}
+{% endblock %}

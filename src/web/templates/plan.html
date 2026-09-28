@@ -1,0 +1,196 @@
+{% extends 'base.html' %}
+{% block titre %}{{ plan.athlete }} — Deepseek Athlete{% endblock %}
+{% block contenu %}
+  <h1>{{ plan.athlete }}</h1>
+  <p class="sous-titre">{{ plan.fichier }}</p>
+
+  <div class="barre">
+    <a class="bouton" href="/">Retour aux plans</a>
+    <form method="post" action="/plans/{{ plan.identifiant }}/validate">
+      <button type="submit" class="bouton">Valider le CSV</button>
+    </form>
+    <a class="bouton" href="/">Retour</a>
+  </div>
+
+  <section class="assistant-ia" data-plan="{{ plan.identifiant }}">
+    <h2>🤖 Assistant IA</h2>
+    <p class="aide">Que souhaitez-vous modifier dans ce plan ?</p>
+    <textarea id="ia-demande" rows="2"
+      placeholder="Ex : Réduis la durée de la sortie longue CAP du dimanche de 20 minutes."></textarea>
+    <div class="ia-barre">
+      <button type="button" id="ia-preview" class="bouton">Prévisualiser</button>
+    </div>
+    <div id="ia-message" class="ia-message" hidden></div>
+    <div id="ia-apercu" hidden>
+      <div class="ia-colonnes">
+        <div class="ia-colonne">
+          <h3>AVANT</h3>
+          <ul id="ia-avant"></ul>
+        </div>
+        <div class="ia-colonne">
+          <h3>APRÈS</h3>
+          <ul id="ia-apres"></ul>
+        </div>
+      </div>
+      <div class="ia-barre">
+        <button type="button" id="ia-annuler" class="bouton secondaire">Annuler</button>
+        <button type="button" id="ia-confirmer" class="bouton">Confirmer la modification</button>
+      </div>
+    </div>
+  </section>
+
+  {% if validation %}
+    {% if validation.valide %}
+      <div class="ok">VALIDATION OK</div>
+    {% else %}
+      <div class="ko">
+        VALIDATION KO
+        {% if validation.erreurs %}
+          <ul>
+            {% for erreur in validation.erreurs %}<li>{{ erreur }}</li>{% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+    {% endif %}
+    {% if validation.avertissements %}
+      <div class="avert">
+        Avertissements
+        <ul>
+          {% for avertissement in validation.avertissements %}<li>{{ avertissement }}</li>{% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+  {% endif %}
+
+  <div class="tableau">
+    <table>
+      <thead>
+        <tr>
+          {% for colonne in colonnes %}<th>{{ colonne }}</th>{% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for ligne in lignes %}
+        <tr>
+          {% for colonne in colonnes %}<td>{{ ligne[colonne] }}</td>{% endfor %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+  (function () {
+    const zone = document.querySelector('.assistant-ia');
+    if (!zone) return;
+    const planId = zone.dataset.plan;
+    const demande = document.getElementById('ia-demande');
+    const message = document.getElementById('ia-message');
+    const apercu = document.getElementById('ia-apercu');
+    const listeAvant = document.getElementById('ia-avant');
+    const listeApres = document.getElementById('ia-apres');
+    let previewId = null;
+    let enCours = false;
+
+    function afficherMessage(texte, classe) {
+      message.hidden = !texte;
+      message.className = 'ia-message ' + (classe || '');
+      message.textContent = texte || '';
+    }
+
+    function formater(item) {
+      if (!item) return '—';
+      return [item.date, item.jour, item.discipline, item.type,
+              item.duree ? item.duree + ' min' : '']
+        .filter(Boolean).join(' · ');
+    }
+
+    function remplirListe(liste, elements) {
+      liste.innerHTML = '';
+      const valeurs = (elements && elements.length) ? elements : [null];
+      valeurs.forEach(function (element) {
+        const li = document.createElement('li');
+        li.textContent = formater(element);
+        liste.appendChild(li);
+      });
+    }
+
+    function messageDe(donnees) {
+      if (donnees.conflits && donnees.conflits.length) return donnees.conflits.join(' ');
+      if (donnees.erreurs && donnees.erreurs.length) return donnees.erreurs.join(' ');
+      if (donnees.question) return donnees.question;
+      return donnees.resultat || 'Demande non applicable.';
+    }
+
+    async function poster(url, corps) {
+      const reponse = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(corps)
+      });
+      return reponse.json();
+    }
+
+    const boutonPreview = document.getElementById('ia-preview');
+    const TEXTE_PREVIEW = 'Prévisualiser';
+
+    boutonPreview.addEventListener('click', async function () {
+      if (enCours) return;
+      const texte = demande.value.trim();
+      if (!texte) { afficherMessage('Saisissez une demande.', 'ko'); return; }
+      enCours = true;
+      apercu.hidden = true;
+      previewId = null;
+      // État d'attente : aucune fausse progression, juste l'information.
+      boutonPreview.disabled = true;
+      boutonPreview.textContent = 'Analyse en cours...';
+      afficherMessage("🤖 L'agent analyse votre demande et le plan...", 'attente');
+      try {
+        const donnees = await poster('/plans/' + planId + '/ia/preview',
+                                     { demande: texte });
+        if (donnees.resultat === 'APERCU') {
+          previewId = donnees.preview_id;
+          remplirListe(listeAvant, donnees.avant);
+          remplirListe(listeApres, donnees.apres);
+          apercu.hidden = false;
+          afficherMessage('', '');
+        } else {
+          afficherMessage(messageDe(donnees), 'avert');
+        }
+      } catch (erreur) {
+        afficherMessage('Erreur de communication.', 'ko');
+      } finally {
+        enCours = false;
+        boutonPreview.disabled = false;
+        boutonPreview.textContent = TEXTE_PREVIEW;
+      }
+    });
+
+    document.getElementById('ia-annuler').addEventListener('click', function () {
+      apercu.hidden = true;
+      previewId = null;
+      afficherMessage('', '');
+    });
+
+    document.getElementById('ia-confirmer').addEventListener('click', async function () {
+      if (enCours || !previewId) return;
+      enCours = true;
+      try {
+        const donnees = await poster('/plans/' + planId + '/ia/confirm',
+                                     { preview_id: previewId });
+        if (donnees.resultat === 'CONFIRME') {
+          window.location.reload();
+        } else {
+          afficherMessage(messageDe(donnees), 'ko');
+          apercu.hidden = true;
+          previewId = null;
+        }
+      } catch (erreur) {
+        afficherMessage('Erreur de communication.', 'ko');
+      } finally {
+        enCours = false;
+      }
+    });
+  })();
+  </script>
+{% endblock %}
