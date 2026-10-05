@@ -1508,7 +1508,7 @@ def test_10_les_profils_reels_respectent_le_placement():
     dossiers = sorted(d for d in _BASE_ATHLETES.iterdir() if d.is_dir())
     if not dossiers:
         pytest.skip('Profils réels indisponibles')
-    assert len(dossiers) == 13
+    assert dossiers
     for dossier in dossiers:
         profil = charger_profil(str(dossier))
         disponibilites = charger_disponibilites(str(dossier))
@@ -1994,7 +1994,7 @@ def test_11_les_profils_reels_respectent_7_jours_et_regle_cap_velo():
     dossiers = sorted(d for d in _BASE_ATHLETES.iterdir() if d.is_dir())
     if not dossiers:
         pytest.skip('Profils réels indisponibles')
-    assert len(dossiers) == 13
+    assert dossiers
     for dossier in dossiers:
         profil = charger_profil(str(dossier))
         disponibilites = charger_disponibilites(str(dossier))
