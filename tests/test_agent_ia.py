@@ -333,7 +333,7 @@ def test_8_recurrence_sans_periode_fin_du_plan(tmp_path):
     chemin, plan, dispo = _creer_plan_ia(tmp_path)
     structure = {
         'action': 'AJOUTER', 'discipline': 'CAP', 'type_seance': 'ENDURANCE',
-        'jour_cible': 'Mercredi', 'duree': 50,
+        'jour_cible': 'Mercredi', 'duree': 40,
         'frequence': {'type': 'UNE_SEMAINE_SUR_DEUX'},
     }
     normalisee = normaliser_demande(structure)

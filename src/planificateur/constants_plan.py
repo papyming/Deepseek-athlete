@@ -117,9 +117,25 @@ DIFFICULTE = {
 
 VOLUME_MAX_PAR_SEANCE = {
     'CAP': 120,      # 2h max par séance
-    'Velo': 180,     # 3h max par séance
+    'Velo': 180,     # borne des seances de qualite uniquement
     'Natation': 90   # 1h30 max par séance
 }
+
+# Bornes metier des seances Velo :
+# - une seance velo n'est jamais < 80 min ;
+# - il n'existe AUCUN plafond metier a 180 min : une sortie longue peut
+#   depasser 180 min (210, 240, 270, 300 min ou davantage) selon le budget
+#   hebdomadaire et la periode. La constante ci-dessous n'est qu'une borne
+#   TECHNIQUE de securite (duree maximale absolue), pas un plafond metier.
+VELO_DUREE_MIN = 80
+VELO_DUREE_MAX_TECHNIQUE = 480  # 8 h : borne technique, PAS un plafond metier
+
+# Cible de base (duree visee) de la seance longue Velo selon l'objectif.
+# C'est un objectif prefere, jamais un plafond : si le budget hebdomadaire le
+# permet, la sortie longue peut le depasser.
+VELO_DUREE_LONGUE_CIBLE_IRONMAN = 180   # longue distance / Ironman
+VELO_DUREE_LONGUE_CIBLE_VOLUME = 150    # triathlon / cyclisme a volume important
+VELO_DUREE_LONGUE_CIBLE_DEFAUT = 90     # sinon
 
 # ============================================================
 # ÉQUIVALENCE DE TEMPS D'ENTRAÎNEMENT (unités par heure)

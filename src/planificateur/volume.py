@@ -7,7 +7,16 @@
 import math
 from typing import Dict, List
 
-from .constants_plan import VOLUME_MAX_PAR_SEANCE, UNITE_DUREE_PAR_HEURE, get_sport_ponderation
+from .constants_plan import (
+    VOLUME_MAX_PAR_SEANCE,
+    UNITE_DUREE_PAR_HEURE,
+    get_sport_ponderation,
+    VELO_DUREE_MIN,
+    VELO_DUREE_MAX_TECHNIQUE,
+    VELO_DUREE_LONGUE_CIBLE_IRONMAN,
+    VELO_DUREE_LONGUE_CIBLE_VOLUME,
+    VELO_DUREE_LONGUE_CIBLE_DEFAUT,
+)
 from .periodisation import get_volume_coeff
 
 
@@ -36,6 +45,118 @@ def calculer_unites_hebdo(volumes: Dict[str, int]) -> Dict[str, float]:
 def total_unites_hebdo(volumes: Dict[str, int]) -> float:
     """Somme des unités de temps d'une semaine, toutes disciplines confondues."""
     return round(sum(unites_depuis_minutes(discipline, minutes) for discipline, minutes in volumes.items()), 4)
+
+
+def get_duree_longue_cible(objectif: str = '', format_competition: str = '') -> int:
+    """Duree de base visee par la seance velo longue selon l'objectif.
+
+    - longue distance / Ironman : 180 min ;
+    - triathlon / cyclisme a volume important : 150 min ;
+    - sinon : 90 min.
+
+    Cette valeur est une CIBLE (plancher prefere), jamais un plafond metier :
+    ``repartir_volume_velo`` peut la depasser (210, 240, 300 min...) lorsque le
+    budget hebdomadaire le permet.
+    """
+    texte = f"{objectif or ''} {format_competition or ''}".lower()
+    if any(mot in texte for mot in (
+        'ironman', 'longue distance', 'longue_distance', 'half', '70.3', '140.6'
+    )):
+        return VELO_DUREE_LONGUE_CIBLE_IRONMAN
+    if any(mot in texte for mot in (
+        'triathlon', 'olympique', 'cyclisme', 'vélo', 'velo',
+        'contre-la-montre', 'clm', 'bike'
+    )):
+        return VELO_DUREE_LONGUE_CIBLE_VOLUME
+    return VELO_DUREE_LONGUE_CIBLE_DEFAUT
+
+
+def _repartir_egal(total: int, nb: int, minimum: int, maximum: int):
+    """Repartit ``total`` minutes sur ``nb`` valeurs les plus egales possible.
+
+    Retourne ``None`` si ``total`` est hors de l'intervalle
+    ``[nb*minimum, nb*maximum]``.
+    """
+    if nb <= 0:
+        return [] if total <= 0 else None
+    if total < nb * minimum or total > nb * maximum:
+        return None
+    base = total // nb
+    reste = total - base * nb
+    return [base + (1 if i < reste else 0) for i in range(nb)]
+
+
+def repartir_volume_velo(
+    budget: float,
+    nb_seances: int,
+    duree_longue_cible: int = None
+):
+    """Repartit un budget hebdomadaire velo (minutes) sur ``nb_seances`` seances.
+
+    Le budget est un total hebdomadaire : il n'est jamais utilise directement
+    comme duree d'une seance. Chaque seance est bornee a
+    ``[VELO_DUREE_MIN, VELO_DUREE_MAX_TECHNIQUE]`` (80 min mini ; la borne haute
+    est TECHNIQUE, elle n'impose aucun plafond metier a 180 min).
+
+    - la seance longue est servie en priorite : elle absorbe le surplus du
+      budget et reste la plus longue ;
+    - les autres seances visent ``VELO_DUREE_LONGUE_CIBLE_DEFAUT`` (90 min),
+      avec repli a 80 min quand le budget est serre ;
+    - ``duree_longue_cible`` est un plancher prefere (180/150/90 min) : la
+      sortie longue peut le depasser (210, 240, 300 min...) si le budget le
+      permet ; elle n'y est jamais silencieusement rognee.
+
+    Retourne une liste de durees (la plus longue en premier) dont la somme
+    egale le budget, ou ``None`` si ``budget < nb_seances * 80`` (budget
+    insuffisant : a l'appelant de reduire le nombre de seances).
+    """
+    if nb_seances <= 0:
+        return []
+    budget = int(round(budget or 0))
+    if budget <= 0:
+        return None
+    minimum = VELO_DUREE_MIN
+    maximum = VELO_DUREE_MAX_TECHNIQUE
+    if budget < nb_seances * minimum:
+        return None
+    # Borne technique uniquement : on ne depasse jamais la capacite absolue.
+    budget = min(budget, nb_seances * maximum)
+
+    if nb_seances == 1:
+        return [budget]
+
+    cible = duree_longue_cible if duree_longue_cible else VELO_DUREE_LONGUE_CIBLE_DEFAUT
+    cible = max(minimum, int(round(cible)))
+
+    # Part des seances normales : 90 min si le budget le permet, sinon 80 min.
+    # On retient la plus grande part qui laisse la longue au moins aussi longue
+    # et, si possible, au moins egale a la cible.
+    autre = minimum
+    for candidat in (VELO_DUREE_LONGUE_CIBLE_DEFAUT, minimum):
+        longue = budget - (nb_seances - 1) * candidat
+        if longue < candidat:
+            continue
+        autre = candidat
+        if longue >= cible:
+            break
+    longue = budget - (nb_seances - 1) * autre
+
+    if longue > maximum:
+        # La longue a atteint la borne technique : le surplus va aux autres,
+        # sans jamais depasser la seance longue.
+        surplus = longue - maximum
+        longue = maximum
+        autres = _repartir_egal(
+            (nb_seances - 1) * autre + surplus,
+            nb_seances - 1,
+            minimum,
+            min(maximum, longue),
+        )
+        if autres is None:
+            autres = [autre] * (nb_seances - 1)
+        return [longue] + autres
+
+    return [longue] + [autre] * (nb_seances - 1)
 
 
 def calculer_volume_hebdo(
@@ -110,12 +231,15 @@ def calculer_volume_hebdo(
             volumes[discipline] = 0
             continue
         
-        if discipline == 'Velo' and duree * coeff_semaine * coeff_niveau < 80:
-            duree = 80
-        
         volume_calc = nb_jours * duree * coeff_niveau * coeff_obj.get(discipline, 1.0) * coeff_semaine * ponderation.get(discipline, 1.0)
         
-        volume_max = nb_jours * VOLUME_MAX_PAR_SEANCE.get(discipline, 120)
+        if discipline == 'Velo':
+            # Le budget hebdomadaire Velo n'est PAS plafonne a 180 min/seance :
+            # une seance (sortie longue) peut depasser 180 min. Seule la borne
+            # technique absolue s'applique ici.
+            volume_max = nb_jours * VELO_DUREE_MAX_TECHNIQUE
+        else:
+            volume_max = nb_jours * VOLUME_MAX_PAR_SEANCE.get(discipline, 120)
         volume_calc = min(volume_calc, volume_max)
         
         if discipline == 'Natation' and nb_jours > 0:
@@ -123,10 +247,13 @@ def calculer_volume_hebdo(
             volume_min_km = km_par_seance * 60 * nb_jours
             volume_calc = max(volume_calc, volume_min_km * 0.7)
         
+        # Le volume Vélo est un BUDGET HEBDOMADAIRE de minutes : il n'est ni
+        # plancheré ni réutilisé comme durée de séance. Le coefficient de
+        # période (coeff_semaine) n'est appliqué qu'ici, une seule fois.
+        # La contrainte « au moins 80 min par séance » est traitée lors de la
+        # répartition du budget (repartir_volume_velo), pas par un clamp
+        # silencieux qui masquerait un budget théorique insuffisant.
         volumes[discipline] = int(volume_calc)
-        
-        if discipline == 'Velo' and nb_jours > 0:
-            volumes[discipline] = max(volumes[discipline], nb_jours * 80)
     
     return volumes
 

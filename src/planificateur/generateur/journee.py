@@ -7,7 +7,12 @@
 from datetime import datetime
 from typing import Dict, List
 
-from ..constants_plan import get_emoji_journee, VOLUME_MAX_PAR_SEANCE
+from ..constants_plan import (
+    get_emoji_journee,
+    VELO_DUREE_MIN,
+    VELO_DUREE_MAX_TECHNIQUE,
+    VOLUME_MAX_PAR_SEANCE,
+)
 from .dates import jours_avant_objectif, est_affutage
 from .seances import (
     generer_seance_endurance, generer_seance_renforcement,
@@ -56,6 +61,17 @@ def _seance_cap_longue(volumes: Dict[str, int], coeff_volume: float) -> Dict:
     return generer_seance_endurance('CAP', duree, 'Z2', 'endurance_fondamentale')
 
 
+def _duree_velo_qualite(duree: int) -> int:
+    """Plafonne une séance Vélo de qualité à [80, 180] min.
+
+    Seules les séances de qualité (Seuil/Intensité) sont bornées à 180 min
+    (``VOLUME_MAX_PAR_SEANCE['Velo']``). Les séances Endurance et Sortie longue
+    ne passent pas par ce plafond et peuvent donc dépasser 180 min.
+    """
+    plafond = VOLUME_MAX_PAR_SEANCE.get('Velo', 180)
+    return max(VELO_DUREE_MIN, min(int(plafond), int(duree)))
+
+
 def construire_journee(
     nom_jour: str,
     date_str: str,
@@ -90,7 +106,8 @@ def construire_journee(
     biquotidien_actif: bool = False,
     statut_jour: str = 'normal',
     roles_jour: Dict[str, str] = None,
-    derniere_categorie_cap: str = None
+    derniere_categorie_cap: str = None,
+    durees_velo_par_jour: Dict[str, int] = None
 ) -> Dict:
     jour_semaine = datetime.strptime(date_str, '%Y-%m-%d').weekday()
 
@@ -113,7 +130,12 @@ def construire_journee(
         if nom_jour in jours_cap:
             seances.append(generer_seance_endurance('CAP', int(volumes.get('CAP', 45) * 0.65), 'Z1', 'endurance_recuperative'))
         if nom_jour in jours_velo:
-            duree_velo = max(45, int(volumes.get('Velo', 90) * 0.65))
+            duree_velo = None
+            if durees_velo_par_jour:
+                duree_velo = durees_velo_par_jour.get(nom_jour)
+            if duree_velo is None:
+                duree_velo = int(volumes.get('Velo', VELO_DUREE_MIN) or VELO_DUREE_MIN)
+            duree_velo = max(VELO_DUREE_MIN, min(VELO_DUREE_MAX_TECHNIQUE, int(duree_velo)))
             seances.append(generer_seance_endurance('Vélo', duree_velo, 'Z1', 'recup'))
         if nom_jour in jours_natation:
             duree_natation = min(60, int(volumes.get('Natation', 45) * 0.65))
@@ -189,28 +211,26 @@ def construire_journee(
             seances.append(_seance_cap_endurance(jour_semaine, volumes, coeff_volume))
     
     # ---- Vélo ----
-    if velo_dispo:
-        # Pas de Vélo le dimanche si déjà CAP
-        if jour_semaine == 6 and cap_dispo:
-            pass
-        elif role_velo == 'intensite':
-            duree = max(80, int(volumes.get('Velo', 90) * coeff_volume))
-            duree = min(duree, VOLUME_MAX_PAR_SEANCE['Velo'])
-            duree = max(80, int(duree * coeff_intensite))
-            seances.append({'discipline': 'Vélo', 'type': 'Seuil Z4', 'details': f'Seuil Z4 ({duree} min)', 'duree': duree, 'difficulte': 'seuil'})
+    # Durée imposée par la répartition du budget hebdomadaire (>= 80 min).
+    # Endurance et Sortie longue peuvent dépasser 180 min (borne technique
+    # absolue uniquement) ; la qualité, elle, est plafonnée à 180 min.
+    # Aucune réapplication du coefficient de période : le budget le contient
+    # déjà une seule fois.
+    if velo_dispo and not (jour_semaine == 6 and cap_dispo):
+        duree_velo = None
+        if durees_velo_par_jour:
+            duree_velo = durees_velo_par_jour.get(nom_jour)
+        if duree_velo is None:
+            duree_velo = int(volumes.get('Velo', VELO_DUREE_MIN) or VELO_DUREE_MIN)
+        duree = max(VELO_DUREE_MIN, min(VELO_DUREE_MAX_TECHNIQUE, int(duree_velo)))
+        if role_velo == 'intensite':
+            # Qualité vélo : plafonnée à 180 min (VOLUME_MAX_PAR_SEANCE['Velo']).
+            duree_qualite = _duree_velo_qualite(duree)
+            seances.append({'discipline': 'Vélo', 'type': 'Seuil Z4', 'details': f'Seuil Z4 ({duree_qualite} min)', 'duree': duree_qualite, 'difficulte': 'seuil'})
         elif role_velo == 'longue':
-            duree = max(80, int(volumes.get('Velo', 90) * 0.8 * coeff_volume))
-            duree = min(duree, 120)
             seances.append(generer_seance_endurance('Vélo', duree, 'Z2', 'sortie_longue'))
         else:
-            if jour_semaine == 6:  # Dimanche (sans CAP)
-                duree = max(60, int(volumes.get('Velo', 90) * 0.6))
-                duree = min(duree, 90)
-                seances.append(generer_seance_endurance('Vélo', duree, 'Z2', 'endurance'))
-            else:
-                duree = max(80, int(volumes.get('Velo', 90) * coeff_volume))
-                duree = min(duree, VOLUME_MAX_PAR_SEANCE['Velo'])
-                seances.append(generer_seance_endurance('Vélo', duree, 'Z2', 'endurance'))
+            seances.append(generer_seance_endurance('Vélo', duree, 'Z2', 'endurance'))
     
     # ---- Natation ----
     if natation_dispo:

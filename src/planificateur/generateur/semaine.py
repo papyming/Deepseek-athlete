@@ -9,9 +9,15 @@ import re
 from datetime import datetime, timedelta
 from typing import Dict, List
 
-from ..constants_plan import JOURS_SEMAINE, get_emoji_semaine, get_sport_discipline_priority_order, get_sport_priority_map
+from ..constants_plan import JOURS_SEMAINE, get_emoji_semaine, get_sport_discipline_priority_order, get_sport_priority_map, VELO_DUREE_MIN, VELO_DUREE_MAX_TECHNIQUE
 from ..periodisation import determiner_phase, determiner_type_semaine, get_volume_coeff, get_intensite_coeff
-from ..volume import calculer_volume_hebdo, get_nb_intenses_requis, get_natation_km
+from ..volume import (
+    calculer_volume_hebdo,
+    get_nb_intenses_requis,
+    get_natation_km,
+    get_duree_longue_cible,
+    repartir_volume_velo,
+)
 from .dates import generer_jour_date, jours_disponibles_renforcement, get_volume_semaine_affichage
 from .journee import construire_journee, _SPORT_DISCIPLINES, _MAX_SPORT_PAR_STATUT
 from .seances import generer_seance_renforcement
@@ -280,6 +286,28 @@ def _trier_jours_preferes(discipline: str, jours: List[str]) -> List[str]:
     return sorted(jours, key=lambda x: ordre.index(x) if x in ordre else 99)
 
 
+def _jour_longue_prioritaire(
+    discipline: str, jours_disponibles: List[str], jours_exclus: List[str] = None
+) -> str:
+    """Choisit le jour de la séance longue d'une discipline.
+
+    Règle CDC : le dimanche, lorsqu'il est disponible et compatible avec les
+    contraintes, est le jour prioritaire de la séance longue principale.
+    Repli sur le samedi, puis sur le meilleur jour disponible. Ne crée jamais
+    de disponibilité : ne retourne qu'un jour de ``jours_disponibles`` non
+    exclu (compétition, etc.). Fonction pure, indépendante du calcul de volume.
+    """
+    exclus = set(jours_exclus or [])
+    candidats = [jour for jour in jours_disponibles if jour not in exclus]
+    if not candidats:
+        return None
+    for jour_prioritaire in ('Dimanche', 'Samedi'):
+        if jour_prioritaire in candidats:
+            return jour_prioritaire
+    ordre = _PREFERENCE_JOURS.get(discipline, JOURS_SEMAINE)
+    return sorted(candidats, key=lambda x: ordre.index(x) if x in ordre else 99)[0]
+
+
 _JOURS_WEEKEND = ['Samedi', 'Dimanche']
 
 # Intensité : priorité aux jours de semaine (lundi -> vendredi).
@@ -295,10 +323,10 @@ _CRENEAUX_INTENSITE_FIXES = {
     'Natation': {'Mardi', 'Vendredi'},
 }
 
-# Longue : priorité au week-end.
+# Longue : priorité au dimanche (jour prioritaire CDC), puis au samedi.
 _PREFERENCES_LONGUE = {
-    'CAP': ['Samedi', 'Dimanche'],
-    'Velo': ['Samedi', 'Dimanche'],
+    'CAP': ['Dimanche', 'Samedi'],
+    'Velo': ['Dimanche', 'Samedi'],
 }
 
 _ROLES = ('intensite', 'longue', 'endurance')
@@ -369,35 +397,48 @@ def _roles_pour_discipline(
     date_semaine: datetime,
     nb_intenses: int,
     derniere_intense: datetime = None,
-    dates_imposees: List[datetime] = None
+    dates_imposees: List[datetime] = None,
+    jours_a_eviter: List[str] = None
 ):
     """Décide le rôle (intensite/longue/endurance) de chaque jour d'une discipline.
 
     ``dates_imposees`` contient les dates de compétitions préparatoires: elles
     comptent comme séances d'intensité et doivent donc être espacées d'au moins
     48 h des séances intenses normales.
+
+    ``jours_a_eviter`` (jours également vélo) n'est utilisé que pour la CAP :
+    une séance de qualité y est placée en dernier recours, car la règle CDC
+    CAP ≤ 50 % du vélo rend le cumul CAP qualité + vélo contraint. Les jours
+    sans vélo restent prioritaires ; l'évitement n'exclut jamais un jour.
     """
     roles = {jour: 'endurance' for jour in jours}
     if not jours:
         return roles, []
 
     alertes = []
+    eviter = set(jours_a_eviter or [])
     dates_reference = list(dates_imposees or [])
     if derniere_intense is not None:
         dates_reference.append(derniere_intense)
 
     if discipline == 'CAP':
-        candidats_semaine = [
-            jour for jour in _PREFERENCES_INTENSITE['CAP'] if jour in jours
-        ]
+        # Tri stable : les jours sans vélo passent en tête, l'ordre de
+        # préférence CAP est conservé à l'intérieur de chaque groupe.
+        candidats_semaine = sorted(
+            [jour for jour in _PREFERENCES_INTENSITE['CAP'] if jour in jours],
+            key=lambda jour: jour in eviter
+        )
         selection = _choisir_creneaux_intenses(
             candidats_semaine, date_semaine, dates_reference, nb_intenses
         )
         if len(selection) < nb_intenses:
-            candidats_weekend = [
-                jour for jour in _PREFERENCES_LONGUE['CAP']
-                if jour in jours and jour not in selection
-            ]
+            candidats_weekend = sorted(
+                [
+                    jour for jour in _PREFERENCES_LONGUE['CAP']
+                    if jour in jours and jour not in selection
+                ],
+                key=lambda jour: jour in eviter
+            )
             reference = dates_reference + [
                 _date_du_jour(date_semaine, jour) for jour in selection
             ]
@@ -427,18 +468,25 @@ def _roles_pour_discipline(
 
     if discipline in ('CAP', 'Velo'):
         restants = [jour for jour in jours if roles[jour] != 'intensite']
-        creneaux_weekend = [
-            jour for jour in _PREFERENCES_LONGUE.get(discipline, [])
-            if jour in restants
-        ]
-        if creneaux_weekend:
-            roles[creneaux_weekend[0]] = 'longue'
-        elif restants:
-            roles[restants[0]] = 'longue'
-            alertes.append(
-                f"Placement de la séance longue {discipline} : aucun créneau "
-                "week-end disponible, repli sur un jour disponible."
-            )
+        # Une compétition n'est jamais déplacée : le jour de course est exclu
+        # des candidats à la séance longue (repli sur un autre jour dispo).
+        jours_competition = []
+        if dates_imposees:
+            dates_set = set(dates_imposees)
+            jours_competition = [
+                jour for jour in restants
+                if _date_du_jour(date_semaine, jour) in dates_set
+            ]
+        jour_longue = _jour_longue_prioritaire(
+            discipline, restants, jours_competition
+        )
+        if jour_longue is not None:
+            roles[jour_longue] = 'longue'
+            if jour_longue not in ('Dimanche', 'Samedi'):
+                alertes.append(
+                    f"Placement de la séance longue {discipline} : aucun créneau "
+                    "week-end disponible, repli sur un jour disponible."
+                )
 
     return roles, alertes
 
@@ -460,7 +508,8 @@ def _construire_roles_semaine(
     roles_cap, alertes_cap = _roles_pour_discipline(
         'CAP', jours_cap, date_semaine, nb_intenses_cap,
         derniers_intenses.get('CAP'),
-        dates_courses.get('CAP')
+        dates_courses.get('CAP'),
+        jours_a_eviter=jours_velo
     )
     for jour, role in roles_cap.items():
         roles_par_jour[jour]['CAP'] = role
@@ -638,6 +687,77 @@ def _appliquer_regle_cap_velo(jour: Dict) -> bool:
     return contrainte_creee
 
 
+def _changer_duree_seance(seance: Dict, nouvelle_duree: int) -> None:
+    """Met à jour la durée d'une séance et sa durée affichée dans les détails."""
+    nouvelle_duree = int(nouvelle_duree)
+    seance['duree'] = nouvelle_duree
+    seance['details'] = _reecrire_duree_details(
+        seance.get('details', ''), nouvelle_duree
+    )
+
+
+def _garantir_ratio_cap_velo(jours: List[Dict]) -> List[str]:
+    """Garantit CAP ≤ 50 % du vélo le même jour pour les CAP non réductibles.
+
+    Une CAP de qualité (VMA/VC/Seuil...) ne peut pas être rognée sans casser
+    sa structure : le vélo du même jour doit donc valoir au moins 2 × CAP. Le
+    budget vélo restant est prélevé sur les autres séances vélo, sans jamais
+    descendre sous 80 min. Si le budget vélo est insuffisant, la correction
+    est partielle et l'impossibilité est explicitement signalée (jamais de
+    clamp silencieux).
+    """
+    alertes = []
+    items = []
+    for jour in jours:
+        seances = jour.get('seances', [])
+        velos = [s for s in seances if s.get('discipline') in ('Vélo', 'Velo')]
+        if not velos:
+            continue
+        velo = max(velos, key=lambda s: int(s.get('duree', 0) or 0))
+        plancher = VELO_DUREE_MIN
+        for cap in seances:
+            if cap.get('discipline') != 'CAP' or _seance_cap_reductible(cap):
+                continue
+            plancher = max(
+                plancher,
+                min(VELO_DUREE_MAX_TECHNIQUE, 2 * int(cap.get('duree', 0) or 0)),
+            )
+        items.append({
+            'jour': jour,
+            'seance': velo,
+            'plancher': plancher,
+            'surplus': int(velo.get('duree', 0) or 0) - plancher,
+        })
+
+    if not any(item['surplus'] < 0 for item in items):
+        return alertes
+
+    for item in items:
+        seance = item['seance']
+        besoin = item['plancher'] - int(seance.get('duree', 0) or 0)
+        while besoin > 0:
+            donneurs = [j for j in items if j['surplus'] > 0]
+            if not donneurs:
+                break
+            donneur = max(donneurs, key=lambda j: j['surplus'])
+            pris = min(donneur['surplus'], besoin)
+            _changer_duree_seance(
+                donneur['seance'], int(donneur['seance']['duree']) - pris
+            )
+            donneur['surplus'] -= pris
+            _changer_duree_seance(seance, int(seance['duree']) + pris)
+            besoin -= pris
+        if besoin > 0:
+            alertes.append(
+                "Volume vélo insuffisant pour respecter la règle CAP ≤ 50 % du "
+                f"vélo le {item['jour'].get('jour', '')} : impossible de "
+                "sécuriser la CAP de qualité par un vélo d'au moins "
+                f"{item['plancher']} min. Sécurisation partielle appliquée, "
+                "à confirmer."
+            )
+    return alertes
+
+
 def _journee_hors_plan(
     nom_jour: str, date_courante: datetime, date_objectif: datetime
 ) -> Dict:
@@ -806,7 +926,41 @@ def construire_semaine(
         niveau, objectif, type_semaine, phase, semaine_num,
         sport_principal
     )
-    
+
+    # --- Budget hebdomadaire Vélo -> séances ---
+    # `volumes['Velo']` est un budget de minutes pour la semaine, jamais une
+    # durée de séance. Règle existante conservée : pas de vélo le dimanche si
+    # un CAP y est placé.
+    cible_longue_velo = get_duree_longue_cible(objectif, format_competition)
+    if 'Dimanche' in jours_cap:
+        jours_velo = [jour for jour in jours_velo if jour != 'Dimanche']
+        nb_velo = len(jours_velo)
+
+    alertes_volume_velo = []
+    if nb_velo > 0:
+        while True:
+            budget_velo = calculer_volume_hebdo(
+                {'CAP': jours_cap, 'Velo': jours_velo, 'Natation': []},
+                niveau, objectif, type_semaine, phase, semaine_num,
+                sport_principal
+            ).get('Velo', 0)
+            if budget_velo >= nb_velo * VELO_DUREE_MIN or nb_velo <= 1:
+                break
+            # Budget théorique insuffisant : réduire le nombre de séances
+            # (sans créer de séance < 80 min).
+            jours_velo = _selectionner_jours_avec_longue(
+                'Velo', jours_velo, nb_velo - 1
+            )
+            nb_velo = len(jours_velo)
+        volumes['Velo'] = budget_velo
+        if budget_velo < nb_velo * VELO_DUREE_MIN:
+            alertes_volume_velo.append(
+                f"Volume vélo théorique insuffisant ({budget_velo} min) pour "
+                f"{nb_velo} séance(s) : le minimum de {VELO_DUREE_MIN} min par "
+                "séance ne peut pas être respecté. Sécurisation appliquée "
+                f"({VELO_DUREE_MIN} min), à confirmer."
+            )
+
     coeff_volume = get_volume_coeff(type_semaine, phase, semaine_num)
     coeff_intensite = get_intensite_coeff(type_semaine)
     natation_km = get_natation_km(niveau)
@@ -850,6 +1004,38 @@ def construire_semaine(
         date_semaine, derniers_intenses, dates_courses
     )
     nb_cap_intenses_placees = 0
+
+    # Durées vélo par jour : répartition du budget hebdomadaire. La séance
+    # longue (rôle 'longue', placée en priorité le dimanche si disponible)
+    # reçoit la plus grande part ; les autres reçoivent le reliquat.
+    durees_velo_par_jour = {}
+    if nb_velo > 0:
+        repartition_velo = repartir_volume_velo(
+            volumes.get('Velo', 0), nb_velo, cible_longue_velo
+        )
+        if repartition_velo is None:
+            # Sécurisation signalée : jamais de séance < 80 min.
+            repartition_velo = [VELO_DUREE_MIN] * nb_velo
+        repartition_velo = sorted(repartition_velo, reverse=True)
+        jour_longue_velo = next(
+            (
+                jour for jour in jours_velo
+                if roles_par_jour.get(jour, {}).get('Velo') == 'longue'
+            ),
+            None
+        )
+        if jour_longue_velo is None:
+            jour_longue_velo = (
+                _jour_longue_prioritaire('Velo', jours_velo) or jours_velo[0]
+            )
+        durees_velo_par_jour[jour_longue_velo] = repartition_velo[0]
+        autres_jours_velo = [
+            jour for jour in jours_velo if jour != jour_longue_velo
+        ]
+        for jour, duree in zip(autres_jours_velo, repartition_velo[1:]):
+            durees_velo_par_jour[jour] = duree
+
+    alertes_placement.extend(alertes_volume_velo)
 
     # Alternance COURTE / LONGUE des intensités CAP successives (état mémorisé
     # d'une semaine à l'autre via derniers_intenses).
@@ -900,7 +1086,8 @@ def construire_semaine(
             nom_jour in jours_biquotidien or nom_jour in jours_biquotidien_normaux,
             statut_par_jour[nom_jour],
             roles_jour=roles_par_jour.get(nom_jour, {}),
-            derniere_categorie_cap=derniere_categorie_cap
+            derniere_categorie_cap=derniere_categorie_cap,
+            durees_velo_par_jour=durees_velo_par_jour
         )
         
         for s in jour['seances']:
@@ -933,8 +1120,10 @@ def construire_semaine(
         jour['contrainte_planification'] = contrainte['active']
         jour['contrainte'] = contrainte
 
-    # Règle métier CAP/Vélo le même jour : appliquée après génération des
-    # séances, sans jamais en supprimer ni en déplacer.
+    # Règle métier CAP/Vélo le même jour : un jour partagé avec une CAP de
+    # qualité reçoit d'abord un vélo ≥ 2 × CAP (prélèvement sur le budget vélo
+    # de la semaine), puis la règle rogne les CAP réductibles restantes.
+    alertes_placement.extend(_garantir_ratio_cap_velo(jours))
     for jour in jours:
         _appliquer_regle_cap_velo(jour)
 

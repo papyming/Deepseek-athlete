@@ -103,15 +103,22 @@ from src.planificateur.volume import (
     calculer_unites_hebdo,
     total_unites_hebdo,
     unites_depuis_minutes,
+    get_duree_longue_cible,
+    repartir_volume_velo,
 )
 from src.planificateur.generateur.semaine import (
     _selectionner_jours_biquotidien,
     _selectionner_jours_avec_longue,
     _trier_jours_preferes,
+    _jour_longue_prioritaire,
     _appliquer_regle_cap_velo,
     MESSAGE_CAP_VELO,
     generer_plan_complet,
     extraire_courses,
+)
+from src.planificateur.generateur.journee import (
+    construire_journee,
+    _duree_velo_qualite,
 )
 from src.utils.parsers import (
     parser_bi_quotidien,
@@ -2031,6 +2038,209 @@ def test_11_les_profils_reels_respectent_7_jours_et_regle_cap_velo():
 
 
 # ============================================================
+# BUDGET VÉLO : RÉPARTITION HEBDOMADAIRE (>= 80 MIN, SANS PLAFOND MÉTIER 180)
+# ============================================================
+
+@pytest.mark.parametrize('objectif, format_competition, attendu', [
+    ('Ironman Nice', 'Ironman', 180),
+    ('', 'longue_distance', 180),
+    ('Triathlon', '', 150),
+    ('Prépa cyclisme', 'Contre-la-montre', 150),
+    ('', '', 90),
+    ('Marathon', '', 90),
+])
+def test_duree_longue_cible_par_objectif(objectif, format_competition, attendu):
+    assert get_duree_longue_cible(objectif, format_competition) == attendu
+
+
+@pytest.mark.parametrize('duree', [80, 150, 180, 210, 240])
+def test_repartir_volume_velo_accepte_duree_longue(duree):
+    # Une séance unique peut prendre toute la durée demandée, y compris > 180.
+    assert repartir_volume_velo(duree, 1, 180) == [duree]
+
+
+def test_repartir_volume_velo_respecte_budget_et_minimum():
+    repartition = repartir_volume_velo(324, 3, 150)
+    assert repartition is not None
+    assert sum(repartition) == 324
+    assert len(repartition) == 3
+    assert all(duree >= 80 for duree in repartition)
+    # La séance longue reçoit la plus grande part.
+    assert max(repartition) == repartition[0]
+    assert repartition[0] >= 150
+
+
+def test_repartir_volume_velo_longue_peut_depasser_180_ironman():
+    # Budget Ironman confortable : la sortie longue dépasse 180 min et la
+    # somme reste égale au budget (aucune réduction silencieuse à 180).
+    for budget in (420, 540, 800):
+        repartition = repartir_volume_velo(
+            budget, 3, get_duree_longue_cible('Ironman Nice', 'Ironman')
+        )
+        assert repartition is not None
+        assert sum(repartition) == budget
+        assert max(repartition) > 180
+        assert all(duree >= 80 for duree in repartition)
+
+
+def test_repartir_volume_velo_ne_depasse_jamais_le_budget():
+    for budget, nb_seances in ((240, 3), (300, 2), (800, 4), (405, 3)):
+        repartition = repartir_volume_velo(budget, nb_seances, 150)
+        assert repartition is not None
+        assert sum(repartition) == budget
+
+
+def test_repartir_volume_velo_budget_insuffisant_retourne_none():
+    # 150 min < 2 séances x 80 min : impossible sans descendre sous 80 min.
+    assert repartir_volume_velo(150, 2, 90) is None
+    assert repartir_volume_velo(0, 2, 90) is None
+    assert repartir_volume_velo(79, 1, 90) is None
+
+
+def test_repartir_volume_velo_une_seance_bornee_technique():
+    # La borne haute est TECHNIQUE et non un plafond métier à 180 : 210 et 240
+    # sont conservées ; seul un budget déraisonnable atteint la borne technique.
+    assert repartir_volume_velo(210, 1, 180) == [210]
+    assert repartir_volume_velo(240, 1, 180) == [240]
+    assert repartir_volume_velo(5000, 1, 180) == [480]
+
+
+def test_equivalence_volume_conservee():
+    # 1 h CAP = 1 h Natation = 2 h Vélo = 1 unité.
+    assert unites_depuis_minutes('CAP', 60) == 1.0
+    assert unites_depuis_minutes('Natation', 60) == 1.0
+    assert unites_depuis_minutes('Velo', 120) == 1.0
+    assert (
+        unites_depuis_minutes('CAP', 60)
+        == unites_depuis_minutes('Natation', 60)
+        == unites_depuis_minutes('Velo', 120)
+        == 1.0
+    )
+
+
+def test_plan_ironman_genere_une_sortie_velo_superieure_a_180():
+    profil = {
+        'niveau_estime': 'Avancé',
+        'objectif_principal': 'Ironman Nice',
+        'format_competition': 'Ironman',
+        'physiologie': {'vma': None, 'vc': None},
+        'sport_principal': 'Triathlon',
+    }
+    disponibilites = _disponibilites_avec_bi(
+        ['Mardi', 'Jeudi'], ['Mercredi', 'Samedi', 'Dimanche'], ['Lundi']
+    )
+    plan = generer_plan_complet(
+        datetime(2026, 8, 1), datetime(2026, 12, 15), profil, disponibilites
+    )
+    durees_velo = [
+        seance['duree']
+        for semaine in plan
+        for jour in semaine['jours']
+        for seance in jour['seances']
+        if seance['discipline'] in ('Vélo', 'Velo')
+    ]
+    assert durees_velo
+    assert all(duree >= 80 for duree in durees_velo)
+    assert max(durees_velo) > 180, durees_velo
+
+
+def test_jour_longue_prioritaire_dimache_puis_samedi():
+    jours = ['Mercredi', 'Dimanche', 'Samedi']
+    assert _jour_longue_prioritaire('Velo', jours) == 'Dimanche'
+    assert _jour_longue_prioritaire('Velo', ['Samedi', 'Mercredi']) == 'Samedi'
+    # Un jour exclu (compétition) n'est jamais choisi.
+    assert _jour_longue_prioritaire(
+        'Velo', ['Dimanche', 'Samedi'], jours_exclus=['Dimanche']
+    ) == 'Samedi'
+    assert _jour_longue_prioritaire('Velo', []) is None
+
+
+# ============================================================
+# VÉLO QUALITÉ : PLAFOND 180 MIN (ENDURANCE/LONGUE NON PLAFONNÉES)
+# ============================================================
+
+@pytest.mark.parametrize('calculee, attendue', [
+    (120, 120),
+    (180, 180),
+    (240, 180),
+    (261, 180),
+])
+def test_duree_velo_qualite_plafonnee_a_180(calculee, attendue):
+    assert _duree_velo_qualite(calculee) == attendue
+
+
+def _journee_velo(role, duree_velo):
+    return construire_journee(
+        'Mercredi', '2026-08-05', datetime(2026, 12, 15), 'normale',
+        [], ['Mercredi'], [],
+        {'CAP': 0, 'Velo': duree_velo, 'Natation': 0},
+        1.0, 1.0, 3,
+        0, 0, 0, False,
+        False, False, False,
+        [], [], 1, 0,
+        '', None, None,
+        [], datetime(2026, 8, 3), 0,
+        roles_jour={'Velo': role},
+        durees_velo_par_jour={'Mercredi': duree_velo},
+    )
+
+
+def _duree_seance_velo(jour):
+    return next(
+        s['duree'] for s in jour['seances']
+        if s['discipline'] in ('Vélo', 'Velo')
+    )
+
+
+def test_velo_qualite_240_est_plafonnee_a_180():
+    assert _duree_seance_velo(_journee_velo('intensite', 240)) == 180
+
+
+def test_velo_endurance_240_n_est_pas_plafonnee():
+    assert _duree_seance_velo(_journee_velo('endurance', 240)) == 240
+
+
+def test_velo_sortie_longue_300_n_est_pas_plafonnee():
+    assert _duree_seance_velo(_journee_velo('longue', 300)) == 300
+
+
+def test_plan_cyclisme_gros_volume_sans_qualite_velo_superieure_a_180():
+    profil = {
+        'niveau_estime': 'Avancé',
+        'objectif_principal': 'Cyclisme contre-la-montre',
+        'format_competition': 'Contre-la-montre',
+        'physiologie': {'vma': None, 'vc': None},
+        'sport_principal': 'Cyclisme',
+    }
+    disponibilites = _disponibilites_avec_bi(
+        ['Mardi'],
+        ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'],
+        [],
+    )
+    plan = generer_plan_complet(
+        datetime(2026, 1, 5), datetime(2026, 7, 1), profil, disponibilites
+    )
+    qualites = [
+        seance['duree']
+        for semaine in plan
+        for jour in semaine['jours']
+        for seance in jour['seances']
+        if seance['discipline'] in ('Vélo', 'Velo') and seance['type'] == 'Seuil Z4'
+    ]
+    assert qualites
+    assert all(duree <= 180 for duree in qualites)
+    # Endurance/Longue restent libres de dépasser 180 min.
+    autres = [
+        seance['duree']
+        for semaine in plan
+        for jour in semaine['jours']
+        for seance in jour['seances']
+        if seance['discipline'] in ('Vélo', 'Velo') and seance['type'] != 'Seuil Z4'
+    ]
+    assert any(duree > 180 for duree in autres)
+
+
+# ============================================================
 # 1 — SAISIE DE LA DATE DE DÉBUT (JJ/MM/AAAA)
 # ============================================================
 
@@ -3276,7 +3486,7 @@ def test_recurrence_une_semaine_sur_deux(tmp_path):
     # mercredi est un jour de repos disponible pour la CAP
     resultat = previsualiser_modifications(chemin, {
         'action': 'AJOUTER', 'discipline': 'CAP', 'type_seance': 'ENDURANCE',
-        'jour_cible': 'Mercredi', 'duree': 50,
+        'jour_cible': 'Mercredi', 'duree': 40,
         'periode': {'type': 'SEMAINES', 'nb': 4},
         'frequence': {'type': 'UNE_SEMAINE_SUR_DEUX'},
     }, dispo, date_reference=_REF_MODIF)
@@ -3316,11 +3526,14 @@ def test_modifier_duree(tmp_path):
     chemin, plan, dispo = _creer_plan_modif(tmp_path)
     resultat = previsualiser_modifications(chemin, {
         'action': 'MODIFIER_DUREE', 'discipline': 'CAP', 'type_seance': 'ENDURANCE',
-        'jour_cible': 'Jeudi', 'duree': 45,
+        'jour_cible': 'Jeudi', 'duree': 40,
     }, dispo, date_reference=_REF_MODIF)
     assert resultat['resultat'] == 'OK'
-    assert resultat['apercu'][0]['avant']['duree'] == '60'
-    assert resultat['apercu'][0]['apres']['duree'] == '45'
+    # Budget vélo corrigé : la sortie longue est servie en priorité et les
+    # autres séances passent à 90 min, donc la CAP du jeudi (45 min) tient
+    # déjà sous la limite de 50 % du vélo et n'est plus rognée.
+    assert resultat['apercu'][0]['avant']['duree'] == '45'
+    assert resultat['apercu'][0]['apres']['duree'] == '40'
 
 
 # 10. MODIFICATION DE DÉTAILS
@@ -3382,7 +3595,7 @@ def test_modification_valide_ok(tmp_path):
     chemin, plan, dispo = _creer_plan_modif(tmp_path)
     resultat = previsualiser_modifications(chemin, {
         'action': 'AJOUTER', 'discipline': 'CAP', 'type_seance': 'ENDURANCE',
-        'jour_cible': 'Mercredi', 'duree': 50,
+        'jour_cible': 'Mercredi', 'duree': 40,
     }, dispo, date_reference=_REF_MODIF)
     assert resultat['resultat'] == 'OK'
     assert resultat['validation']['valide'] is True
@@ -3549,7 +3762,7 @@ def test_recurrence_une_semaine_sur_deux_jusqua_fin_du_plan(tmp_path):
     chemin, plan, dispo = _creer_plan_modif(tmp_path)
     resultat = previsualiser_modifications(chemin, {
         'action': 'AJOUTER', 'discipline': 'CAP', 'type_seance': 'ENDURANCE',
-        'jour_cible': 'Mercredi', 'duree': 50,
+        'jour_cible': 'Mercredi', 'duree': 40,
         'frequence': {'type': 'UNE_SEMAINE_SUR_DEUX'},
     }, dispo, date_reference=_REF_MODIF)
     assert resultat['resultat'] == 'OK'
